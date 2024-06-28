@@ -21,16 +21,18 @@ gem "tailwindcss-rails", "~> 2.6"
 gem "turbo-rails"
 gem "stimulus-rails"
 
+# Authorization
+gem "action_policy", "~> 0.7.0"
+
 # Other
 gem "puma", ">= 5.0"
-gem "action_policy", "~> 0.7.0"
 gem "tzinfo-data", platforms: %i[windows jruby]
 gem "bootsnap", require: false
 
 group :development, :test do
   gem "dotenv"
   gem "pry-byebug"
-  gem 'rspec-rails'
+  gem "rspec-rails"
 end
 
 group :development do
