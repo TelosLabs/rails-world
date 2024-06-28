@@ -15,6 +15,7 @@ gem "mission_control-jobs"
 # Assets
 gem "propshaft"
 gem "importmap-rails"
+gem "tailwindcss-rails", "~> 2.6"
 
 # Hotwire
 gem "turbo-rails"
@@ -22,13 +23,14 @@ gem "stimulus-rails"
 
 # Other
 gem "puma", ">= 5.0"
+gem "action_policy", "~> 0.7.0"
 gem "tzinfo-data", platforms: %i[windows jruby]
 gem "bootsnap", require: false
 
 group :development, :test do
   gem "dotenv"
   gem "pry-byebug"
-  gem "debug", platforms: %i[mri windows]
+  gem 'rspec-rails'
 end
 
 group :development do

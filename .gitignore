@@ -34,3 +34,6 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 *tags
+
+/app/assets/builds/*
+!/app/assets/builds/.keep
