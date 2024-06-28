@@ -17,10 +17,12 @@ FileUtils.chdir APP_ROOT do
   system! "gem install bundler --conservative"
   system("bundle check") || system!("bundle install")
 
-  # puts "\n== Copying sample files =="
-  # unless File.exist?("config/database.yml")
-  #   FileUtils.cp "config/database.yml.sample", "config/database.yml"
-  # end
+  puts "\n== Creating .env file =="
+  if File.exist?(".env")
+    puts ".env file already exists"
+  else
+    FileUtils.cp ".env.template", ".env"
+  end
 
   puts "\n== Preparing database =="
   system! "bin/rails db:prepare"
