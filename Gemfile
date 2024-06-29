@@ -42,5 +42,8 @@ end
 
 group :test do
   gem "capybara"
-  gem "selenium-webdriver"
+  gem "cuprite"
+  gem "fuubar"
+  gem "rspec-instafail", require: false
+  gem "rspec-retry"
 end
