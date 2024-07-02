@@ -21,15 +21,6 @@ RSpec.configure do |config|
 
   # Make sure this hook runs before others
   config.prepend_before(:each, type: :system) do
-    WebMock.disable_net_connect!(
-      allow: [
-        "localhost",
-        "127.0.0.1",
-        "opensearch",
-        %r{chromedriver.storage.googleapis.com/.*}
-      ]
-    )
-    # Use JS driver always
     driven_by Capybara.javascript_driver
   end
 end
