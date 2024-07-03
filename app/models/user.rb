@@ -15,6 +15,8 @@
 #  index_users_on_email  (email) UNIQUE
 #
 class User < ApplicationRecord
+  PASSWORD_RESET_EXPIRATION = 15.minutes
+
   normalizes :email, with: ->(email) { email.strip.downcase }
 
   has_one :profile, as: :profileable, dependent: :destroy
@@ -22,4 +24,13 @@ class User < ApplicationRecord
   has_and_belongs_to_many :events
 
   validates :email, presence: true, uniqueness: true
+  validates :password_digest, presence: true
+
+  normalizes :email, with: ->(email) { email.strip.downcase }
+
+  has_secure_password
+
+  generates_token_for :password_reset, expires_in: PASSWORD_RESET_EXPIRATION do
+    password_salt&.last(10)
+  end
 end

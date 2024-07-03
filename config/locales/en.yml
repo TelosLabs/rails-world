@@ -28,4 +28,23 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  controllers:
+    concerns:
+      authentication:
+        unauthorized: "You must be logged in to do that."
+    password_resets:
+      create:
+        notice: "Check your email to reset your password."
+      update:
+        notice: "Your password has been reset successfully. Please login."
+      errors:
+        invalid_token: "Invalid token, please try again"
+    passwords:
+      update:
+        notice: "Your password has been updated successfully."
+    sessions:
+      create:
+        notice: "You have signed successfully."
+        alert: "Invalid email or password."
+      destroy:
+        notice: "You have been logged out."

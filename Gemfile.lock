@@ -91,6 +91,7 @@ GEM
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
     base64 (0.2.0)
+    bcrypt (3.1.20)
     better_errors (2.10.1)
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
@@ -315,6 +316,10 @@ GEM
       activesupport (= 7.1.3.4)
       bundler (>= 1.15.0)
       railties (= 7.1.3.4)
+    rails-controller-testing (1.0.5)
+      actionpack (>= 5.0.1.rc1)
+      actionview (>= 5.0.1.rc1)
+      activesupport (>= 5.0.1.rc1)
     rails-dom-testing (2.2.0)
       activesupport (>= 5.0.0)
       minitest
@@ -485,6 +490,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
+  arm64-darwin-22
   arm64-darwin-23
   x86_64-linux
 
@@ -492,6 +498,7 @@ DEPENDENCIES
   action_policy (~> 0.7.0)
   activerecord-enhancedsqlite3-adapter (~> 0.8.0)
   annotate
+  bcrypt (~> 3.1.20)
   better_errors
   binding_of_caller
   bootsnap
@@ -507,13 +514,14 @@ DEPENDENCIES
   faker
   fuubar
   importmap-rails
-  letter_opener
+  letter_opener (~> 1.10)
   mission_control-jobs
   propshaft
   pry-byebug
   puma (>= 5.0)
   rack-mini-profiler
   rails (~> 7.1.3, >= 7.1.3.4)
+  rails-controller-testing
   rspec-instafail
   rspec-rails
   rspec-retry
