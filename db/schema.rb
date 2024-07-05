@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_28_211903) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_05_224728) do
   create_table "conferences", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -60,6 +60,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_28_211903) do
     t.boolean "public", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["id"], name: "index_profiles_id", unique: true
     t.index ["profileable_type", "profileable_id"], name: "index_profiles_on_profileable"
   end
 
