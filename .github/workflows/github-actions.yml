@@ -88,7 +88,7 @@ jobs:
           bundle exec database_consistency -c .database_consistency.todo.yml
 
   tests:
-      name: RSpec
+      name: Tests
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v4

@@ -32,12 +32,16 @@ gem "tzinfo-data", platforms: %i[windows jruby]
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem "better_errors"
+  gem "binding_of_caller"
   gem "brakeman"
+  gem "bullet"
   gem "bundle-audit"
   gem "database_consistency"
   gem "debug", platforms: %i[mri windows]
   gem "dotenv"
   gem "erb_lint", require: false
+  gem "letter_opener"
   gem "pry-byebug"
   gem "rspec-rails"
   gem "rubocop-capybara", require: false
