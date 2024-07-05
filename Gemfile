@@ -32,6 +32,8 @@ gem "tzinfo-data", platforms: %i[windows jruby]
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem "brakeman"
+  gem "bundle-audit"
   gem "debug", platforms: %i[mri windows]
   gem "dotenv"
   gem "erb_lint", require: false
@@ -42,11 +44,11 @@ group :development, :test do
   gem "rubocop-rails", require: false
   gem "rubocop-rspec", require: false
   gem "rubocop-rspec_rails", require: false
+  gem "rubycritic"
   gem "standard"
 end
 
 group :development do
-  gem "brakeman"
   gem "rack-mini-profiler"
   gem "web-console"
 end
