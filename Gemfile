@@ -36,6 +36,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "annotate"
   gem "web-console"
   gem "rack-mini-profiler"
 end
