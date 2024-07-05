@@ -86,3 +86,21 @@ jobs:
         run: |
           bundle exec rails db:test:prepare
           bundle exec database_consistency -c .database_consistency.todo.yml
+
+  tests:
+      name: RSpec
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+        - name: Set up Ruby
+          uses: ruby/setup-ruby@v1
+          with:
+            bundler-cache: true
+        - name: Setup DB
+          run: |
+            bundle exec rails db:test:prepare
+        - name: Assets Precompile
+          run: bundle exec rails assets:precompile
+        - name: Run tests
+          run: |
+            bundle exec rspec
