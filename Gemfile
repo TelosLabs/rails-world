@@ -27,6 +27,7 @@ gem "action_policy", "~> 0.7.0"
 # Other
 gem "bootsnap", require: false
 gem "puma", ">= 5.0"
+gem "rack-attack", "~> 6.7"
 gem "tzinfo-data", platforms: %i[windows jruby]
 
 group :development, :test do
@@ -45,6 +46,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "brakeman"
   gem "rack-mini-profiler"
   gem "web-console"
 end
