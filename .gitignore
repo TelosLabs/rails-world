@@ -9,6 +9,7 @@
 
 # Ignore all environment files (except templates).
 /.env*
+!/.env.template
 !/.env*.erb
 
 # Ignore all logfiles and tempfiles.
@@ -33,3 +34,12 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+*tags
+
+/app/assets/builds/*
+!/app/assets/builds/.keep
+
+# Ignore node_modules
+/node_modules
+
+.idea/

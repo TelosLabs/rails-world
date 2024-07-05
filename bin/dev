@@ -1,0 +1,30 @@
+#!/usr/bin/env sh
+
+# # Check if Overmind is installed
+if command -v overmind >/dev/null 2>&1; then
+  echo "Overmind is installed. Running the application with Overmind..."
+  exec overmind s -f Procfile.dev
+  exit 0
+fi
+
+# Check if Hivemind is installed
+if command -v hivemind >/dev/null 2>&1; then
+  echo "Hivemind is installed. Running the application with Hivemind..."
+  exec hivemind Procfile.dev
+  exit 0
+fi
+
+if ! gem list foreman -i --silent; then
+  echo "Installing foreman..."
+  gem install foreman
+fi
+
+# Default to port 3000 if not specified
+export PORT="${PORT:-3000}"
+
+# Let the debug gem allow remote connections,
+# but avoid loading until `debugger` is called
+export RUBY_DEBUG_OPEN="true"
+export RUBY_DEBUG_LAZY="true"
+
+exec foreman start -f Procfile.dev "$@"
