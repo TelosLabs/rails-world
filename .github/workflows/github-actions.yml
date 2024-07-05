@@ -1,0 +1,88 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - "**"
+
+env:
+  CI: true
+  RSPEC_RETRY_RETRY_COUNT: 3
+  RAILS_ENV: test
+  RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
+jobs:
+  linters:
+    name: Linters
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Ruby and install gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Setup Node
+        uses: actions/setup-node@v4
+      - name: Run RuboCop
+        run: bundle exec rubocop
+      - name: Run ERB Lint
+        run: bundle exec erblint --lint-all
+      - name: Run StandardJS
+        run: |
+          npm install standard --global
+          standard
+      - name: Run spell checker
+        uses: crate-ci/typos@master
+
+  security:
+    name: Security
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Ruby and install gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Run brakeman
+        run: |
+          bundle exec brakeman -w3
+      - name: Run bundler-audit
+        run: |
+          bundle exec bundle-audit check --update
+
+  code_quality:
+    name: Code quality
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16.2
+        env:
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    if: ${{ github.ref_name != 'main' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Setup Ruby and install gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Run rubycritic
+        run: |
+          bundle exec rubycritic --mode-ci main --no-browser
+      - name: Run database consistency
+        run: |
+          bundle exec rails db:test:prepare
+          bundle exec database_consistency -c .database_consistency.todo.yml
