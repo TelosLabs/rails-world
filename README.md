@@ -49,6 +49,28 @@ We use [Typos](https://github.com/crate-ci/typos) as a spell checker.
 - Run `typos -w` to auto-correct offenses
 - For false positives and other configuration, see the `_typos.yml` file
 
+#### Optional - Running linters' auto-fix before a commit
+
+[Leftook](https://github.com/evilmartians/lefthook) will execute the linters' auto-fix on staged files and abort the commit if there are offenses that can't be auto-fixed.
+Run the following commands to enable this flow:
+
+```
+gem install lefthook
+lefthook install
+```
+
+## Code Quality
+
+#### Rubycritic
+
+Besides code reviews, we use [rubycritic](https://github.com/whitesmith/rubycritic) to generate a report of the code quality. Both as a reviewer and as a contributor, you should check the report and address the issues found if the files you are working on have a low score ("D" or "F").
+- You can run it with `bundle exec rubycritic`
+
+#### Database consistency
+
+We use [DatabaseConsistency](https://github.com/djezzzl/database_consistency) to check for inconsistencies between the database schema and the application models.
+- You can run it with `bundle exec database_consistency`.
+
 ## Testing
 
 Run tests by using `bundle exec rspec`.
