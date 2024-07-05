@@ -115,6 +115,13 @@ GEM
     erubi (1.13.0)
     et-orbi (1.2.11)
       tzinfo
+    factory_bot (6.4.6)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.4.3)
+      factory_bot (~> 6.4)
+      railties (>= 5.0.0)
+    faker (3.4.1)
+      i18n (>= 1.8.11, < 2)
     ferrum (0.15)
       addressable (~> 2.5)
       concurrent-ruby (~> 1.1)
@@ -298,6 +305,7 @@ GEM
     tailwindcss-rails (2.6.1-x86_64-linux)
       railties (>= 7.0.0)
     thor (1.3.1)
+    timeliness (0.4.5)
     timeout (0.4.1)
     turbo-rails (2.0.5)
       actionpack (>= 6.0.0)
@@ -305,6 +313,9 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    validates_timeliness (7.0.0.beta2)
+      activemodel (>= 7.0.0, < 8)
+      timeliness (>= 0.3.10, < 1)
     web-console (4.2.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -336,6 +347,8 @@ DEPENDENCIES
   capybara
   cuprite
   dotenv
+  factory_bot_rails
+  faker
   fuubar
   importmap-rails
   mission_control-jobs
@@ -353,6 +366,7 @@ DEPENDENCIES
   tailwindcss-rails (~> 2.6)
   turbo-rails
   tzinfo-data
+  validates_timeliness (~> 7.0.0.beta1)
   web-console
 
 RUBY VERSION

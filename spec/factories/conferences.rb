@@ -7,9 +7,12 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-class Conference < ApplicationRecord
-  has_many :locations, dependent: :destroy
-  has_many :events, dependent: :destroy
+FactoryBot.define do
+  factory :conference do
+    name { "RailsWorld 2024" }
 
-  validates :name, presence: true
+    trait :with_location do
+      location
+    end
+  end
 end

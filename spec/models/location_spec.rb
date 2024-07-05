@@ -13,10 +13,12 @@
 #  index_locations_on_conference_id           (conference_id)
 #  index_locations_on_name_and_conference_id  (name,conference_id) UNIQUE
 #
-class Location < ApplicationRecord
-  belongs_to :conference
+require "rails_helper"
 
-  has_many :events, dependent: :destroy
+RSpec.describe Location, type: :model do
+  let(:location) { build_stubbed(:location, :with_conference) }
 
-  validates :name, presence: true, uniqueness: {scope: :conference_id}
+  it "has a valid factory" do
+    expect(location).to be_valid
+  end
 end

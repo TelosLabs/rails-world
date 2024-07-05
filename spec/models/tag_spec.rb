@@ -11,8 +11,12 @@
 #
 #  index_tags_on_name  (name) UNIQUE
 #
-class Tag < ApplicationRecord
-  has_and_belongs_to_many :events
+require "rails_helper"
 
-  validates :name, presence: true, uniqueness: true
+RSpec.describe Tag, type: :model do
+  let(:tag) { build_stubbed(:tag) }
+
+  it "has a valid factory" do
+    expect(tag).to be_valid
+  end
 end

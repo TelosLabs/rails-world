@@ -17,17 +17,19 @@
 #  index_events_on_conference_id  (conference_id)
 #  index_events_on_location_id    (location_id)
 #
-class Event < ApplicationRecord
-  belongs_to :location
-  belongs_to :conference
+FactoryBot.define do
+  factory :event do
+    title { "Keynote" }
+    description { "The opening keynote" }
+    starts_at { Time.zone.now + 1.day }
+    ends_at { Time.zone.now + 1.day + 1.hour }
 
-  has_and_belongs_to_many :speakers
-  has_and_belongs_to_many :users # attendees
-  has_and_belongs_to_many :tags
+    trait :with_conference do
+      conference
+    end
 
-  validates :title, presence: true
-  validates :starts_at, presence: true
-  validates :ends_at, presence: true
-
-  validates_datetime :ends_at, after: :starts_at
+    trait :with_location do
+      location
+    end
+  end
 end

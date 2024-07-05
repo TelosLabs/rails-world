@@ -1,5 +1,15 @@
+# == Schema Information
+#
+# Table name: speakers
+#
+#  id         :integer          not null, primary key
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 class Speaker < ApplicationRecord
-  belongs_to :event
-
   has_one :profile, as: :profileable
+
+  has_and_belongs_to_many :events
+
+  accepts_nested_attributes_for :profile
 end

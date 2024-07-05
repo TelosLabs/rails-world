@@ -28,15 +28,18 @@ gem "action_policy", "~> 0.7.0"
 gem "puma", ">= 5.0"
 gem "tzinfo-data", platforms: %i[windows jruby]
 gem "bootsnap", require: false
+gem "validates_timeliness", "~> 7.0.0.beta1"
 
 group :development, :test do
   gem "dotenv"
+  gem "factory_bot_rails"
   gem "pry-byebug"
   gem "rspec-rails"
 end
 
 group :development do
   gem "annotate"
+  gem "faker"
   gem "web-console"
   gem "rack-mini-profiler"
 end

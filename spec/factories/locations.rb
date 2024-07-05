@@ -13,10 +13,12 @@
 #  index_locations_on_conference_id           (conference_id)
 #  index_locations_on_name_and_conference_id  (name,conference_id) UNIQUE
 #
-class Location < ApplicationRecord
-  belongs_to :conference
+FactoryBot.define do
+  factory :location do
+    name { "Main Hall" }
 
-  has_many :events, dependent: :destroy
-
-  validates :name, presence: true, uniqueness: {scope: :conference_id}
+    trait :with_conference do
+      conference
+    end
+  end
 end

@@ -14,10 +14,12 @@
 #
 #  index_users_on_email  (email) UNIQUE
 #
-class User < ApplicationRecord
-  normalizes :email, with: ->(email) { email.strip.downcase }
+FactoryBot.define do
+  factory :user do
+    email { "dev@example.com" }
 
-  has_one :profile, as: :profileable
-
-  has_and_belongs_to_many :events
+    trait :with_profile do
+      profile
+    end
+  end
 end

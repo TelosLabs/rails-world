@@ -17,17 +17,21 @@
 #  index_events_on_conference_id  (conference_id)
 #  index_events_on_location_id    (location_id)
 #
-class Event < ApplicationRecord
-  belongs_to :location
-  belongs_to :conference
+require "rails_helper"
 
-  has_and_belongs_to_many :speakers
-  has_and_belongs_to_many :users # attendees
-  has_and_belongs_to_many :tags
+RSpec.describe Event, type: :model do
+  let(:event) { build_stubbed(:event, :with_conference, :with_location) }
 
-  validates :title, presence: true
-  validates :starts_at, presence: true
-  validates :ends_at, presence: true
+  it "has a valid factory" do
+    expect(event).to be_valid
+  end
 
-  validates_datetime :ends_at, after: :starts_at
+  describe "validations" do
+    it "needs to have starts_at set before ends_at" do
+      expect(event).to be_valid
+      event.starts_at = 1.day.from_now
+      event.ends_at = 1.day.ago
+      expect(event).not_to be_valid
+    end
+  end
 end

@@ -7,9 +7,12 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-class Conference < ApplicationRecord
-  has_many :locations, dependent: :destroy
-  has_many :events, dependent: :destroy
+require "rails_helper"
 
-  validates :name, presence: true
+RSpec.describe Conference, type: :model do
+  let(:conference) { build_stubbed(:conference) }
+
+  it "has a valid factory" do
+    expect(conference).to be_valid
+  end
 end

@@ -19,10 +19,12 @@
 #
 #  index_profiles_on_profileable  (profileable_type,profileable_id)
 #
-class Profile < ApplicationRecord
-  belongs_to :profileable, polymorphic: true
+require "rails_helper"
 
-  has_one :self_ref, class_name: 'Profile', foreign_key: :id
-  has_one :user, through: :self_ref, source: :profileable, source_type: 'User'
-  has_one :speaker, through: :self_ref, source: :profileable, source_type: 'Speaker'
+RSpec.describe Profile, type: :model do
+  let(:profile) { build_stubbed(:profile, :with_user) }
+
+  it "has a valid factory" do
+    expect(profile).to be_valid
+  end
 end
