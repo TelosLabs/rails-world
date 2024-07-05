@@ -9,7 +9,7 @@ class CreateProfiles < ActiveRecord::Migration[7.1]
       t.string :github_url
       t.string :linkedin_url
       t.string :twitter_url
-      t.boolean :public
+      t.boolean :public, default: false, null: false
 
       t.timestamps
     end
