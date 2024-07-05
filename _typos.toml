@@ -1,0 +1,15 @@
+# https://github.com/crate-ci/typos/blob/master/docs/reference.md
+
+[default.extend-words]
+# Don't correct the following words
+
+[files]
+extend-exclude = [
+  "app/assets/stylesheets/**",
+  "app/assets/fonts/**",
+  "vendor/**",
+  "/spec/fixtures/**",
+  "/lib/assets/**",
+  "*.css",
+  "*.pdf",
+]
