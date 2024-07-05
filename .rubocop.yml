@@ -1,0 +1,35 @@
+require:
+  - rubocop-capybara
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-rspec_rails
+  - standard
+
+inherit_gem:
+  standard: config/base.yml
+
+AllCops:
+  TargetRubyVersion: 3.3.3
+  NewCops: enable
+  Exclude:
+    - "bin/**"
+    - "db/schema.rb"
+    - "vendor/**/*"
+
+RSpec/ExampleLength:
+  Enabled: false
+RSpec/MultipleExpectations:
+  Enabled: false
+RSpec/LetSetup:
+  Enabled: false
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+RSpecRails/InferredSpecType:
+  Enabled: false
+Bundler/OrderedGems:
+  Enabled: true
+Rails/HasAndBelongsToMany:
+  Enabled: false
+Rails/UnknownEnv:
+  Environments: ["development", "test", "staging", "production"]

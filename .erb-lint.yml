@@ -1,0 +1,14 @@
+glob: "**/*.{html}{+*,}.erb"
+exclude:
+  - '**/vendor/**/*'
+EnableDefaultLinters: true
+linters:
+  PartialInstanceVariable:
+    enabled: true
+  ErbSafety:
+    enabled: true
+  Rubocop:
+    enabled: false
+    rubocop_config:
+      inherit_from:
+        - .rubocop.yml

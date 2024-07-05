@@ -82,7 +82,15 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
+    ast (2.4.2)
     base64 (0.2.0)
+    better_html (2.1.1)
+      actionview (>= 6.0)
+      activesupport (>= 6.0)
+      ast (~> 2.0)
+      erubi (~> 1.4)
+      parser (>= 2.4)
+      smart_properties
     bigdecimal (3.1.8)
     bindex (0.8.1)
     bootsnap (1.18.3)
@@ -106,9 +114,19 @@ GEM
       capybara (~> 3.0)
       ferrum (~> 0.15.0)
     date (3.3.4)
+    debug (1.9.2)
+      irb (~> 1.10)
+      reline (>= 0.3.8)
     diff-lcs (1.5.1)
     dotenv (3.1.2)
     drb (2.2.1)
+    erb_lint (0.5.0)
+      activesupport
+      better_html (>= 2.0.1)
+      parser (>= 2.7.1.4)
+      rainbow
+      rubocop
+      smart_properties
     erubi (1.13.0)
     et-orbi (1.2.11)
       tzinfo
@@ -135,6 +153,9 @@ GEM
     irb (1.13.2)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
+    json (2.7.2)
+    language_server-protocol (3.17.0.3)
+    lint_roller (1.1.0)
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -165,18 +186,12 @@ GEM
     net-smtp (0.5.0)
       net-protocol
     nio4r (2.7.3)
-    nokogiri (1.16.6-aarch64-linux)
-      racc (~> 1.4)
-    nokogiri (1.16.6-arm-linux)
-      racc (~> 1.4)
     nokogiri (1.16.6-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.16.6-x86-linux)
-      racc (~> 1.4)
-    nokogiri (1.16.6-x86_64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.16.6-x86_64-linux)
-      racc (~> 1.4)
+    parallel (1.25.1)
+    parser (3.3.3.0)
+      ast (~> 2.4.1)
+      racc
     propshaft (0.9.0)
       actionpack (>= 7.0.0)
       activesupport (>= 7.0.0)
@@ -234,12 +249,15 @@ GEM
       rake (>= 12.2)
       thor (~> 1.0, >= 1.2.2)
       zeitwerk (~> 2.6)
+    rainbow (3.1.1)
     rake (13.2.1)
     rdoc (6.7.0)
       psych (>= 4.0.0)
     regexp_parser (2.9.2)
     reline (0.5.9)
       io-console (~> 0.5)
+    rexml (3.3.1)
+      strscan
     rspec (3.13.0)
       rspec-core (~> 3.13.0)
       rspec-expectations (~> 3.13.0)
@@ -265,34 +283,61 @@ GEM
     rspec-retry (0.6.2)
       rspec-core (> 3.3)
     rspec-support (3.13.1)
+    rubocop (1.64.1)
+      json (~> 2.3)
+      language_server-protocol (>= 3.17.0)
+      parallel (~> 1.10)
+      parser (>= 3.3.0.2)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 1.8, < 3.0)
+      rexml (>= 3.2.5, < 4.0)
+      rubocop-ast (>= 1.31.1, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 2.4.0, < 3.0)
+    rubocop-ast (1.31.3)
+      parser (>= 3.3.1.0)
+    rubocop-capybara (2.21.0)
+      rubocop (~> 1.41)
+    rubocop-performance (1.21.1)
+      rubocop (>= 1.48.1, < 2.0)
+      rubocop-ast (>= 1.31.1, < 2.0)
+    rubocop-rails (2.25.0)
+      activesupport (>= 4.2.0)
+      rack (>= 1.1)
+      rubocop (>= 1.33.0, < 2.0)
+      rubocop-ast (>= 1.31.1, < 2.0)
+    rubocop-rspec (3.0.1)
+      rubocop (~> 1.61)
+    rubocop-rspec_rails (2.30.0)
+      rubocop (~> 1.61)
+      rubocop-rspec (~> 3, >= 3.0.1)
     ruby-next-core (1.0.3)
     ruby-progressbar (1.13.0)
+    smart_properties (1.17.0)
     solid_queue (0.3.3)
       activejob (>= 7.1)
       activerecord (>= 7.1)
       concurrent-ruby (>= 1.3.1)
       fugit (~> 1.11.0)
       railties (>= 7.1)
-    sqlite3 (1.7.3-aarch64-linux)
-    sqlite3 (1.7.3-arm-linux)
     sqlite3 (1.7.3-arm64-darwin)
-    sqlite3 (1.7.3-x86-linux)
-    sqlite3 (1.7.3-x86_64-darwin)
-    sqlite3 (1.7.3-x86_64-linux)
+    standard (1.39.0)
+      language_server-protocol (~> 3.17.0.2)
+      lint_roller (~> 1.0)
+      rubocop (~> 1.64.0)
+      standard-custom (~> 1.0.0)
+      standard-performance (~> 1.4)
+    standard-custom (1.0.2)
+      lint_roller (~> 1.0)
+      rubocop (~> 1.50)
+    standard-performance (1.4.0)
+      lint_roller (~> 1.1)
+      rubocop-performance (~> 1.21.0)
     stimulus-rails (1.3.3)
       railties (>= 6.0.0)
     stringio (3.1.1)
-    tailwindcss-rails (2.6.1)
-      railties (>= 7.0.0)
-    tailwindcss-rails (2.6.1-aarch64-linux)
-      railties (>= 7.0.0)
-    tailwindcss-rails (2.6.1-arm-linux)
-      railties (>= 7.0.0)
+    strscan (3.1.0)
     tailwindcss-rails (2.6.1-arm64-darwin)
-      railties (>= 7.0.0)
-    tailwindcss-rails (2.6.1-x86_64-darwin)
-      railties (>= 7.0.0)
-    tailwindcss-rails (2.6.1-x86_64-linux)
       railties (>= 7.0.0)
     thor (1.3.1)
     timeout (0.4.1)
@@ -302,6 +347,7 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    unicode-display_width (2.5.0)
     web-console (4.2.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -316,14 +362,8 @@ GEM
     zeitwerk (2.6.16)
 
 PLATFORMS
-  aarch64-linux
-  arm-linux
   arm64-darwin-21
-  arm64-darwin-22
   arm64-darwin-23
-  x86-linux
-  x86_64-darwin
-  x86_64-linux
 
 DEPENDENCIES
   action_policy (~> 0.7.0)
@@ -331,7 +371,9 @@ DEPENDENCIES
   bootsnap
   capybara
   cuprite
+  debug
   dotenv
+  erb_lint
   fuubar
   importmap-rails
   mission_control-jobs
@@ -343,8 +385,14 @@ DEPENDENCIES
   rspec-instafail
   rspec-rails
   rspec-retry
+  rubocop-capybara
+  rubocop-performance
+  rubocop-rails
+  rubocop-rspec
+  rubocop-rspec_rails
   solid_queue
   sqlite3 (~> 1.4)
+  standard
   stimulus-rails
   tailwindcss-rails (~> 2.6)
   turbo-rails
