@@ -33,6 +33,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_28_211903) do
   create_table "events_speakers", force: :cascade do |t|
     t.integer "event_id", null: false
     t.integer "speaker_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["event_id", "speaker_id"], name: "index_events_speakers_on_event_id_and_speaker_id", unique: true
     t.index ["event_id"], name: "index_events_speakers_on_event_id"
     t.index ["speaker_id"], name: "index_events_speakers_on_speaker_id"
@@ -74,7 +76,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_28_211903) do
     t.string "github_url"
     t.string "linkedin_url"
     t.string "twitter_url"
-    t.boolean "is_public"
+    t.boolean "is_public", default: false, null: false
     t.string "profileable_type", null: false
     t.integer "profileable_id", null: false
     t.datetime "created_at", null: false
@@ -97,8 +99,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_28_211903) do
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "role"
-    t.boolean "mail_notifications_enabled", default: true
-    t.boolean "in_app_notifications_enabled", default: true
+    t.boolean "mail_notifications_enabled", default: true, null: false
+    t.boolean "in_app_notifications_enabled", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true

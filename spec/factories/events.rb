@@ -21,8 +21,8 @@ FactoryBot.define do
   factory :event do
     title { "Keynote" }
     description { "The opening keynote" }
-    starts_at { Time.zone.now + 1.day }
-    ends_at { Time.zone.now + 1.day + 1.hour }
+    starts_at { 1.day.from_now }
+    ends_at { 1.day.from_now + 1.hour }
 
     trait :with_conference do
       conference

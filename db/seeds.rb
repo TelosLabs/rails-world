@@ -54,9 +54,9 @@ end
 conference.locations.each do |location|
   speakers = case location
   when bmo_atrium
-    Speaker.all.last(4)
+    Speaker.last(4)
   when terrace
-    Speaker.all.first(3)
+    Speaker.first(3)
   when young_centre
     Speaker.all[3..5]
   end

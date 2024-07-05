@@ -358,10 +358,10 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    unicode-display_width (2.5.0)
     validates_timeliness (7.0.0.beta2)
       activemodel (>= 7.0.0, < 8)
       timeliness (>= 0.3.10, < 1)
-    unicode-display_width (2.5.0)
     web-console (4.2.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -388,9 +388,9 @@ DEPENDENCIES
   cuprite
   debug
   dotenv
+  erb_lint
   factory_bot_rails
   faker
-  erb_lint
   fuubar
   importmap-rails
   mission_control-jobs

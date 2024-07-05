@@ -5,7 +5,7 @@
 #  id               :integer          not null, primary key
 #  bio              :string
 #  github_url       :string
-#  is_public        :boolean
+#  is_public        :boolean          default(FALSE), not null
 #  linkedin_url     :string
 #  location         :string
 #  name             :string

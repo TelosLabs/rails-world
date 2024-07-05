@@ -4,6 +4,8 @@ class CreateEventsSpeakers < ActiveRecord::Migration[7.1]
       t.references :event, null: false, foreign_key: true
       t.references :speaker, null: false, foreign_key: true
 
+      t.timestamps
+
       t.index %i[event_id speaker_id], unique: true
     end
   end
