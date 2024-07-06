@@ -27,7 +27,6 @@ gem "action_policy", "~> 0.7.0"
 # Other
 gem "bootsnap", require: false
 gem "puma", ">= 5.0"
-gem "rack-attack", "~> 6.7"
 gem "tzinfo-data", platforms: %i[windows jruby]
 
 group :development, :test do
@@ -35,7 +34,6 @@ group :development, :test do
   gem "better_errors"
   gem "binding_of_caller"
   gem "brakeman"
-  gem "bullet"
   gem "bundle-audit"
   gem "database_consistency"
   gem "debug", platforms: %i[mri windows]

@@ -58,19 +58,6 @@ jobs:
   code_quality:
     name: Code quality
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:16.2
-        env:
-          POSTGRES_USER: root
-          POSTGRES_PASSWORD: postgres
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
     if: ${{ github.ref_name != 'main' }}
     steps:
       - name: Checkout code
@@ -99,8 +86,6 @@ jobs:
         - name: Setup DB
           run: |
             bundle exec rails db:test:prepare
-        - name: Assets Precompile
-          run: bundle exec rails assets:precompile
         - name: Run tests
           run: |
             bundle exec rspec

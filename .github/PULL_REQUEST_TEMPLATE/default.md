@@ -22,11 +22,7 @@ Please mark the tests that you ran to verify your changes. If difficult to test,
 
 ## Release tasks
 
-Does this change require any release tasks?
-- [ ] ES Re-indexing
-- [ ] Rake task
-- [ ] Other (please specify)
-- [ ] None
+Add any tasks that need to be done before/after the release of this feature.
 
 ## Screenshots/Loom
 
