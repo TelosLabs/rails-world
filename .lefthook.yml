@@ -1,0 +1,18 @@
+pre-commit:
+  parallel: true
+  commands:
+    ruby-linter:
+      glob: "*.{rb,rake}"
+      run: bundle exec rubocop -a --force-exclusion {staged_files}
+      stage_fixed: true
+    erb-linter:
+      glob: "*.erb"
+      run: bundle exec erblint --lint-all {staged_files}
+    js-linter:
+      glob: "*.js"
+      run: standard --fix {staged_files}
+      stage_fixed: true
+    fix-typos:
+      exclude: '\.(pdf|ttf|jpg|png|csv)$'
+      run: typos --write-changes {staged_files}
+      stage_fixed: true
