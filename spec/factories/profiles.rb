@@ -19,10 +19,18 @@
 #
 #  index_profiles_on_profileable  (profileable_type,profileable_id)
 #
-class Profile < ApplicationRecord
-  belongs_to :profileable, polymorphic: true
+FactoryBot.define do
+  factory :profile do
+    name { "John Doe" }
+    bio { "About me" }
+    location { "New York" }
+    is_public { false }
+    github_url { "https://github.com" }
+    linkedin_url { "https://linkedin.com" }
+    twitter_url { "https://twitter.com" }
 
-  has_one :self_ref, class_name: "Profile", foreign_key: :id, inverse_of: :self_ref, dependent: :destroy
-  has_one :user, through: :self_ref, source: :profileable, source_type: "User"
-  has_one :speaker, through: :self_ref, source: :profileable, source_type: "Speaker"
+    trait :with_user do
+      association :profileable, factory: :user
+    end
+  end
 end

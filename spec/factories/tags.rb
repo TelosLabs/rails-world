@@ -1,15 +1,18 @@
 # == Schema Information
 #
-# Table name: conferences
+# Table name: tags
 #
 #  id         :integer          not null, primary key
 #  name       :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-class Conference < ApplicationRecord
-  has_many :locations, dependent: :destroy
-  has_many :events, dependent: :destroy
-
-  validates :name, presence: true
+# Indexes
+#
+#  index_tags_on_name  (name) UNIQUE
+#
+FactoryBot.define do
+  factory :tag do
+    name { "Backend" }
+  end
 end

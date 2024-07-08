@@ -28,6 +28,7 @@ gem "action_policy", "~> 0.7.0"
 gem "bootsnap", require: false
 gem "puma", ">= 5.0"
 gem "tzinfo-data", platforms: %i[windows jruby]
+gem "validates_timeliness", "~> 7.0.0.beta1"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -39,6 +40,7 @@ group :development, :test do
   gem "debug", platforms: %i[mri windows]
   gem "dotenv"
   gem "erb_lint", require: false
+  gem "factory_bot_rails"
   gem "letter_opener"
   gem "pry-byebug"
   gem "rspec-rails"
@@ -52,6 +54,8 @@ group :development, :test do
 end
 
 group :development do
+  gem "annotate"
+  gem "faker"
   gem "rack-mini-profiler"
   gem "web-console"
 end
