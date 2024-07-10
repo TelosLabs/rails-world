@@ -1,0 +1,19 @@
+<h1>Log in</h1>
+
+<%= form_with model: @user, url: session_path do |form| %>
+  <div>
+    <%= form.label :email %>
+    <%= form.email_field :email %>
+  </div>
+
+  <div>
+    <%= form.label :password %>
+    <%= form.password_field :password %>
+  </div>
+
+  <div>
+    <%= form.submit "Log in" %>
+  </div>
+<% end %>
+
+<%= link_to "Forgot your password?", new_password_reset_path %>

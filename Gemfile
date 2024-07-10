@@ -24,6 +24,9 @@ gem "turbo-rails"
 # Authorization
 gem "action_policy", "~> 0.7.0"
 
+# Authentication
+gem "bcrypt", "~> 3.1.20"
+
 # Other
 gem "bootsnap", require: false
 gem "puma", ">= 5.0"
@@ -41,7 +44,8 @@ group :development, :test do
   gem "dotenv"
   gem "erb_lint", require: false
   gem "factory_bot_rails"
-  gem "letter_opener"
+  gem "faker"
+  gem "letter_opener", "~> 1.10"
   gem "pry-byebug"
   gem "rspec-rails"
   gem "rubocop-capybara", require: false
@@ -55,7 +59,6 @@ end
 
 group :development do
   gem "annotate"
-  gem "faker"
   gem "rack-mini-profiler"
   gem "web-console"
 end
@@ -64,6 +67,7 @@ group :test do
   gem "capybara"
   gem "cuprite"
   gem "fuubar"
+  gem "rails-controller-testing"
   gem "rspec-instafail", require: false
   gem "rspec-retry"
 end

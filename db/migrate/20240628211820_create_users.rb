@@ -5,6 +5,7 @@ class CreateUsers < ActiveRecord::Migration[7.1]
       t.string :role
       t.boolean :mail_notifications_enabled, default: true, null: false
       t.boolean :in_app_notifications_enabled, default: true, null: false
+      t.string :password_digest, null: false
 
       t.timestamps
 
