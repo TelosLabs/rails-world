@@ -6,6 +6,7 @@
 #  email                        :string           not null
 #  in_app_notifications_enabled :boolean          default(TRUE), not null
 #  mail_notifications_enabled   :boolean          default(TRUE), not null
+#  password_digest              :string           not null
 #  role                         :string
 #  created_at                   :datetime         not null
 #  updated_at                   :datetime         not null
@@ -15,9 +16,11 @@
 #  index_users_on_email  (email) UNIQUE
 #
 class User < ApplicationRecord
-  PASSWORD_RESET_EXPIRATION = 15.minutes
+  PASSWORD_RESET_EXPIRATION = 60.minutes
 
   normalizes :email, with: ->(email) { email.strip.downcase }
+
+  has_secure_password
 
   has_one :profile, as: :profileable, dependent: :destroy
 
@@ -25,10 +28,6 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true
   validates :password_digest, presence: true
-
-  normalizes :email, with: ->(email) { email.strip.downcase }
-
-  has_secure_password
 
   generates_token_for :password_reset, expires_in: PASSWORD_RESET_EXPIRATION do
     password_salt&.last(10)

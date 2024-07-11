@@ -1,7 +1,7 @@
-conference = Conference.create!(name: "RailsWorld 2024")
+conference = Conference.find_or_create_by!(name: "RailsWorld 2024")
 
 # Users
-user = User.create!(email: "dev@example.com")
+user = User.create!(email: "dev@example.com", password: "foobar", password_confirmation: "foobar")
 
 # Tags
 Tag.create!(name: "Hotwire")

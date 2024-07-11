@@ -1,5 +1,6 @@
 class PasswordResetsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:new, :create]
+
   before_action :set_user_by_token, only: [:edit, :update]
 
   def new
@@ -15,7 +16,7 @@ class PasswordResetsController < ApplicationController
       PasswordMailer.with(
         user: @user,
         token: @user.generate_token_for(:password_reset)
-      ).password_reset.deliver_now
+      ).password_reset.deliver_later
     end
 
     redirect_to root_path, notice: t("controllers.password_resets.create.notice")
@@ -33,8 +34,9 @@ class PasswordResetsController < ApplicationController
 
   def set_user_by_token
     @user = User.find_by_token_for(:password_reset, params[:token])
+    return if @user.present?
 
-    redirect_to new_password_reset_path alert: t("controllers.password_resets.errors.invalid_token") if @user.blank?
+    redirect_to new_password_reset_path alert: t("controllers.password_resets.errors.invalid_token")
   end
 
   def password_params
