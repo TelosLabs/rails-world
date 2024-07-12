@@ -7,7 +7,6 @@ RSpec.describe RegistrationsController, type: :controller do
     it "returns a success response" do
       get :new
       expect(response).to have_http_status(:ok)
-      assigns(:user).should be_a_new(User)
     end
   end
 

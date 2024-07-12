@@ -4,31 +4,41 @@ module Authentication
   included do
     helper_method :current_user, :user_signed_in?
 
-    def authenticate_user!
-      redirect_to root_path, alert: t("controllers.concerns.authentication.unauthorized") unless user_signed_in?
-    end
+    before_action :authenticate_user, :authenticate_user!
+  end
 
-    def current_user
-      Current.user ||= authenticate_user_from_session
+  class_methods do
+    def allow_unauthenticated_access(**options)
+      skip_before_action :authenticate_user!, **options
     end
+  end
 
-    def authenticate_user_from_session
-      User.find_by(id: session[:user_id])
-    end
+  private
 
-    def user_signed_in?
-      current_user.present?
-    end
+  def current_user = Current.user
 
-    def login(user)
-      Current.user = user
-      reset_session
-      session[:user_id] = user.id
-    end
+  def user_signed_in? = Current.user.present?
 
-    def logout
-      Current.user = nil
-      reset_session
+  def authenticate_user
+    Current.user = User.find_by(id: session[:user_id])
+  end
+
+  def authenticate_user!
+    authenticate_user
+
+    if !user_signed_in?
+      redirect_to new_session_path, alert: t("controllers.concerns.authentication.unauthorized")
     end
+  end
+
+  def login(user)
+    Current.user = user
+    reset_session
+    session[:user_id] = user.id
+  end
+
+  def logout
+    Current.user = nil
+    reset_session
   end
 end

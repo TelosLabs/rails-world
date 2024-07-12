@@ -1,5 +1,6 @@
 class MainController < ApplicationController
-  skip_before_action :authenticate_user!
+  allow_unauthenticated_access
+
   def index
   end
 end
