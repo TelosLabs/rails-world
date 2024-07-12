@@ -17,6 +17,10 @@
 1. Run `bin/setup` (needs to be run only once)
 2. Run `bin/dev`
 
+or
+
+1. Run `docker compose up`
+
 ## Linting & Formatting
 
 #### Ruby

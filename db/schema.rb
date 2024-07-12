@@ -99,8 +99,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_28_211903) do
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "role"
-    t.boolean "mail_notifications_enabled", default: true, null: false
-    t.boolean "in_app_notifications_enabled", default: true, null: false
+    t.boolean "mail_notifications", default: true, null: false
+    t.boolean "in_app_notifications", default: true, null: false
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
