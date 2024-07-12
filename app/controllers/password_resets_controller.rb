@@ -1,5 +1,5 @@
 class PasswordResetsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:new, :create]
+  allow_unauthenticated_access
 
   before_action :set_user_by_token, only: [:edit, :update]
 
@@ -19,7 +19,7 @@ class PasswordResetsController < ApplicationController
       ).password_reset.deliver_later
     end
 
-    redirect_to root_path, notice: t("controllers.password_resets.create.notice")
+    redirect_to new_session_path, notice: t("controllers.password_resets.create.notice")
   end
 
   def update
@@ -36,7 +36,7 @@ class PasswordResetsController < ApplicationController
     @user = User.find_by_token_for(:password_reset, params[:token])
     return if @user.present?
 
-    redirect_to new_password_reset_path alert: t("controllers.password_resets.errors.invalid_token")
+    redirect_to new_password_reset_path, alert: t("controllers.password_resets.errors.invalid_token")
   end
 
   def password_params

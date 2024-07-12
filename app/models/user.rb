@@ -28,6 +28,7 @@ class User < ApplicationRecord
 
   validates :email, presence: true, uniqueness: true
   validates :password_digest, presence: true
+  validates :password, length: {minimum: 8}, if: -> { password.present? }
 
   generates_token_for :password_reset, expires_in: PASSWORD_RESET_EXPIRATION do
     password_salt&.last(10)

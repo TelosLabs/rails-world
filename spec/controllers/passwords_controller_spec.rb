@@ -4,10 +4,9 @@ require "rails_helper"
 
 RSpec.describe PasswordsController, type: :controller do
   let!(:user) { create(:user, password: "password") }
-  let(:current) { instance_double(Current) }
 
   before do
-    allow(Current).to receive(:user).and_return(user)
+    sign_in(user)
   end
 
   describe "GET #edit" do
