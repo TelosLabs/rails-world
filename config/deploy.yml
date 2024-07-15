@@ -4,10 +4,6 @@ service: rails-world
 # Name of the container image.
 image: sergeaf/rails-world
 
-# Deploy to these servers.
-servers:
-  - 165.227.38.160
-
 # To persist sqlite data, we need to mount a volume.
 volumes:
   - storage:/rails/storage
@@ -18,17 +14,8 @@ registry:
   password:
     - KAMAL_REGISTRY_PASSWORD
 
-# Inject ENV variables into containers (secrets come from .env).
-# Remember to run `kamal env push` after making changes!
-env:
-  clear:
-    RAILS_ENV: production
-  secret:
-    - RAILS_MASTER_KEY
-
-# Use a different ssh user than root
-# ssh:
-#   user: app
+# When running commands, you can specify a destination with the -d flag, e.g. kamal deploy -d staging
+require_destination: true
 
 # Configure builder setup.
 # builder:
@@ -68,11 +55,6 @@ env:
 #   args:
 #     accesslog: true
 #     accesslog.format: json
-
-# Configure a custom healthcheck (default is /up on port 3000)
-# healthcheck:
-#   path: /healthz
-#   port: 4000
 
 # Bridge fingerprinted assets, like JS and CSS, between versions to avoid
 # hitting 404 on in-flight requests. Combines all files from new and old

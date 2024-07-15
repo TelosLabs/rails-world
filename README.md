@@ -86,3 +86,12 @@ Run tests by using `bundle exec rspec`.
 - If you want to see the logs you can use `:log`, e.g. `it "xxx", :log do`
 - Use `data-test-id` to find elements instead of classes/ids, e.g. `data-test-id="decline_modal"`
 - Use the methods in the `DataTestId` module to select HTML elements, e.g., `find_dti("decline_modal")`
+
+## Deployment
+
+We use Kamal to deploy the application. Here are some common commands:
+
+- You need to append `-d staging` or `-d production` to the command to specify the environment.
+- Run `kamal deploy` to deploy the application.
+- Run `kamal app logs` to see the logs of the application.
+- Run `kamal app exec -i 'bin/rails console'` to open a Rails console.
