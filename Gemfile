@@ -27,6 +27,9 @@ gem "action_policy", "~> 0.7.0"
 # Authentication
 gem "bcrypt", "~> 3.1.20"
 
+# QR code
+gem "rqrcode", "~> 2.0"
+
 # Other
 gem "bootsnap", require: false
 gem "inline_svg"

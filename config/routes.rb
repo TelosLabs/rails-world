@@ -9,7 +9,14 @@ Rails.application.routes.draw do
   resource :registration, only: [:new, :create]
   resource :session, only: [:new, :create, :destroy]
   resource :password, only: [:edit, :update]
+
   resource :password_reset, only: [:new, :create, :edit, :update] do
     get :post_submit
+    end
+  resource :password_reset, only: [:new, :create, :edit, :update]
+  resources :profiles, only: [:show, :edit, :update], param: :uuid do
+    member do
+      get :qr_code
+    end
   end
 end

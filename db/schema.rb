@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_28_211903) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_10_213305) do
   create_table "conferences", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -81,7 +81,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_28_211903) do
     t.integer "profileable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "uuid"
     t.index ["profileable_type", "profileable_id"], name: "index_profiles_on_profileable"
+    t.index ["uuid"], name: "index_profiles_on_uuid", unique: true
   end
 
   create_table "speakers", force: :cascade do |t|
