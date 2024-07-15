@@ -1,0 +1,29 @@
+<div class="bg-purple flex flex-col bg-slate-500 p-4 w-full">
+  <h1 class="text-4xl text-white mb-6 font-black">Set up your account</h1>
+
+  <%u_profile = current_user.profile%>
+  <%= form_with url: profile_path, method: :put, class: "flex flex-col" do |form| %> 
+    <%= form.label :bio, class: "font-bold text-white text-base" %>
+    <%= form.text_area :bio, value: u_profile.present? ? u_profile.bio : "" ,class: "text-white border-2 border-white bg-transparent rounded-sm  mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white"%>
+    
+    <%= form.label :location, class: "font-bold text-white  text-base"  %>
+    <%= form.text_field :location, value: u_profile.present? ? u_profile.location : "", class: "text-white border-2 border-white bg-transparent rounded-sm  mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white"%>
+
+    <%= form.label :github_url, class: "font-bold text-white text-base"  %>
+    <%= form.text_field :github_url, value: u_profile.present? ? u_profile.github_url : "", class: "text-white border-2 border-white bg-transparent rounded-sm  mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white" %>
+
+    <%= form.label :linkedin_url, class: "font-bold text-white text-base"  %>
+    <%= form.text_field :linkedin_url, value: u_profile.present? ? u_profile.linkedin_url : "", class: "text-white border-2 border-white bg-transparent rounded-sm  mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white" %>
+    
+    <%= form.label :twitter_url, class: "font-bold text-white text-base"  %>
+    <%= form.text_field :twitter_url, value: u_profile.present? ? u_profile.twitter_url : "", class: "text-white border-2 border-white bg-transparent rounded-sm  mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white" %>
+
+    <p>Discoverability</p>
+    <%= form.label :is_public, class: "font-bold text-white text-base"  %>
+    <%= form.check_box :is_public, value:"true", checked: u_profile.present? ? u_profile.is_public : false, class: "text-white border-2 border-white bg-transparent rounded-sm  mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white" %>
+    <p class="text-xs" >Allow other persons to view your profile through a QR code.</p>
+
+    
+    <%= form.submit "Preview profile", class:"w-full bg-red-500 p-4 text-lg font-black text-white rounded cursor-pointer" %>
+  <% end %>
+</div>

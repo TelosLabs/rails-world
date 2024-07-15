@@ -10,4 +10,6 @@ Rails.application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
   resource :password, only: [:edit, :update]
   resource :password_reset, only: [:new, :create, :edit, :update]
+
+  resource :profile, only: [:edit, :update]
 end
