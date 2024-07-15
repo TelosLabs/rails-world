@@ -1,28 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>RailsWorld</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-  <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+  <head>
+    <title>RailsWorld</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
 
-  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  <%= javascript_importmap_tags %>
-</head>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
 
-<body>
-<main class="container mx-auto mt-28 px-5 flex">
-  <div><%= notice %></div>
-  <div><%= alert %></div>
-  <% if user_signed_in? %>
-    <%= link_to "Edit Password", edit_password_path %>
-    <%= button_to "Log out", session_path, method: :delete %>
-  <% else %>
-    <%= link_to "Sign Up", new_registration_path %>
-    <%= link_to "Log in", new_session_path %>
-  <% end %>
-  <%= yield %>
-</main>
-</body>
+  <body>
+    <main class="w-full relative mx-auto max-w-[1440px]">
+      <% flash.each do |type, message| %>
+        <% if message.present? && message.is_a?(String) %>
+          <div><%= notice %></div>
+          <div><%= alert %></div>
+        <% end %>
+      <% end %>
+      <%= yield %>
+    </main>
+  </body>
 </html>

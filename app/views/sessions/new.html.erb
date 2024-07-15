@@ -1,19 +1,30 @@
-<h1>Log in</h1>
-
-<%= form_with model: @user, url: session_path do |form| %>
-  <div>
-    <%= form.label :email %>
-    <%= form.email_field :email %>
+<div class="flex flex-col items-center h-screen pt-10 bg-purple-dark">
+  <%= inline_svg_tag("main-logo-with-date.svg", class: "mb-10") %>
+  <div class="flex flex-col items-center mb-10">
+    <h1 class="mb-4 text-4xl italic font-black text-white">Welcome!</h1>
+    <h3 class="text-lg font-bold text-white">Please log in to continue</h3>
   </div>
 
-  <div>
-    <%= form.label :password %>
-    <%= form.password_field :password %>
-  </div>
+  <div class="w-full px-5">
+    <%= form_with model: @user, url: session_path do |form| %>
+      <div class="mb-10">
+        <div class="flex flex-col w-full mb-6">
+          <%= form.label :email, class: "text-white italic font-bold mb-2" %>
+          <%= form.email_field :email, placeholder: "email@example.com", class: "bg-transparent border border-2 border-white rounded-md text-white" %>
+        </div>
 
-  <div>
-    <%= form.submit "Log in" %>
-  </div>
-<% end %>
+        <div class="flex flex-col">
+          <%= form.label :password, class: "text-white italic font-bold mb-2" %>
+          <%= form.password_field :password, placeholder: "Password", class: "bg-transparent border border-2 border-white rounded-md text-white" %>
+        </div>
+      </div>
 
-<%= link_to "Forgot your password?", new_password_reset_path %>
+      <div class="flex flex-col items-center mb-10">
+        <%= link_to "Forgot password?", new_password_reset_path, class: "font-black italic underline text-white mb-10" %>
+        <%= link_to "Sign up", new_registration_path, class: "font-black italic underline text-white" %>
+      </div>
+
+      <%= form.submit "Log in", class: "w-full bg-red py-4 text-white font-black italic rounded-[10px] uppercase" %>
+    <% end %>
+  </div>
+</div>

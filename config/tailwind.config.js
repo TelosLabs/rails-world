@@ -10,7 +10,16 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter var', ...defaultTheme.fontFamily.sans]
+        sans: ['Roboto', ...defaultTheme.fontFamily.sans]
+      },
+      colors: {
+        gray: '#C6C6C8',
+        'purple-dark': '#432463',
+        'purple-light': '#4E2A73',
+        red: '#CB0C1C',
+        blue: '#0A4E6B',
+        'green-dark': '#62C554',
+        'green-light': '#D8F1D4'
       }
     }
   },

@@ -45,6 +45,7 @@ group :development, :test do
   gem "erb_lint", require: false
   gem "factory_bot_rails"
   gem "faker"
+  gem "inline_svg"
   gem "letter_opener", "~> 1.10"
   gem "pry-byebug"
   gem "rspec-rails"
