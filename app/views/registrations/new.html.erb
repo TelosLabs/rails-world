@@ -1,28 +1,34 @@
-<h1>Sign Up</h1>
+<div class="flex flex-col items-center h-screen px-5 pt-10 bg-purple-dark">
+  <div class="flex flex-col w-full mb-6">
+    <h1 class="mb-4 text-4xl italic font-black text-white">Sign Up</h1>
+  </div>
 
-<%= form_with model: @user, url: registration_path do |form| %>
-  <% if form.object.errors.any? %>
-    <% form.object.errors.full_messages.each do |message| %>
-      <div><%= message %></div>
+  <div class="w-full">
+    <%= form_with model: @user, url: registration_path do |form| %>
+      <% if form.object.errors.any? %>
+        <% form.object.errors.full_messages.each do |message| %>
+          <div><%= message %></div>
+        <% end %>
+      <% end %>
+
+      <div class="mb-10">
+        <div class="flex flex-col w-full mb-6">
+          <%= form.label :email, class: "text-white italic font-bold mb-2" %>
+          <%= form.email_field :email, placeholder: "email@example.com", class: "bg-transparent border border-2 border-white rounded-md text-white placeholder-white", data: { test_id: "email_field" } %>
+        </div>
+
+        <div class="flex flex-col mb-6">
+          <%= form.label :password, class: "text-white italic font-bold mb-2" %>
+          <%= form.password_field :password, placeholder: "Password", class: "bg-transparent border border-2 border-white rounded-md text-white placeholder-white", data: { test_id: "password_field" } %>
+        </div>
+
+        <div class="flex flex-col">
+          <%= form.label :password_confirmation, class: "text-white italic font-bold mb-2" %>
+          <%= form.password_field :password_confirmation, placeholder: "You know how a strong password goes, right?", class: "bg-transparent border border-2 border-white rounded-md text-white placeholder-white", data: { test_id: "password_confirmation_field" } %>
+        </div>
+      </div>
+
+      <%= form.submit "Sign Up", class: "w-full bg-red py-4 text-white font-black italic rounded-[10px] uppercase", data: { test_id: "sign_up_button" } %>
     <% end %>
-  <% end %>
-
-  <div>
-    <%= form.label :email %>
-    <%= form.email_field :email, data: { test_id: "email_field" } %>
   </div>
-
-  <div>
-    <%= form.label :password %>
-    <%= form.password_field :password, data: { test_id: "password_field" } %>
-  </div>
-
-  <div>
-    <%= form.label :password_confirmation %>
-    <%= form.password_field :password_confirmation, data: { test_id: "password_confirmation_field" } %>
-  </div>
-
-  <div>
-    <%= form.submit "Sign Up", data: { test_id: "sign_up_button" } %>
-  </div>
-<% end %>
+</div>
