@@ -9,3 +9,4 @@ env:
     RAILS_ENV: staging
   secret:
     - RAILS_MASTER_KEY
+    - APPSIGNAL_PUSH_API_KEY

@@ -27,6 +27,9 @@ gem "action_policy", "~> 0.7.0"
 # Authentication
 gem "bcrypt", "~> 3.1.20"
 
+# Monitoring
+gem "appsignal"
+
 # Other
 gem "bootsnap", require: false
 gem "puma", ">= 5.0"

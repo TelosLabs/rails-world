@@ -93,5 +93,5 @@ We use Kamal to deploy the application. Here are some common commands:
 
 - You need to append `-d staging` or `-d production` to the command to specify the environment.
 - Run `kamal deploy` to deploy the application.
-- Run `kamal app logs` to see the logs of the application.
 - Run `kamal app exec -i 'bin/rails console'` to open a Rails console.
+- Run `kamal env push` to push the environment variables to the application.

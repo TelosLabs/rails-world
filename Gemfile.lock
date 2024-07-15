@@ -85,6 +85,8 @@ GEM
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
+    appsignal (3.11.0)
+      rack
     ast (2.4.2)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
@@ -504,6 +506,7 @@ DEPENDENCIES
   action_policy (~> 0.7.0)
   activerecord-enhancedsqlite3-adapter (~> 0.8.0)
   annotate
+  appsignal
   bcrypt (~> 3.1.20)
   better_errors
   binding_of_caller
