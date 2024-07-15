@@ -3,6 +3,9 @@
 
   <%u_profile = current_user.profile%>
   <%= form_with url: profile_path, method: :put, class: "flex flex-col" do |form| %> 
+    <%= form.label :image, class: "font-bold text-white text-base" %>
+    <%= form.file_field :image, class: "text-white border-2 border-white bg-transparent rounded-sm  mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white" %>
+
     <%= form.label :bio, class: "font-bold text-white text-base" %>
     <%= form.text_area :bio, value: u_profile.present? ? u_profile.bio : "" ,class: "text-white border-2 border-white bg-transparent rounded-sm  mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white"%>
     
@@ -20,7 +23,7 @@
 
     <p>Discoverability</p>
     <%= form.label :is_public, class: "font-bold text-white text-base"  %>
-    <%= form.check_box :is_public, value:"true", checked: u_profile.present? ? u_profile.is_public : false, class: "text-white border-2 border-white bg-transparent rounded-sm  mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white" %>
+    <%= form.check_box :is_public, checked: u_profile.present? ? u_profile.is_public : false, class: "text-white border-2 border-white bg-transparent rounded-sm  mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white" %>
     <p class="text-xs" >Allow other persons to view your profile through a QR code.</p>
 
     
