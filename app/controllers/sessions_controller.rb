@@ -1,7 +1,8 @@
 class SessionsController < ApplicationController
-  skip_before_action :authenticate_user!
+  allow_unauthenticated_access only: [:new, :create]
 
   def new
+    @user = User.new
   end
 
   def create
@@ -11,8 +12,7 @@ class SessionsController < ApplicationController
       login @user
       redirect_to root_path, notice: t("controllers.sessions.create.notice")
     else
-      flash[:alert] = t("controllers.sessions.create.alert")
-      render :new, status: :unprocessable_entity
+      redirect_to new_session_path, alert: t("controllers.sessions.create.alert")
     end
   end
 

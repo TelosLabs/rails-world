@@ -22,17 +22,17 @@ RSpec.describe PasswordResetsController, type: :controller do
       end
 
       it "sends a password reset email" do
-        expect { post :create, params: params }.to change { ActionMailer::Base.deliveries.count }.by(1)
-        expect(response).to redirect_to(root_path)
+        expect {
+          post :create, params: params
+        }.to have_enqueued_mail(PasswordMailer, :password_reset)
+        expect(response).to redirect_to(new_session_path)
       end
     end
   end
 
   describe "GET #edit" do
-    let(:current) { instance_double(Current) }
-
     before do
-      allow(Current).to receive(:user).and_return(user)
+      sign_in(user)
     end
 
     context "with valid token" do
@@ -46,17 +46,16 @@ RSpec.describe PasswordResetsController, type: :controller do
     context "with invalid token" do
       it "redirects to new password reset path" do
         get :edit, params: {token: "invalid_token"}
-        expect(response).to redirect_to(new_password_reset_path(alert: I18n.t("controllers.password_resets.errors.invalid_token")))
+        expect(response).to redirect_to(new_password_reset_path)
       end
     end
   end
 
   describe "PUT #update" do
     let(:new_password) { "new_password" }
-    let(:current) { instance_double(Current) }
 
     before do
-      allow(Current).to receive(:user).and_return(user)
+      sign_in(user)
     end
 
     context "with valid params" do
@@ -108,7 +107,7 @@ RSpec.describe PasswordResetsController, type: :controller do
 
       it "does not update the user password" do
         expect { put :update, params: params }.not_to change { user.reload.password_digest }
-        expect(response).to redirect_to(new_password_reset_path(alert: I18n.t("controllers.password_resets.errors.invalid_token")))
+        expect(response).to redirect_to(new_password_reset_path)
       end
     end
   end

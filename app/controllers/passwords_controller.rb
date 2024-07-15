@@ -3,7 +3,7 @@ class PasswordsController < ApplicationController
   end
 
   def update
-    if current_user.update(password_params)
+    if Current.user.update(password_params)
       redirect_to edit_password_path, notice: t("controllers.passwords.update.notice")
     else
       render :edit, status: :unprocessable_entity

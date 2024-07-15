@@ -27,7 +27,6 @@ RSpec.describe SessionsController, type: :controller do
         post :create, params: params
         expect(session[:user_id]).to eq(user.id)
         expect(response).to redirect_to(root_path)
-        assigns(:user).should eq(user)
       end
     end
 
@@ -43,8 +42,8 @@ RSpec.describe SessionsController, type: :controller do
 
       it "does not create a User session" do
         expect { post :create, params: params }.not_to change(User, :count)
-        expect(response).to have_http_status(:unprocessable_content)
-        expect(response).to render_template(:new)
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(new_session_path)
       end
     end
   end

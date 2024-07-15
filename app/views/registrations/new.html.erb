@@ -9,20 +9,20 @@
 
   <div>
     <%= form.label :email %>
-    <%= form.email_field :email %>
+    <%= form.email_field :email, data: { test_id: "email_field" } %>
   </div>
 
   <div>
     <%= form.label :password %>
-    <%= form.password_field :password %>
+    <%= form.password_field :password, data: { test_id: "password_field" } %>
   </div>
 
   <div>
     <%= form.label :password_confirmation %>
-    <%= form.password_field :password_confirmation %>
+    <%= form.password_field :password_confirmation, data: { test_id: "password_confirmation_field" } %>
   </div>
 
   <div>
-    <%= form.submit "Sign Up" %>
+    <%= form.submit "Sign Up", data: { test_id: "sign_up_button" } %>
   </div>
 <% end %>
