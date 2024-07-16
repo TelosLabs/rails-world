@@ -13,6 +13,11 @@
 
   <body>
     <main class="w-full relative mx-auto max-w-[1440px]">
+      <% if !current_page?(new_session_path) %>
+        <div class="flex justify-center py-6 mx-auto border-b border-b-white bg-purple-dark">
+          <%= inline_svg_tag("main-logo.svg") %>
+        </div>
+      <% end %>
       <% flash.each do |type, message| %>
         <% if message.present? && message.is_a?(String) %>
           <div><%= notice %></div>
@@ -20,6 +25,9 @@
         <% end %>
       <% end %>
       <%= yield %>
+      <% if user_signed_in? %>
+        <%= button_to "Log out", session_path, method: :delete %>
+      <% end %>
     </main>
   </body>
 </html>
