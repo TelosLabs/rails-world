@@ -29,6 +29,7 @@ gem "bcrypt", "~> 3.1.20"
 
 # Monitoring
 gem "appsignal"
+gem "lograge"
 
 # Other
 gem "bootsnap", require: false

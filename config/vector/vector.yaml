@@ -1,0 +1,20 @@
+sources:
+  docker:
+    type: "docker_logs"
+
+transforms:
+  parse_logs:
+    type: "remap"
+    inputs: ["docker"]
+    source: |
+      payload, err = parse_json(string!(.message))
+      if err == null {
+        .payload = payload
+        del(.message)
+      }
+
+sinks:
+  appsignal:
+    type: "appsignal"
+    inputs: ["parse_logs"]
+    push_api_key: <%= ENV["APPSIGNAL_#{Rails.env.upcase}_PUSH_API_KEY"] %>

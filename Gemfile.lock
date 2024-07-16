@@ -237,6 +237,11 @@ GEM
     letter_opener (1.10.0)
       launchy (>= 2.2, < 4)
     lint_roller (1.1.0)
+    lograge (0.14.0)
+      actionpack (>= 4)
+      activesupport (>= 4)
+      railties (>= 4)
+      request_store (~> 1.0)
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -351,6 +356,8 @@ GEM
     regexp_parser (2.9.2)
     reline (0.5.9)
       io-console (~> 0.5)
+    request_store (1.7.0)
+      rack (>= 1.4)
     rexml (3.3.1)
       strscan
     rouge (4.3.0)
@@ -524,6 +531,7 @@ DEPENDENCIES
   fuubar
   importmap-rails
   letter_opener (~> 1.10)
+  lograge
   mission_control-jobs
   propshaft
   pry-byebug

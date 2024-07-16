@@ -17,6 +17,16 @@ registry:
 # When running commands, you can specify a destination with the -d flag, e.g. kamal deploy -d staging
 require_destination: true
 
+accessories:
+  vector:
+    image: timberio/vector:0.39.0-debian
+    roles:
+      - web
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    files:
+      - "./config/vector/vector.yaml:/etc/vector/vector.yaml"
+
 # Configure builder setup.
 # builder:
 #   args:
@@ -26,29 +36,6 @@ require_destination: true
 #   remote:
 #     arch: amd64
 #     host: ssh://app@192.168.0.1
-
-# Use accessory services (secrets come from .env).
-# accessories:
-#   db:
-#     image: mysql:8.0
-#     host: 192.168.0.2
-#     port: 3306
-#     env:
-#       clear:
-#         MYSQL_ROOT_HOST: '%'
-#       secret:
-#         - MYSQL_ROOT_PASSWORD
-#     files:
-#       - config/mysql/production.cnf:/etc/mysql/my.cnf
-#       - db/production.sql:/docker-entrypoint-initdb.d/setup.sql
-#     directories:
-#       - data:/var/lib/mysql
-#   redis:
-#     image: redis:7.0
-#     host: 192.168.0.2
-#     port: 6379
-#     directories:
-#       - data:/data
 
 # Configure custom arguments for Traefik. Be sure to reboot traefik when you modify it.
 # traefik:

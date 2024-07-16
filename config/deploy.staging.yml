@@ -1,6 +1,6 @@
 # Deploy to these servers.
 servers:
-  - 165.227.38.160
+  - 216.128.176.23
 
 # Inject ENV variables into containers (secrets come from .env).
 # Remember to run `kamal env push` after making changes!
