@@ -25,9 +25,17 @@
     <%= form.text_field :twitter_url, value:  @profile.twitter_url, class: "text-white border-2 border-white bg-transparent rounded-sm  mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white" %>
 
     <p>Discoverability</p>
-    <%= form.label :is_public, class: "font-bold text-white text-base"  %>
-    <%= form.check_box :is_public, checked:  @profile.is_public || false, class: "text-white border-2 border-white bg-transparent rounded-sm  mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white" %>
+    <div class="flex flex-row items-center">
+      <%= form.label :is_public, "Public profile", class: "font-bold text-white text-base cursor-pointer mr-2"  %>
+      <label class="inline-flex items-center cursor-pointer">
+        <%= form.check_box :is_public, checked:  @profile.is_public || false, class: "sr-only peer" %>
+        <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+      </label>
+    </div>
     <p class="text-xs" >Allow other persons to view your profile through a QR code.</p>
+
+    
+
 
     
     <%= form.submit "Preview profile", class:"w-full bg-red-500 p-4 text-lg font-black text-white rounded cursor-pointer" %>
