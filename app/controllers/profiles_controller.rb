@@ -1,5 +1,10 @@
 class ProfilesController < ApplicationController
+  def show
+    @profile = current_user.profile
+  end
+
   def edit
+    @profile = current_user.profile || Profile.new
   end
 
   def update
@@ -9,7 +14,7 @@ class ProfilesController < ApplicationController
     else
       current_user.profile.update!(profile_params)
     end
-    redirect_to edit_profile_path, notice: "Profile updated!"
+    redirect_to profile_path, notice: "Profile updated!"
   end
 
   private

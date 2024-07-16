@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   resource :password, only: [:edit, :update]
   resource :password_reset, only: [:new, :create, :edit, :update]
 
-  resource :profile, only: [:edit, :update]
+  resource :profile, only: [:edit, :update, :show]
 end
