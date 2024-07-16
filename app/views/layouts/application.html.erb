@@ -12,17 +12,24 @@
 </head>
 
 <body>
-<main class="container mx-auto mt-28 px-5 flex">
+<main class="flex flex-col container mx-auto flex">
+  <div class="flex flex-row items-center justify-center p-6 bg-violet-900">
+    <%= image_tag url_for("rails_world_logo.svg") %> 
+  </div>
   <div><%= notice %></div>
   <div><%= alert %></div>
-  <% if user_signed_in? %>
-    <%= link_to "Edit Password", edit_password_path %>
-    <%= button_to "Log out", session_path, method: :delete %>
-  <% else %>
-    <%= link_to "Sign Up", new_registration_path %>
-    <%= link_to "Log in", new_session_path %>
-  <% end %>
+  
   <%= yield %>
+
+  <div class="flex flex-row gap-2">
+    <% if user_signed_in? %>
+      <%= link_to "Edit Password", edit_password_path %>
+      <%= button_to "Log out", session_path, method: :delete %>
+    <% else %>
+      <%= link_to "Sign Up", new_registration_path %>
+      <%= link_to "Log in", new_session_path %>
+    <% end %>
+  </div>
 </main>
 </body>
 </html>
