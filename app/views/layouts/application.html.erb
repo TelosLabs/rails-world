@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="h-full">
   <head>
     <title>RailsWorld</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -11,10 +11,10 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="w-full relative mx-auto max-w-[1440px]">
+  <body class="h-full">
+    <main class="flex flex-col w-full h-full relative mx-auto max-w-[1440px]">
       <% if !current_page?(new_session_path) %>
-        <div class="flex justify-center py-6 mx-auto border-b border-b-white bg-purple-dark">
+        <div class="flex justify-center w-full py-6 mx-auto border-b border-b-white bg-purple-dark">
           <%= inline_svg_tag("main-logo.svg") %>
         </div>
       <% end %>
