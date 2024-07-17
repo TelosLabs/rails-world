@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   resource :password_reset, only: [:new, :create, :edit, :update]
 
   resource :profile, only: [:edit, :update, :show]
+  resource :preview_profile, only: [:show]
 end

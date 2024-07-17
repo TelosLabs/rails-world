@@ -2,7 +2,7 @@
   <h1 class="text-4xl text-white mb-6 font-black w-full">Set up your account</h1>
 
 
-  <%= form_with url: profile_path, method: :put, class: "flex flex-col items-center" do |form| %>
+  <%= form_with url: preview_profile_path, class: "flex flex-col items-center", method: :get do |form| %>
     <%= form.label :image, class: "font-bold text-white text-base w-32 h-32 bg-white cursor-pointer rounded-full flex flex-col items-center justify-center" do%>
       <%= form.file_field :image, class: "text-white border-2 border-white bg-transparent rounded-sm hidden mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white" %>
       <%= image_tag url_for("camera.svg") %>

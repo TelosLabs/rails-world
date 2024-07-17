@@ -24,6 +24,8 @@
         </div>
     </div>
     <div class="p-4 flex flex-col items-center gap-4 w-full">
-        <%= link_to 'EDIT PROFILE', edit_profile_path, class: "w-full bg-white text-red-900 rounded-sm p-4 rounded-lg grow flex flex-row items-center justify-center" %>
+        <%= button_to 'SAVE PROFILE', profile_path, params: @profile, class:"w-full bg-white text-red-900 rounded-sm p-4 rounded-lg grow flex flex-row items-center justify-center", method: :post %>
+        <%= button_to 'BACK TO EDIT', edit_profile_path, method: :get, class: "w-full bg-white text-red-900 rounded-sm p-4 rounded-lg grow flex flex-row items-center justify-center" %>
     </div>
 </div>
+
