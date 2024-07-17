@@ -14,6 +14,7 @@ class ProfilesController < ApplicationController
     else
       current_user.profile.update!(profile_params)
     end
+    current_user.update!(notifications_params)
     redirect_to profile_path, notice: "Profile updated!"
   end
 
@@ -21,5 +22,9 @@ class ProfilesController < ApplicationController
 
   def profile_params
     params.permit(:name, :location, :bio, :is_public, :twitter_url, :linkedin_url, :github_url, :image)
+  end
+
+  def notifications_params
+    params.permit(:in_app_notifications_enabled, :mail_notifications_enabled)
   end
 end
