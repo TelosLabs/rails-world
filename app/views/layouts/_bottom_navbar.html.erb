@@ -1,0 +1,24 @@
+
+
+<div class="flex flex-row items-center justify-center gap-4 bg-white">
+  <a href="<%= NavigationHelper::NAVIGATION_LINKS[:agenda]%>" class="<%= nav_text_class_for :agenda %> flex flex-col items-center" >
+    <%= inline_svg_tag "calendar.svg", class: nav_icon_class_for(:agenda) %>
+    Agenda
+  </a>
+  <a href="<%= NavigationHelper::NAVIGATION_LINKS[:schedule]%>" class="<%= nav_text_class_for :schedule %> flex flex-col items-center justify-center">
+    <%= inline_svg_tag "clock.svg", class: nav_icon_class_for(:schedule)  %>
+    My Schedule
+  </a>
+  <a href="<%= NavigationHelper::NAVIGATION_LINKS[:profile]%>" class="<%= nav_text_class_for :profile %> flex flex-col items-center justify-center">
+    <%= inline_svg_tag "avatar_no_fill.svg", class: nav_icon_class_for(:profile)  %>
+    Profile
+  </a>
+  <a href="<%= NavigationHelper::NAVIGATION_LINKS[:notifications]%>" class="<%= nav_text_class_for :notifications %> flex flex-col items-center justify-center">
+    <%= inline_svg_tag "bell.svg", class: nav_icon_class_for(:notifications)  %>
+    Notifications
+  </a>
+  <a href="<%= NavigationHelper::NAVIGATION_LINKS[:about]%>" class="<%= nav_text_class_for :about %> flex flex-col items-center justify-center">
+    <%= inline_svg_tag "info.svg", class: nav_icon_class_for(:about)  %>
+    About
+  </a>
+</div>
