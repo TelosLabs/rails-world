@@ -17,4 +17,4 @@ sinks:
   appsignal:
     type: "appsignal"
     inputs: ["parse_logs"]
-    push_api_key: <%= ENV["APPSIGNAL_#{Rails.env.upcase}_PUSH_API_KEY"] %>
+    push_api_key: <%= ENV["APPSIGNAL_APP_PUSH_API_KEY"] %>

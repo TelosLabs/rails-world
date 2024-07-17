@@ -95,3 +95,7 @@ We use Kamal to deploy the application. Here are some common commands:
 - Run `kamal deploy` to deploy the application.
 - Run `kamal app exec -i 'bin/rails console'` to open a Rails console.
 - Run `kamal env push` to push the environment variables to the application.
+
+#### Monitoring
+
+We use AppSignal to monitor the application. You can access the dashboard [here](https://appsignal.com/telos-labs-1/sites/66957fb350fa9b6729fb6919/dashboard).

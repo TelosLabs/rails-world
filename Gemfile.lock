@@ -283,6 +283,11 @@ GEM
       ast (~> 2.4.1)
       racc
     path_expander (1.1.1)
+    postmark (1.25.1)
+      json
+    postmark-rails (0.22.1)
+      actionmailer (>= 3.0.0)
+      postmark (>= 1.21.3, < 2.0)
     propshaft (0.9.0)
       actionpack (>= 7.0.0)
       activesupport (>= 7.0.0)
@@ -533,6 +538,7 @@ DEPENDENCIES
   letter_opener (~> 1.10)
   lograge
   mission_control-jobs
+  postmark-rails
   propshaft
   pry-byebug
   puma (>= 5.0)
