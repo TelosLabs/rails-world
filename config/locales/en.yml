@@ -13,6 +13,9 @@ en:
     passwords:
       update:
         notice: "Your password has been updated successfully."
+    profiles:
+      update:
+        success: "Your profile has been updated successfully."
     sessions:
       create:
         notice: "Signed in successfully."

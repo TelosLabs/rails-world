@@ -15,7 +15,7 @@ class ProfilesController < ApplicationController
       current_user.profile.update!(profile_params)
     end
     current_user.update!(notifications_params)
-    redirect_to profile_path, notice: "Profile updated!"
+    redirect_to profile_path, notice: t("controllers.profiles.update.success")
   end
 
   private
