@@ -30,7 +30,15 @@ class User < ApplicationRecord
   validates :password_digest, presence: true
   validates :password, length: {minimum: 8}, if: -> { password.present? }
 
+  enum role: {user: "user", admin: "admin"}
+
+  accepts_nested_attributes_for :profile
+
   generates_token_for :password_reset, expires_in: PASSWORD_RESET_EXPIRATION do
     password_salt&.last(10)
+  end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[email]
   end
 end
