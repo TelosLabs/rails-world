@@ -6,8 +6,8 @@ gem "rails", "~> 7.1.3", ">= 7.1.3.4"
 
 # Database
 gem "activerecord-enhancedsqlite3-adapter", "~> 0.8.0"
-gem "sqlite3", "~> 1.4"
 gem "litestream", "~> 0.10.4"
+gem "sqlite3", "~> 1.4"
 
 # Jobs
 gem "mission_control-jobs"
