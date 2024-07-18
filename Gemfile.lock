@@ -237,6 +237,16 @@ GEM
     letter_opener (1.10.0)
       launchy (>= 2.2, < 4)
     lint_roller (1.1.0)
+    litestream (0.10.4)
+      logfmt (>= 0.0.10)
+      sqlite3
+    litestream (0.10.4-arm64-darwin)
+      logfmt (>= 0.0.10)
+      sqlite3
+    litestream (0.10.4-x86_64-linux)
+      logfmt (>= 0.0.10)
+      sqlite3
+    logfmt (0.0.10)
     lograge (0.14.0)
       actionpack (>= 4)
       activesupport (>= 4)
@@ -536,6 +546,7 @@ DEPENDENCIES
   fuubar
   importmap-rails
   letter_opener (~> 1.10)
+  litestream (~> 0.10.4)
   lograge
   mission_control-jobs
   postmark-rails

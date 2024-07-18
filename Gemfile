@@ -7,6 +7,7 @@ gem "rails", "~> 7.1.3", ">= 7.1.3.4"
 # Database
 gem "activerecord-enhancedsqlite3-adapter", "~> 0.8.0"
 gem "sqlite3", "~> 1.4"
+gem "litestream", "~> 0.10.4"
 
 # Jobs
 gem "mission_control-jobs"
@@ -21,11 +22,11 @@ gem "tailwindcss-rails", "~> 2.6"
 gem "stimulus-rails"
 gem "turbo-rails"
 
-# Authorization
-gem "action_policy", "~> 0.7.0"
-
 # Authentication
 gem "bcrypt", "~> 3.1.20"
+
+# Authorization
+gem "action_policy", "~> 0.7.0"
 
 # Monitoring
 gem "appsignal"
