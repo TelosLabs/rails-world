@@ -17,16 +17,6 @@ registry:
 # When running commands, you can specify a destination with the -d flag, e.g. kamal deploy -d staging
 require_destination: true
 
-accessories:
-  vector:
-    image: timberio/vector:0.39.0-debian
-    roles:
-      - web
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    files:
-      - "./config/vector/vector.yaml:/etc/vector/vector.yaml"
-
 # Configure builder setup.
 # builder:
 #   args:

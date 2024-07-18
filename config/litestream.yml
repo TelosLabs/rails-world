@@ -10,17 +10,17 @@
 #
 # For more details, see: https://litestream.io/reference/config/
 dbs:
-  - path: storage/staging.sqlite3
+  - path: storage/production.sqlite3
     replicas:
       - type: s3
         bucket: $LITESTREAM_BUCKET
-        path: storage/staging.sqlite3
+        path: storage/production.sqlite3
         access-key-id: $LITESTREAM_ACCESS_KEY_ID
         secret-access-key: $LITESTREAM_SECRET_ACCESS_KEY
-  - path: storage/staging-queue.sqlite3
+  - path: storage/production-queue.sqlite3
     replicas:
       - type: s3
         bucket: $LITESTREAM_BUCKET
-        path: storage/staging-queue.sqlite3
+        path: storage/production-queue.sqlite3
         access-key-id: $LITESTREAM_ACCESS_KEY_ID
         secret-access-key: $LITESTREAM_SECRET_ACCESS_KEY

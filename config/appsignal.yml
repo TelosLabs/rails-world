@@ -1,5 +1,5 @@
 default: &defaults
-  push_api_key: "<%= ENV['APPSIGNAL_ORG_PUSH_API_KEY'] %>"
+  push_api_key: "<%= ENV['APPSIGNAL_PUSH_API_KEY'] %>"
 
   # Your app's name
   name: "RailsWorld"
