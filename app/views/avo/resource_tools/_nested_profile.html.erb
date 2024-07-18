@@ -1,0 +1,20 @@
+<div class="flex flex-col">
+  <%= render Avo::PanelComponent.new(name: "Profile") do |c| %>
+    <% c.with_tools do %>
+      <%= form.submit "Save", class: "button-component inline-flex flex-grow-0 items-center font-semibold leading-6 fill-current whitespace-nowrap transition duration-100 transform transition duration-100 cursor-pointer disabled:cursor-not-allowed disabled:opacity-70 justify-center  border active:outline active:outline-1 rounded bg-primary-500 text-white border-primary-500 hover:bg-primary-600 hover:border-primary-600 active:border-primary-600 active:outline-primary-600 active:bg-primary-600 px-3 py-1.5 text-sm" %>
+    <% end %>
+    <% c.with_body do %>
+      <div class="divide-y overflow-auto">
+        <% if form.present? %>
+          <%= render partial: "avo/resource_tools/text_input", locals: { form: form, input_name: :name } %>
+          <%= render partial: "avo/resource_tools/text_input", locals: { form: form, input_name: :bio } %>
+          <%= render partial: "avo/resource_tools/text_input", locals: { form: form, input_name: :location } %>
+          <%= render partial: "avo/resource_tools/text_input", locals: { form: form, input_name: :github_url } %>
+          <%= render partial: "avo/resource_tools/text_input", locals: { form: form, input_name: :linkedin_url } %>
+          <%= render partial: "avo/resource_tools/text_input", locals: { form: form, input_name: :twitter_url } %>
+          <%= render partial: "avo/resource_tools/checkbox_input", locals: { form: form, input_name: :is_public } %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
