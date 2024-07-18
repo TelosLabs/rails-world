@@ -26,12 +26,12 @@ gem "bcrypt", "~> 3.1.20"
 
 # Admin
 gem "avo", ">= 3.2.1"
+gem "ransack"
 
 # Other
 gem "bootsnap", require: false
 gem "inline_svg"
 gem "puma", ">= 5.0"
-gem "ransack"
 gem "rqrcode", "~> 2.0"
 gem "tzinfo-data", platforms: %i[windows jruby]
 gem "validates_timeliness", "~> 7.0.0.beta1"
