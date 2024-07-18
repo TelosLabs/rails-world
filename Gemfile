@@ -26,6 +26,14 @@ gem "bcrypt", "~> 3.1.20"
 
 # Admin
 gem "avo", ">= 3.2.1"
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+gem "ransack"
+=======
+gem 'ransack'
+>>>>>>> dbe39e2 (Setup AVO)
+>>>>>>> 3865739 (Setup AVO)
 
 # Other
 gem "bootsnap", require: false
