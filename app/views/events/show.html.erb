@@ -2,7 +2,6 @@
     <div class="bg-cover bg-bottom bg-no-repeat w-full pt-6 px-5 pb-12" style="background-image: url(<%= asset_path 'background_design.svg' %>)">
         <div class="flex flex-row items-center mb-6">
             <%= image_tag url_for(current_user.profile.image), class: "w-12 h-12 rounded-full mr-5" %>
-           
            <div class="w-full flex flex-row items-center justify-between grow">
                 <div class="flex flex-col">
                     <p class="text-lg italic font-black red-500">Melia Antiqua</p>
@@ -14,11 +13,12 @@
         <h1 class="text-2xl text-red-500 mb-4 font-bold mb-4">Level up performance with simple coding changes</h1>
         <p class="text-lg font-black mb-4">Thursday, September 26 · 09:00 - 12:00
         Conference Hall</p>
-        <p class="font-normal mb-6 leading-6">This presentation will first highlight some 
-        of the major improvements Bionis, Inc. has achieved using straightforward 
+        <p class="font-normal mb-6 leading-6">This presentation will first highlight some
+        of the major improvements Bionis, Inc. has achieved using straightforward
         Ruby techniques and her approach to solving technical problems centers
         around ensuring the continued stability and extensibility for individual
         developers and companies large and small.</p>
+
         <div class="flex flex-row items-center gap-4">
             <div class="bg-violet-600 rounded-lg px-4 py-2 text-white">
                 Front-end
@@ -33,10 +33,9 @@
     </div>
     <div class="flex flex-col p-5">
         <p class="text-white mb-4 text-2xl font-bold italic">About this speaker</p>
-        <div class="p-5 rounded-lg bg-white"> 
+        <div class="p-5 rounded-lg bg-white">
             <div class="flex flex-row items-center mb-6">
                 <%= image_tag url_for(current_user.profile.image), class: "w-12 h-12 rounded-full mr-5" %>
-            
                 <div class="flex flex-col">
                     <p class="text-lg italic font-black red-500">Melia Antiqua</p>
                     <p class="font-normal text-sm">CTO, Bionis, Inc.</p>
