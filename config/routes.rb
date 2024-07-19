@@ -13,4 +13,6 @@ Rails.application.routes.draw do
 
   resource :profile, only: [:edit, :update, :show]
   resource :preview_profile, only: [:show]
+
+  resources :events, only: [:index, :show]
 end
