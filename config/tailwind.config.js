@@ -12,6 +12,9 @@ module.exports = {
       fontFamily: {
         sans: ['Roboto', ...defaultTheme.fontFamily.sans]
       },
+      maxWidth: {
+        'screen-sm': '425px'
+      },
       colors: {
         gray: '#C6C6C8',
         'purple-dark': '#432463',

@@ -1,30 +1,26 @@
 <div class="flex flex-col items-center flex-1 h-screen px-5 py-10 bg-purple-dark">
-  <%= form_with model: @user, url: password_reset_path(token: params[:token]), class: "flex flex-col h-full justify-between" do |form| %>
+  <%= form_with model: @user, url: password_reset_path(token: params[:token]), class: "flex flex-col h-full justify-between w-full max-w-screen-sm" do |form| %>
     <div class="flex flex-col">
       <div class="flex flex-col w-full mb-6">
         <h1 class="mb-4 text-4xl italic font-black text-white">Reset your password</h1>
       </div>
 
       <div class="w-full">
-        <% if form.object.errors.any? %>
-          <% form.object.errors.full_messages.each do |message| %>
-            <div> <%= message %></div>
-          <% end %>
-        <% end %>
+        <%= render partial: "shared/form_errors", locals: { errors: form.object.errors.full_messages } %>
 
         <div class="mb-10">
           <div class="flex flex-col w-full mb-6">
             <%= form.label :password, class: "text-white italic font-bold mb-2" %>
-            <%= form.password_field :password, placeholder: "You know how a strong password goes, right?", class: "bg-transparent border border-2 border-white rounded-md text-white placeholder-white focus:bg-white focus:text-black focus:placeholder-gray focus:border-white focus:ring-white" %>
+            <%= form.password_field :password, required: true, placeholder: "You know how a strong password goes, right?", class: "bg-transparent border border-2 border-white rounded-md text-white placeholder-white focus:bg-white focus:text-black focus:placeholder-gray focus:border-white focus:ring-white" %>
           </div>
 
           <div class="flex flex-col w-full mb-6">
             <%= form.label :password_confirmation, class: "text-white italic font-bold mb-2" %>
-            <%= form.password_field :password_confirmation, placeholder: "Confirm strong password", class: "bg-transparent border border-2 border-white rounded-md text-white placeholder-white focus:bg-white focus:text-black focus:placeholder-gray focus:border-white focus:ring-white" %>
+            <%= form.password_field :password_confirmation, required: true, placeholder: "Confirm strong password", class: "bg-transparent border border-2 border-white rounded-md text-white placeholder-white focus:bg-white focus:text-black focus:placeholder-gray focus:border-white focus:ring-white" %>
           </div>
         </div>
       </div>
     </div>
-    <%= form.submit "Reset Your Password", class: "w-full bg-red py-4 text-white font-black italic rounded-[10px] uppercase" %>
+    <%= form.button "Reset Your Password", type: "submit", class: "w-full bg-red py-4 text-white font-black italic rounded-[10px] uppercase" %>
   <% end %>
 </div>

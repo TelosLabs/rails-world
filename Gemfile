@@ -29,6 +29,7 @@ gem "bcrypt", "~> 3.1.20"
 
 # Other
 gem "bootsnap", require: false
+gem "inline_svg"
 gem "puma", ">= 5.0"
 gem "tzinfo-data", platforms: %i[windows jruby]
 gem "validates_timeliness", "~> 7.0.0.beta1"
@@ -45,7 +46,6 @@ group :development, :test do
   gem "erb_lint", require: false
   gem "factory_bot_rails"
   gem "faker"
-  gem "inline_svg"
   gem "letter_opener", "~> 1.10"
   gem "pry-byebug"
   gem "rspec-rails"

@@ -1,5 +1,5 @@
 <div class="flex flex-col items-center flex-1 h-screen px-5 py-10 bg-purple-dark">
-  <%= form_with model: @user, url: password_reset_path, class: "flex flex-col h-full justify-between" do |form| %>
+  <%= form_with model: @user, url: password_reset_path, class: "flex flex-col h-full w-full max-w-screen-sm justify-between" do |form| %>
     <div class="flex flex-col">
       <div class="flex flex-col w-full mb-6">
         <h1 class="mb-4 text-4xl italic font-black text-white">Forgot Password</h1>
@@ -9,11 +9,11 @@
       <div class="w-full">
         <div class="flex flex-col w-full mb-10">
           <%= form.label :email, class: "text-white italic font-bold mb-2" %>
-          <%= form.email_field :email, placeholder: "email@example.com", class: "bg-transparent border border-2 border-white rounded-md text-white placeholder-white focus:bg-white focus:text-black focus:placeholder-gray focus:border-white focus:ring-white", data: { test_id: "email_field" } %>
+          <%= form.email_field :email, required: true, placeholder: "email@example.com", class: "bg-transparent border border-2 border-white rounded-md text-white placeholder-white focus:bg-white focus:text-black focus:placeholder-gray focus:border-white focus:ring-white", data: { test_id: "email_field" } %>
         </div>
       </div>
     </div>
 
-    <%= form.submit "Send recovery email", class: "w-full bg-red py-4 text-white font-black italic rounded-[10px] uppercase" %>
+    <%= form.button "Send recovery email", type: "submit", class: "w-full bg-red py-4 text-white font-black italic rounded-[10px] uppercase" %>
   <% end %>
 </div>
