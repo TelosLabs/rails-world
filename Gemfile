@@ -32,7 +32,7 @@ gem "rqrcode", "~> 2.0"
 
 # Admin
 gem "avo", ">= 3.2.1"
-gem 'ransack'
+gem "ransack"
 
 # Other
 gem "bootsnap", require: false
