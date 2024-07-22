@@ -96,6 +96,18 @@ We use Kamal to deploy the application. Here are some common commands:
 - Run `kamal app exec -i 'bin/rails console'` to open a Rails console.
 - Run `kamal env push` to push the environment variables to the application.
 
+#### Hosting
+
+We use Vultr to host the application.
+
+- [Staging](http://216.128.176.23/)
+- [Production](http://149.248.53.52/)
+
+
 #### Monitoring
 
 We use AppSignal to monitor the application. You can access the dashboard [here](https://appsignal.com/telos-labs-1/sites/66957fb350fa9b6729fb6919/dashboard).
+
+#### Backups
+
+We use [Litestream](https://litestream.io/) to backup the database. Changes are automatically pushed to the S3 bucket.
