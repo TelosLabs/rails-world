@@ -4,10 +4,11 @@ Rails.application.routes.draw do
   # TODO: authenticate with admin user
   mount MissionControl::Jobs::Engine, at: "/jobs"
 
-  root "main#index"
+  root "events#index"
 
   resource :registration, only: [:new, :create]
   resource :session, only: [:new, :create, :destroy]
   resource :password, only: [:edit, :update]
   resource :password_reset, only: [:new, :create, :edit, :update]
+  resources :events, only: [:index]
 end

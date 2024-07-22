@@ -1,0 +1,63 @@
+<div class="flex flex-col items-center flex-1 h-screen px-5 py-10 bg-gray-light">
+  <div class="flex justify-between w-full mb-4">
+    <div class="flex">
+      <h1 class="text-4xl italic font-black text-black">Agenda</h1>
+    </div>
+    <div class="flex items-center justify-center p-3 bg-white rounded-full">
+      <%= inline_svg_tag("icons/filter.svg", class: "mr-2") %>
+      <span class="font-medium">Filters</span>
+    </div>
+  </div>
+
+  <div class="flex flex-col w-full">
+    <% @events.each do |event| %>
+      <div class="flex flex-col w-full p-5 mb-4 bg-white rounded-lg shadow-lg">
+        <div>
+          <!-- status tag -->
+        </div>
+
+        <div class="flex flex-col w-full">
+          <div class="flex justify-between w-full mb-4">
+            <div class="flex">
+              <%= image_tag("placeholder.png", class: "w-[48px] h-[48px] mr-5 rounded-full object-cover") %>
+              <div class="flex flex-col">
+                <h2 class="italic font-black text-red text-[18px]"><%= event.speakers.first.profile.name %></h2>
+              </div>
+            </div>
+            <div>
+              <%= inline_svg_tag("icons/bookmark.svg") %>
+            </div>
+          </div>
+
+          <div class="flex flex-col mb-4">
+            <h3 class="text-[18px] font-bold text-red italic"><%= event.title %></h3>
+            <p class="font-medium"><%= event.description %></p>
+          </div>
+
+          <div class="flex flex-col mb-4">
+            <div class="flex items-center">
+              <%= inline_svg_tag("icons/calendar.svg", class: "w-[14px] h-[14px] mr-2") %>
+              <span class="text-sm"><%= event.starts_at.strftime("%A, %d %B %Y") %></span>
+            </div>
+            <div class="flex items-center">
+              <%= inline_svg_tag("icons/clock.svg", class: "w-[14px] h-[14px] mr-2") %>
+              <span class="text-sm"><%= event.starts_at.strftime("%H:%M") %> - <%= event.ends_at.strftime("%H:%M") %></span>
+            </div>
+            <div class="flex items-center">
+              <%= inline_svg_tag("icons/location-pin.svg", class: "w-[14px] h-[14px] mr-2") %>
+              <span class="text-sm"><%= event.location.name %></span>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap w-full gap-2">
+            <% event.tags.each do |tag| %>
+              <div class="px-3 py-1 text-sm font-bold bg-transparent border-2 rounded-lg border-blue-light text-blue-light">
+                <%= tag.name %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
