@@ -1,8 +1,5 @@
 en:
   controllers:
-    concerns:
-      authentication:
-        unauthorized: "You need to sign in or sign up before continuing."
     password_resets:
       create:
         notice: "Check your email to reset your password."

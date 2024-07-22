@@ -19,7 +19,7 @@ class PasswordResetsController < ApplicationController
       ).password_reset.deliver_later
     end
 
-    redirect_to new_session_path, notice: t("controllers.password_resets.create.notice")
+    redirect_to post_submit_password_reset_path
   end
 
   def update

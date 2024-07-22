@@ -223,6 +223,9 @@ GEM
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)
+    inline_svg (1.9.0)
+      activesupport (>= 3.0)
+      nokogiri (>= 1.6)
     io-console (0.7.2)
     irb (1.13.2)
       rdoc (>= 4.0.0)
@@ -347,7 +350,7 @@ GEM
     regexp_parser (2.9.2)
     reline (0.5.9)
       io-console (~> 0.5)
-    rexml (3.3.1)
+    rexml (3.3.2)
       strscan
     rouge (4.3.0)
     rspec (3.13.0)
@@ -514,6 +517,7 @@ DEPENDENCIES
   faker
   fuubar
   importmap-rails
+  inline_svg
   letter_opener (~> 1.10)
   mission_control-jobs
   propshaft
