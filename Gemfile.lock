@@ -225,6 +225,9 @@ GEM
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)
+    inline_svg (1.9.0)
+      activesupport (>= 3.0)
+      nokogiri (>= 1.6)
     io-console (0.7.2)
     irb (1.13.2)
       rdoc (>= 4.0.0)
@@ -545,6 +548,7 @@ DEPENDENCIES
   faker
   fuubar
   importmap-rails
+  inline_svg
   letter_opener (~> 1.10)
   litestream (~> 0.10.4)
   lograge

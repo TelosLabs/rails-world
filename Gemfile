@@ -34,6 +34,7 @@ gem "lograge"
 
 # Other
 gem "bootsnap", require: false
+gem "inline_svg"
 gem "postmark-rails"
 gem "puma", ">= 5.0"
 gem "tzinfo-data", platforms: %i[windows jruby]
