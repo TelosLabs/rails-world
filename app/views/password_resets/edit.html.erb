@@ -19,6 +19,10 @@
             <%= form.password_field :password_confirmation, required: true, placeholder: "Confirm strong password", class: "bg-transparent border border-2 border-white rounded-md text-white placeholder-white focus:bg-white focus:text-black focus:placeholder-gray focus:border-white focus:ring-white" %>
           </div>
         </div>
+
+        <div class="flex flex-col items-center mb-10">
+          <span class="text-white">Just remembered your password? <%= link_to "Log in instead", new_session_path, class: "font-black italic underline text-white" %></span>
+        </div>
       </div>
     </div>
     <%= form.button "Reset Your Password", type: "submit", class: "w-full bg-red py-4 text-white font-black italic rounded-[10px] uppercase" %>
