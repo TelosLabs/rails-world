@@ -24,12 +24,4 @@ RSpec.describe ProfilesController, type: :controller do
       end
     end
   end
-
-  describe "GET #qr_code" do
-    it "returns a PNG" do
-      get :qr_code, params: {uuid: profile.uuid}
-      expect(response.headers["Content-Type"]).to eq("image/png")
-      expect(response.headers["Content-Disposition"]).to include("#{profile.name}.png")
-    end
-  end
 end

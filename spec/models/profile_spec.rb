@@ -38,4 +38,20 @@ RSpec.describe Profile, type: :model do
       expect(profile.uuid).to be_present
     end
   end
+
+  describe "validations" do
+    context "with a valid UUID" do
+      it "is valid" do
+        profile.uuid = SecureRandom.uuid
+        expect(profile).to be_valid
+      end
+    end
+
+    context "with an invalid UUID" do
+      it "is invalid" do
+        profile.uuid = "invalid"
+        expect(profile).not_to be_valid
+      end
+    end
+  end
 end
