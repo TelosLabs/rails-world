@@ -22,7 +22,7 @@
 #  index_profiles_on_uuid         (uuid) UNIQUE
 #
 class Profile < ApplicationRecord
-  UUID_REGEX = /[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}/
+  UUID_REGEX = /\A[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}\z/
 
   belongs_to :profileable, polymorphic: true
 
@@ -30,7 +30,7 @@ class Profile < ApplicationRecord
   has_one :user, through: :self_ref, source: :profileable, source_type: "User"
   has_one :speaker, through: :self_ref, source: :profileable, source_type: "Speaker"
 
-  validates :uuid, uniqueness: true, presence: true, format: {with: UUID_REGEX}
+  validates :uuid, uniqueness: true, format: {with: UUID_REGEX}
 
   before_validation :set_uuid
 

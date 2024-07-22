@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   resource :password_reset, only: [:new, :create, :edit, :update] do
     get :post_submit
-    end
+  end
   resource :password_reset, only: [:new, :create, :edit, :update]
   resources :profiles, only: [:show, :edit, :update], param: :uuid do
     resource :qr_code, only: [:show]
