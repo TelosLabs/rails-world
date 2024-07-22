@@ -29,4 +29,8 @@ class Profile < ApplicationRecord
   has_one :speaker, through: :self_ref, source: :profileable, source_type: "Speaker"
 
   belongs_to :profileable, polymorphic: true
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[name]
+  end
 end

@@ -19,4 +19,8 @@ class Location < ApplicationRecord
   has_many :events, dependent: :destroy
 
   validates :name, presence: true, uniqueness: {scope: :conference_id}
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[name]
+  end
 end
