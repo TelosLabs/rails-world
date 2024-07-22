@@ -15,4 +15,6 @@ Rails.application.routes.draw do
   resource :preview_profile, only: [:show]
 
   resources :events, only: [:index, :show]
+
+  resources :speakers, only: [:show]
 end

@@ -1,0 +1,49 @@
+<div class="p-5 rounded-lg bg-white w-full">
+    <div class="flex flex-row items-center mb-6">
+        <% if profile.image.attached? %>
+            <%= image_tag url_for(profile.image), class: "text-red w-12 h-12 rounded-full mr-4" %>
+        <% else %>
+            <div class="w-12 h-12 rounded-full bg-slate-300 p-2 flex flex-row items-center justify-center mr-4">
+                <%= image_tag url_for("user_avatar.svg") %>
+            </div>
+        <% end %>
+        <div class="w-full flex flex-row items-center justify-between grow">
+            <div class="flex flex-col">
+                <p class="text-lg italic font-black red-500">Melia Antiqua</p>
+                <p class="font-normal text-sm">CTO, Bionis, Inc.</p>
+            </div>
+            <%= inline_svg_tag "circle_with_checkmark.svg", class: "fill-red-500" %>
+        </div>
+    </div>
+    <h1 class="text-2xl text-red-500 mb-4 font-bold mb-4">Level up performance with simple coding changes</h1>
+    <p class="font-normal mb-6 leading-6 text-sm">This presentation will first highlight some
+    of the major improvements Bionis, Inc. has achieved using straightforward
+    Ruby techniques and her approach to solving technical problems centers
+    around ensuring the continued stability and extensibility for individual
+    developers and companies large and small.</p>
+    <div class="flex flex-row items-center mb-1">
+        <%= inline_svg_tag("simple_calendar.svg", class: "mr-3") %>
+        <p class="text-lg font-normal text-sm text-slate-700">Thursday, September 26</p>
+    </div>
+    <div class="flex flex-row items-center mb-1">
+        <%= inline_svg_tag("simple_clock.svg", class: "mr-3") %>
+        <p class="text-lg font-normal  text-sm text-slate-700">09:00 - 12:00</p>
+    </div>
+    <div class="flex flex-row items-center mb-6">
+        <%= inline_svg_tag("simple_location_pin.svg", class: "mr-3") %>
+        <p class="text-lg font-normal text-sm text-slate-700 ">Conference Hall</p>
+    </div>
+    
+
+    <div class="flex flex-row items-center gap-4">
+        <div class="border border-blue-500 rounded-lg px-4 py-2 text-blue-500">
+            Front-end
+        </div>
+        <div class="border border-blue-500 rounded-lg px-4 py-2 text-blue-500">
+            Tailwind
+        </div>
+        <div class="border border-blue-500 rounded-lg px-4 py-2 text-blue-500">
+            CSS
+        </div>
+    </div>
+</div>
