@@ -3,4 +3,3 @@ threshold_score: 2 # default is 0
 minimum_score: 95 # default is 0
 paths:
   - "app/"
-  - "config/"
