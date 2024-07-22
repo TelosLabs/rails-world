@@ -15,8 +15,6 @@ Rails.application.routes.draw do
     end
   resource :password_reset, only: [:new, :create, :edit, :update]
   resources :profiles, only: [:show, :edit, :update], param: :uuid do
-    member do
-      get :qr_code
-    end
+    resource :qr_code, only: [:show]
   end
 end

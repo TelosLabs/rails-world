@@ -1,18 +1,7 @@
 class ProfilesController < ApplicationController
-  include ProfileHelper
-
-  before_action :set_profile, only: [:show, :qr_code]
+  before_action :set_profile
 
   def show
-  end
-
-  def qr_code
-    send_data(
-      qr_code_png(@profile),
-      filename: "#{@profile.name}.png",
-      type: "image/png",
-      disposition: "attachment"
-    )
   end
 
   private

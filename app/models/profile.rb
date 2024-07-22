@@ -28,15 +28,15 @@ class Profile < ApplicationRecord
   has_one :user, through: :self_ref, source: :profileable, source_type: "User"
   has_one :speaker, through: :self_ref, source: :profileable, source_type: "Speaker"
 
-  validates :uuid, uniqueness: true
+  validates :uuid, uniqueness: true, presence: true
 
-  before_create :set_uuid
+  before_validation :set_uuid
 
   scope :public_profiles, -> { where(is_public: true) }
 
   private
 
   def set_uuid
-    self.uuid = SecureRandom.uuid
+    self.uuid ||= SecureRandom.uuid
   end
 end

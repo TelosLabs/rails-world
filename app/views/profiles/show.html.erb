@@ -6,13 +6,13 @@
 <br>
 
 <!-- Save QR -->
-<%= link_to 'Save QR Code', qr_code_profile_path(@profile.uuid), method: :get %>
+<%= link_to 'Save QR Code', profile_qr_code_path(@profile.uuid), method: :get %>
 <br>
 <br>
 
 <!-- Share QR -->
 <div data-controller="qr">
-  <button id="shareQR" data-action="click->qr#share" data-qr-target="button" data-url="<%= qr_code_profile_path(@profile.uuid) %>">
+  <button id="shareQR" data-action="click->qr#share" data-qr-target="button" data-url="<%= profile_qr_code_path(@profile.uuid) %>">
     Share
   </button>
 </div>
