@@ -16,7 +16,7 @@
 
       <div class="flex flex-col items-start w-full w-full">
         <%= form.label :name, class: "font-bold text-white  text-base mb-2" %>
-        <%= form.text_field :name, class: FormsHelper::TEXT_FIELD_CLASSES + " mb-6" %>
+        <%= form.text_field :name, required: true, class: FormsHelper::TEXT_FIELD_CLASSES + " mb-6" %>
 
         <%= form.label :bio, class: "font-bold text-white text-base mb-2" %>
         <%= form.text_area :bio, class: FormsHelper::TEXT_FIELD_CLASSES + " mb-6", placeholder: "Short bio" %>
