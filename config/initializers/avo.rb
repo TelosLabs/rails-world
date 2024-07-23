@@ -22,6 +22,8 @@ Avo.configure do |config|
   end
 
   ## == Authentication ==
+  config.sign_out_path_name = :session_path
+
   config.current_user_method do
     Current.user
   end
@@ -30,7 +32,7 @@ Avo.configure do |config|
     user = User.find_by(id: session[:user_id])
 
     unless user&.admin?
-      redirect_to "/", alert: t("controllers.concerns.authentication.unauthorized")
+      redirect_to main_app.new_session_path, alert: t("controllers.avo.unauthorized")
     end
   end
 

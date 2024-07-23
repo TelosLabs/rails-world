@@ -32,8 +32,6 @@ class User < ApplicationRecord
 
   enum role: {user: "user", admin: "admin"}
 
-  accepts_nested_attributes_for :profile
-
   generates_token_for :password_reset, expires_in: PASSWORD_RESET_EXPIRATION do
     password_salt&.last(10)
   end
