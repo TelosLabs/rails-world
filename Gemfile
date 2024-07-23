@@ -29,6 +29,7 @@ gem "bcrypt", "~> 3.1.20"
 
 # Other
 gem "bootsnap", require: false
+gem "inline_svg"
 gem "puma", ">= 5.0"
 gem "tzinfo-data", platforms: %i[windows jruby]
 gem "validates_timeliness", "~> 7.0.0.beta1"

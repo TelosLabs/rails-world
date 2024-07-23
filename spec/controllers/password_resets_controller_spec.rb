@@ -25,7 +25,7 @@ RSpec.describe PasswordResetsController, type: :controller do
         expect {
           post :create, params: params
         }.to have_enqueued_mail(PasswordMailer, :password_reset)
-        expect(response).to redirect_to(new_session_path)
+        expect(response).to redirect_to(post_submit_password_reset_path)
       end
     end
   end
