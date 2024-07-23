@@ -2,7 +2,7 @@
 
 <h2>My QR Code</h2>
 
-<%= render inline: qr_code_svg(@profile) %>
+<%= render inline: @profile.svg_qr_code(module_size: 4) %>
 <br>
 
 <!-- Save QR -->
@@ -12,7 +12,7 @@
 
 <!-- Share QR -->
 <div data-controller="qr">
-  <button id="shareQR" data-action="click->qr#share" data-qr-target="button" data-url="<%= profile_qr_code_path(@profile.uuid) %>">
+  <button id="shareQR" data-action="click->qr#share" data-qr-target="button" data-item-url-param="<%= profile_qr_code_path(@profile.uuid) %>">
     Share
   </button>
 </div>

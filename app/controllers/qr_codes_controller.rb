@@ -1,12 +1,12 @@
 class QRCodesController < ApplicationController
-  include ProfileHelper
-
   before_action :set_profile
 
   def show
+    @profile = @profile.decorate
+
     send_data(
-      qr_code_png(@profile),
-      filename: "#{@profile.name}.png",
+      @profile.png_qr_code(size: 240),
+      filename: "qr.png",
       type: "image/png",
       disposition: "attachment"
     )

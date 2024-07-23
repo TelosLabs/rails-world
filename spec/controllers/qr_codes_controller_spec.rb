@@ -13,7 +13,7 @@ RSpec.describe QRCodesController, type: :controller do
     it "returns a PNG" do
       get :show, params: {profile_uuid: profile.uuid}
       expect(response.headers["Content-Type"]).to eq("image/png")
-      expect(response.headers["Content-Disposition"]).to include("#{profile.name}.png")
+      expect(response.headers["Content-Disposition"]).to include("qr.png")
     end
   end
 end
