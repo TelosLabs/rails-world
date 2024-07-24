@@ -2,9 +2,9 @@ module Authentication
   extend ActiveSupport::Concern
 
   included do
-    helper_method :current_user, :user_signed_in?, :authenticate_admin_user!
+    helper_method :current_user, :user_signed_in?
 
-    before_action :authenticate_user!
+    before_action :authenticate_user, :authenticate_user!
   end
 
   class_methods do
