@@ -3,7 +3,7 @@ class Avo::Resources::Tag < Avo::BaseResource
     query: -> { query.ransack(name_cont: params[:q], m: "or").result(distinct: false) },
     item: -> do
       {
-        title: "[#{record.id}] #{record.name}"
+        title: "#{record.id} | #{record.name}"
       }
     end
   }

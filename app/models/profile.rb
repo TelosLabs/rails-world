@@ -24,7 +24,7 @@
 class Profile < ApplicationRecord
   has_one_attached :image
 
-  has_one :self_ref, class_name: "Profile", foreign_key: :id, inverse_of: :self_ref
+  has_one :self_ref, class_name: "Profile", foreign_key: :id, inverse_of: :self_ref, dependent: :nullify
   has_one :user, through: :self_ref, source: :profileable, source_type: "User"
   has_one :speaker, through: :self_ref, source: :profileable, source_type: "Speaker"
 
