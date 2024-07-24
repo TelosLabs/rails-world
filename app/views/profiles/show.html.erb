@@ -12,14 +12,14 @@
                     </div>
                 <% end %>
                 <div class="flex flex-col items-start ml-5">
-                    <div class="text-red-500 font-black"> <%= @profile.name.presence || "Anonymous" %> </div>
+                    <div class="text-red text-xl font-black"> <%= @profile.name.presence || "Anonymous" %> </div>
                     <% if @profile.location.present? %>
                         <div class="text-lg"><%= @profile.location %></div>
                     <% end %>
                 </div>
             </div>
             <% if @profile.bio.present? %>
-                <p class="text-lg text-base font-medium mt-6"><%= @profile.bio %></p>
+                <p class="text-base font-medium mt-6"><%= @profile.bio %></p>
             <% end %>
             <div class="flex flex-row items-center justify-center gap-4 mt-6">
                 <a href="<%= @profile.github_url %>" class="flex flex-row items-center justify-center w-28 h-14 rounded-lg bg-red">
