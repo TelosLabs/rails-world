@@ -29,10 +29,10 @@
         <% end %>
       <% end %>
       <%= yield %>
-      <%= render partial: "/layouts/bottom_navbar" %>
       <% if user_signed_in? %>
         <%= button_to "Log out", session_path, method: :delete %>
       <% end %>
+      <%= render partial: "/layouts/bottom_navbar" %>
     </main>
   </body>
 </html>
