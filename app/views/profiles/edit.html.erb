@@ -2,7 +2,7 @@
   <div class="flex flex-col p-4 w-full border-t b-white max-w-screen-sm">
     <h1 class="text-4xl text-white mb-6 font-black w-full">Set up your account</h1>
 
-    <%= form_with url: profile_path, scope: :profile, class: "flex flex-col items-center", method: :put do |form| %>
+    <%= form_with model: @profile, class: "flex flex-col items-center" do |form| %>
       <%= form.label :image, data: {controller: "image-previewer", }, class: "overflow-hidden relative font-bold text-white text-base w-32 h-32 bg-white cursor-pointer rounded-full flex flex-col items-center justify-center" do %>
         <%= form.file_field :image, data: {image_previewer_target: "input"}, class: "text-white border-2 border-white bg-transparent rounded-sm hidden mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white" %>
         <% if @profile.image.present? %>
@@ -15,8 +15,10 @@
       <% end %>
 
       <div class="flex flex-col items-start w-full w-full">
-        <%= form.label :name, class: "font-bold text-white  text-base mb-2" %>
-        <%= form.text_field :name, required: true, class: FormsHelper::TEXT_FIELD_CLASSES + " mb-6" %>
+        <%= render partial: "shared/form_errors", locals: { errors: form.object.errors.full_messages } %>
+
+        <%= form.label :name, class: "font-bold text-white text-base mb-2" %>
+        <%= form.text_field :name, class: FormsHelper::TEXT_FIELD_CLASSES + " mb-6" %>
 
         <%= form.label :bio, class: "font-bold text-white text-base mb-2" %>
         <%= form.text_area :bio, class: FormsHelper::TEXT_FIELD_CLASSES + " mb-6", placeholder: "Short bio" %>

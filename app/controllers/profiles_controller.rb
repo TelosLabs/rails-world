@@ -14,7 +14,6 @@ class ProfilesController < ApplicationController
     if @profile.save
       redirect_to profile_path, notice: t("controllers.profiles.update.success")
     else
-      # TODO display errors
       render :edit, status: :unprocessable_entity
     end
   end

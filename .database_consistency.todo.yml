@@ -1,5 +1,1 @@
 ---
-Profile:
-  self_ref:
-    MissingIndexChecker:
-      enabled: false
