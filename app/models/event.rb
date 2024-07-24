@@ -30,4 +30,7 @@ class Event < ApplicationRecord
   validates :ends_at, presence: true
 
   validates_datetime :ends_at, after: :starts_at
+
+  # this scope returns events based on a given date
+  scope :on_date, ->(date) { where(starts_at: date.all_day) }
 end

@@ -29,6 +29,9 @@
         <% end %>
       <% end %>
       <%= yield %>
+      <% if user_signed_in? %>
+        <%= button_to "Log out", session_path, method: :delete %>
+      <% end %>
     </main>
   </body>
 </html>
