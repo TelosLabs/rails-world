@@ -28,7 +28,7 @@ class Profile < ApplicationRecord
   has_one :user, through: :self_ref, source: :profileable, source_type: "User"
   has_one :speaker, through: :self_ref, source: :profileable, source_type: "Speaker"
 
-  validates :uuid, uniqueness: true
+  validates :uuid, uniqueness: true, presence: true
 
   before_validation :set_uuid
 
