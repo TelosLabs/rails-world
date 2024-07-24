@@ -1,6 +1,7 @@
 conference = Conference.find_or_create_by!(name: "RailsWorld 2024")
 
 # Users
+User.create!(email: "admin@example.com", password: "foobar2024", password_confirmation: "foobar2024", role: "admin")
 user = User.create!(email: "dev@example.com", password: "foobar2024", password_confirmation: "foobar2024")
 User.create!(email: "dev+1@example.com", password: "foobar2024", password_confirmation: "foobar2024")
 

@@ -2,14 +2,12 @@
 #
 # Table name: users
 #
-#  id                           :integer          not null, primary key
-#  email                        :string           not null
-#  in_app_notifications_enabled :boolean          default(TRUE), not null
-#  mail_notifications_enabled   :boolean          default(TRUE), not null
-#  password_digest              :string           not null
-#  role                         :string
-#  created_at                   :datetime         not null
-#  updated_at                   :datetime         not null
+#  id              :integer          not null, primary key
+#  email           :string           not null
+#  password_digest :string           not null
+#  role            :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 # Indexes
 #
@@ -24,6 +22,8 @@ class User < ApplicationRecord
     password_salt&.last(10)
   end
 
+  enum role: {user: "user", admin: "admin"}
+
   has_secure_password
 
   has_one :profile, as: :profileable, dependent: :destroy
@@ -35,4 +35,8 @@ class User < ApplicationRecord
   validates :password, length: {minimum: 8}, if: -> { password.present? }
 
   after_create_commit { create_profile! }
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[email]
+  end
 end
