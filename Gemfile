@@ -27,8 +27,6 @@ gem "action_policy", "~> 0.7.0"
 # Authentication
 gem "bcrypt", "~> 3.1.20"
 
-# QR code
-gem "rqrcode", "~> 2.0"
 # Admin
 gem "avo", ">= 3.2.1"
 
