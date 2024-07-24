@@ -21,16 +21,22 @@
             <% if @profile.bio.present? %>
                 <p class="text-base font-medium mt-6"><%= @profile.bio %></p>
             <% end %>
-            <div class="flex flex-row items-center justify-center gap-4 mt-6">
-                <a href="<%= @profile.github_url %>" class="flex flex-row items-center justify-center w-28 h-14 rounded-lg bg-red">
-                    <img src="<%= asset_path 'github.svg' %>" alt="github" class="w-6 h-6">
-                </a>
-                <a href="<%= @profile.linkedin_url %>" class="flex flex-row items-center justify-center w-28 h-14 rounded-lg bg-red">
-                    <img src="<%= asset_path 'linkedin.svg' %>" alt="linkedin" class="w-6 h-6">
-                </a>
-                <a href="<%= @profile.twitter_url %>" class="flex flex-row items-center justify-center w-28 h-14 rounded-lg bg-red">
-                    <img src="<%= asset_path 'twitter.svg' %>" alt="twitter" class="w-6 h-6">
-                </a>
+            <div class="flex flex-row items-center justify-center gap-4">
+                <% if @profile.github_url.present? %>
+                    <a href="<%= @profile.github_url %>" class="flex flex-row items-center justify-center w-28 h-14 rounded-lg bg-red  mt-6">
+                        <img src="<%= asset_path 'github.svg' %>" alt="github" class="w-6 h-6">
+                    </a>
+                <% end %>
+                <% if @profile.linkedin_url.present? %>
+                    <a href="<%= @profile.linkedin_url %>" class="flex flex-row items-center justify-center w-28 h-14 rounded-lg bg-red  mt-6">
+                        <img src="<%= asset_path 'linkedin.svg' %>" alt="linkedin" class="w-6 h-6">
+                    </a>
+                <% end %>
+                <% if @profile.twitter_url.present? %>
+                    <a href="<%= @profile.twitter_url %>" class="flex flex-row items-center justify-center w-28 h-14 rounded-lg bg-red  mt-6">
+                        <img src="<%= asset_path 'twitter.svg' %>" alt="twitter" class="w-6 h-6">
+                    </a>
+                <% end %>
             </div>
         </div>
     </div>
