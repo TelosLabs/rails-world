@@ -21,14 +21,12 @@ gem "tailwindcss-rails", "~> 2.6"
 gem "stimulus-rails"
 gem "turbo-rails"
 
-# Authorization
-gem "action_policy", "~> 0.7.0"
-
 # Authentication
 gem "bcrypt", "~> 3.1.20"
 
 # Other
 gem "bootsnap", require: false
+gem "inline_svg"
 gem "puma", ">= 5.0"
 gem "tzinfo-data", platforms: %i[windows jruby]
 gem "validates_timeliness", "~> 7.0.0.beta1"

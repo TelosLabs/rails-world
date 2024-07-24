@@ -2,6 +2,19 @@ conference = Conference.find_or_create_by!(name: "RailsWorld 2024")
 
 # Users
 user = User.create!(email: "dev@example.com", password: "foobar2024", password_confirmation: "foobar2024")
+User.create!(email: "dev+1@example.com", password: "foobar2024", password_confirmation: "foobar2024")
+
+# Profiles
+user.create_profile!(
+  name: "John Doe",
+  bio: "I'm a Ruby on Rails developer.",
+  is_public: true,
+  mail_notifications: true,
+  in_app_notifications: true,
+  github_url: "https://github.com/TelosLabs",
+  twitter_url: "https://x.com/teloslabs",
+  linkedin_url: "https://www.linkedin.com/company/telos-labs"
+)
 
 # Tags
 Tag.create!(name: "Hotwire")

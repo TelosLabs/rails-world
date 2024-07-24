@@ -20,6 +20,10 @@ class User < ApplicationRecord
 
   normalizes :email, with: ->(email) { email.strip.downcase }
 
+  generates_token_for :password_reset, expires_in: PASSWORD_RESET_EXPIRATION do
+    password_salt&.last(10)
+  end
+
   has_secure_password
 
   has_one :profile, as: :profileable, dependent: :destroy
@@ -30,7 +34,5 @@ class User < ApplicationRecord
   validates :password_digest, presence: true
   validates :password, length: {minimum: 8}, if: -> { password.present? }
 
-  generates_token_for :password_reset, expires_in: PASSWORD_RESET_EXPIRATION do
-    password_salt&.last(10)
-  end
+  after_create_commit { create_profile! }
 end
