@@ -1,5 +1,4 @@
 class Avo::Resources::Speaker < Avo::BaseResource
-  self.visible_on_sidebar = false
   self.includes = [:profile]
 
   def fields

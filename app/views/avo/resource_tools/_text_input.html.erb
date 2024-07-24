@@ -7,7 +7,7 @@
       <%= form.text_field input_name,
                           class: "appearance-none inline-flex bg-gray-25 disabled:cursor-not-allowed text-gray-600 disabled:opacity-50 rounded py-2 px-3 leading-tight border focus:border-gray-600 focus-visible:ring-0 focus:text-gray-700 placeholder:text-gray-300 border-gray-200 w-full",
                           placeholder: "#{input_name.to_s.humanize}",
-                          name: "user[profile_attributes][#{input_name}]" %>
+                          name: "#{@resource.model_name.singular}[profile_attributes][#{input_name}]" %>
     </div>
   </div>
 </div>

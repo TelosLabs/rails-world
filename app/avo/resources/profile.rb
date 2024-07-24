@@ -1,5 +1,5 @@
 class Avo::Resources::Profile < Avo::BaseResource
-  # self.visible_on_sidebar = false
+  self.visible_on_sidebar = false
   self.title = :name
 
   self.search = {
