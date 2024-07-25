@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   resource :password_reset, only: [:new, :create, :edit, :update] do
     get :post_submit
   end
+  resource :about, only: [:show]
 end
