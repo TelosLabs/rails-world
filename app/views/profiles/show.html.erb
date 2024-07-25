@@ -1,6 +1,6 @@
 <div class="flex flex-col items-center bg-gray-8 relative min-h-screen justify-between ">
-  <div class="flex flex-col items-center bg-cover bg-bottom bg-no-repeat max-h-[430px] w-full pt-6 px-5 pb-12 max-w-screen-sm" style="background-image: url(<%= asset_path 'background_design.svg' %>)">
-    <div class="flex flex-col items-start z-10">
+  <div class="flex flex-col items-center bg-cover bg-bottom bg-no-repeat max-h-[430px] w-full pt-6 px-5 pb-12" style="background-image: url(<%= asset_path 'background_design.svg' %>)">
+    <div class="flex flex-col items-start z-10 max-w-screen-sm">
       <div class="flex flex-row items-center">
         <% if @profile.image.attached? %>
           <div class="flex flex-col items-center justify-center relative w-[120px] h-[120px] rounded-full">
@@ -21,19 +21,19 @@
       <% if @profile.bio.present? %>
         <p class="text-base font-medium mt-6"><%= @profile.bio %></p>
       <% end %>
-      <div class="flex flex-row items-center justify-center gap-4">
+      <div class="flex flex-row items-center justify-center gap-4 w-full">
         <% if @profile.github_url.present? %>
-          <a href="<%= @profile.github_url %>" class="flex flex-row items-center justify-center w-28 h-14 rounded-lg bg-red  mt-6">
+          <a href="<%= @profile.github_url %>" class="flex flex-row grow items-center justify-center w-28 h-14 rounded-lg bg-red  mt-6">
             <img src="<%= asset_path 'github.svg' %>" alt="github" class="w-6 h-6">
           </a>
         <% end %>
         <% if @profile.linkedin_url.present? %>
-          <a href="<%= @profile.linkedin_url %>" class="flex flex-row items-center justify-center w-28 h-14 rounded-lg bg-red  mt-6">
+          <a href="<%= @profile.linkedin_url %>" class="flex flex-row grow items-center justify-center w-28 h-14 rounded-lg bg-red  mt-6">
             <img src="<%= asset_path 'linkedin.svg' %>" alt="linkedin" class="w-6 h-6">
           </a>
         <% end %>
         <% if @profile.twitter_url.present? %>
-          <a href="<%= @profile.twitter_url %>" class="flex flex-row items-center justify-center w-28 h-14 rounded-lg bg-red  mt-6">
+          <a href="<%= @profile.twitter_url %>" class="flex flex-row grow items-center justify-center w-28 h-14 rounded-lg bg-red  mt-6">
             <img src="<%= asset_path 'twitter.svg' %>" alt="twitter" class="w-6 h-6">
           </a>
         <% end %>

@@ -3,17 +3,26 @@
     <h1 class="text-4xl text-white mb-6 font-black w-full">Set up your account</h1>
 
     <%= form_with model: @profile, class: "flex flex-col items-center" do |form| %>
-      <%= form.label :image, data: {controller: "image-previewer", }, class: "overflow-hidden relative font-bold text-white text-base w-32 h-32 bg-white cursor-pointer rounded-full flex flex-col items-center justify-center" do %>
-        <%= form.file_field :image, data: {image_previewer_target: "input"}, accept:"image/*,image/apng,image/avif,image/gif,image/gif,image/jpeg,image/png,image/svg+xml", class: "text-white border-2 border-white bg-transparent rounded-sm hidden mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white" %>
-        <% if @profile.image.present? %>
-          <%= image_tag @profile.image, data: {image_previewer_target: "hideOnLoad"}, class: "absolute" %>
-        <% else %>
-          <%= image_tag url_for("camera.svg"), data: {image_previewer_target: "hideOnLoad"} %>
+      <div class="relative" data-controller="image-previewer" >
+        <%= form.label :image, class: "overflow-hidden relative font-bold text-white text-base w-32 h-32 bg-white cursor-pointer rounded-full flex flex-col items-center justify-center" do %>
+          <%= form.file_field :image, data: {image_previewer_target: "input"}, accept:"image/*,image/apng,image/avif,image/gif,image/gif,image/jpeg,image/png,image/svg+xml", class: "text-white border-2 border-white bg-transparent rounded-sm hidden mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white" %>
+          <% if @profile.image.present? %>
+            <%= image_tag @profile.image, data: {image_previewer_target: "hideOnLoad"}, class: "absolute" %>
+          <% else %>
+            <%= image_tag url_for("camera.svg"), data: {image_previewer_target: "hideOnLoad"} %>
+          <% end %>
+          <div class="absolute" data-image-previewer-target="onRemoveImagePlaceholderContainer"></div>
+          <%= image_tag "", data: {image_previewer_target: "image"}, class: "hidden absolute" %>
         <% end %>
-
-        <%= image_tag "", data: {image_previewer_target: "image"}, class: "hidden absolute" %>
-      <% end %>
-
+        <%= inline_svg_tag "icon_delete_photo.svg", data: {action: "click->image-previewer#removeImage" }, class: "cursor-pointer absolute top-[5px] right-[5px] w-6 h-6"%>
+        <div class="hidden" data-image-previewer-target="onRemoveImageContainer"></div>
+        <template data-image-previewer-target="onRemoveImagePlaceholderTemplate">
+          <%= image_tag url_for("camera.svg") %>
+        </template>
+        <template data-image-previewer-target="onRemoveImageTemplate">
+          <%= form.hidden_field :remove_image, value: "true" %>
+        </template>
+      </div>
       <div class="flex flex-col items-start w-full w-full">
         <%= render partial: "shared/form_errors", locals: { errors: form.object.errors.full_messages } %>
 
