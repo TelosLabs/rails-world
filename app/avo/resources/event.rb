@@ -18,7 +18,7 @@ class Avo::Resources::Event < Avo::BaseResource
     field :location, as: :belongs_to
     field :conference, as: :belongs_to
     field :tags, as: :has_and_belongs_to_many
-    field :speakers, as: :has_and_belongs_to_many, allow_create: false
+    field :speakers, as: :has_and_belongs_to_many, can_create: false
     field :users, as: :has_and_belongs_to_many
   end
 end
