@@ -7,8 +7,8 @@
 #  github_url           :string
 #  in_app_notifications :boolean          default(TRUE), not null
 #  is_public            :boolean          default(FALSE), not null
+#  job_title            :string
 #  linkedin_url         :string
-#  location             :string
 #  mail_notifications   :boolean          default(TRUE), not null
 #  name                 :string
 #  profileable_type     :string           not null
@@ -25,7 +25,7 @@ FactoryBot.define do
   factory :profile do
     name { "John Doe" }
     bio { "About me" }
-    location { "New York" }
+    job_title { "Developer" }
     is_public { false }
     github_url { "https://github.com" }
     linkedin_url { "https://linkedin.com" }

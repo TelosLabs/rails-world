@@ -3,7 +3,7 @@ class CreateProfiles < ActiveRecord::Migration[7.1]
     create_table :profiles do |t|
       t.string :name
       t.text :bio
-      t.string :location
+      t.string :job_title
       t.string :github_url
       t.string :linkedin_url
       t.string :twitter_url

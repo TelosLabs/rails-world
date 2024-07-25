@@ -4,7 +4,7 @@
       <div class="flex flex-row items-center">
         <% if @profile.image.attached? %>
           <div class="flex flex-col items-center justify-center relative w-[120px] h-[120px] rounded-full">
-            <%= image_tag url_for(@profile.image), class: "absolute" %>
+            <%= image_tag url_for(@profile.image), class: "rounded-full absolute" %>
           </div>
         <% else %>
           <div class="w-[120px] h-[120px] rounded-full bg-slate-300 p-5 flex flex-row items-center justify-center">
@@ -13,8 +13,8 @@
         <% end %>
         <div class="flex flex-col items-start ml-5">
           <div class="text-red text-xl font-black italic"> <%= @profile.name.presence || "Anonymous" %> </div>
-          <% if @profile.location.present? %>
-            <div class="text-lg"><%= @profile.location %></div>
+          <% if @profile.job_title.present? %>
+            <div class="text-lg"><%= @profile.job_title %></div>
           <% end %>
         </div>
       </div>
@@ -22,20 +22,35 @@
         <p class="text-base font-medium mt-6"><%= @profile.bio %></p>
       <% end %>
       <div class="flex flex-row items-center justify-center gap-4 w-full">
-        <% if @profile.github_url.present? %>
-          <a href="<%= @profile.github_url %>" class="flex flex-row grow items-center justify-center w-28 h-14 rounded-lg bg-red  mt-6">
-            <img src="<%= asset_path 'github.svg' %>" alt="github" class="w-6 h-6">
-          </a>
+        <%= link_to(
+          @profile.github_url,
+          class: [
+            "flex flex-row grow items-center justify-center w-28 h-14 rounded-lg mt-6",
+            "bg-red": @profile.github_url.present?,
+            "bg-gray-6 cursor-not-allowed": @profile.github_url.blank?
+          ]
+        ) do %>
+          <img src="<%= asset_path 'github.svg' %>" alt="github" class="w-6 h-6">
         <% end %>
-        <% if @profile.linkedin_url.present? %>
-          <a href="<%= @profile.linkedin_url %>" class="flex flex-row grow items-center justify-center w-28 h-14 rounded-lg bg-red  mt-6">
-            <img src="<%= asset_path 'linkedin.svg' %>" alt="linkedin" class="w-6 h-6">
-          </a>
+        <%= link_to(
+          @profile.twitter_url,
+          class: [
+            "flex flex-row grow items-center justify-center w-28 h-14 rounded-lg mt-6",
+            "bg-red": @profile.twitter_url.present?,
+            "bg-gray-6 cursor-not-allowed": @profile.twitter_url.blank?
+          ]
+        ) do %>
+          <img src="<%= asset_path 'twitter.svg' %>" alt="twitter" class="w-6 h-6">
         <% end %>
-        <% if @profile.twitter_url.present? %>
-          <a href="<%= @profile.twitter_url %>" class="flex flex-row grow items-center justify-center w-28 h-14 rounded-lg bg-red  mt-6">
-            <img src="<%= asset_path 'twitter.svg' %>" alt="twitter" class="w-6 h-6">
-          </a>
+        <%= link_to(
+          @profile.linkedin_url,
+          class: [
+            "flex flex-row grow items-center justify-center w-28 h-14 rounded-lg mt-6",
+            "bg-red": @profile.linkedin_url.present?,
+            "bg-gray-6 cursor-not-allowed": @profile.linkedin_url.blank?
+          ]
+        ) do %>
+          <img src="<%= asset_path 'linkedin.svg' %>" alt="linkedin" class="w-6 h-6">
         <% end %>
       </div>
     </div>
