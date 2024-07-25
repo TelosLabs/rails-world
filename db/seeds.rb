@@ -3,6 +3,20 @@ conference = Conference.find_or_create_by!(name: "RailsWorld 2024")
 # Users
 User.create!(email: "admin@example.com", password: "foobar2024", password_confirmation: "foobar2024", role: "admin")
 user = User.create!(email: "dev@example.com", password: "foobar2024", password_confirmation: "foobar2024")
+User.create!(email: "dev+1@example.com", password: "foobar2024", password_confirmation: "foobar2024")
+
+# Profiles
+user.create_profile!(
+  name: "John Doe",
+  job_title: "Software Developer",
+  bio: "I'm a Ruby on Rails developer.",
+  is_public: true,
+  mail_notifications: true,
+  in_app_notifications: true,
+  github_url: "https://github.com/TelosLabs",
+  twitter_url: "https://x.com/teloslabs",
+  linkedin_url: "https://www.linkedin.com/company/telos-labs"
+)
 
 # Tags
 Tag.create!(name: "Hotwire")
@@ -21,11 +35,11 @@ young_centre = Location.create!(name: "Young Centre", conference: conference)
   Speaker.create!(
     profile_attributes: {
       name: Faker::Name.name,
+      job_title: Faker::Job.title,
       bio: Faker::Lorem.paragraph,
       github_url: Faker::Internet.url(host: "github.com"),
       twitter_url: Faker::Internet.url(host: "twitter.com"),
       linkedin_url: Faker::Internet.url(host: "linkedin.com"),
-      location: Faker::Address.city,
       is_public: [true, false].sample
     }
   )
