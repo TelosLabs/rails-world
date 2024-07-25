@@ -7,7 +7,9 @@ export default class extends Controller {
     'onRemoveImageTemplate',
     'onRemoveImageContainer',
     'onRemoveImagePlaceholderTemplate',
-    'onRemoveImagePlaceholderContainer']
+    'onRemoveImagePlaceholderContainer',
+    'deleteIcon'
+  ]
 
   connect () {
     this.inputTarget.onchange = evt => {
@@ -18,6 +20,7 @@ export default class extends Controller {
         this.imageTarget.style.position = 'absolute'
         this.onRemoveImageContainerTarget.innerHTML = ''
         this.onRemoveImagePlaceholderContainerTarget.innerHTML = ''
+        this.deleteIconTarget.style.display = 'block'
         this.hideOnLoadTargets.forEach(element => {
           element.style.display = 'none'
         })
@@ -31,6 +34,7 @@ export default class extends Controller {
     this.inputTarget.value = ''
     this.onRemoveImageContainerTarget.innerHTML = this.onRemoveImageTemplateTarget.innerHTML
     this.onRemoveImagePlaceholderContainerTarget.innerHTML = this.onRemoveImagePlaceholderTemplateTarget.innerHTML
+    this.deleteIconTarget.style.display = 'none'
     this.hideOnLoadTargets.forEach(element => {
       element.style.display = 'none'
     })
