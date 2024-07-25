@@ -7,8 +7,8 @@
 #  github_url           :string
 #  in_app_notifications :boolean          default(TRUE), not null
 #  is_public            :boolean          default(FALSE), not null
+#  job_title            :string
 #  linkedin_url         :string
-#  location             :string
 #  mail_notifications   :boolean          default(TRUE), not null
 #  name                 :string
 #  profileable_type     :string           not null
@@ -24,6 +24,7 @@
 class Profile < ApplicationRecord
   has_one_attached :image
 
+  has_one :self_ref, class_name: "Profile", foreign_key: :id, inverse_of: :self_ref
   has_one :user, through: :self_ref, source: :profileable, source_type: "User"
   has_one :speaker, through: :self_ref, source: :profileable, source_type: "Speaker"
 

@@ -1,6 +1,8 @@
 class RegistrationsController < ApplicationController
   allow_unauthenticated_access
 
+  before_action :redirect_if_signed_in
+
   def new
     @user = User.new
   end
@@ -20,5 +22,9 @@ class RegistrationsController < ApplicationController
 
   def registration_params
     params.require(:user).permit(:email, :password, :password_confirmation)
+  end
+
+  def redirect_if_signed_in
+    redirect_to root_path if user_signed_in?
   end
 end

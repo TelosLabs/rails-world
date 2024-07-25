@@ -100,7 +100,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_15_201230) do
   create_table "profiles", force: :cascade do |t|
     t.string "name"
     t.text "bio"
-    t.string "location"
+    t.string "job_title"
     t.string "github_url"
     t.string "linkedin_url"
     t.string "twitter_url"

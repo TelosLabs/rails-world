@@ -1,5 +1,7 @@
 en:
   controllers:
+    avo:
+      unauthorized: "You need to be an admin to access this page."
     password_resets:
       create:
         notice: "Check your email to reset your password."
