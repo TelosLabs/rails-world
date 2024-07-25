@@ -27,8 +27,7 @@ class ProfilesController < ApplicationController
   def profile_params
     params.require(:profile).permit(
       :name, :location, :bio, :is_public, :image,
-      :twitter_url, :linkedin_url, :github_url,
-      :in_app_notifications, :mail_notifications
+      :twitter_url, :linkedin_url, :github_url
     )
   end
 

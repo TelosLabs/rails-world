@@ -14,7 +14,7 @@
           <div class="absolute" data-image-previewer-target="onRemoveImagePlaceholderContainer"></div>
           <%= image_tag "", data: {image_previewer_target: "image"}, class: "hidden absolute" %>
         <% end %>
-        <%= inline_svg_tag "icon_delete_photo.svg", data: {action: "click->image-previewer#removeImage", image_previewer_target: "deleteIcon" }, class: "cursor-pointer absolute top-[5px] right-[5px] w-6 h-6" %>
+        <%= inline_svg_tag "icon_delete_photo.svg", data: {action: "click->image-previewer#removeImage", image_previewer_target: "deleteIcon" }, class: "cursor-pointer absolute top-[5px] right-[5px] w-6 h-6", style: @profile.image.present? ? "display:block;" : "display:none;" %>
         <div class="hidden" data-image-previewer-target="onRemoveImageContainer"></div>
         <template data-image-previewer-target="onRemoveImagePlaceholderTemplate">
           <%= image_tag url_for("camera.svg") %>
