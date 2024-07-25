@@ -17,7 +17,7 @@
 
   <body class="h-full">
     <main class="relative flex flex-col w-full h-full mx-auto">
-      <% if !current_page?(new_session_path) %>
+      <% if !current_page?(new_session_path) && !current_page?(about_path) %>
         <div class="flex justify-center w-full py-6 mx-auto border-b border-b-white bg-purple-dark">
           <div class="flex max-w-screen-sm px-5">
             <%= link_to homepage_link do %>
