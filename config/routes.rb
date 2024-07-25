@@ -14,7 +14,5 @@ Rails.application.routes.draw do
     get :post_submit
   end
 
-  resources :profiles, only: [:show, :edit, :update], param: :uuid do
-    resource :qr_code, only: [:show]
-  end
+  resources :profiles, only: [:show, :edit, :update], param: :uuid
 end

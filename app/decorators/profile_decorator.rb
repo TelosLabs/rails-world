@@ -5,10 +5,6 @@ class ProfileDecorator < Draper::Decorator
     RQRCode::QRCode.new(profile_url).as_svg(options)
   end
 
-  def png_qr_code(options = {})
-    RQRCode::QRCode.new(profile_url).as_png(options)
-  end
-
   private
 
   def profile_url

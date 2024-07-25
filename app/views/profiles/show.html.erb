@@ -4,20 +4,3 @@
 
 <%= render inline: @profile.svg_qr_code(module_size: 4) %>
 <br>
-
-<!-- Save QR -->
-<%= link_to 'Save QR Code', profile_qr_code_path(@profile.uuid), method: :get %>
-<br>
-<br>
-
-<!-- Share QR -->
-<div data-controller="qr">
-  <button id="shareQR" data-action="click->qr#share" data-qr-target="button" data-item-url-param="<%= profile_qr_code_path(@profile.uuid) %>">
-    Share
-  </button>
-</div>
-<br>
-
-<!-- Open Camera -->
-<h3>Scan a code</h3>
-<input type="file" accept="image/*" capture="capture">
