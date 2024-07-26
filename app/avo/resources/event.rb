@@ -14,7 +14,7 @@ class Avo::Resources::Event < Avo::BaseResource
     field :title, as: :text, sortable: true
     field :description, as: :textarea
     field :starts_at, as: :date_time
-    field :ends_at, as: :date_time
+    field :ends_at, as: :date_time, help: Time.zone.name
     field :location, as: :belongs_to
     field :conference, as: :belongs_to
     field :tags, as: :has_and_belongs_to_many
