@@ -33,6 +33,7 @@ gem "avo", ">= 3.2.1"
 # Other
 gem "bootsnap", require: false
 gem "inline_svg"
+gem "noticed"
 gem "puma", ">= 5.0"
 gem "ransack"
 gem "rqrcode", "~> 2.0"

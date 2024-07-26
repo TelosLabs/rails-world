@@ -26,6 +26,8 @@ class User < ApplicationRecord
 
   has_and_belongs_to_many :events
 
+  has_many :notifications, as: :recipient, dependent: :destroy, class_name: "Noticed::Notification"
+
   validates :email, presence: true, uniqueness: true
   validates :password_digest, presence: true
   validates :password, length: {minimum: 8}, if: -> { password.present? }
