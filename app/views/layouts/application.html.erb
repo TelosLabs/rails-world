@@ -32,7 +32,8 @@
       <% if user_signed_in? %>
         <%= button_to "Log out", session_path, method: :delete %>
       <% end %>
-      <%= render partial: "/layouts/bottom_navbar" %>
+
+      <%= render partial: "/layouts/bottom_navbar" if current_user.present? %>
     </main>
   </body>
 </html>
