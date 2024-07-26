@@ -18,10 +18,10 @@ class Avo::Resources::Profile < Avo::BaseResource
     field :profileable_type, as: :select, options: ["User", "Speaker"]
     field :profileable_id, as: :text
     field :bio, as: :text
-    field :location, as: :text
+    field :job_title, as: :text
     field :github_url, as: :text
     field :linkedin_url, as: :text
     field :twitter_url, as: :text
-    field :is_public, as: :boolean
+    field :is_public, as: :boolean, default: true
   end
 end

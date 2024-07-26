@@ -1,7 +1,7 @@
 class Avo::Resources::User < Avo::BaseResource
   self.includes = [:profile]
   self.index_query = -> { query.left_outer_joins(:profile).order("profiles.name") }
-  self.extra_params = [profile_attributes: [:name, :bio, :github_url, :linkedin_url, :twitter_url, :location, :is_public, :profileable_type, :profileable_id]]
+  self.extra_params = [profile_attributes: [:name, :bio, :github_url, :linkedin_url, :twitter_url, :job_title, :is_public, :profileable_type, :profileable_id]]
 
   self.search = {
     query: -> { query.ransack(email_cont: params[:q], m: "or").result(distinct: false) },
