@@ -16,14 +16,6 @@
 class User < ApplicationRecord
   PASSWORD_RESET_EXPIRATION = 60.minutes
 
-  normalizes :email, with: ->(email) { email.strip.downcase }
-
-  generates_token_for :password_reset, expires_in: PASSWORD_RESET_EXPIRATION do
-    password_salt&.last(10)
-  end
-
-  enum role: {user: "user", admin: "admin"}
-
   has_secure_password
 
   has_one :profile, as: :profileable, dependent: :destroy
@@ -35,6 +27,16 @@ class User < ApplicationRecord
   validates :password, length: {minimum: 8}, if: -> { password.present? }
 
   after_create_commit { create_profile! }
+
+  enum role: {user: "user", admin: "admin"}
+
+  accepts_nested_attributes_for :profile
+
+  normalizes :email, with: ->(email) { email.strip.downcase }
+
+  generates_token_for :password_reset, expires_in: PASSWORD_RESET_EXPIRATION do
+    password_salt&.last(10)
+  end
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[email]

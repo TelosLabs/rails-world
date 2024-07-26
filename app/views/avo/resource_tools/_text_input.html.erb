@@ -1,0 +1,13 @@
+<div class="field-wrapper relative flex flex-col grow pb-2 md:pb-0 leading-tight h-full min-h-14 field-wrapper-size-regular field-width-regular field-wrapper-layout-inline md:flex-row md:items-center">
+  <div class="pt-4 flex self-start items-center flex-shrink-0 w-48 px-6 uppercase font-semibold text-gray-500 text-sm h-full md:pt-0 md:h-14 md:w-64" data-slot="label">
+    <%= form.label input_name, for: "profile_#{input_name}" %>
+  </div>
+  <div class="flex-1 flex flex-row md:min-h-inherit px-6 py-2" data-slot="value">
+    <div class="self-center w-full  md:w-8/12 has-sidebar:w-full ">
+      <%= form.text_field input_name,
+                          class: "appearance-none inline-flex bg-gray-25 disabled:cursor-not-allowed text-gray-600 disabled:opacity-50 rounded py-2 px-3 leading-tight border focus:border-gray-600 focus-visible:ring-0 focus:text-gray-700 placeholder:text-gray-300 border-gray-200 w-full",
+                          placeholder: "#{input_name.to_s.humanize}",
+                          name: "#{@resource.model_name.singular}[profile_attributes][#{input_name}]" %>
+    </div>
+  </div>
+</div>
