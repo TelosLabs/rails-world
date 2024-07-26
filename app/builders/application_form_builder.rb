@@ -57,7 +57,7 @@ class ApplicationFormBuilder < ActionView::Helpers::FormBuilder
     style = []
     style << options[:class]
     style << (STYLES_MAP[method] || STYLES_MAP[:default])
-    style << (STYLES_MAP[method] || ERROR_STYLES_MAP[:default]) if attribute_has_error?(attribute)
+    style << (ERROR_STYLES_MAP[method] || ERROR_STYLES_MAP[:default]) if attribute_has_error?(attribute)
     style.join(" ").strip
   end
 
