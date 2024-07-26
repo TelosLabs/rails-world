@@ -1,8 +1,8 @@
 class EventReminderJob < ApplicationJob
-  def perform(event_id, reminder_id)
+  def perform(event_id:, reminder_type:, reminder_id:)
     event = Event.find(event_id)
-    return if event.reminder_details["15_min_reminder_id"] != reminder_id
+    return if event.reminder_details["#{reminder_type}_id"] != reminder_id
 
-    EventNotifier.with(record: event).deliver(event.users)
+    EventNotifier.with(record: event, reminder_type: reminder_type).deliver(event.users)
   end
 end
