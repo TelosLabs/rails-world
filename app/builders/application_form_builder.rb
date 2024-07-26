@@ -1,107 +1,71 @@
 class ApplicationFormBuilder < ActionView::Helpers::FormBuilder
   include ActionView::Helpers::TagHelper
-
-  DEFAULT_TYPES = [:text_field, :password_field, :email_field, :number_field, :date_field,
-    :text_area, :radio_button, :search_field].freeze
+  # include CustomTheme
 
   STYLES_MAP = {
-    text_field: "text-white placeholder-white transition-all bg-transparent border-2 border-white rounded-md focus:bg-white focus:text-black focus:placeholder-gray focus:border-white focus:ring-white",
-    label: "text-slate-600 text-sm font-medium",
-    select_field: "form-builder-select-field",
-    submit_field: "form-builder-submit",
-    check_box: "form-builder-check-box",
-    toggle_switch: "form-builder-toggle-switch",
-    full_errors: "form-builder-full-errors",
-    pill: "form-builder-pill",
-    default: ""
+    full_errors: "text-white text-xs",
+    default: "text-white placeholder-white transition-all bg-transparent border-2 border-white
+    rounded-md focus:bg-white focus:text-black focus:placeholder-gray focus:border-white focus:ring-white"
   }.freeze
 
   ERROR_STYLES_MAP = {
     default: "ring-1 ring-red-500 !focus:ring-red-500"
   }.freeze
 
-  def label(attribute, content_or_options = nil, options = {}, &block)
-    super(attribute, content_or_options, add_style(options, __method__, attribute), &block)
-  end
-
-  def text_field(attribute, options = {})
-    super(attribute, add_style(options, __method__, attribute))
-  end
-
-  def check_box(attribute, options = {}, legacy: false)
-    if legacy
-      super attribute, options
-    else
-      super(attribute, add_style(options, __method__, attribute))
+  [
+    :text_field,
+    :check_box,
+    :date_field,
+    :email_field,
+    :number_field,
+    :search_field,
+    :password_field,
+    :text_area
+  ].each do |method_name|
+    define_method(method_name) do |attribute, options = {}|
+      options = process_styles(options, method_name, attribute)
+      super(attribute, options)
     end
   end
 
-  def date_field(attribute, options = {})
-    super(attribute, add_style(options, __method__, attribute))
-  end
-
-  def number_field(attribute, options = {})
-    super(attribute, add_style(options, __method__, attribute))
-  end
-
-  def email_field(attribute, options = {})
-    super(attribute, add_style(options, __method__, attribute))
-  end
-
-  def search_field(attribute, options = {})
-    super(attribute, add_style(options, __method__, attribute))
-  end
-
-  def password_field(attribute, options = {})
-    super(attribute, add_style(options, __method__, attribute))
+  def label(attribute, content_or_options = nil, options = {}, &block)
+    options = process_styles(options, __method__, attribute)
+    super
   end
 
   def select(attribute, choices = nil, options = {}, html_options = {})
-    super(attribute, choices, add_style(options, __method__, attribute))
-  end
-
-  def text_area(attribute, options = {})
-    super(attribute, add_style(options, __method__, attribute))
+    options = process_styles(options, __method__, attribute)
+    super
   end
 
   # New elements
   def full_errors(attribute, options = {})
     return unless attribute_has_error?(attribute)
 
-    content_tag :div, full_message_errors(attribute), add_style(options, __method__, attribute)
+    options = process_styles(options, __method__, attribute)
+    content_tag :div, full_message_errors(attribute), options
   end
-
-  def toggle_switch(attribute, options = {})
-    check_box(attribute, add_style(options, __method__, attribute), legacy: true)
-  end
-
-  def pill(attribute, content_or_options = nil, options = {}, &block)
-    label(attribute, content_or_options, add_style(options, __method__, attribute), &block)
-  end
-
 
   private
 
-  def add_style(options, method, attribute)
-    options[:class] = "#{options[:class]} #{input_style_by_type(method)} #{error_styles(method, attribute)}".strip
-    options
+  def process_styles(options, method_name, attribute)
+    options[:class] = styles(options, method_name, attribute) if options[:legacy].blank?
+    options.except(:legacy)
   end
 
-  def full_message_errors(attribute)
-    @object.errors.full_messages_for(attribute).join(", ")
-  end
-
-  def error_styles(type, attribute)
-    return nil unless attribute_has_error?(attribute).present?
-
-    ERROR_STYLES_MAP[type] || DEFAULT_TYPES.include?(type) && ERROR_STYLES_MAP[:default]
-  end
-
-  def input_style_by_type(type)
-    STYLES_MAP[type] || DEFAULT_TYPES.include?(type) && STYLES_MAP[:default]
+  def styles(options, method, attribute)
+    style = []
+    style << options[:class]
+    style << (STYLES_MAP[method] || STYLES_MAP[:default])
+    style << (STYLES_MAP[method] || ERROR_STYLES_MAP[:default]) if attribute_has_error?(attribute)
+    style.join(" ").strip
   end
 
   def attribute_has_error?(attribute)
     @object&.errors&.include?(attribute.to_sym)
+  end
+
+  def full_message_errors(attribute)
+    @object.errors.full_messages_for(attribute).join(", ")
   end
 end
