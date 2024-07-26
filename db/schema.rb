@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_28_211903) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_25_222556) do
   create_table "conferences", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -26,6 +26,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_28_211903) do
     t.integer "conference_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.json "reminder_details", default: {}
     t.index ["conference_id"], name: "index_events_on_conference_id"
     t.index ["location_id"], name: "index_events_on_location_id"
   end
