@@ -3,9 +3,17 @@ class ApplicationFormBuilder < ActionView::Helpers::FormBuilder
   # include CustomTheme
 
   STYLES_MAP = {
-    full_errors: "text-white text-xs",
-    default: "text-white placeholder-white transition-all bg-transparent border-2 border-white
-    rounded-md focus:bg-white focus:text-black focus:placeholder-gray focus:border-white focus:ring-white"
+    default: "bg-transparent border border-2 border-white rounded-md text-white
+    placeholder-white/50 focus:bg-white focus:text-black focus:placeholder-gray
+    focus:border-white focus:ring-white transition-all",
+    label: "font-bold text-base",
+    # new fields
+    full_errors: "text-xs",
+    toggle: "relative w-11 h-6 bg-gray-6 rounded-full peer dark:bg-gray-6
+    peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full
+    peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px]
+    after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5
+    after:transition-all peer-checked:bg-red cursor-pointer",
   }.freeze
 
   ERROR_STYLES_MAP = {
@@ -44,6 +52,11 @@ class ApplicationFormBuilder < ActionView::Helpers::FormBuilder
 
     options = process_styles(options, __method__, attribute)
     content_tag :div, full_message_errors(attribute), options
+  end
+
+  def toggle(attribute, content_or_options= nil, options = {})
+    options = process_styles(options, __method__, attribute)
+    @template.render "shared/form_elements/toggle", form: self, attribute: attribute, options: options
   end
 
   private
