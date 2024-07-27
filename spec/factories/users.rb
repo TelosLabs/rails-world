@@ -6,7 +6,6 @@
 #  email                        :string           not null
 #  in_app_notifications_enabled :boolean          default(TRUE), not null
 #  mail_notifications_enabled   :boolean          default(TRUE), not null
-#  notification_preferences     :json
 #  password_digest              :string           not null
 #  role                         :string
 #  created_at                   :datetime         not null
