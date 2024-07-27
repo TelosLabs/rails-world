@@ -6,6 +6,7 @@
 #  email                        :string           not null
 #  in_app_notifications_enabled :boolean          default(TRUE), not null
 #  mail_notifications_enabled   :boolean          default(TRUE), not null
+#  notification_preferences     :json
 #  password_digest              :string           not null
 #  role                         :string
 #  created_at                   :datetime         not null
@@ -33,6 +34,8 @@ class User < ApplicationRecord
   validates :password, length: {minimum: 8}, if: -> { password.present? }
 
   enum role: {user: "user", admin: "admin"}
+
+  store_attribute :notification_preferences, :email_notifications_enabled?, :boolean, default: -> { true }
 
   generates_token_for :password_reset, expires_in: PASSWORD_RESET_EXPIRATION do
     password_salt&.last(10)
