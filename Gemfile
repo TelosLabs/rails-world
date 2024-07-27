@@ -21,9 +21,6 @@ gem "tailwindcss-rails", "~> 2.6"
 gem "stimulus-rails"
 gem "turbo-rails"
 
-# Authorization
-gem "action_policy", "~> 0.7.0"
-
 # Authentication
 gem "bcrypt", "~> 3.1.20"
 
