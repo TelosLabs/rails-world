@@ -1,6 +1,5 @@
 class ApplicationFormBuilder < ActionView::Helpers::FormBuilder
   include ActionView::Helpers::TagHelper
-  # include CustomTheme
 
   STYLES_MAP = {
     default: "bg-transparent border border-2 border-white rounded-md text-white
@@ -13,7 +12,7 @@ class ApplicationFormBuilder < ActionView::Helpers::FormBuilder
     peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full
     peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px]
     after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5
-    after:transition-all peer-checked:bg-red cursor-pointer",
+    after:transition-all peer-checked:bg-red cursor-pointer"
   }.freeze
 
   ERROR_STYLES_MAP = {
@@ -54,7 +53,7 @@ class ApplicationFormBuilder < ActionView::Helpers::FormBuilder
     content_tag :div, full_message_errors(attribute), options
   end
 
-  def toggle(attribute, content_or_options= nil, options = {})
+  def toggle(attribute, content_or_options = nil, options = {})
     options = process_styles(options, __method__, attribute)
     @template.render "shared/form_elements/toggle", form: self, attribute: attribute, options: options
   end
