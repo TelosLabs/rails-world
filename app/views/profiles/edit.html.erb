@@ -47,7 +47,7 @@
         <p class="mb-2 font-bold text-white">Discoverability</p>
         <div class="flex flex-row items-center justify-between w-full p-4 bg-white rounded-md">
           <%= form.label :is_public, "Public profile", class: "grow font-medium text-slate-900 text-base cursor-pointer mr-2" %>
-          <%= form.toggle :is_public %>
+          <%= form.toggle_field :is_public %>
         </div>
         <p class="mt-1 mb-6 text-xs text-white">Allow other persons to view your profile through a QR code.</p>
 
@@ -55,11 +55,11 @@
         <div class="w-full mb-10 overflow-hidden rounded-md">
           <div class="flex flex-row items-center justify-between w-full p-4 bg-white border-b border-gray-6">
             <%= form.label :mail_notifications, "Mail notifications", class: "grow font-medium text-slate-900 text-base cursor-pointer mr-2" %>
-            <%= form.toggle :mail_notifications %>
+            <%= form.toggle_field :mail_notifications %>
           </div>
           <div class="flex flex-row items-center justify-between w-full p-4 bg-white">
             <%= form.label :in_app_notifications, "In-app notifications", class: "grow font-medium text-slate-900 text-base cursor-pointer mr-2" %>
-            <%= form.toggle :in_app_notifications %>
+            <%= form.toggle_field :in_app_notifications %>
           </div>
         </div>
       </div>

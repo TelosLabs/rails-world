@@ -30,7 +30,7 @@ class User < ApplicationRecord
 
   has_and_belongs_to_many :events
 
-  validates :email, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true, format: {with: URI::MailTo::EMAIL_REGEXP}
   validates :password_digest, presence: true
   validates :password, length: {minimum: 8}, if: -> { password.present? }
 
