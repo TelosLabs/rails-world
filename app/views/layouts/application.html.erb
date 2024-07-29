@@ -24,11 +24,7 @@
       <% end %>
       <% flash.each do |type, message| %>
         <% if message.present? && message.is_a?(String) %>
-          <div class="flex flex-col items-center justify-center fixed bottom-[64px] w-full z-20">
-            <div data-controller="closable" class="bg-gray-3 rounded-lg px-5 py-4 absolute transition-all bottom-0 max-w-screen-sm text-white z-20 sticky">
-              <%= message %>
-            </div>
-          </div>
+          <%= render partial: "layouts/flash_message", locals: { message: message }%>
         <% end %>
       <% end %>
       <%= yield %>
