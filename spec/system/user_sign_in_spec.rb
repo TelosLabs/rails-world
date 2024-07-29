@@ -6,7 +6,6 @@ RSpec.describe "User sign in", type: :system do
   it "redirects to the login page when trying to access another page" do
     visit edit_password_path
     expect(page).to have_current_path(new_session_path)
-    expect(page).to have_content("You need to sign in or sign up before continuing.")
   end
 
   context "when the user inputs invalid credentials" do

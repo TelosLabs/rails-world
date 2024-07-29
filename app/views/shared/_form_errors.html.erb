@@ -1,0 +1,10 @@
+<% if local_assigns[:errors].any? %>
+  <div class="w-full p-3 mb-5 text-white rounded-md bg-red">
+    <h2 class="font-bold">The following errors were found:</h2>
+    <ol>
+      <% local_assigns[:errors].each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ol>
+  </div>
+<% end %>

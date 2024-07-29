@@ -1,66 +1,80 @@
-<div class="bg-purple flex flex-col bg-slate-500 p-4 w-full bg-violet-800 border-t b-white">
-  <h1 class="text-4xl text-white mb-6 font-black w-full">Set up your account</h1>
+<div class="bg-purple-dark w-full flex flex-col items-center justify-center">
+  <div class="flex flex-col p-4 w-full border-t b-white max-w-screen-sm">
+    <h1 class="text-4xl text-white mb-6 font-black w-full">Set up your account</h1>
 
-  <%= form_with url: profile_path, class: "flex flex-col items-center", method: :put do |form| %>
-    <%= form.label :image, data: {controller: "image-previewer", }, class: "overflow-hidden relative font-bold text-white text-base w-32 h-32 bg-white cursor-pointer rounded-full flex flex-col items-center justify-center" do %>
-      <%= form.file_field :image, data: {image_previewer_target: "input"}, class: "text-white border-2 border-white bg-transparent rounded-sm hidden mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white" %>
-      <% if @profile.image.present? %>
-        <%= image_tag @profile.image, data: {image_previewer_target: "hideOnLoad"}, class: "absolute" %>
-      <% else %>
-        <%= image_tag url_for("camera.svg"), data: {image_previewer_target: "hideOnLoad"} %>
-      <% end %>
+    <%= form_with model: @profile, class: "flex flex-col items-center" do |form| %>
+      <div class="relative" data-controller="image-previewer">
+        <%= form.label :image, class: "overflow-hidden relative font-bold text-white text-base w-32 h-32 bg-white cursor-pointer rounded-full flex flex-col items-center justify-center" do %>
+          <%= form.file_field :image, data: {image_previewer_target: "input"}, accept:"image/*,image/apng,image/avif,image/gif,image/gif,image/jpeg,image/png,image/svg+xml", class: "text-white border-2 border-white bg-transparent rounded-sm hidden mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white" %>
+          <% if @profile.image.present? %>
+            <%= image_tag @profile.image, data: {image_previewer_target: "hideOnLoad"}, class: "absolute" %>
+          <% else %>
+            <%= image_tag url_for("camera.svg"), data: {image_previewer_target: "hideOnLoad"} %>
+          <% end %>
+          <div class="absolute" data-image-previewer-target="onRemoveImagePlaceholderContainer"></div>
+          <%= image_tag "", data: {image_previewer_target: "image"}, class: "hidden absolute" %>
+        <% end %>
+        <%= inline_svg_tag "icon_delete_photo.svg", data: {action: "click->image-previewer#removeImage", image_previewer_target: "deleteIcon" }, class: "cursor-pointer absolute top-[5px] right-[5px] w-6 h-6", style: @profile.image.present? ? "display:block;" : "display:none;" %>
+        <div class="hidden" data-image-previewer-target="onRemoveImageContainer"></div>
+        <template data-image-previewer-target="onRemoveImagePlaceholderTemplate">
+          <%= image_tag url_for("camera.svg") %>
+        </template>
+        <template data-image-previewer-target="onRemoveImageTemplate">
+          <%= form.hidden_field :remove_image, value: "true" %>
+        </template>
+      </div>
+      <div class="flex flex-col items-start w-full w-full">
+        <%= render partial: "shared/form_errors", locals: { errors: form.object.errors.full_messages } %>
 
-      <%= image_tag "", data: {image_previewer_target: "image"}, class: "hidden absolute" %>
+        <%= form.label :name, class: "font-bold text-white text-base mb-2" %>
+        <%= form.text_field :name, class: FormsHelper::TEXT_FIELD_CLASSES + " mb-6", placeholder: "John P. Doe" %>
+
+        <%= form.label :bio, class: "font-bold text-white text-base mb-2" %>
+        <%= form.text_area :bio, class: FormsHelper::TEXT_FIELD_CLASSES + " mb-6", placeholder: "I'm a Ruby on Rails developer with six years of experience. Outside of work, I enjoy hiking and using dating apps." %>
+
+        <%= form.label :job_title, class: "font-bold text-white  text-base mb-2" %>
+        <%= form.text_field :job_title, class: FormsHelper::TEXT_FIELD_CLASSES + " mb-6", placeholder: "Senior Developer at Telos Labs" %>
+
+        <%= form.label :github_url, "GitHub", class: "font-bold text-white text-base mb-2" %>
+        <%= form.text_field :github_url, class: FormsHelper::TEXT_FIELD_CLASSES + " mb-6", placeholder: "https://github.com/johnp" %>
+
+        <%= form.label :linkedin_url, "LinkedIn", class: "font-bold text-white text-base mb-2" %>
+        <%= form.text_field :linkedin_url, class: FormsHelper::TEXT_FIELD_CLASSES + " mb-6", placeholder: "https://www.linkedin.com/in/johnp" %>
+
+        <%= form.label :twitter_url, "X (formerly Twitter)", class: "font-bold text-white text-base mb-2" %>
+        <%= form.text_field :twitter_url, class: FormsHelper::TEXT_FIELD_CLASSES + " mb-6", placeholder: "https://x.com/johnp" %>
+
+        <p class="text-white font-bold mb-2">Discoverability</p>
+        <div class="flex flex-row items-center bg-white justify-between rounded-md w-full p-4">
+          <%= form.label :is_public, "Public profile", class: "grow font-medium text-slate-900 text-base cursor-pointer mr-2" %>
+          <label class="inline-flex items-center cursor-pointer">
+            <%= form.check_box :is_public, class: "sr-only peer" %>
+              <div class="relative w-11 h-6 bg-gray-6 rounded-full peer dark:bg-gray-6 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red"></div>
+          </label>
+        </div>
+        <p class="text-xs text-white mt-1 mb-6">Allow other persons to view your profile through a QR code.</p>
+
+        <p class="text-white font-bold mb-2">Notifications</p>
+        <div class="rounded-md w-full overflow-hidden mb-10">
+          <div class="flex flex-row items-center bg-white justify-between w-full p-4 border-b border-gray-6">
+            <%= form.label :mail_notifications, "Mail notifications", class: "grow font-medium text-slate-900 text-base cursor-pointer mr-2" %>
+            <label class="inline-flex items-center cursor-pointer">
+              <%= form.check_box :mail_notifications, class: "sr-only peer" %>
+              <div class="relative w-11 h-6 bg-gray-6 rounded-full peer dark:bg-gray-6 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red"></div>
+            </label>
+          </div>
+          <div class="flex flex-row items-center bg-white justify-between w-full p-4">
+            <%= form.label :in_app_notifications, "In-app notifications", class: "grow font-medium text-slate-900 text-base cursor-pointer mr-2" %>
+            <label class="inline-flex items-center cursor-pointer">
+              <%= form.check_box :in_app_notifications, class: "sr-only peer" %>
+              <div class="relative w-11 h-6 bg-gray-6 rounded-full peer dark:bg-gray-6 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red"></div>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <%= form.submit "SAVE PROFILE", class:"w-full bg-red rounded-[10px] p-4 text-lg font-black text-white cursor-pointer" %>
+      <%= link_to "Skip for now", root_path, class: "text-lg underline font-black italic text-white mt-10" %>
     <% end %>
-    <div class="flex flex-col items-start w-full w-full">
-      <%= form.label :bio, class: "font-bold text-white text-base" %>
-      <%= form.text_area :bio, value:  @profile.bio,class: "w-full text-white border-2 border-white bg-transparent rounded-sm  mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white" %>
-
-      <%= form.label :name, class: "font-bold text-white  text-base" %>
-      <%= form.text_field :name, value:  @profile.name, class: "w-full text-white border-2 border-white bg-transparent rounded-sm  mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white" %>
-
-      <%= form.label :location, class: "font-bold text-white  text-base" %>
-      <%= form.text_field :location, value:  @profile.location, class: "w-full text-white border-2 border-white bg-transparent rounded-sm  mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white" %>
-
-      <%= form.label :github_url, class: "font-bold text-white text-base" %>
-      <%= form.text_field :github_url, value:  @profile.github_url, class: "w-full text-white border-2 border-white bg-transparent rounded-sm  mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white" %>
-
-      <%= form.label :linkedin_url, class: "font-bold text-white text-base" %>
-      <%= form.text_field :linkedin_url, value:  @profile.linkedin_url, class: "w-full text-white border-2 border-white bg-transparent rounded-sm  mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white" %>
-
-      <%= form.label :twitter_url, class: "font-bold text-white text-base" %>
-      <%= form.text_field :twitter_url, value:  @profile.twitter_url, class: "w-full text-white border-2 border-white bg-transparent rounded-sm  mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white" %>
-
-      <p class="text-white font-bold">Discoverability</p>
-      <div class="flex flex-row items-center bg-white justify-between rounded-md w-full p-4">
-        <%= form.label :is_public, "Public profile", class: "grow font-medium text-slate-900 text-base cursor-pointer mr-2" %>
-        <label class="inline-flex items-center cursor-pointer">
-          <%= form.check_box :is_public, checked:  @profile.is_public || false, class: "sr-only peer" %>
-          <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 dark:peer-focus:ring-red-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-red-600"></div>
-        </label>
-      </div>
-      <p class="text-xs text-white mb-6">Allow other persons to view your profile through a QR code.</p>
-
-      <p class="text-white font-bold">Notifications</p>
-      <div class="rounded-md w-full overflow-hidden mb-10">
-        <div class="flex flex-row items-center bg-white justify-between w-full p-4">
-          <%= form.label :mail_notifications_enabled, "Mail Notifications", class: "grow font-medium text-slate-900 text-base cursor-pointer mr-2" %>
-          <label class="inline-flex items-center cursor-pointer">
-            <%= form.check_box :mail_notifications_enabled, checked:  current_user.mail_notifications_enabled || false, class: "sr-only peer" %>
-            <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 dark:peer-focus:ring-red-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-red-600"></div>
-          </label>
-        </div>
-        <div class="flex flex-row items-center bg-white justify-between w-full p-4">
-          <%= form.label :in_app_notifications_enabled, "In app Notifications", class: "grow font-medium text-slate-900 text-base cursor-pointer mr-2" %>
-          <label class="inline-flex items-center cursor-pointer">
-            <%= form.check_box :in_app_notifications_enabled, checked:  current_user.in_app_notifications_enabled || false, class: "sr-only peer" %>
-            <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-red-300 dark:peer-focus:ring-red-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-red-600"></div>
-          </label>
-        </div>
-      </div>
-    </div>
-
-    <%= form.submit "SAVE PROFILE", class:"w-full bg-red-500 p-4 text-lg font-black text-white rounded cursor-pointer" %>
-    <%= link_to "Skip for now", root_path, class: "text-lg underline font-black italic text-white mt-10" %>
-  <% end %>
+  </div>
 </div>
