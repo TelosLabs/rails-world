@@ -9,32 +9,21 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
   </head>
 
   <body class="flex flex-col h-full bg-gray-8">
     <main class="relative flex flex-col flex-1 w-full mx-auto overflow-auto">
-      <% if !current_page?(new_session_path) && !current_page?(about_path) %>
-        <div class="flex justify-center w-full py-6 mx-auto border-b border-b-white bg-purple-dark">
-          <div class="flex max-w-screen-sm px-5">
-            <%= link_to homepage_link do %>
-              <%= inline_svg_tag("main_logo.svg", class: "w-full") %>
-            <% end %>
-          </div>
-        </div>
+      <% if show_header? %>
+        <%= render partial: "layouts/header" %>
       <% end %>
+
       <% flash.each do |type, message| %>
         <% if message.present? && message.is_a?(String) %>
           <%= render partial: "layouts/flash_message", locals: { message: message } %>
         <% end %>
       <% end %>
+
       <%= yield %>
-      <% if user_signed_in? %>
-        <%= button_to "Log out", session_path, method: :delete %>
-      <% end %>
     </main>
     <%= render partial: "layouts/bottom_navbar" if user_signed_in? %>
   </body>
