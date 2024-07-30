@@ -9,6 +9,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        'simple': '0px 0px 25px 0px rgba(0, 0, 0, 0.50)'
+      },
       fontFamily: {
         sans: ['Roboto', ...defaultTheme.fontFamily.sans],
         karla: ['Karla', ...defaultTheme.fontFamily.sans]
@@ -22,6 +25,7 @@ module.exports = {
         'gray-7': '#D7D7D8',
         'gray-6': '#C6C6C8',
         'gray-5': '#A2A2A2',
+        'gray-3': '#262626',
         'purple-dark': '#432463',
         'purple-light': '#4E2A73',
         red: '#CB0C1C',
