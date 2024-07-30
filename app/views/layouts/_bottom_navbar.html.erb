@@ -7,8 +7,8 @@
     <%= inline_svg_tag "clock.svg", class: nav_icon_class_for([root_path]) %>
     My Schedule
   </a>
-  <a href="<%= profile_path(current_user.uuid) %>" class="<%= nav_text_class_for [profile_path(current_user.uuid), edit_profile_path] %> flex flex-col items-center justify-center">
-    <%= inline_svg_tag "avatar_no_fill.svg", class: nav_icon_class_for([profile_path(current_user.uuid), edit_profile_path]) %>
+  <a href="<%= profile_path(current_profile&.uuid) %>" class="<%= nav_text_class_for [profile_path(current_profile&.uuid), edit_profile_path(current_profile&.uuid)] %> flex flex-col items-center justify-center">
+    <%= inline_svg_tag "avatar_no_fill.svg", class: nav_icon_class_for([profile_path(current_profile&.uuid), edit_profile_path(current_profile&.uuid)]) %>
     Profile
   </a>
   <a href="<%= root_path %>" class="<%= nav_text_class_for [root_path] %> flex flex-col items-center justify-center">

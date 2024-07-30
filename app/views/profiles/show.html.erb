@@ -56,7 +56,10 @@
     </div>
   </div>
   <%= render inline: @profile.svg_qr_code(module_size: 4) %>
-  <div class="p-4 flex flex-col items-center gap-4 w-full">
-    <%= link_to 'Edit Profile', edit_profile_path, class: "text-red font-bold rounded-sm underline italic text-lg" %>
-  </div>
+
+  <% if allowed_to?(:edit?, @profile, with: ProfilePolicy) %>
+    <div class="p-4 flex flex-col items-center gap-4 w-full">
+      <%= link_to 'Edit Profile', edit_profile_path(@profile.uuid), class: "text-red font-bold rounded-sm underline italic text-lg" %>
+    </div>
+  <% end %>
 </div>

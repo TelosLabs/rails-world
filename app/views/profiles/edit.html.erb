@@ -2,7 +2,7 @@
   <div class="flex flex-col p-4 w-full border-t b-white max-w-screen-sm">
     <h1 class="text-4xl text-white mb-6 font-black w-full">Set up your account</h1>
 
-    <%= form_with model: @profile, class: "flex flex-col items-center" do |form| %>
+    <%= form_with model: @profile, url: profile_path(@profile.uuid), class: "flex flex-col items-center" do |form| %>
       <div class="relative" data-controller="image-previewer">
         <%= form.label :image, class: "overflow-hidden relative font-bold text-white text-base w-32 h-32 bg-white cursor-pointer rounded-full flex flex-col items-center justify-center" do %>
           <%= form.file_field :image, data: {image_previewer_target: "input"}, accept:"image/*,image/apng,image/avif,image/gif,image/gif,image/jpeg,image/png,image/svg+xml", class: "text-white border-2 border-white bg-transparent rounded-sm hidden mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white" %>

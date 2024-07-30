@@ -13,7 +13,7 @@
 #  name                 :string
 #  profileable_type     :string           not null
 #  twitter_url          :string
-#  uuid                 :string
+#  uuid                 :string           not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  profileable_id       :integer          not null
@@ -31,8 +31,6 @@ class Profile < ApplicationRecord
   validates :uuid, uniqueness: true, presence: true
 
   before_validation :set_uuid
-
-  scope :public_profiles, -> { where(is_public: true) }
 
   class << self
     def ransackable_attributes(_auth_object = nil)

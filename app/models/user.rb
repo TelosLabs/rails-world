@@ -18,6 +18,10 @@ class User < ApplicationRecord
 
   has_secure_password
 
+  normalizes :email, with: ->(email) { email.strip.downcase }
+
+  enum role: {user: "user", admin: "admin"}
+
   has_one :profile, as: :profileable, dependent: :destroy
 
   has_and_belongs_to_many :events
@@ -28,13 +32,7 @@ class User < ApplicationRecord
 
   after_create_commit { create_profile! }
 
-  enum role: {user: "user", admin: "admin"}
-
   accepts_nested_attributes_for :profile
-
-  delegate :uuid, to: :profile, allow_nil: true
-
-  normalizes :email, with: ->(email) { email.strip.downcase }
 
   generates_token_for :password_reset, expires_in: PASSWORD_RESET_EXPIRATION do
     password_salt&.last(10)
