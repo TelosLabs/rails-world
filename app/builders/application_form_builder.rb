@@ -10,12 +10,8 @@ class ApplicationFormBuilder < ActionView::Helpers::FormBuilder
     peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px]
     after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5
     after:transition-all peer-checked:bg-red cursor-pointer",
-    error_message: "text-red-500 text-sm mt-1",
+    error_message: "text-red text-sm",
     label: "font-bold text-base"
-  }.freeze
-
-  ERROR_STYLES = {
-    default: "ring-1 ring-red-500 !focus:ring-red-500"
   }.freeze
 
   [
@@ -65,7 +61,6 @@ class ApplicationFormBuilder < ActionView::Helpers::FormBuilder
     style = []
     style << options[:class]
     style << (STYLES[method_name] || STYLES[:default])
-    style << (ERROR_STYLES[method_name] || ERROR_STYLES[:default]) if attribute_has_error?(attribute)
     style.join(" ").strip
 
     options[:class] = style
