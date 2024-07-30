@@ -19,7 +19,9 @@ FactoryBot.define do
     password { "password2024" }
 
     trait :with_profile do
-      profile
+      after(:create) do |user|
+        create(:profile, profileable: user)
+      end
     end
   end
 end
