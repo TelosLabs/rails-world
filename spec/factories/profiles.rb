@@ -35,7 +35,7 @@ FactoryBot.define do
     uuid { SecureRandom.uuid }
 
     trait :with_user do
-      association :profileable, factory: :user
+      profileable { create(:user) }
     end
 
     trait :public do

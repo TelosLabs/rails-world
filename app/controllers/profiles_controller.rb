@@ -24,7 +24,12 @@ class ProfilesController < ApplicationController
   private
 
   def set_profile
-    @profile = Profile.public_profiles.find_by!(uuid: params[:uuid])
+    @profile =
+      if params[:uuid] == current_profile.uuid
+        current_profile
+      else
+        Profile.public_profiles.find_by!(uuid: params[:uuid])
+      end
   end
 
   def current_profile
