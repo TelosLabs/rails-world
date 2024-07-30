@@ -10,8 +10,9 @@ Rails.application.routes.draw do
   resource :registration, only: [:new, :create]
   resource :session, only: [:new, :create, :destroy]
   resource :password, only: [:edit, :update]
-  resource :profile, only: [:edit, :update, :show]
   resource :password_reset, only: [:new, :create, :edit, :update] do
     get :post_submit
   end
+  resources :profiles, only: [:show], param: :uuid
+  resource :profile, only: [:edit, :update]
 end
