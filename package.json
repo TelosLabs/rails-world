@@ -2,11 +2,6 @@
   "name": "rails_world",
   "version": "1.0.0",
   "standard": {
-    "ignore": [
-      "vendor/**"
-    ]
-  },
-  "dependencies": {
-    "stimulus-rails-nested-form": "^4.1.0"
+    "ignore": ["vendor/**"]
   }
 }
