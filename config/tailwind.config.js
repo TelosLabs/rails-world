@@ -24,11 +24,13 @@ module.exports = {
         'gray-7': '#D7D7D8',
         'gray-6': '#C6C6C8',
         'gray-5': '#A2A2A2',
+        'gray-4': '#3A3A3C',
         'gray-3': '#262626',
         'purple-dark': '#432463',
         'purple-light': '#4E2A73',
         red: '#CB0C1C',
         blue: '#0A4E6B',
+        'blue-2': '#829ECE',
         'green-dark': '#62C554',
         'green-light': '#D8F1D4'
       },
