@@ -21,6 +21,6 @@ class Avo::Resources::Speaker < Avo::BaseResource
     field :mail_notifications, as: :boolean
     field :in_app_notifications, as: :boolean
     field :is_public, as: :boolean
-    field :events, as: :has_many
+    field :sessions, as: :has_many
   end
 end

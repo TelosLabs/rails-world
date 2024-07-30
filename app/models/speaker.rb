@@ -9,7 +9,7 @@
 class Speaker < ApplicationRecord
   has_one :profile, as: :profileable, dependent: :destroy
 
-  has_and_belongs_to_many :events
+  has_and_belongs_to_many :sessions
 
   accepts_nested_attributes_for :profile
 

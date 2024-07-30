@@ -20,7 +20,7 @@ class User < ApplicationRecord
 
   has_one :profile, as: :profileable, dependent: :destroy
 
-  has_and_belongs_to_many :events
+  has_and_belongs_to_many :sessions
 
   validates :email, presence: true, uniqueness: true
   validates :password_digest, presence: true

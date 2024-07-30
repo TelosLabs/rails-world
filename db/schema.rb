@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_15_201230) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_30_112507) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -43,19 +43,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_15_201230) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "events", force: :cascade do |t|
-    t.string "title", null: false
-    t.string "description"
-    t.datetime "starts_at", null: false
-    t.datetime "ends_at", null: false
-    t.integer "location_id", null: false
-    t.integer "conference_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["conference_id"], name: "index_events_on_conference_id"
-    t.index ["location_id"], name: "index_events_on_location_id"
   end
 
   create_table "events_speakers", force: :cascade do |t|
@@ -111,7 +98,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_15_201230) do
     t.integer "profileable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "uuid"
     t.index ["profileable_type", "profileable_id"], name: "index_profiles_on_profileable"
+    t.index ["uuid"], name: "index_profiles_on_uuid", unique: true
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "description"
+    t.datetime "starts_at", null: false
+    t.datetime "ends_at", null: false
+    t.integer "location_id", null: false
+    t.integer "conference_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["conference_id"], name: "index_sessions_on_conference_id"
+    t.index ["location_id"], name: "index_sessions_on_location_id"
   end
 
   create_table "speakers", force: :cascade do |t|
@@ -137,13 +139,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_15_201230) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "events", "conferences"
-  add_foreign_key "events", "locations"
-  add_foreign_key "events_speakers", "events"
+  add_foreign_key "events_speakers", "sessions", column: "event_id"
   add_foreign_key "events_speakers", "speakers"
-  add_foreign_key "events_tags", "events"
+  add_foreign_key "events_tags", "sessions", column: "event_id"
   add_foreign_key "events_tags", "tags"
-  add_foreign_key "events_users", "events"
+  add_foreign_key "events_users", "sessions", column: "event_id"
   add_foreign_key "events_users", "users"
   add_foreign_key "locations", "conferences"
+  add_foreign_key "sessions", "conferences"
+  add_foreign_key "sessions", "locations"
 end

@@ -1,4 +1,4 @@
-class Avo::Resources::Event < Avo::BaseResource
+class Avo::Resources::Session < Avo::BaseResource
   self.index_query = -> { query.order(:title) }
   self.search = {
     query: -> { query.ransack(title_cont: params[:q], m: "or").result(distinct: false) },
