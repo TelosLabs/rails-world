@@ -30,6 +30,7 @@ gem "ransack"
 
 # Other
 gem "bootsnap", require: false
+gem "draper"
 gem "inline_svg"
 gem "puma", ">= 5.0"
 gem "rqrcode", "~> 2.0"

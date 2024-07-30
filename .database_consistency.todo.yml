@@ -3,3 +3,6 @@ Profile:
   self_ref:
     MissingIndexChecker:
       enabled: false
+  uuid:
+    ColumnPresenceChecker:
+      enabled: false

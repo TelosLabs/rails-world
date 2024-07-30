@@ -13,6 +13,7 @@
 #  name                 :string
 #  profileable_type     :string           not null
 #  twitter_url          :string
+#  uuid                 :string
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  profileable_id       :integer          not null
@@ -20,11 +21,18 @@
 # Indexes
 #
 #  index_profiles_on_profileable  (profileable_type,profileable_id)
+#  index_profiles_on_uuid         (uuid) UNIQUE
 #
 class Profile < ApplicationRecord
   has_one_attached :image
 
   belongs_to :profileable, polymorphic: true
+
+  validates :uuid, uniqueness: true, presence: true
+
+  before_validation :set_uuid
+
+  scope :public_profiles, -> { where(is_public: true) }
 
   class << self
     def ransackable_attributes(_auth_object = nil)
@@ -34,5 +42,11 @@ class Profile < ApplicationRecord
     def delegateable_attributes
       column_names - %w[id created_at updated_at]
     end
+  end
+
+  private
+
+  def set_uuid
+    self.uuid ||= SecureRandom.uuid
   end
 end
