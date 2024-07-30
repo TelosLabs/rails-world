@@ -1,6 +1,8 @@
 class ProfilesController < ApplicationController
+  before_action :set_profile, only: :show
+
   def show
-    @profile = current_profile
+    @profile = @profile.decorate
   end
 
   def edit
@@ -13,13 +15,22 @@ class ProfilesController < ApplicationController
 
     if @profile.save
       remove_profile_image_if_requested
-      redirect_to profile_path, notice: t("controllers.profiles.update.success")
+      redirect_to profile_path(@profile.uuid), notice: t("controllers.profiles.update.success")
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
   private
+
+  def set_profile
+    @profile =
+      if params[:uuid] == current_profile.uuid
+        current_profile
+      else
+        Profile.public_profiles.find_by!(uuid: params[:uuid])
+      end
+  end
 
   def current_profile
     current_user.profile || current_user.build_profile
