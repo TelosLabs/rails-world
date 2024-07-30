@@ -24,9 +24,6 @@
 class Profile < ApplicationRecord
   has_one_attached :image
 
-  has_one :user, as: :profileable
-  has_one :speaker, as: :profileable
-
   belongs_to :profileable, polymorphic: true
 
   class << self
