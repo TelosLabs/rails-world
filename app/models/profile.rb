@@ -28,6 +28,12 @@ class Profile < ApplicationRecord
 
   belongs_to :profileable, polymorphic: true
 
+  validates :uuid, uniqueness: true, presence: true
+
+  before_validation :set_uuid
+
+  scope :public_profiles, -> { where(is_public: true) }
+
   class << self
     def ransackable_attributes(_auth_object = nil)
       %w[name]
@@ -36,5 +42,11 @@ class Profile < ApplicationRecord
     def delegateable_attributes
       column_names - %w[id created_at updated_at]
     end
+  end
+
+  private
+
+  def set_uuid
+    self.uuid ||= SecureRandom.uuid
   end
 end

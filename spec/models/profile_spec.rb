@@ -31,4 +31,13 @@ RSpec.describe Profile, type: :model do
   it "has a valid factory" do
     expect(profile).to be_valid
   end
+
+  describe "callbacks" do
+    let(:profile) { build(:profile, :with_user) }
+
+    it "sets a UUID before creation" do
+      profile.save
+      expect(profile.uuid).to be_present
+    end
+  end
 end

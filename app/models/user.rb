@@ -32,6 +32,8 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :profile
 
+  delegate :uuid, to: :profile, allow_nil: true
+
   normalizes :email, with: ->(email) { email.strip.downcase }
 
   generates_token_for :password_reset, expires_in: PASSWORD_RESET_EXPIRATION do

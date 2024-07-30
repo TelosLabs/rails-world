@@ -32,9 +32,14 @@ FactoryBot.define do
     github_url { "https://github.com" }
     linkedin_url { "https://linkedin.com" }
     twitter_url { "https://twitter.com" }
+    uuid { SecureRandom.uuid }
 
     trait :with_user do
-      association :profileable, factory: :user
+      profileable { create(:user) }
+    end
+
+    trait :public do
+      is_public { true }
     end
   end
 end
