@@ -12,7 +12,7 @@
   </head>
 
   <body class="flex flex-col h-full bg-gray-8">
-    <main class="relative flex flex-col w-full mx-auto flex-1 overflow-auto">
+    <main class="relative flex flex-col flex-1 w-full mx-auto overflow-auto">
       <% if !current_page?(new_session_path) %>
         <div class="flex justify-center w-full py-6 mx-auto border-b border-b-white bg-purple-dark">
           <div class="flex max-w-screen-sm px-5">
@@ -33,6 +33,6 @@
         <%= button_to "Log out", session_path, method: :delete %>
       <% end %>
     </main>
-    <%= render partial: "/layouts/bottom_navbar" if current_user.present? %>
+    <%= render partial: "layouts/bottom_navbar" if user_signed_in? %>
   </body>
 </html>
