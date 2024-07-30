@@ -1,36 +1,37 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>RailsWorld</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-  <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+<html class="h-full">
+  <head>
+    <title>RailsWorld</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
 
-  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  <%= javascript_importmap_tags %>
-</head>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
 
-<body>
-<main class="flex flex-col container mx-auto flex">
-  <div class="flex flex-row items-center justify-center p-6 bg-violet-900">
-    <%= image_tag url_for("rails_world_logo.svg") %>
-  </div>
-  <div><%= notice %></div>
-  <div><%= alert %></div>
-
-  <%= yield %>
-
-  <div class="flex flex-row gap-2">
-    <% if user_signed_in? %>
-      <%= link_to "Edit Password", edit_password_path %>
-      <%= button_to "Log out", session_path, method: :delete %>
-    <% else %>
-      <%= link_to "Sign Up", new_registration_path %>
-      <%= link_to "Log in", new_session_path %>
-    <% end %>
-  </div>
-  <%= render partial: "/layouts/bottom_navbar" %>
-</main>
-</body>
+  <body class="flex flex-col h-full bg-gray-8">
+    <main class="relative flex flex-col flex-1 w-full mx-auto overflow-auto">
+      <% if !current_page?(new_session_path) %>
+        <div class="flex justify-center w-full py-6 mx-auto border-b border-b-white bg-purple-dark">
+          <div class="flex max-w-screen-sm px-5">
+            <%= link_to homepage_link do %>
+              <%= inline_svg_tag("main_logo.svg", class: "w-full") %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+      <% flash.each do |type, message| %>
+        <% if message.present? && message.is_a?(String) %>
+          <%= render partial: "layouts/flash_message", locals: { message: message }%>
+        <% end %>
+      <% end %>
+      <%= yield %>
+      <% if user_signed_in? %>
+        <%= button_to "Log out", session_path, method: :delete %>
+      <% end %>
+    </main>
+    <%= render partial: "layouts/bottom_navbar" if user_signed_in? %>
+  </body>
 </html>

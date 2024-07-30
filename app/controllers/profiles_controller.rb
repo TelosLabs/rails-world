@@ -1,30 +1,39 @@
 class ProfilesController < ApplicationController
   def show
-    @profile = current_user.profile
+    @profile = current_profile
   end
 
   def edit
-    @profile = current_user.profile || Profile.new
+    @profile = current_profile
   end
 
   def update
-    if current_user.profile.nil?
-      current_user.profile = Profile.new(profile_params)
-      current_user.save!
+    @profile = current_profile
+    @profile.assign_attributes(profile_params)
+
+    if @profile.save
+      remove_profile_image_if_requested
+      redirect_to profile_path, notice: t("controllers.profiles.update.success")
     else
-      current_user.profile.update!(profile_params)
+      render :edit, status: :unprocessable_entity
     end
-    current_user.update!(notifications_params)
-    redirect_to profile_path, notice: t("controllers.profiles.update.success")
   end
 
   private
 
-  def profile_params
-    params.permit(:name, :location, :bio, :is_public, :twitter_url, :linkedin_url, :github_url, :image)
+  def current_profile
+    current_user.profile || current_user.build_profile
   end
 
-  def notifications_params
-    params.permit(:in_app_notifications_enabled, :mail_notifications_enabled)
+  def profile_params
+    params.require(:profile).permit(
+      :name, :job_title, :bio, :is_public, :image,
+      :twitter_url, :linkedin_url, :github_url,
+      :in_app_notifications, :mail_notifications
+    )
+  end
+
+  def remove_profile_image_if_requested
+    @profile.image.purge if params[:profile][:remove_image].presence
   end
 end

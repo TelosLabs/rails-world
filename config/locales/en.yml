@@ -1,8 +1,7 @@
 en:
   controllers:
-    concerns:
-      authentication:
-        unauthorized: "You need to sign in or sign up before continuing."
+    avo:
+      unauthorized: "You need to be an admin to access this page."
     password_resets:
       create:
         notice: "Check your email to reset your password."

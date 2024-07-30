@@ -1,6 +1,8 @@
 class SessionsController < ApplicationController
   allow_unauthenticated_access only: [:new, :create]
 
+  before_action :redirect_if_signed_in, only: [:new, :create]
+
   def new
     @user = User.new
   end
@@ -25,5 +27,9 @@ class SessionsController < ApplicationController
 
   def session_params
     params.require(:user).permit(:email, :password)
+  end
+
+  def redirect_if_signed_in
+    redirect_to root_path if user_signed_in?
   end
 end

@@ -99,11 +99,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_15_201230) do
 
   create_table "profiles", force: :cascade do |t|
     t.string "name"
-    t.string "bio"
-    t.string "location"
+    t.text "bio"
+    t.string "job_title"
     t.string "github_url"
     t.string "linkedin_url"
     t.string "twitter_url"
+    t.boolean "mail_notifications", default: true, null: false
+    t.boolean "in_app_notifications", default: true, null: false
     t.boolean "is_public", default: false, null: false
     t.string "profileable_type", null: false
     t.integer "profileable_id", null: false
@@ -127,8 +129,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_15_201230) do
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "role"
-    t.boolean "mail_notifications_enabled", default: true, null: false
-    t.boolean "in_app_notifications_enabled", default: true, null: false
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
