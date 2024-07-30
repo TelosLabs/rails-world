@@ -15,7 +15,7 @@ class ProfilesController < ApplicationController
 
     if @profile.save
       remove_profile_image_if_requested
-      redirect_to profile_path, notice: t("controllers.profiles.update.success")
+      redirect_to profile_path(@profile.uuid), notice: t("controllers.profiles.update.success")
     else
       render :edit, status: :unprocessable_entity
     end
