@@ -13,5 +13,11 @@ class Speaker < ApplicationRecord
 
   accepts_nested_attributes_for :profile
 
-  delegate :name, to: :profile, allow_nil: true
+  Profile.delegateable_attributes.each do |attribute|
+    delegate attribute, "#{attribute}=", to: :profile, allow_nil: true
+  end
+
+  def profile
+    super || build_profile
+  end
 end

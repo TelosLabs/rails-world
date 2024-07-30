@@ -24,13 +24,18 @@
 class Profile < ApplicationRecord
   has_one_attached :image
 
-  has_one :self_ref, class_name: "Profile", foreign_key: :id, inverse_of: :self_ref, dependent: :nullify
-  has_one :user, through: :self_ref, source: :profileable, source_type: "User"
-  has_one :speaker, through: :self_ref, source: :profileable, source_type: "Speaker"
+  has_one :user, as: :profileable
+  has_one :speaker, as: :profileable
 
   belongs_to :profileable, polymorphic: true
 
-  def self.ransackable_attributes(_auth_object = nil)
-    %w[name]
+  class << self
+    def ransackable_attributes(_auth_object = nil)
+      %w[name]
+    end
+
+    def delegateable_attributes
+      column_names - %w[id created_at updated_at]
+    end
   end
 end
