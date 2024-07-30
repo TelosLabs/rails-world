@@ -1,9 +1,3 @@
 detectors:
   IrresponsibleModule:
     enabled: false
-  TooManyStatements:
-    max_statements: 20
-  InstanceVariableAssumption:
-    enabled: false
-  UtilityFunction:
-    enabled: false
