@@ -24,8 +24,7 @@
       <% end %>
       <% flash.each do |type, message| %>
         <% if message.present? && message.is_a?(String) %>
-          <div><%= notice %></div>
-          <div><%= alert %></div>
+          <%= render partial: "layouts/flash_message", locals: { message: message }%>
         <% end %>
       <% end %>
       <%= yield %>
