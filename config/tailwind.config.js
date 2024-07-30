@@ -10,7 +10,7 @@ module.exports = {
   theme: {
     extend: {
       boxShadow: {
-        'simple': '0px 0px 25px 0px rgba(0, 0, 0, 0.50)'
+        simple: '0px 0px 25px 0px rgba(0, 0, 0, 0.50)'
       },
       fontFamily: {
         sans: ['Roboto', ...defaultTheme.fontFamily.sans]
@@ -31,7 +31,7 @@ module.exports = {
         blue: '#0A4E6B',
         'green-dark': '#62C554',
         'green-light': '#D8F1D4'
-      },
+      }
     }
   },
   plugins: [
