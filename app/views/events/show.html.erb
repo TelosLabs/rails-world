@@ -11,11 +11,11 @@
             <%= image_tag url_for("user_avatar.svg") %>
           </div>
         <% end %>
-        
+
         <div class="w-full flex flex-row items-center justify-between grow ml-5 ">
           <div class="flex flex-col">
-            <p class="text-lg italic font-black text-red"><%= @speaker.profile.name%></p>
-            <p class="font-normal text-sm"><%= @speaker.profile.job_title%></p>
+            <p class="text-lg italic font-black text-red"><%= @speaker.profile.name %></p>
+            <p class="font-normal text-sm"><%= @speaker.profile.job_title %></p>
           </div>
           <%= inline_svg_tag "circle_with_checkmark.svg", class: "fill-red-500" %>
         </div>
@@ -29,7 +29,7 @@
           </div>
         <% end %>
       </div>
-      
+
       <p class="font-normal mb-6 leading-6 text-base"><%= @event.description %></p>
       <div class="flex flex-row items-center mb-1">
         <%= inline_svg_tag "calendar.svg", class: "fill-gray-4 w-3 h-3 mr-2" %> <p class="text-[13px]"><%= @event.starts_at.strftime("%A, %b %d") %></p>
@@ -41,7 +41,7 @@
         <%= inline_svg_tag "location_pin.svg", class: "stroke-gray-4 w-3 h-3 mr-2" %><p class="text-[13px]"><%= @event.location.name %></p>
       </div>
     </div>
-    
+
   </div>
   <div class="flex flex-col  max-w-screen-sm">
     <p class="text-black mb-4 text-2xl font-bold italic">About this speaker</p>
@@ -57,8 +57,8 @@
           </div>
         <% end %>
         <div class="flex flex-col ml-5">
-          <p class="text-lg italic font-black text-red"><%= @speaker.profile.name%></p>
-          <p class="font-normal text-sm"><%= @speaker.profile.job_title%></p>
+          <p class="text-lg italic font-black text-red"><%= @speaker.profile.name %></p>
+          <p class="font-normal text-sm"><%= @speaker.profile.job_title %></p>
         </div>
       </div>
       <p>
