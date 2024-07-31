@@ -32,7 +32,7 @@ class User < ApplicationRecord
 
   has_many :notifications, as: :recipient, dependent: :destroy, class_name: "Noticed::Notification"
 
-  validates :email, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: true, format: {with: URI::MailTo::EMAIL_REGEXP}
   validates :password_digest, presence: true
   validates :password, length: {minimum: 8}, if: -> { password.present? }
 
