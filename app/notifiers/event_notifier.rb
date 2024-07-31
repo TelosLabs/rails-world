@@ -5,6 +5,8 @@ class EventNotifier < ApplicationNotifier
     config.if = -> { recipient.profile&.mail_notifications }
   end
 
+  deliver_by :webpush, class: "DeliveryMethods::Webpush"
+
   notification_methods do
     def time_to_start_message
       cadence = Event::REMINDER_CADENCE.fetch(params[:reminder_type])
