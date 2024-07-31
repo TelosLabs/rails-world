@@ -32,14 +32,8 @@ class Profile < ApplicationRecord
 
   before_validation :set_uuid
 
-  class << self
-    def ransackable_attributes(_auth_object = nil)
-      %w[name]
-    end
-
-    def delegateable_attributes
-      column_names - %w[id created_at updated_at]
-    end
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[name]
   end
 
   private
