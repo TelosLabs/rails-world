@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe SessionsController, type: :controller do
+RSpec.describe UserSessionsController, type: :controller do
   describe "GET #new" do
     it "returns a success response" do
       get :new
@@ -43,7 +43,7 @@ RSpec.describe SessionsController, type: :controller do
       it "does not create a User session" do
         expect { post :create, params: params }.not_to change(User, :count)
         expect(response).to have_http_status(:found)
-        expect(response).to redirect_to(new_session_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
   end
