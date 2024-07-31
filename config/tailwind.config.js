@@ -10,10 +10,11 @@ module.exports = {
   theme: {
     extend: {
       boxShadow: {
-        'simple': '0px 0px 25px 0px rgba(0, 0, 0, 0.50)'
+        simple: '0px 0px 25px 0px rgba(0, 0, 0, 0.50)'
       },
       fontFamily: {
-        sans: ['Roboto', ...defaultTheme.fontFamily.sans]
+        sans: ['Roboto', ...defaultTheme.fontFamily.sans],
+        karla: ['Karla', ...defaultTheme.fontFamily.sans]
       },
       maxWidth: {
         'screen-sm': '425px'
@@ -30,8 +31,11 @@ module.exports = {
         red: '#CB0C1C',
         blue: '#0A4E6B',
         'green-dark': '#62C554',
-        'green-light': '#D8F1D4'
-      },
+        'green-light': '#D8F1D4',
+        'blue-marine': '#003A5D',
+        'blue-light': '#EFF6FF',
+        'blue-teal': '#00AFAA'
+      }
     }
   },
   plugins: [

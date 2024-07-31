@@ -29,6 +29,7 @@ gem "avo", ">= 3.2.1"
 
 # Other
 gem "bootsnap", require: false
+gem "draper"
 gem "inline_svg"
 gem "noticed"
 gem "puma", ">= 5.0"

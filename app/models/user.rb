@@ -38,6 +38,8 @@ class User < ApplicationRecord
 
   after_create_commit { create_profile! }
 
+  delegate :uuid, to: :profile, allow_nil: true
+
   def self.ransackable_attributes(_auth_object = nil)
     %w[email]
   end
