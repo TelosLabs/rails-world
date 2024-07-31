@@ -56,9 +56,16 @@
     </div>
   </div>
   <%= render inline: @profile.svg_qr_code(module_size: 4) %>
-  <div class="flex flex-col items-center w-full gap-4 p-4">
-    <%= link_to 'Edit Profile', edit_profile_path, class: "text-red font-bold rounded-sm underline italic text-lg" %>
-  </div>
 
-  <%= button_to "Log out", session_path, method: :delete, form_class: "w-full max-w-screen-sm px-4", class: "w-full bg-red py-4 text-white font-black italic rounded-[10px] uppercase mb-6" %>
+  <% if allowed_to?(:edit?, @profile, with: ProfilePolicy) %>
+    <div class="flex flex-col items-center w-full gap-4 p-4">
+      <%= link_to 'Edit Profile', edit_profile_path(@profile.uuid), class: "text-red font-bold rounded-sm underline italic text-lg" %>
+    </div>
+
+    <%= button_to(
+      "Log out", session_path, method: :delete,
+      form_class: "w-full max-w-screen-sm px-4",
+      class: "w-full bg-red py-4 text-white font-black italic rounded-[10px] uppercase mb-6"
+    ) %>
+  <% end %>
 </div>
