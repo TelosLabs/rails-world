@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   include Authentication
   include Authorization
 
+  default_form_builder ApplicationFormBuilder
+
   helper_method :current_profile
 
   private
