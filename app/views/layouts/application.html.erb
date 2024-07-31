@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <link rel="manifest" crossorigin="use-credentials" href="/manifest.json">
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
@@ -12,7 +13,7 @@
   </head>
 
   <body class="flex flex-col h-full bg-gray-8">
-    <main class="relative flex flex-col flex-1 w-full mx-auto overflow-auto">
+    <main class="flex overflow-auto relative flex-col flex-1 mx-auto w-full">
       <% if show_header? %>
         <%= render partial: "layouts/header" %>
       <% end %>
