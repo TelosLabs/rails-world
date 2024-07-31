@@ -37,7 +37,7 @@ plugin :tmp_restart
 # Run the Solid Queue's supervisor together with Puma and have Puma monitor and manage it.
 plugin :solid_queue
 
-if ENV["RAILS_ENV"] == "production"
+if ENV["LITESTREAM_REPLICATION_ENABLED"] == "true"
   # Allow puma to manage the Litestream replication process
   plugin :litestream
 end

@@ -11,7 +11,6 @@
 - Hotwire
 - Import maps
 - Tailwind CSS
-- Kamal
 
 ## Running the application
 
@@ -87,26 +86,3 @@ Run tests by using `bundle exec rspec`.
 - If you want to see the logs you can use `:log`, e.g. `it "xxx", :log do`
 - Use `data-test-id` to find elements instead of classes/ids, e.g. `data-test-id="decline_modal"`
 - Use the methods in the `DataTestId` module to select HTML elements, e.g., `find_dti("decline_modal")`
-
-## DevOps
-
-The staging link is [http://10.118.0.2/](http://10.118.0.2/) and the production link is TBD.
-
-#### Deployment
-
-We use Kamal to deploy the application. Here are some common commands:
-
-- Run `kamal deploy` to deploy the application.
-- Run `kamal env push` to push the environment variables to the application.
-- Run `kamal app exec -i 'bin/rails console'` to open a Rails console.
-
-You need to append `-d staging` or `-d production` to the command to specify the environment.
-
-#### Tools
-
-- Kamal is used to deploy the application.
-- DigitalOcean is used to host the application.
-- AppSignal is used for monitoring the application.
-- Cloudflare is used as a CDN.
-- Litestream is used for database backups.
-- MailPace is used for transactional emails.

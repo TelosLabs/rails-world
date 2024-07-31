@@ -28,10 +28,6 @@ gem "bcrypt", "~> 3.1.20"
 # Authorization
 gem "action_policy"
 
-# Monitoring
-gem "appsignal"
-gem "lograge"
-
 # Admin
 gem "avo", ">= 3.2.1"
 gem "ransack"
@@ -40,14 +36,12 @@ gem "ransack"
 gem "bootsnap", require: false
 gem "draper"
 gem "inline_svg"
-gem "postmark-rails"
 gem "puma", ">= 5.0"
 gem "rqrcode", "~> 2.0"
 gem "tzinfo-data", platforms: %i[windows jruby]
 gem "validates_timeliness", "~> 7.0.0.beta1"
 
 group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "better_errors"
   gem "binding_of_caller"
   gem "brakeman"
@@ -83,4 +77,10 @@ group :test do
   gem "rails-controller-testing"
   gem "rspec-instafail", require: false
   gem "rspec-retry"
+end
+
+group :staging, :production do
+  gem "appsignal"
+  gem "lograge"
+  gem "mailpace-rails"
 end

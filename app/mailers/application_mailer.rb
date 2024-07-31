@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "hello@teloslabs.co"
+  default from: "hello@railsworld.com"
   layout "mailer"
 end
