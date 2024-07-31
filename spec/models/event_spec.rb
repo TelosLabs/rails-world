@@ -2,16 +2,15 @@
 #
 # Table name: events
 #
-#  id               :integer          not null, primary key
-#  description      :string
-#  ends_at          :datetime         not null
-#  reminder_details :json
-#  starts_at        :datetime         not null
-#  title            :string           not null
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  conference_id    :integer          not null
-#  location_id      :integer          not null
+#  id            :integer          not null, primary key
+#  description   :string
+#  ends_at       :datetime         not null
+#  starts_at     :datetime         not null
+#  title         :string           not null
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  conference_id :integer          not null
+#  location_id   :integer          not null
 #
 # Indexes
 #

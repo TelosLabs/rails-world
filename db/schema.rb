@@ -54,7 +54,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_26_171428) do
     t.integer "conference_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.json "reminder_details", default: {}
     t.index ["conference_id"], name: "index_events_on_conference_id"
     t.index ["location_id"], name: "index_events_on_location_id"
   end

@@ -1,8 +1,13 @@
 class EventReminderJob < ApplicationJob
-  def perform(event_id:, reminder_type:, reminder_id:)
-    event = Event.find(event_id)
-    return if event.reminder_details["#{reminder_type}_id"] != reminder_id
+  def perform
+    now = Time.zone.now
 
-    EventNotifier.with(record: event, reminder_type: reminder_type).deliver(event.users)
+    Event::REMINDER_CADENCE.each do |reminder_type, cadence|
+      starts_at = now + cadence
+
+      Event.where(starts_at: starts_at.beginning_of_minute..starts_at.end_of_minute).find_each do |event|
+        EventNotifier.with(record: event, reminder_type: reminder_type).deliver(event.users)
+      end
+    end
   end
 end
