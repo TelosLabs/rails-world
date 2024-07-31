@@ -13,24 +13,17 @@
 
   <body class="flex flex-col h-full bg-gray-8">
     <main class="relative flex flex-col flex-1 w-full mx-auto overflow-auto">
-      <% if !current_page?(new_session_path) %>
-        <div class="flex justify-center w-full py-6 mx-auto border-b border-b-white bg-purple-dark">
-          <div class="flex max-w-screen-sm px-5">
-            <%= link_to homepage_link do %>
-              <%= inline_svg_tag("main_logo.svg", class: "w-full") %>
-            <% end %>
-          </div>
-        </div>
+      <% if show_header? %>
+        <%= render partial: "layouts/header" %>
       <% end %>
+
       <% flash.each do |type, message| %>
         <% if message.present? && message.is_a?(String) %>
           <%= render partial: "layouts/flash_message", locals: { message: message } %>
         <% end %>
       <% end %>
+
       <%= yield %>
-      <% if user_signed_in? %>
-        <%= button_to "Log out", session_path, method: :delete %>
-      <% end %>
     </main>
     <%= render partial: "layouts/bottom_navbar" if user_signed_in? %>
   </body>
