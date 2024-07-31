@@ -1,0 +1,7 @@
+<div class="flex flex-col items-center flex-1 p-5">
+  <div class="flex flex-col items-start max-w-screen-sm w-full">
+    <h1 class="mb-6 text-[34px] mb-4 font-bold italic">Notifications</h1>
+    <h2 class="text-[23px] mb-4 font-bold italic">Recent</h2>
+    <%= render partial: "card", locals: { profile: current_user.profile, message: "message"} %>
+  </div>
+</div>
