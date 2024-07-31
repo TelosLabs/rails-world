@@ -2,7 +2,7 @@ class EventNotifier < ApplicationNotifier
   deliver_by :email do |config|
     config.mailer = "EventMailer"
     config.method = "reminder"
-    config.if = -> { recipient.profile.mail_notifications }
+    config.if = -> { recipient.profile&.mail_notifications }
   end
 
   notification_methods do
