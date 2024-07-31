@@ -11,12 +11,12 @@
         <div class="mb-10">
           <div class="flex flex-col w-full mb-6">
             <%= form.label :email, class: "text-white italic font-bold mb-2" %>
-            <%= form.email_field :email, required: true, placeholder: "email@example.com", data: { test_id: "email_field" }, class: FormsHelper::TEXT_FIELD_CLASSES %>
+            <%= form.email_field :email, required: true, placeholder: "email@example.com", data: { test_id: "email_field" } %>
           </div>
 
           <div class="flex flex-col">
             <%= form.label :password, class: "text-white italic font-bold mb-2" %>
-            <%= form.password_field :password, required: true, placeholder: "Password", data: { test_id: "password_field" }, class: FormsHelper::TEXT_FIELD_CLASSES %>
+            <%= form.password_field :password, required: true, placeholder: "Password", data: { test_id: "password_field" } %>
           </div>
         </div>
 

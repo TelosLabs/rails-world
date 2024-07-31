@@ -33,6 +33,8 @@ Rails.application.configure do
     config.cache_store = :null_store
   end
 
+  Rails.application.routes.default_url_options[:host] = "localhost:3000"
+
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
 
@@ -82,4 +84,7 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
+
+  # Allow ngrok hosts
+  config.hosts << /[a-z0-9.\-]+\.ngrok\.io/
 end
