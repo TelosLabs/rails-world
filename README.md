@@ -1,8 +1,43 @@
-# Rails World
+# Kleo
 
-[![Ruby Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://github.com/testdouble/standard)
+Kleo is a Rails application that allows you to create and manage conferences. You can use it to create a conference, add speakers and sessions. Attendees can register for the conference, view the schedule, receive notifications and more.
 
-## About
+## Installation
+
+1. Requirements
+  - Ruby 3.3.x (https://www.ruby-lang.org/en/documentation/installation/)
+  - Bundler (`gem install bundler`)
+2. Clone the repository (`git clone xxx`)
+3. Run `bin/setup` (needs to be run only once)
+4. Run `bin/dev`
+5. Visit `http://localhost:3000` in your browser
+
+## Usage
+
+#### Creating a conference
+
+1. Visit `http://localhost:3000/`
+2. Log in as an admin (see `config/seeds.rb` for the default admin credentials)
+3. Visit `http://localhost:3000/avo`
+4. In avo, you can create a new conference, add speakers, locations and sessions
+
+## Customization
+
+#### Setting a logo
+
+To set a logo for the conference, you can replace the `app/assets/images/logo.png` file with your own logo.
+
+#### Setting a theme
+
+To set a theme for the conference, you can customize the `app/assets/stylesheets/application.scss` file.
+
+## Deployment
+
+To deploy the application, you can use Heroku. You can deploy the application to Heroku by clicking the button below:
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
+## The stack
 
 - Ruby on Rails 7.1.x
 - Ruby 3.3.x
@@ -12,12 +47,9 @@
 - Import maps
 - Tailwind CSS
 
-## Running the application
+## Contributing
 
-1. Run `bin/setup` (needs to be run only once)
-2. Run `bin/dev`
-
-## Linting & Formatting
+### Linting & Formatting
 
 #### Ruby
 
@@ -59,7 +91,7 @@ gem install lefthook
 lefthook install
 ```
 
-## Code Quality
+### Code Quality
 
 #### Rubycritic
 
@@ -71,7 +103,7 @@ Besides code reviews, we use [rubycritic](https://github.com/whitesmith/rubycrit
 We use [DatabaseConsistency](https://github.com/djezzzl/database_consistency) to check for inconsistencies between the database schema and the application models.
 - You can run it with `bundle exec database_consistency`.
 
-## Testing
+### Testing
 
 Run tests by using `bundle exec rspec`.
 
