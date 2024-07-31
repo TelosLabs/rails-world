@@ -26,5 +26,38 @@
       <%= yield %>
     </main>
     <%= render partial: "layouts/bottom_navbar" if user_signed_in? %>
+
+    <%# TODO: Move this script to a stimulus controller %>
+    <script>
+      window.vapidPublicKey = new Uint8Array(<%= Base64.urlsafe_decode64(Rails.application.credentials.dig(:vapid, :public_key)).bytes %>)
+
+       Notification.requestPermission().then((permission) => {
+        if (permission === "granted") {
+          if (navigator.serviceWorker) {
+            navigator.serviceWorker.register('service_worker.js')
+              .then((reg) => {
+                navigator.serviceWorker.ready.then((serviceWorkerRegistration) => {
+                  serviceWorkerRegistration.pushManager
+                  .subscribe({
+                    userVisibleOnly: true,
+                    applicationServerKey: window.vapidPublicKey
+                  }).then(async (sub) => {
+                    const data = await fetch('/webpush_subscription', {
+                      method: 'POST',
+                      headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                      },
+                      body: JSON.stringify(sub)
+                    }).then((res) => res.json());
+                  });
+                });
+              })
+          }
+        } else {
+          console.warn("User rejected to allow notifications.");
+        }
+      });
+    </script>
   </body>
 </html>

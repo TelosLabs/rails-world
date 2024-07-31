@@ -261,6 +261,8 @@ GEM
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     json (2.7.2)
+    jwt (2.8.2)
+      base64
     language_server-protocol (3.17.0.3)
     launchy (3.0.1)
       addressable (~> 2.8)
@@ -307,6 +309,7 @@ GEM
       racc (~> 1.4)
     noticed (2.4.0)
       rails (>= 6.1.0)
+    openssl (3.2.0)
     pagy (8.6.3)
     parallel (1.25.1)
     parser (3.3.3.0)
@@ -536,6 +539,9 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
+    web-push (3.0.1)
+      jwt (~> 2.0)
+      openssl (~> 3.0)
     webrick (1.8.1)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
@@ -602,6 +608,7 @@ DEPENDENCIES
   tzinfo-data
   validates_timeliness (~> 7.0.0.beta1)
   web-console
+  web-push
 
 RUBY VERSION
    ruby 3.3.3p89
