@@ -24,6 +24,9 @@ gem "turbo-rails"
 # Authentication
 gem "bcrypt", "~> 3.1.20"
 
+# Authorization
+gem "action_policy"
+
 # Admin
 gem "avo", ">= 3.2.1"
 gem "ransack"

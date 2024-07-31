@@ -11,9 +11,8 @@ class Avo::Resources::Speaker < Avo::BaseResource
 
   def fields
     field :id, as: :id
-    field :uuid, as: :text, readonly: true, only_on: [:show]
     field :name, as: :text, sortable: true
-    field :bio, as: :text
+    field :bio, as: :textarea
     field :job_title, as: :text
     field :github_url, as: :text
     field :linkedin_url, as: :text

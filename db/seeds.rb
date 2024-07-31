@@ -33,15 +33,12 @@ young_centre = Location.create!(name: "Young Centre", conference: conference)
 # Speakers
 10.times do |i|
   Speaker.create!(
-    profile_attributes: {
-      name: Faker::Name.name,
-      job_title: Faker::Job.title,
-      bio: Faker::Lorem.paragraph,
-      github_url: Faker::Internet.url(host: "github.com"),
-      twitter_url: Faker::Internet.url(host: "twitter.com"),
-      linkedin_url: Faker::Internet.url(host: "linkedin.com"),
-      is_public: [true, false].sample
-    }
+    name: Faker::Name.name,
+    job_title: Faker::Job.title,
+    bio: Faker::Lorem.paragraph,
+    github_url: Faker::Internet.url(host: "github.com"),
+    twitter_url: Faker::Internet.url(host: "twitter.com"),
+    linkedin_url: Faker::Internet.url(host: "linkedin.com")
   )
 end
 

@@ -15,8 +15,6 @@ class Avo::Resources::Profile < Avo::BaseResource
     field :id, as: :id
     field :uuid, as: :text, readonly: true, only_on: [:show]
     field :name, as: :text
-    field :profileable_type, as: :select, options: ["User", "Speaker"]
-    field :profileable_id, as: :text
     field :bio, as: :text
     field :job_title, as: :text
     field :github_url, as: :text

@@ -13,6 +13,6 @@ Rails.application.routes.draw do
   resource :password_reset, only: [:new, :create, :edit, :update] do
     get :post_submit
   end
-  resources :profiles, only: [:show], param: :uuid
-  resource :profile, only: [:edit, :update]
+  resource :about, only: [:show]
+  resources :profiles, only: [:show, :edit, :update], param: :uuid
 end
