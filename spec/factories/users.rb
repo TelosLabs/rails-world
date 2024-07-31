@@ -2,14 +2,12 @@
 #
 # Table name: users
 #
-#  id                   :integer          not null, primary key
-#  email                :string           not null
-#  in_app_notifications :boolean          default(TRUE), not null
-#  mail_notifications   :boolean          default(TRUE), not null
-#  password_digest      :string           not null
-#  role                 :string
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
+#  id              :integer          not null, primary key
+#  email           :string           not null
+#  password_digest :string           not null
+#  role            :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 # Indexes
 #
@@ -21,7 +19,9 @@ FactoryBot.define do
     password { "password2024" }
 
     trait :with_profile do
-      profile
+      after(:create) do |user|
+        create(:profile, profileable: user)
+      end
     end
   end
 end

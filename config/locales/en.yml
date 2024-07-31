@@ -1,5 +1,7 @@
 en:
   controllers:
+    avo:
+      unauthorized: "You need to be an admin to access this page."
     password_resets:
       create:
         notice: "Check your email to reset your password."
@@ -10,9 +12,14 @@ en:
     passwords:
       update:
         notice: "Your password has been updated successfully."
+    profiles:
+      update:
+        success: "Your profile has been updated successfully."
     sessions:
       create:
         notice: "Signed in successfully."
         alert: "Invalid email or password."
       destroy:
         notice: "You have been logged out."
+  authorization:
+    unauthorized: "You are not authorized to access this page."

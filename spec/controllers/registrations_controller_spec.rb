@@ -25,7 +25,7 @@ RSpec.describe RegistrationsController, type: :controller do
       it "creates a new User" do
         expect { post :create, params: params }.to change(User, :count).by(1)
         expect(session[:user_id]).to eq(User.last.id)
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(edit_profile_path(User.last.profile.uuid))
       end
     end
 

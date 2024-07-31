@@ -1,7 +1,7 @@
 <div class="flex flex-col items-center flex-1 px-5 py-10 bg-purple-dark">
   <%= form_with model: @user, url: session_path, class: "flex flex-col h-full justify-between w-full max-w-screen-sm" do |form| %>
     <div class="flex flex-col items-center">
-      <%= inline_svg_tag("main-logo-with-date.svg", class: "w-full mb-10") %>
+      <%= inline_svg_tag("main_logo_with_date.svg", class: "w-full mb-10") %>
       <div class="flex flex-col items-center mb-10">
         <h1 class="mb-4 text-4xl italic font-black text-white">Welcome!</h1>
         <h3 class="text-lg font-bold text-white">Please log in to continue</h3>
@@ -11,12 +11,12 @@
         <div class="mb-10">
           <div class="flex flex-col w-full mb-6">
             <%= form.label :email, class: "text-white italic font-bold mb-2" %>
-            <%= form.email_field :email, required: true, placeholder: "email@example.com", data: { test_id: "email_field" }, class: "bg-transparent border border-2 border-white rounded-md text-white placeholder-white focus:bg-white focus:text-black focus:placeholder-gray focus:border-white focus:ring-white transition-all" %>
+            <%= form.email_field :email, required: true, placeholder: "email@example.com", data: { test_id: "email_field" } %>
           </div>
 
           <div class="flex flex-col">
             <%= form.label :password, class: "text-white italic font-bold mb-2" %>
-            <%= form.password_field :password, required: true, placeholder: "Password", data: { test_id: "password_field" }, class: "bg-transparent border border-2 border-white rounded-md text-white placeholder-white focus:bg-white focus:text-black focus:placeholder-gray focus:border-white focus:ring-white transition-all" %>
+            <%= form.password_field :password, required: true, placeholder: "Password", data: { test_id: "password_field" } %>
           </div>
         </div>
 

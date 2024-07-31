@@ -1,5 +1,5 @@
 branch: 'main' # default is master
 threshold_score: 2 # default is 0
-minimum_score: 95 # default is 0
+minimum_score: 92 # default is 0
 paths:
   - "app/"

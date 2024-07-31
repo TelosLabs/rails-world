@@ -11,5 +11,11 @@ class Speaker < ApplicationRecord
 
   has_and_belongs_to_many :events
 
-  accepts_nested_attributes_for :profile
+  [:name, :bio, :job_title, :github_url, :twitter_url, :linkedin_url].each do |attr|
+    delegate attr, "#{attr}=", to: :profile, allow_nil: true
+  end
+
+  def profile
+    super || build_profile
+  end
 end
