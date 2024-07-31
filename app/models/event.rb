@@ -36,4 +36,8 @@ class Event < ApplicationRecord
   validates :ends_at, presence: true
 
   validates_datetime :ends_at, after: :starts_at
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[title]
+  end
 end

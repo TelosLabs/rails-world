@@ -2,6 +2,7 @@ class CreateProfiles < ActiveRecord::Migration[7.1]
   def change
     create_table :profiles do |t|
       t.string :name
+      t.string :uuid, null: false
       t.text :bio
       t.string :job_title
       t.string :github_url
@@ -13,6 +14,8 @@ class CreateProfiles < ActiveRecord::Migration[7.1]
       t.references :profileable, polymorphic: true, null: false
 
       t.timestamps
+
+      t.index :uuid, unique: true
     end
   end
 end

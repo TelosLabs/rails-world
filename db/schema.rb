@@ -123,6 +123,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_26_171428) do
 
   create_table "profiles", force: :cascade do |t|
     t.string "name"
+    t.string "uuid", null: false
     t.text "bio"
     t.string "job_title"
     t.string "github_url"
@@ -135,7 +136,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_26_171428) do
     t.integer "profileable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "uuid"
     t.index ["profileable_type", "profileable_id"], name: "index_profiles_on_profileable"
     t.index ["uuid"], name: "index_profiles_on_uuid", unique: true
   end
