@@ -12,8 +12,10 @@ Rails.application.routes.draw do
   resource :password, only: [:edit, :update]
   resource :profile, only: [:edit, :update, :show]
   resources :events, only: [:index, :show]
-
   resource :password_reset, only: [:new, :create, :edit, :update] do
     get :post_submit
   end
+  resource :about, only: [:show]
+  resources :profiles, only: [:show], param: :uuid
+  resource :profile, only: [:edit, :update]
 end
