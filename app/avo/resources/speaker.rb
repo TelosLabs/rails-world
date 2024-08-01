@@ -17,6 +17,6 @@ class Avo::Resources::Speaker < Avo::BaseResource
     field :github_url, as: :text
     field :linkedin_url, as: :text
     field :twitter_url, as: :text
-    field :events, as: :has_many
+    field :sessions, as: :has_many
   end
 end
