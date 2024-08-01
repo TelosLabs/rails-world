@@ -15,5 +15,6 @@ Rails.application.routes.draw do
   end
   resources :profiles, only: [:show], param: :uuid
   resource :profile, only: [:edit, :update]
-  resources :notifications, only: [:index, :show]
+  resources :notifications, only: [:index]
+  resource :notifications_settings, only: [:show, :update]
 end

@@ -2,6 +2,18 @@
   <div class="flex flex-col items-start max-w-screen-sm w-full">
     <h1 class="mb-6 text-[34px] mb-4 font-bold italic">Notifications</h1>
     <h2 class="text-[23px] mb-4 font-bold italic">Recent</h2>
-    <%= render partial: "card", locals: { profile: current_user.profile, message: "message"} %>
+    <div class="flex flex-col gap-4 w-full">
+      <%= render partial: "card", locals: { profile: current_user.profile, message: "message"} %>
+    </div>
+    <h2 class="text-[23px] mb-4 font-bold italic mt-10">Past</h2>
+    <div class="flex flex-col gap-4 w-full">
+      <%= render partial: "card", locals: { profile: current_user.profile, message: "message"} %>
+    </div>
+    <div class="w-full flex flex-col items-center mt-10 mb-10">
+      <%= link_to 'Notification settings', edit_profile_path, class: "text-red font-bold  text-center rounded-sm underline italic text-lg" %>
+    </div>
+    <div class="w-full bg-red rounded-[10px] p-4 text-lg font-black text-white cursor-pointer italic items-center text-center">
+      CLEAR ALL
+    </div>
   </div>
 </div>
