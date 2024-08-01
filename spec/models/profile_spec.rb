@@ -13,7 +13,7 @@
 #  name                 :string
 #  profileable_type     :string           not null
 #  twitter_url          :string
-#  uuid                 :string
+#  uuid                 :string           not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  profileable_id       :integer          not null

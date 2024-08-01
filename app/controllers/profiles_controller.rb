@@ -1,16 +1,13 @@
 class ProfilesController < ApplicationController
-  before_action :set_profile, only: :show
+  before_action :set_profile
 
   def show
-    @profile = @profile.decorate
   end
 
   def edit
-    @profile = current_profile
   end
 
   def update
-    @profile = current_profile
     @profile.assign_attributes(profile_params)
 
     if @profile.save
@@ -24,16 +21,8 @@ class ProfilesController < ApplicationController
   private
 
   def set_profile
-    @profile =
-      if params[:uuid] == current_profile.uuid
-        current_profile
-      else
-        Profile.public_profiles.find_by!(uuid: params[:uuid])
-      end
-  end
-
-  def current_profile
-    current_user.profile || current_user.build_profile
+    @profile = Profile.find_by!(uuid: params[:uuid]).decorate
+    authorize! @profile, with: ProfilePolicy
   end
 
   def profile_params

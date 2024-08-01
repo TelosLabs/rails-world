@@ -1,7 +1,7 @@
 module AuthenticationHelper
   def sign_in(user, password = "password2024")
     if respond_to?(:visit) # System specs
-      visit new_session_path
+      visit new_user_session_path
       find_dti("email_field").set(user.email)
       find_dti("password_field").set(password)
       find_dti("sign_in_button").click
