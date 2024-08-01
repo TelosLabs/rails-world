@@ -80,6 +80,7 @@ group :test do
 end
 
 group :staging, :production do
+  gem "aws-sdk-s3", require: false
   gem "appsignal"
   gem "lograge"
   gem "mailpace-rails"
