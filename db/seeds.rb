@@ -44,7 +44,7 @@ young_centre = Location.create!(name: "Young Centre", conference: conference)
   )
 end
 
-# Events
+# Sessions
 conference_duration_in_days = 2
 start_date = 1.week.from_now
 datetime_slots = []
@@ -76,7 +76,7 @@ conference.locations.each do |location|
   end
 
   datetime_slots.each do |start_time, end_time|
-    event = Event.create!(
+    session = Session.create!(
       conference: conference,
       title: Faker::Lorem.sentence,
       description: Faker::Lorem.paragraph,
@@ -85,13 +85,13 @@ conference.locations.each do |location|
       location: location
     )
     tags_random_count = rand(1..Tag.count)
-    event.tags << Tag.all.sample(tags_random_count)
-    event.speakers << speakers.sample
+    session.tags << Tag.all.sample(tags_random_count)
+    session.speakers << speakers.sample
   end
 end
 
 # Attendee's schedule
 datetime_slots.each do |start_time, end_time|
-  event = conference.events.where(starts_at: start_time).sample
-  user.events << event
+  session = conference.sessions.where(starts_at: start_time).sample
+  user.sessions << session
 end
