@@ -6,7 +6,6 @@ gem "rails", "~> 7.1.3", ">= 7.1.3.4"
 
 # Database
 gem "activerecord-enhancedsqlite3-adapter", "~> 0.8.0"
-gem "litestream", "~> 0.10.4"
 gem "sqlite3", "~> 1.4"
 
 # Jobs
@@ -80,8 +79,9 @@ group :test do
 end
 
 group :staging, :production do
-  gem "aws-sdk-s3", require: false
   gem "appsignal"
+  gem "aws-sdk-s3", require: false
+  gem "litestream", "~> 0.10.4"
   gem "lograge"
   gem "mailpace-rails"
 end

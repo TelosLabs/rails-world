@@ -3,7 +3,9 @@ class LitestreamVerificationJob < ApplicationJob
   queue_as :default
 
   def perform
-    return unless Rails.env.production?
+    if Feature.disabled?(:litestream_backup)
+      return Rails.logger.info("Skipping litestream verification. Feature is disabled")
+    end
 
     Litestream::Commands.databases.each do |database_hash|
       Litestream.verify!(database_hash["path"])

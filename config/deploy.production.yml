@@ -8,7 +8,7 @@ env:
   clear:
     RAILS_ENV: production
     WEB_CONCURRENCY: 4
-    LITESTREAM_REPLICATION_ENABLED: true
+    LITESTREAM_BACKUP_ENABLED: true
   secret:
     - APP_HOST
     - RAILS_MASTER_KEY
