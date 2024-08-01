@@ -24,3 +24,5 @@ en:
         alert: "Invalid email or password."
       destroy:
         notice: "You have been logged out."
+  authorization:
+    unauthorized: "You are not authorized to access this page."
