@@ -17,9 +17,6 @@ class Avo::Resources::Speaker < Avo::BaseResource
     field :github_url, as: :text
     field :linkedin_url, as: :text
     field :twitter_url, as: :text
-    field :mail_notifications, as: :boolean
-    field :in_app_notifications, as: :boolean
-    field :is_public, as: :boolean
     field :sessions, as: :has_many
   end
 end
