@@ -55,7 +55,10 @@
       </div>
     </div>
   </div>
-  <%= render inline: @profile.svg_qr_code(module_size: 4) %>
+
+  <% if @profile.is_public? && @profile == current_profile %>
+    <%= render inline: @profile.svg_qr_code(module_size: 4) %>
+  <% end %>
 
   <% if allowed_to?(:edit?, @profile, with: ProfilePolicy) %>
     <div class="flex flex-col items-center w-full gap-4 p-4">

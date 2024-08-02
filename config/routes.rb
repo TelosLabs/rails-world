@@ -3,16 +3,22 @@ Rails.application.routes.draw do
 
   get "up" => "rails/health#show", :as => :rails_health_check
 
-  # TODO: authenticate with admin user
-  mount MissionControl::Jobs::Engine, at: "/jobs"
-  mount Avo::Engine, at: Avo.configuration.root_path
+  constraints(AdminConstraint) do
+    mount MissionControl::Jobs::Engine, at: "/jobs"
+    mount Avo::Engine, at: Avo.configuration.root_path
+  end
+
+  constraints(AuthenticatedConstraint) do
+    resource :password, only: [:edit, :update]
+    resources :profiles, only: [:edit, :update], param: :uuid
+  end
 
   resource :registration, only: [:new, :create]
   resource :user_session, only: [:new, :create, :destroy]
-  resource :password, only: [:edit, :update]
+  resource :about, only: [:show]
+  resources :profiles, only: [:show], param: :uuid
+
   resource :password_reset, only: [:new, :create, :edit, :update] do
     get :post_submit
   end
-  resource :about, only: [:show]
-  resources :profiles, only: [:show, :edit, :update], param: :uuid
 end
