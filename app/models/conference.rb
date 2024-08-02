@@ -9,7 +9,7 @@
 #
 class Conference < ApplicationRecord
   has_many :locations, dependent: :restrict_with_error
-  has_many :events, dependent: :restrict_with_error
+  has_many :sessions, dependent: :restrict_with_error
 
   validates :name, presence: true
 

@@ -16,7 +16,7 @@
 class Location < ApplicationRecord
   belongs_to :conference
 
-  has_many :events, dependent: :restrict_with_error
+  has_many :sessions, dependent: :restrict_with_error
 
   validates :name, presence: true, uniqueness: {scope: :conference_id}
 

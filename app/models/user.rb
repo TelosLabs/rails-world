@@ -24,7 +24,7 @@ class User < ApplicationRecord
 
   has_one :profile, as: :profileable, dependent: :destroy
 
-  has_and_belongs_to_many :events
+  has_and_belongs_to_many :sessions
 
   has_many :notifications, as: :recipient, dependent: :destroy, class_name: "Noticed::Notification"
 

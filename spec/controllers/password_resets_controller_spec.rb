@@ -72,7 +72,7 @@ RSpec.describe PasswordResetsController, type: :controller do
       it "resets user password" do
         expect { put :update, params: params }
           .to change { user.reload.authenticate(new_password) }.from(false).to(user)
-        expect(response).to redirect_to(new_session_path)
+        expect(response).to redirect_to(new_user_session_path)
       end
     end
 
