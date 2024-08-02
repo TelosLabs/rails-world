@@ -1,4 +1,4 @@
-class SessionNotifier < ApplicationNotifier
+class SessionReminderNotifier < ApplicationNotifier
   deliver_by :email do |config|
     config.mailer = "SessionMailer"
     config.method = "reminder"

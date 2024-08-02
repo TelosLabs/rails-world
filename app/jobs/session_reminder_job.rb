@@ -6,7 +6,7 @@ class SessionReminderJob < ApplicationJob
       starts_at = now + cadence
 
       Session.where(starts_at: starts_at.beginning_of_minute..starts_at.end_of_minute).find_each do |session|
-        SessionNotifier.with(record: session, reminder_type: reminder_type).deliver(session.users)
+        SessionReminderNotifier.with(record: session, reminder_type: reminder_type).deliver(session.users)
       end
     end
   end
