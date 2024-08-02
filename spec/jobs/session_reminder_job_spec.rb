@@ -25,8 +25,8 @@ RSpec.describe SessionReminderJob, type: :job do
     end
 
     sessions.each do |session|
-      Session::REMINDER_CADENCE.each do |reminder_type, cadence|
-        Timecop.travel(session.starts_at - cadence)
+      Session::REMINDER_TIME_BEFORE_EVENT.each do |time_before_session|
+        Timecop.travel(session.starts_at - time_before_session)
 
         expect {
           described_class.perform_now
@@ -35,8 +35,29 @@ RSpec.describe SessionReminderJob, type: :job do
         }.by(1)
 
         nots = Noticed::Notification.joins(:event).where(noticed_events: {record: session}, recipient: user)
-        expect(nots.last.params[:reminder_type]).to eq(reminder_type)
+        expect(nots.last.params[:time_before_session]).to eq(time_before_session.inspect)
       end
+    end
+  end
+
+  it "prevents multiple deliveries of the same notification" do
+    session = create(:session, conference: conference, location: location, starts_at: now + 1.hour, ends_at: now + 1.hour + 30.minutes)
+    session.users << user
+
+    Session::REMINDER_TIME_BEFORE_EVENT.each do |time_before_session|
+      Timecop.travel(session.starts_at - time_before_session)
+
+      expect {
+        described_class.perform_now
+      }.to change {
+        Noticed::Notification.joins(:event).where(noticed_events: {record: session}, recipient: user).count
+      }.by(1)
+
+      expect {
+        described_class.perform_now
+      }.not_to change {
+        Noticed::Notification.joins(:event).where(noticed_events: {record: session}, recipient: user).count
+      }
     end
   end
 end

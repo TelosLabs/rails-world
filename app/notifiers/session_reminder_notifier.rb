@@ -6,13 +6,11 @@ class SessionReminderNotifier < ApplicationNotifier
   end
 
   notification_methods do
-    def time_to_start_message
-      cadence = Session::REMINDER_CADENCE.fetch(params[:reminder_type])
-
-      if params[:reminder_type] == :last_reminder
+    def title
+      if params[:time_before_session].match?(/^0\s/)
         "Starting Now"
       else
-        "Starting in #{cadence} minutes"
+        "Starting in about #{params[:time_before_session]}"
       end
     end
   end

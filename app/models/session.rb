@@ -2,15 +2,16 @@
 #
 # Table name: sessions
 #
-#  id            :integer          not null, primary key
-#  description   :string
-#  ends_at       :datetime         not null
-#  starts_at     :datetime         not null
-#  title         :string           not null
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  conference_id :integer          not null
-#  location_id   :integer          not null
+#  id               :integer          not null, primary key
+#  description      :string
+#  ends_at          :datetime         not null
+#  reminder_details :json
+#  starts_at        :datetime         not null
+#  title            :string           not null
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  conference_id    :integer          not null
+#  location_id      :integer          not null
 #
 # Indexes
 #
@@ -18,11 +19,7 @@
 #  index_sessions_on_location_id    (location_id)
 #
 class Session < ApplicationRecord
-  REMINDER_CADENCE = {
-    first_reminder: 15.minutes,
-    second_reminder: 10.minutes,
-    last_reminder: 0.minutes
-  }.freeze
+  REMINDER_TIME_BEFORE_EVENT = [5.minutes].freeze
 
   belongs_to :location
   belongs_to :conference
