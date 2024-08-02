@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-  root "main#index"
-
-  get "up" => "rails/health#show", :as => :rails_health_check
-
   constraints(AdminConstraint) do
     mount MissionControl::Jobs::Engine, at: "/jobs"
     mount Avo::Engine, at: Avo.configuration.root_path
@@ -11,6 +7,10 @@ Rails.application.routes.draw do
   constraints(AuthenticatedConstraint) do
     root "main#index", as: :authenticated_root
   end
+
+  root "main#index"
+
+  get "up" => "rails/health#show", :as => :rails_health_check
 
   resource :registration, only: [:new, :create]
   resource :user_session, only: [:new, :create, :destroy]
