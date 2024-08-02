@@ -11,6 +11,9 @@ class DeliveryMethods::Webpush < Noticed::DeliveryMethod
           private_key: Rails.application.credentials.dig(:vapid, :private_key)
         }
       )
+    rescue WebPush::ExpiredSubscription => e
+      Rails.logger.error(e.message)
+      sub.destroy
     end
   end
 end
