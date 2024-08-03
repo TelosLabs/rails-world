@@ -7,7 +7,7 @@ export default class extends Controller {
 
   close (event) {
     setTimeout(() => {
-      // Animate element to dissapear towards the right
+      // Animate element to disappear towards the right
       this.element.style.transition = 'transform 600ms, opacity 600ms'
       this.element.style.transform = 'translate(200px, 0px)'
       this.element.style.opacity = 0
