@@ -12,6 +12,6 @@ class Avo::Resources::Location < Avo::BaseResource
     field :id, as: :id
     field :name, as: :text, sortable: true
     field :conference, as: :belongs_to
-    field :events, as: :has_many
+    field :sessions, as: :has_many
   end
 end

@@ -1,6 +1,6 @@
-class EventNotifier < ApplicationNotifier
+class SessionReminderNotifier < ApplicationNotifier
   deliver_by :email do |config|
-    config.mailer = "EventMailer"
+    config.mailer = "SessionMailer"
     config.method = "reminder"
     config.if = -> { recipient.profile&.mail_notifications }
   end
@@ -17,13 +17,11 @@ class EventNotifier < ApplicationNotifier
   end
 
   notification_methods do
-    def time_to_start_message
-      cadence = Event::REMINDER_CADENCE.fetch(params[:reminder_type])
-
-      if params[:reminder_type] == :last_reminder
+    def title
+      if params[:time_before_session].match?(/^0\s/)
         "Starting Now"
       else
-        "Starting in about #{cadence} minutes"
+        "Starting in about #{params[:time_before_session]}"
       end
     end
   end

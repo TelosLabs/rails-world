@@ -3,8 +3,8 @@ default: &default
     - polling_interval: 1
       batch_size: 500
       recurring_tasks:
-        event_reminder:
-          class: EventReminderJob
+        session_reminder:
+          class: SessionReminderJob
           schedule: every minute
   workers:
     - queues: "*"

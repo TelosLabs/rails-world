@@ -1,4 +1,4 @@
-class EventMailer < ApplicationMailer
+class SessionMailer < ApplicationMailer
   def reminder
     recipient = params[:recipient]
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_30_231514) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_02_162104) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -43,49 +43,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_30_231514) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "events", force: :cascade do |t|
-    t.string "title", null: false
-    t.string "description"
-    t.datetime "starts_at", null: false
-    t.datetime "ends_at", null: false
-    t.integer "location_id", null: false
-    t.integer "conference_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["conference_id"], name: "index_events_on_conference_id"
-    t.index ["location_id"], name: "index_events_on_location_id"
-  end
-
-  create_table "events_speakers", force: :cascade do |t|
-    t.integer "event_id", null: false
-    t.integer "speaker_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["event_id", "speaker_id"], name: "index_events_speakers_on_event_id_and_speaker_id", unique: true
-    t.index ["event_id"], name: "index_events_speakers_on_event_id"
-    t.index ["speaker_id"], name: "index_events_speakers_on_speaker_id"
-  end
-
-  create_table "events_tags", force: :cascade do |t|
-    t.integer "event_id", null: false
-    t.integer "tag_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["event_id", "tag_id"], name: "index_events_tags_on_event_id_and_tag_id", unique: true
-    t.index ["event_id"], name: "index_events_tags_on_event_id"
-    t.index ["tag_id"], name: "index_events_tags_on_tag_id"
-  end
-
-  create_table "events_users", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "event_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["event_id"], name: "index_events_users_on_event_id"
-    t.index ["user_id", "event_id"], name: "index_events_users_on_user_id_and_event_id", unique: true
-    t.index ["user_id"], name: "index_events_users_on_user_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -140,6 +97,50 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_30_231514) do
     t.index ["uuid"], name: "index_profiles_on_uuid", unique: true
   end
 
+  create_table "sessions", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "description"
+    t.datetime "starts_at", null: false
+    t.datetime "ends_at", null: false
+    t.integer "location_id", null: false
+    t.integer "conference_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.json "reminder_details", default: {}
+    t.index ["conference_id"], name: "index_sessions_on_conference_id"
+    t.index ["location_id"], name: "index_sessions_on_location_id"
+  end
+
+  create_table "sessions_speakers", force: :cascade do |t|
+    t.integer "session_id", null: false
+    t.integer "speaker_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["session_id", "speaker_id"], name: "index_sessions_speakers_on_session_id_and_speaker_id", unique: true
+    t.index ["session_id"], name: "index_sessions_speakers_on_session_id"
+    t.index ["speaker_id"], name: "index_sessions_speakers_on_speaker_id"
+  end
+
+  create_table "sessions_tags", force: :cascade do |t|
+    t.integer "session_id", null: false
+    t.integer "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["session_id", "tag_id"], name: "index_sessions_tags_on_session_id_and_tag_id", unique: true
+    t.index ["session_id"], name: "index_sessions_tags_on_session_id"
+    t.index ["tag_id"], name: "index_sessions_tags_on_tag_id"
+  end
+
+  create_table "sessions_users", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "session_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["session_id"], name: "index_sessions_users_on_session_id"
+    t.index ["user_id", "session_id"], name: "index_sessions_users_on_user_id_and_session_id", unique: true
+    t.index ["user_id"], name: "index_sessions_users_on_user_id"
+  end
+
   create_table "speakers", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -173,14 +174,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_30_231514) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "events", "conferences"
-  add_foreign_key "events", "locations"
-  add_foreign_key "events_speakers", "events"
-  add_foreign_key "events_speakers", "speakers"
-  add_foreign_key "events_tags", "events"
-  add_foreign_key "events_tags", "tags"
-  add_foreign_key "events_users", "events"
-  add_foreign_key "events_users", "users"
   add_foreign_key "locations", "conferences"
   add_foreign_key "webpush_subscriptions", "users"
+  add_foreign_key "sessions", "conferences"
+  add_foreign_key "sessions", "locations"
+  add_foreign_key "sessions_speakers", "sessions"
+  add_foreign_key "sessions_speakers", "speakers"
+  add_foreign_key "sessions_tags", "sessions"
+  add_foreign_key "sessions_tags", "tags"
+  add_foreign_key "sessions_users", "sessions"
+  add_foreign_key "sessions_users", "users"
 end
