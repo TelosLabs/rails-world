@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: events
+# Table name: sessions
 #
 #  id            :integer          not null, primary key
 #  description   :string
@@ -14,10 +14,10 @@
 #
 # Indexes
 #
-#  index_events_on_conference_id  (conference_id)
-#  index_events_on_location_id    (location_id)
+#  index_sessions_on_conference_id  (conference_id)
+#  index_sessions_on_location_id    (location_id)
 #
-class Event < ApplicationRecord
+class Session < ApplicationRecord
   belongs_to :location
   belongs_to :conference
 
