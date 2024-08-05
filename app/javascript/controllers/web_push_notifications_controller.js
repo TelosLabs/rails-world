@@ -1,74 +1,76 @@
+/* global Notification */
+
 import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   static values = { vapidKey: String }
 
-  connect() {
-    if (Notification.permission === "denied") return;
+  connect () {
+    if (Notification.permission === 'denied') return
 
-    if (Notification.permission === "granted") {
-      this.getSubscription();
+    if (Notification.permission === 'granted') {
+      this.getSubscription()
     } else {
-      this.promptNotificationPermission();
+      this.promptNotificationPermission()
     }
   }
 
-  promptNotificationPermission() {
-    const notificationsButton = document.getElementById('enable_notifications_btn');
-    notificationsButton.classList.remove("hidden")
+  promptNotificationPermission () {
+    const notificationsButton = document.getElementById('enable_notifications_btn')
+    notificationsButton.classList.remove('hidden')
 
     notificationsButton.addEventListener('click', () => {
-      let permission;
+      let permission
 
       Notification.requestPermission()
         .then((result) => {
-          permission = result;
-          if (permission === "granted") {
-            this.setupSubscription();
+          permission = result
+          if (permission === 'granted') {
+            this.setupSubscription()
           } else {
-            console.warn("Notifications Denied.");
+            console.warn('Notifications Denied.')
           }
         })
         .catch((error) => { console.error(error) })
         .finally(() => {
-          if (permission === "granted" || permission === "denied") {
-            notificationsButton.classList.add("hidden")
+          if (permission === 'granted' || permission === 'denied') {
+            notificationsButton.classList.add('hidden')
           }
-        });
-    });
+        })
+    })
   }
 
-  async setupSubscription() {
+  async setupSubscription () {
     if (!navigator.serviceWorker) {
-      console.error("Service workers are not supported by this browser.");
-      return;
+      console.error('Service workers are not supported by this browser.')
+      return
     }
 
-    const vapidKey = new Uint8Array(JSON.parse(this.vapidKeyValue));
+    const vapidKey = new Uint8Array(JSON.parse(this.vapidKeyValue))
 
-    await navigator.serviceWorker.register('/service_worker.js');
-    const registration = await navigator.serviceWorker.ready;
+    await navigator.serviceWorker.register('/service_worker.js')
+    const registration = await navigator.serviceWorker.ready
     const subscription = await registration.pushManager.subscribe({
       userVisibleOnly: true,
       applicationServerKey: vapidKey
-    });
+    })
 
-    await this.sendSubscriptionToServer(subscription);
+    await this.sendSubscriptionToServer(subscription)
   }
 
-  async getSubscription() {
+  async getSubscription () {
     if (!navigator.serviceWorker) {
-      console.error("Service workers are not supported by this browser.");
-      return;
+      console.error('Service workers are not supported by this browser.')
+      return
     }
 
-    const registration = await navigator.serviceWorker.ready;
-    const subscription = await registration.pushManager.getSubscription();
+    const registration = await navigator.serviceWorker.ready
+    const subscription = await registration.pushManager.getSubscription()
 
-    await this.sendSubscriptionToServer(subscription);
+    await this.sendSubscriptionToServer(subscription)
   }
 
-  async sendSubscriptionToServer(subscription) {
+  async sendSubscriptionToServer (subscription) {
     await fetch('/webpush_subscription', {
       method: 'POST',
       headers: {
