@@ -1,19 +1,10 @@
 class DeliveryMethods::Webpush < Noticed::DeliveryMethod
   def deliver
-    recipient.webpush_subscriptions.each do |sub|
-      WebPush.payload_send(
-        message: JSON.generate(evaluate_option(:payload_message)),
-        endpoint: sub.endpoint,
-        p256dh: sub.p256dh,
-        auth: sub.auth,
-        vapid: {
-          public_key: Rails.application.credentials.dig(:vapid, :public_key),
-          private_key: Rails.application.credentials.dig(:vapid, :private_key)
-        }
-      )
+    recipient.webpush_subscriptions.each do |subscription|
+      subscription.publish(evaluate_option(:payload_message))
     rescue WebPush::ExpiredSubscription => e
       Rails.logger.error(e.message)
-      sub.destroy
+      subscription.destroy
     end
   end
 end
