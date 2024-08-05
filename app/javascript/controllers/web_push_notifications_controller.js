@@ -3,7 +3,7 @@
 import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
-  static values = { vapidKey: String }
+  // static values = { vapidKey: String }
 
   connect () {
     if (Notification.permission === 'denied') return
@@ -46,7 +46,7 @@ export default class extends Controller {
       return
     }
 
-    const vapidKey = new Uint8Array(JSON.parse(this.vapidKeyValue))
+    const vapidKey = "dummy_vapid_key"
 
     await navigator.serviceWorker.register('/service_worker.js')
     const registration = await navigator.serviceWorker.ready
