@@ -3,7 +3,7 @@
   <head>
     <title>RailsWorld</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="vapid-public-key" content="<%= Base64.urlsafe_decode64(Rails.application.credentials.dig(:vapid, :public_key)).bytes.join(',') %>">
+    <meta name="vapid-public-key" content="<%= Base64.urlsafe_decode64(Rails.application.credentials.dig(:vapid, :public_key)).bytes %>">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
