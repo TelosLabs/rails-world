@@ -163,9 +163,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_02_162104) do
   end
 
   create_table "webpush_subscriptions", force: :cascade do |t|
-    t.string "endpoint"
-    t.string "p256dh"
-    t.string "auth"
+    t.string "endpoint", null: false
+    t.string "p256dh", null: false
+    t.string "auth", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -175,7 +175,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_02_162104) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "locations", "conferences"
-  add_foreign_key "webpush_subscriptions", "users"
   add_foreign_key "sessions", "conferences"
   add_foreign_key "sessions", "locations"
   add_foreign_key "sessions_speakers", "sessions"
@@ -184,4 +183,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_02_162104) do
   add_foreign_key "sessions_tags", "tags"
   add_foreign_key "sessions_users", "sessions"
   add_foreign_key "sessions_users", "users"
+  add_foreign_key "webpush_subscriptions", "users"
 end
