@@ -8,7 +8,7 @@ class SessionReminderNotifier < ApplicationNotifier
   deliver_by :webpush, class: "DeliveryMethods::Webpush" do |config|
     config.payload_message = -> {
       {
-        title: time_to_start_message,
+        title: title,
         body: record.title,
         icon: recipient.profile&.image.present? ? url_for(recipient.profile.image) : nil
       }

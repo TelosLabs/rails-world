@@ -14,15 +14,28 @@ export default class extends Controller {
   }
 
   promptNotificationPermission() {
-    Notification.requestPermission()
-      .then((permission) => {
-        if (permission === "granted") {
-          this.setupSubscription();
-        } else {
-          console.warn("Notifications Denied.");
-        }
-      })
-      .catch((error) => { console.error(error) });
+    const notificationsButton = document.getElementById('enable_notifications_btn');
+    notificationsButton.classList.remove("hidden")
+
+    notificationsButton.addEventListener('click', () => {
+      let permission;
+
+      Notification.requestPermission()
+        .then((result) => {
+          permission = result;
+          if (permission === "granted") {
+            this.setupSubscription();
+          } else {
+            console.warn("Notifications Denied.");
+          }
+        })
+        .catch((error) => { console.error(error) })
+        .finally(() => {
+          if (permission === "granted" || permission === "denied") {
+            notificationsButton.classList.add("hidden")
+          }
+        });
+    });
   }
 
   async setupSubscription() {
