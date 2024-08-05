@@ -31,8 +31,9 @@ RSpec.describe ProfilesController, type: :controller do
     end
 
     context "when the profile is not public" do
-      it "raises a RecordNotFound error" do
-        expect { get :show, params: {uuid: other_profile.uuid} }.to raise_error(ActiveRecord::RecordNotFound)
+      it "redirects to the root path" do
+        get :show, params: {uuid: other_profile.uuid}
+        expect(response).to redirect_to(root_path)
       end
     end
   end

@@ -11,23 +11,25 @@
         <div class="mb-10">
           <div class="flex flex-col w-full mb-6">
             <%= form.label :email, class: "text-white italic font-bold mb-2" %>
-            <%= form.email_field :email, required: true, placeholder: "email@example.com", data: { test_id: "email_field" }, class: "bg-transparent border border-2 border-white rounded-md text-white placeholder:text-white/50 focus:bg-white focus:text-black focus:placeholder-gray focus:border-white focus:ring-white" %>
+            <%= form.email_field :email, required: true, placeholder: "email@example.com", data: { test_id: "email_field" } %>
+            <%= form.error_message :email %>
           </div>
 
           <div class="flex flex-col mb-6">
             <%= form.label :password, class: "text-white italic font-bold mb-2" %>
-            <%= form.password_field :password, required: true, data: { test_id: "password_field" }, placeholder: "You know how a strong password goes, right?", class: "bg-transparent border border-2 border-white rounded-md text-white placeholder:text-white/50 focus:bg-white focus:text-black focus:placeholder-gray focus:border-white focus:ring-white mb-2" %>
+            <%= form.password_field :password, required: true, data: { test_id: "password_field" }, placeholder: "You know how a strong password goes, right?" %>
             <p class="text-xs text-white">Password should contain at least 8 characters</p>
           </div>
 
           <div class="flex flex-col">
             <%= form.label :password_confirmation, class: "text-white italic font-bold mb-2" %>
-            <%= form.password_field :password_confirmation, required: true, data: { test_id: "password_confirmation_field" }, placeholder: "Confirm strong password", class: "bg-transparent border border-2 border-white rounded-md text-white placeholder:text-white/50 focus:bg-white focus:text-black focus:placeholder-gray focus:border-white focus:ring-white" %>
+            <%= form.password_field :password_confirmation, required: true, data: { test_id: "password_confirmation_field" }, placeholder: "Confirm strong password" %>
+            <%= form.error_message :password_confirmation %>
           </div>
         </div>
 
         <div class="flex flex-col items-center mb-10">
-          <span class="text-white">Already have an account? <%= link_to "Log in instead", new_session_path, class: "font-black italic underline text-white" %></span>
+          <span class="text-white">Already have an account? <%= link_to "Log in instead", new_user_session_path, class: "font-black italic underline text-white" %></span>
         </div>
       </div>
     </div>

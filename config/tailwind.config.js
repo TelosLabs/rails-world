@@ -4,7 +4,8 @@ module.exports = {
     './public/*.html',
     './app/helpers/**/*.rb',
     './app/javascript/**/*.js',
-    './app/views/**/*.{erb,haml,html,slim}'
+    './app/views/**/*.{erb,haml,html,slim}',
+    './app/builders/**/*.rb'
   ],
   theme: {
     extend: {
@@ -30,7 +31,6 @@ module.exports = {
         'purple-light': '#4E2A73',
         red: '#CB0C1C',
         blue: '#0A4E6B',
-        'blue-light': '#829ECE',
         'green-dark': '#62C554',
         'green-light': '#D8F1D4',
         'blue-marine': '#003A5D',
