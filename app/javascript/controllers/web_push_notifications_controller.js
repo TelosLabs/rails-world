@@ -46,7 +46,8 @@ export default class extends Controller {
       return
     }
 
-    const vapidKey = "dummy_vapid_key"
+    const vapidKeyMetaTag = document.querySelector('meta[name="vapid-public-key"]')
+    const vapidKey = new Uint8Array(JSON.parse(vapidKeyMetaTag.content))
 
     await navigator.serviceWorker.register('/service_worker.js')
     const registration = await navigator.serviceWorker.ready
