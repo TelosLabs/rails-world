@@ -53,6 +53,8 @@ export default class extends Controller {
     if (opacity === 0) {
       setTimeout(() => {
         this.elementTarget.remove()
+        window.removeEventListener('mouseup', this.onMouseUp.bind(this))
+        window.removeEventListener('mousemove', this.onMouseMove.bind(this))
       }, 500)
     }
   }
