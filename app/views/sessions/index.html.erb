@@ -21,10 +21,6 @@
     <div class="flex flex-col w-full h-full">
       <% @sessions.each do |session| %>
         <div class="flex flex-col w-full p-5 mb-4 bg-white rounded-lg shadow-lg">
-          <div>
-            <!-- status tag -->
-          </div>
-
           <div class="flex flex-col w-full">
             <div class="flex justify-between w-full mb-4">
               <div class="flex">
@@ -34,7 +30,13 @@
                 </div>
               </div>
               <div>
-                <%= inline_svg_tag("icons/bookmark.svg") %>
+                <%= button_to session_path(id: session.id, on_date: request.params[:on_date]), method: :put do %>
+                  <% if current_user.sessions.include?(session) %>
+                    <%= inline_svg_tag("icons/bookmark-full.svg") %>
+                  <% else %>
+                    <%= inline_svg_tag("icons/bookmark-outline.svg") %>
+                  <% end %>
+                <% end %>
               </div>
             </div>
 

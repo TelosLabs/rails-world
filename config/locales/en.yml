@@ -15,11 +15,15 @@ en:
     profiles:
       update:
         success: "Your profile has been updated successfully."
-    sessions:
+    user_sessions:
       create:
         notice: "Signed in successfully."
         alert: "Invalid email or password."
       destroy:
         notice: "You have been logged out."
+    sessions:
+      update:
+        notice: "Session was added to My Schedule"
+        alert: "Could not add session to My Schedule. Please try again"
   authorization:
     unauthorized: "You are not authorized to access this page."
