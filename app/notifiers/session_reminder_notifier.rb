@@ -10,7 +10,7 @@ class SessionReminderNotifier < ApplicationNotifier
       {
         title: title,
         body: record.title,
-        icon: recipient.profile&.image.present? ? url_for(recipient.profile.image) : nil
+        icon: "/pwa_home_screen_icon.png"
       }
     }
     config.if = -> { recipient.profile&.in_app_notifications }
