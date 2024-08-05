@@ -8,9 +8,9 @@
 
     <div class="flex justify-between w-full mb-6">
       <div class="flex gap-2">
-        <%= link_to 'All', events_path, class: "flex items-center px-5 py-1 rounded-full #{request.params[:on_date] == nil ? "bg-red text-white" : "bg-white text-red"}" %>
-        <%= link_to 'Tue, 23', events_path(on_date: '23-07-2024'), class: "flex items-center px-4 py-1 rounded-full #{request.params[:on_date] == '23-07-2024' ? "bg-red text-white" : "bg-white text-red"}" %>
-        <%= link_to 'Wed, 24', events_path(on_date: '24-07-2024'), class: "flex items-center px-4 py-1 rounded-full #{request.params[:on_date] == '24-07-2024' ? "bg-red text-white" : "bg-white text-red"}" %>
+        <%= link_to 'All', sessions_path, class: "flex items-center px-5 py-1 rounded-full #{request.params[:on_date] == nil ? "bg-red text-white" : "bg-white text-red"}" %>
+        <%= link_to 'Tue, 12', sessions_path(on_date: '12-08-2024'), class: "flex items-center px-4 py-1 rounded-full #{request.params[:on_date] == '12-08-2024' ? "bg-red text-white" : "bg-white text-red"}" %>
+        <%= link_to 'Wed, 13', sessions_path(on_date: '13-08-2024'), class: "flex items-center px-4 py-1 rounded-full #{request.params[:on_date] == '13-08-2024' ? "bg-red text-white" : "bg-white text-red"}" %>
       </div>
 
       <div class="flex items-center justify-center p-4 bg-white rounded-full">
@@ -19,7 +19,7 @@
     </div>
 
     <div class="flex flex-col w-full h-full">
-      <% @events.each do |event| %>
+      <% @sessions.each do |session| %>
         <div class="flex flex-col w-full p-5 mb-4 bg-white rounded-lg shadow-lg">
           <div>
             <!-- status tag -->
@@ -30,7 +30,7 @@
               <div class="flex">
                 <%= image_tag("placeholder.png", class: "w-[48px] h-[48px] mr-5 rounded-full object-cover") %>
                 <div class="flex flex-col justify-center h-full">
-                  <h2 class="italic font-black text-red text-[18px]"><%= event.speakers.first.profile.name %></h2>
+                  <h2 class="italic font-black text-red text-[18px]"><%= session.speakers.first.profile.name %></h2>
                 </div>
               </div>
               <div>
@@ -39,27 +39,27 @@
             </div>
 
             <div class="flex flex-col mb-4">
-              <h3 class="text-[18px] font-bold text-red italic mb-4"><%= event.title %></h3>
-              <p class="font-medium"><%= event.description %></p>
+              <h3 class="text-[18px] font-bold text-red italic mb-4"><%= session.title %></h3>
+              <p class="font-medium"><%= session.description %></p>
             </div>
 
             <div class="flex flex-col mb-4">
               <div class="flex items-center">
                 <%= inline_svg_tag("icons/calendar.svg", class: "w-[14px] h-[14px] mr-2") %>
-                <span class="text-sm"><%= event.starts_at.strftime("%A, %d %B %Y") %></span>
+                <span class="text-sm"><%= session.starts_at.strftime("%A, %d %B %Y") %></span>
               </div>
               <div class="flex items-center">
                 <%= inline_svg_tag("icons/clock.svg", class: "w-[14px] h-[14px] mr-2") %>
-                <span class="text-sm"><%= event.starts_at.strftime("%H:%M") %> - <%= event.ends_at.strftime("%H:%M") %></span>
+                <span class="text-sm"><%= session.starts_at.strftime("%H:%M") %> - <%= session.ends_at.strftime("%H:%M") %></span>
               </div>
               <div class="flex items-center">
                 <%= inline_svg_tag("icons/location-pin.svg", class: "w-[14px] h-[14px] mr-2") %>
-                <span class="text-sm"><%= event.location.name %></span>
+                <span class="text-sm"><%= session.location.name %></span>
               </div>
             </div>
 
             <div class="flex flex-wrap w-full gap-2">
-              <% event.tags.each do |tag| %>
+              <% session.tags.each do |tag| %>
                 <div class="px-3 py-1 text-sm font-bold bg-transparent border-2 rounded-lg border-blue-light text-blue-light">
                   <%= tag.name %>
                 </div>
