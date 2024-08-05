@@ -8,12 +8,10 @@
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <script async src="https://ga.jspm.io/npm:es-module-shims@1.8.2/dist/es-module-shims.js" data-turbo-track="reload"></script>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="flex flex-col h-full bg-gray-8" data-controller="web-push-notifications"
-  data-web-push-notifications-vapid-key-value="<%= Base64.urlsafe_decode64(Rails.application.credentials.dig(:vapid, :public_key)).bytes %>">
+  <body class="flex flex-col h-full bg-gray-8">
     <main class="relative flex flex-col flex-1 w-full mx-auto overflow-auto">
       <% if show_header? %>
         <%= render partial: "layouts/header" %>
