@@ -30,8 +30,8 @@ gem "action_policy"
 # Admin
 gem "activestorage"
 gem "avo", ">= 3.2.1"
-gem "ransack"
 gem "image_processing"
+gem "ransack"
 
 # Other
 gem "bootsnap", require: false
