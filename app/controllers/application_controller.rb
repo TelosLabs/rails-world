@@ -16,4 +16,5 @@ class ApplicationController < ActionController::Base
 
     vapid_key = Rails.application.credentials.dig(:vapid, :public_key)
     Base64.urlsafe_decode64(vapid_key).bytes
+  end
 end
