@@ -13,7 +13,7 @@
   </head>
 
   <body class="flex flex-col h-full bg-gray-8" data-controller="web-push-notifications"
-  data-web-push-notifications-vapid-key-value="<%= Base64.urlsafe_decode64(Rails.application.credentials.dig(:vapid, :public_key)).bytes %>">
+  data-web-push-notifications-vapid-key-value="<%= vapid_public_key %>">
     <main class="relative flex flex-col flex-1 w-full mx-auto overflow-auto">
       <% if show_header? %>
         <%= render partial: "layouts/header" %>

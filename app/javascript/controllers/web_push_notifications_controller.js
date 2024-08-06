@@ -46,6 +46,11 @@ export default class extends Controller {
       return
     }
 
+    if (!this.vapidKeyValue) {
+      console.error('VAPID key is not available.')
+      return
+    }
+
     const vapidKey = new Uint8Array(JSON.parse(this.vapidKeyValue))
 
     await navigator.serviceWorker.register('/service_worker.js')
@@ -61,6 +66,11 @@ export default class extends Controller {
   async getSubscription () {
     if (!navigator.serviceWorker) {
       console.error('Service workers are not supported by this browser.')
+      return
+    }
+
+    if (!this.vapidKeyValue) {
+      console.error('VAPID key is not available.')
       return
     }
 
