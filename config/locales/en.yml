@@ -22,8 +22,11 @@ en:
       destroy:
         notice: "You have been logged out."
     sessions:
-      update:
+      add_user:
         notice: "Session was added to My Schedule"
         alert: "Could not add session to My Schedule. Please try again"
+      remove_user:
+        notice: "Session was removed from My Schedule"
+        alert: "Could not remove session from My Schedule. Please try again"
   authorization:
     unauthorized: "You are not authorized to access this page."

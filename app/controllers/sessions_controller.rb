@@ -7,12 +7,26 @@ class SessionsController < ApplicationController
   def update
     @session = Session.find(params[:id])
 
-    if @session.update(users: [current_user])
-      flash[:notice] = I18n.t("controllers.sessions.update.notice")
-    else
-      flash[:alert] = I18n.t("controllers.sessions.update.alert")
-    end
+    @session.users.include?(current_user) ? remove_user_from_session : add_user_to_session
 
     redirect_to sessions_path(on_date: params[:on_date])
+  end
+
+  private
+
+  def remove_user_from_session
+    if @session.users.delete(current_user)
+      flash[:notice] = I18n.t("controllers.sessions.remove_user.notice")
+    else
+      flash[:alert] = I18n.t("controllers.sessions.remove_user.alert")
+    end
+  end
+
+  def add_user_to_session
+    if @session.users.push(current_user)
+      flash[:notice] = I18n.t("controllers.sessions.add_user.notice")
+    else
+      flash[:alert] = I18n.t("controllers.sessions.add_user.alert")
+    end
   end
 end
