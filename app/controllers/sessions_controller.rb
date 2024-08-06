@@ -8,9 +8,9 @@ class SessionsController < ApplicationController
     @session = Session.find(params[:id])
 
     if @session.update(users: [current_user])
-      flash[:notice] = I18n.t("sessions.update.notice")
+      flash[:notice] = I18n.t("controllers.sessions.update.notice")
     else
-      flash[:alert] = I18n.t("sessions.update.alert")
+      flash[:alert] = I18n.t("controllers.sessions.update.alert")
     end
 
     redirect_to sessions_path(on_date: params[:on_date])
