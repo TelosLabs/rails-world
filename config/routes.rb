@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     root "main#index", as: :authenticated_root
   end
 
-  root "main#index"
+  root "user_sessions#new"
 
   get "up" => "rails/health#show", :as => :rails_health_check
 
