@@ -27,6 +27,8 @@ module.exports = {
         'gray-6': '#C6C6C8',
         'gray-5': '#A2A2A2',
         'gray-3': '#262626',
+        'gray-600': '#3A3A3C',
+        'gray-800': '#1C1C1E',
         'purple-dark': '#432463',
         'purple-light': '#4E2A73',
         red: '#CB0C1C',
@@ -35,7 +37,8 @@ module.exports = {
         'green-light': '#D8F1D4',
         'blue-marine': '#003A5D',
         'blue-light': '#EFF6FF',
-        'blue-teal': '#00AFAA'
+        'blue-teal': '#00AFAA',
+        bluegray: '#829ECE'
       }
     }
   },
