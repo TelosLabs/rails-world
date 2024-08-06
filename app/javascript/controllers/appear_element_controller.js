@@ -1,8 +1,8 @@
 import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
-  initialize(){
-    this.element.classList.add("opacity-0", "transition", "ease-in-out")
+  initialize () {
+    this.element.classList.add('opacity-0', 'transition', 'ease-in-out')
   }
 
   connect () {
@@ -11,8 +11,8 @@ export default class extends Controller {
 
   show (event) {
     setTimeout(() => {
-      this.element.classList.remove("opacity-0")
-      this.element.classList.add("opacity-1")
+      this.element.classList.remove('opacity-0')
+      this.element.classList.add('opacity-1')
     }, 600)
   }
 }
