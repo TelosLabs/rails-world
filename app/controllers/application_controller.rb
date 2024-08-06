@@ -12,10 +12,8 @@ class ApplicationController < ActionController::Base
   def current_profile = current_user&.profile
 
   def vapid_public_key
-    vapid_key = Rails.application.credentials.dig(:vapid, :public_key)
+    return if Rails.env.test?
 
+    vapid_key = Rails.application.credentials.dig(:vapid, :public_key)
     Base64.urlsafe_decode64(vapid_key).bytes
-  rescue ArgumentError => e
-    Rails.logger.error "Failed to decode VAPID public key: #{e.message}"
-  end
 end
