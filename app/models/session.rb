@@ -6,6 +6,7 @@
 #  description    :string
 #  ends_at        :datetime         not null
 #  sent_reminders :json
+#  slug           :string
 #  starts_at      :datetime         not null
 #  title          :string           not null
 #  created_at     :datetime         not null
@@ -17,8 +18,12 @@
 #
 #  index_sessions_on_conference_id  (conference_id)
 #  index_sessions_on_location_id    (location_id)
+#  index_sessions_on_slug           (slug) UNIQUE
 #
 class Session < ApplicationRecord
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
   belongs_to :location
   belongs_to :conference
 
