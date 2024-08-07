@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_02_162104) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_07_150821) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -87,7 +87,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_02_162104) do
     t.string "linkedin_url"
     t.string "twitter_url"
     t.boolean "mail_notifications", default: true, null: false
-    t.boolean "in_app_notifications", default: true, null: false
+    t.boolean "in_app_notifications", default: false, null: false
     t.boolean "is_public", default: false, null: false
     t.string "profileable_type", null: false
     t.integer "profileable_id", null: false
