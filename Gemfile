@@ -28,7 +28,9 @@ gem "bcrypt", "~> 3.1.20"
 gem "action_policy"
 
 # Admin
+gem "activestorage"
 gem "avo", ">= 3.2.1"
+gem "image_processing"
 gem "ransack"
 
 # Other
