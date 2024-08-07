@@ -6,6 +6,9 @@ Rails.application.routes.draw do
 
   constraints(AuthenticatedConstraint) do
     root "main#index", as: :authenticated_root
+    resources :profiles, only: [:edit, :update], param: :uuid
+    resources :speakers, only: [:show]
+    resources :sessions, only: [:index, :show]
   end
 
   root "user_sessions#new"
@@ -16,9 +19,7 @@ Rails.application.routes.draw do
   resource :user_session, only: [:new, :create, :destroy]
   resource :password, only: [:edit, :update]
   resource :about, only: [:show]
-  resources :profiles, only: [:show, :edit, :update], param: :uuid
-  resources :speakers, only: [:show]
-  resources :sessions, only: [:index, :show]
+  resources :profiles, only: [:show], param: :uuid
 
   resource :password_reset, only: [:new, :create, :edit, :update] do
     get :post_submit
