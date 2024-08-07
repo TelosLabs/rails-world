@@ -23,3 +23,6 @@ en:
         notice: "You have been logged out."
   authorization:
     unauthorized: "You are not authorized to access this page."
+  notification_mailer:
+    session_notification:
+      "Notification"

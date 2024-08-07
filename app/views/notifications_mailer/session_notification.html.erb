@@ -1,0 +1,52 @@
+<div class="container">
+  <h1 class="title">Your bookmarked session is starting now</h1>
+  <div class="c-event-card">
+    <div class="c-event-card__speaker">
+      <div class="c-event-card__speaker-img">
+      </div>
+      <div>
+        <div class="c-event-card__speaker-title"><%= @speaker.name %></div>
+        <div class="c-event-card__speaker-subtitle"><%= @speaker.job_title %></div>
+      </div>
+    </div>
+    <div class="c-event-card__title">
+      <%= @session.title %>
+    </div>
+    <div class="c-event-card__tags">
+      <% @session.tags.each do |tag| %>
+        <div class="c-event-card__tags-tag"><%= tag.name %></div>
+      <% end %>
+    </div>
+
+    <div class="c-event-card__description">
+      <%= @session.description %>
+    </div>
+
+    <div class="c-event-card__time">
+      <div class="c-event-card__time-icon">
+      </div>
+      <div class="c-event-card__time-item">
+        <%= @session.starts_at.strftime("%A, %b %d") %>
+      </div>
+    </div>
+
+    <div class="c-event-card__time">
+      <div class="c-event-card__time-icon">
+      </div>
+      <div class="c-event-card__time-item">
+        <%= @session.starts_at.strftime("%H:%M") %> - <%= @session.ends_at.strftime("%H:%M") %>
+      </div>
+    </div>
+
+    <div class="c-event-card__time">
+      <div class="c-event-card__time-icon">
+      </div>
+      <div class="c-event-card__time-item">
+        <%= @session.location.name %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="c-footer">
+  <span>RAILS WORLD</span>
+</div>
