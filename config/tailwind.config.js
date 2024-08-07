@@ -32,7 +32,7 @@ module.exports = {
           700: '#371e52',
           800: '#2b173f',
           900: '#211230',
-          background: "#4e2a73"
+          background: '#4e2a73'
         },
         secondary: {
           50: '#FAE7E8',
