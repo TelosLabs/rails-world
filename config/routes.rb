@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resource :registration, only: [:new, :create]
   resource :user_session, only: [:new, :create, :destroy]
   resource :password, only: [:edit, :update]
+  resources :speakers, only: [:show]
   resources :sessions, only: [:index, :show]
   resource :password_reset, only: [:new, :create, :edit, :update] do
     get :post_submit
