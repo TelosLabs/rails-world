@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "main#index"
+  root "sessions#index"
 
   get "up" => "rails/health#show", :as => :rails_health_check
 
@@ -11,10 +11,11 @@ Rails.application.routes.draw do
   resource :user_session, only: [:new, :create, :destroy]
   resource :password, only: [:edit, :update]
   resources :speakers, only: [:show]
-  resources :sessions, only: [:index, :show]
   resource :password_reset, only: [:new, :create, :edit, :update] do
     get :post_submit
   end
-  resource :about, only: [:show]
+  resources :sessions, only: [:index, :update, :show]
+  resources :schedules, only: [:index, :update, :show]
   resources :profiles, only: [:show, :edit, :update], param: :uuid
+  resource :about, only: [:show]
 end

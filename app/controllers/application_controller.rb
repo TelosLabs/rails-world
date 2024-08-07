@@ -4,9 +4,12 @@ class ApplicationController < ActionController::Base
 
   default_form_builder ApplicationFormBuilder
 
-  helper_method :current_profile
+  helper_method :current_profile, :current_conference
 
   private
 
   def current_profile = current_user&.profile
+
+  # TODO: Must change after implementing multi-conference support
+  def current_conference = Conference.last
 end
