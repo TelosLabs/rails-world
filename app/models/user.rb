@@ -26,6 +26,8 @@ class User < ApplicationRecord
 
   has_and_belongs_to_many :sessions
 
+  has_many :notifications, as: :recipient, dependent: :destroy, class_name: "Noticed::Notification"
+
   validates :email, presence: true, uniqueness: true, format: {with: URI::MailTo::EMAIL_REGEXP}
   validates :password_digest, presence: true
   validates :password, length: {minimum: 8}, if: -> { password.present? }
@@ -33,6 +35,10 @@ class User < ApplicationRecord
   after_create_commit { create_profile! }
 
   accepts_nested_attributes_for :profile
+
+  scope :with_at_least_one_notification_enabled, -> {
+    joins(:profile).where("profiles.in_app_notifications = ? OR profiles.mail_notifications = ?", true, true)
+  }
 
   generates_token_for :password_reset, expires_in: PASSWORD_RESET_EXPIRATION do
     password_salt&.last(10)

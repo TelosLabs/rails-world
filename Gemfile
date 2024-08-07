@@ -37,6 +37,7 @@ gem "ransack"
 gem "bootsnap", require: false
 gem "draper"
 gem "inline_svg"
+gem "noticed"
 gem "puma", ">= 5.0"
 gem "rqrcode", "~> 2.0"
 gem "tzinfo-data", platforms: %i[windows jruby]
@@ -79,4 +80,5 @@ group :test do
   gem "rails-controller-testing"
   gem "rspec-instafail", require: false
   gem "rspec-retry"
+  gem "timecop"
 end
