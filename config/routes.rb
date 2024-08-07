@@ -8,15 +8,13 @@ Rails.application.routes.draw do
   mount Avo::Engine, at: Avo.configuration.root_path
 
   resource :registration, only: [:new, :create]
-  resource :session, only: [:new, :create, :destroy]
+  resource :user_session, only: [:new, :create, :destroy]
   resource :password, only: [:edit, :update]
-  resource :profile, only: [:edit, :update, :show]
-  resources :events, only: [:index, :show]
   resources :speakers, only: [:show]
+  resources :sessions, only: [:index, :show]
   resource :password_reset, only: [:new, :create, :edit, :update] do
     get :post_submit
   end
   resource :about, only: [:show]
-  resources :profiles, only: [:show], param: :uuid
-  resource :profile, only: [:edit, :update]
+  resources :profiles, only: [:show, :edit, :update], param: :uuid
 end

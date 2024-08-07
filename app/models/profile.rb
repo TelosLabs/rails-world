@@ -13,7 +13,7 @@
 #  name                 :string
 #  profileable_type     :string           not null
 #  twitter_url          :string
-#  uuid                 :string
+#  uuid                 :string           not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  profileable_id       :integer          not null
@@ -26,17 +26,15 @@
 class Profile < ApplicationRecord
   has_one_attached :image
 
-  has_one :self_ref, class_name: "Profile", foreign_key: :id, inverse_of: :self_ref
-  has_one :user, through: :self_ref, source: :profileable, source_type: "User"
-  has_one :speaker, through: :self_ref, source: :profileable, source_type: "Speaker"
-
   belongs_to :profileable, polymorphic: true
 
   validates :uuid, uniqueness: true, presence: true
 
   before_validation :set_uuid
 
-  scope :public_profiles, -> { where(is_public: true) }
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[name]
+  end
 
   private
 

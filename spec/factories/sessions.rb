@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: events
+# Table name: sessions
 #
 #  id            :integer          not null, primary key
 #  description   :string
@@ -14,11 +14,11 @@
 #
 # Indexes
 #
-#  index_events_on_conference_id  (conference_id)
-#  index_events_on_location_id    (location_id)
+#  index_sessions_on_conference_id  (conference_id)
+#  index_sessions_on_location_id    (location_id)
 #
 FactoryBot.define do
-  factory :event do
+  factory :session do
     title { "Keynote" }
     description { "The opening keynote" }
     starts_at { 1.day.from_now }

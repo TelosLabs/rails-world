@@ -1,13 +1,13 @@
-<div class="p-5 rounded-lg bg-white w-full">
+<div class="w-full p-5 bg-white rounded-lg">
     <div class="flex flex-row items-center mb-6">
       <% if speaker.profile.image.attached? %>
         <%= image_tag url_for(profile.image), class: "text-red w-12 h-12 rounded-full mr-4" %>
       <% else %>
-        <div class="min-w-12 min-h-12 w-12 h-12 rounded-full bg-slate-300 p-2 flex flex-row items-center justify-center mr-4">
+        <div class="flex flex-row items-center justify-center w-12 h-12 p-2 mr-4 rounded-full min-w-12 min-h-12 bg-slate-300">
             <%= image_tag url_for("user_avatar.svg") %>
         </div>
       <% end %>
-      <div class="w-full flex flex-row items-center justify-between grow">
+      <div class="flex flex-row items-center justify-between w-full grow">
         <div class="flex flex-col">
           <p class="text-base italic font-black text-red"><%= speaker.profile.name %></p>
           <p class="font-normal text-[13px]"><%= speaker.profile.job_title %></p>
@@ -15,21 +15,21 @@
         <%= inline_svg_tag "circle_with_checkmark.svg", class: "fill-red-500" %>
       </div>
     </div>
-    <h1 class="text-xl text-red mb-4 font-bold mb-4 italic"><%= event.title %></h1>
+    <h1 class="mb-4 text-xl italic font-bold text-red"><%= session.title %></h1>
     <div class="flex flex-row flex-wrap items-center gap-2 mb-[18px]">
-    <% event.tags.each do |tag| %>
+    <% session.tags.each do |tag| %>
       <div class="bg-white border border-blue-2 rounded-lg px-4 py-[6px] text-blue-2">
       <%= tag.name %>
       </div>
     <% end %>
     </div>
     <div class="flex flex-row items-center mb-1">
-      <%= inline_svg_tag "calendar.svg", class: "fill-gray-4 w-3 h-3 mr-2" %> <p class="text-[13px]"><%= event.starts_at.strftime("%A, %b %d") %></p>
+      <%= inline_svg_tag "calendar.svg", class: "fill-gray-4 w-3 h-3 mr-2" %> <p class="text-[13px]"><%= session.starts_at.strftime("%A, %b %d") %></p>
     </div>
     <div class="flex flex-row items-center mb-1">
-      <%= inline_svg_tag "clock.svg", class: "stroke-gray-4 fill-gray-4 w-3 h-3 mr-2" %><p class="text-[13px]"><%= event.starts_at.strftime("%H:%M") %> - <%= event.ends_at.strftime("%H:%M") %></p>
+      <%= inline_svg_tag "clock.svg", class: "stroke-gray-4 fill-gray-4 w-3 h-3 mr-2" %><p class="text-[13px]"><%= session.starts_at.strftime("%H:%M") %> - <%= session.ends_at.strftime("%H:%M") %></p>
     </div>
     <div class="flex flex-row items-center mb-1">
-      <%= inline_svg_tag "location_pin.svg", class: "stroke-gray-4 fill-gray-4 w-3 h-3 mr-2" %><p class="text-[13px]"><%= event.location.name %></p>
+      <%= inline_svg_tag "location_pin.svg", class: "stroke-gray-4 fill-gray-4 w-3 h-3 mr-2" %><p class="text-[13px]"><%= session.location.name %></p>
     </div>
 </div>
