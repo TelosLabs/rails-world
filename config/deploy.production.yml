@@ -7,6 +7,7 @@ servers:
 env:
   clear:
     RAILS_ENV: production
+    MAILER_SENDER: hello@railsworld.com
     WEB_CONCURRENCY: 4
     LITESTREAM_BACKUP_ENABLED: true
   secret:

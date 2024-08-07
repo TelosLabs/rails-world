@@ -7,6 +7,7 @@ servers:
 env:
   clear:
     RAILS_ENV: staging
+    MAILER_SENDER: hello@teloslabs.co
   secret:
     - APP_HOST
     - RAILS_MASTER_KEY
