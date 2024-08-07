@@ -46,3 +46,5 @@
 
 # Ignore asdf version files
 /.tool-versions
+
+*.DS_Store
