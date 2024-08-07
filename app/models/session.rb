@@ -33,7 +33,7 @@ class Session < ApplicationRecord
   validates_datetime :ends_at, after: :starts_at
 
   scope :on_date, ->(date) { where(starts_at: date.all_day) }
-  scope :from_user, ->(user) { joins(:users).where(users: {id: user.id}) }
+  scope :from_user, ->(user) { joins(:attendees).where(attendees: {id: user.id}) }
 
   after_commit :invalidate_cache
 

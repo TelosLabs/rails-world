@@ -7,16 +7,16 @@
     </div>
 
     <div class="flex justify-between w-full mb-6">
-      <div class="flex gap-2">
-        <%= link_to 'All dates', sessions_path, class: "flex items-center px-5 py-1.5 rounded-full font-medium #{session_pill_class}" %>
+      <div class="flex items-center gap-2 overflow-x-scroll no-scrollbar">
+        <%= link_to 'All dates', sessions_path, class: "flex min-w-fit items-center justify-center px-4 py-2 rounded-full font-medium #{session_pill_class}" %>
         <% current_conference.session_dates.each do |session_date| %>
           <%= link_to session_date.strftime("%a, %d"),
                       sessions_path(on_date: session_date),
-                      class: "flex items-center px-4 py-1.5 font-medium rounded-full #{session_pill_class(session_date)}" %>
+                      class: "flex min-w-fit items-center justify-center px-4 py-2 font-medium rounded-full #{session_pill_class(session_date)}" %>
         <% end %>
       </div>
 
-      <div class="flex items-center justify-center p-2 bg-white rounded-full">
+      <div class="flex items-center justify-center p-2 bg-white rounded-full min-w-[40px] min-h-[40px]">
         <%= inline_svg_tag("icons/filters.svg", size: "18") %>
       </div>
     </div>
