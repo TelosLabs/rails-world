@@ -4,6 +4,7 @@ import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   static values = { vapidKey: String }
+  static targets = ["enableNotifications"]
 
   connect () {
     if (Notification.permission === 'denied') return
@@ -16,27 +17,18 @@ export default class extends Controller {
   }
 
   promptNotificationPermission () {
-    const notificationsButton = document.getElementById('enable_notifications_btn')
-    notificationsButton.classList.remove('hidden')
-
-    notificationsButton.addEventListener('click', () => {
-      let permission
+    this.enableNotificationsTarget.addEventListener('change', (event) => {
+      if (!event.target.checked) { return }
 
       Notification.requestPermission()
-        .then((result) => {
-          permission = result
+        .then((permission) => {
           if (permission === 'granted') {
             this.setupSubscription()
-          } else {
+          } else if (permission === 'denied') {
             console.warn('Notifications Denied.')
           }
         })
         .catch((error) => { console.error(error) })
-        .finally(() => {
-          if (permission === 'granted' || permission === 'denied') {
-            notificationsButton.classList.add('hidden')
-          }
-        })
     })
   }
 

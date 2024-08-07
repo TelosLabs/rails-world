@@ -14,6 +14,9 @@ Rails.application.routes.draw do
     get :post_submit
   end
   resource :about, only: [:show]
-  resources :profiles, only: [:show, :edit, :update], param: :uuid
   resource :webpush_subscription, only: [:create]
+  resource :notifications_settings, only: [:show, :update]
+
+  resources :profiles, only: [:show, :edit, :update], param: :uuid
+  resources :notifications, only: [:index]
 end

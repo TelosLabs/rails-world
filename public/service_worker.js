@@ -1,7 +1,7 @@
 /* global self */
 
-self.addEventListener('push', (event) => {
-  const data = event.data.json()
+self.addEventListener('push', async (event) => {
+  const data = await event.data.json()
   const title = data.title
   const options = {
     body: data.body,
@@ -12,3 +12,4 @@ self.addEventListener('push', (event) => {
     self.registration.showNotification(title, options)
   )
 })
+
