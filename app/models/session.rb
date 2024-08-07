@@ -33,7 +33,15 @@ class Session < ApplicationRecord
 
   scope :on_date, ->(date) { where(starts_at: date.all_day) }
 
+  after_commit :invalidate_cache
+
   def self.ransackable_attributes(_auth_object = nil)
     %w[title]
+  end
+
+  private
+
+  def invalidate_cache
+    Rails.cache.delete("conference_#{conference_id}_session_dates")
   end
 end

@@ -16,4 +16,10 @@ class Conference < ApplicationRecord
   def self.ransackable_attributes(_auth_object = nil)
     %w[name]
   end
+
+  def session_dates
+    Rails.cache.fetch("conference_#{id}_session_dates") do
+      sessions.distinct.pluck(Arel.sql("date(starts_at)")).map(&:to_date)
+    end
+  end
 end
