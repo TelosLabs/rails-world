@@ -102,11 +102,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_07_150821) do
     t.string "description"
     t.datetime "starts_at", null: false
     t.datetime "ends_at", null: false
+    t.json "sent_reminders", default: []
     t.integer "location_id", null: false
     t.integer "conference_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.json "reminder_details", default: {}
     t.index ["conference_id"], name: "index_sessions_on_conference_id"
     t.index ["location_id"], name: "index_sessions_on_location_id"
   end
