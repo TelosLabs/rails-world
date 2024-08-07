@@ -1,22 +1,33 @@
 class SessionReminderJob < ApplicationJob
-  def perform
-    now = Time.zone.now
-    Session::REMINDER_TIME_BEFORE_EVENT.each do |time_before_session|
-      reminder_time = now + time_before_session
-      two_iterations_ago = now - 2.minutes
+  REMINDER_TIME_BEFORE_EVENT = [5.minutes].freeze
 
-      Session
-        .where(starts_at: two_iterations_ago.beginning_of_minute..reminder_time.end_of_minute)
-        .find_each do |session|
-        next if session.reminder_details["delivered_reminder_times"]&.include?(time_before_session.inspect)
+  def perform
+    if Feature.disabled?(:session_reminders)
+      return Rails.logger.info("Skipping session reminders. Feature is disabled")
+    end
+
+    now = Time.zone.now
+    Rails.logger.info "Searching for sessions to remind users about. Time is #{now}"
+
+    REMINDER_TIME_BEFORE_EVENT.each do |time_before_session|
+      # Grace time is the time window in which we send reminders that should have been sent already.
+      grace_time = 2.minutes
+
+      start_reminder_time = (now + time_before_session - grace_time).end_of_minute
+      end_reminder_time = (start_reminder_time + grace_time).beginning_of_minute
+
+      Rails.logger.info "Searching for sessions with starts_at between #{start_reminder_time} and #{end_reminder_time}"
+
+      Session.where(starts_at: start_reminder_time..end_reminder_time).find_each do |session|
+        next if session.sent_reminders.include?(time_before_session.inspect)
+
+        session.sent_reminders << time_before_session.inspect
+        session.sent_reminders.uniq!
+        session.save!
 
         SessionReminderNotifier
           .with(record: session, time_before_session: time_before_session.inspect)
-          .deliver(session.users.with_at_least_one_notification_enabled)
-
-        session.reminder_details["delivered_reminder_times"] ||= []
-        session.reminder_details["delivered_reminder_times"] << time_before_session.inspect
-        session.save!
+          .deliver(session.attendees.with_at_least_one_notification_enabled)
       end
     end
   end

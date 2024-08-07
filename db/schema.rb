@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_02_162104) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_26_171428) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -102,11 +102,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_02_162104) do
     t.string "description"
     t.datetime "starts_at", null: false
     t.datetime "ends_at", null: false
+    t.json "sent_reminders", default: []
     t.integer "location_id", null: false
     t.integer "conference_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.json "reminder_details", default: {}
     t.index ["conference_id"], name: "index_sessions_on_conference_id"
     t.index ["location_id"], name: "index_sessions_on_location_id"
   end
