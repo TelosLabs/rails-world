@@ -12,4 +12,3 @@ self.addEventListener('push', async (event) => {
     self.registration.showNotification(title, options)
   )
 })
-

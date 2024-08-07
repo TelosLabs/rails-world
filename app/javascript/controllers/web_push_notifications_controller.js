@@ -4,7 +4,7 @@ import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   static values = { vapidKey: String }
-  static targets = ["enableNotifications"]
+  static targets = ['enableNotifications']
 
   connect () {
     if (Notification.permission === 'denied') return
