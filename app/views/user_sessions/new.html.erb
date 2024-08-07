@@ -1,7 +1,7 @@
-<div class="flex flex-col items-center flex-1 px-5 py-10 bg-purple-dark">
+<div class="flex flex-col items-center flex-1 px-5 py-10 bg-primary-background">
   <%= form_with model: @user, url: user_session_path, class: "flex flex-col h-full justify-between w-full max-w-screen-sm" do |form| %>
     <div class="flex flex-col items-center">
-      <%= inline_svg_tag("main_logo_with_date.svg", class: "w-full mb-10") %>
+      <%= inline_svg_tag("main_logo.svg", class: "w-full mb-10") %>
       <div class="flex flex-col items-center mb-10">
         <h1 class="mb-4 text-4xl italic font-black text-white">Welcome!</h1>
         <h3 class="text-lg font-bold text-white">Please log in to continue</h3>
@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="flex flex-col">
-      <%= form.button "Log in", type: "submit", data: { test_id: "sign_in_button" }, class: "w-full bg-red py-4 text-white font-black italic rounded-[10px] uppercase" %>
+      <%= form.button "Log in", type: "submit", data: { test_id: "sign_in_button" }, class: "w-full bg-secondary-500 py-4 text-white font-black italic rounded-[10px] uppercase" %>
     </div>
   <% end %>
 </div>
