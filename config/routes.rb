@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resource :user_session, only: [:new, :create, :destroy]
   resource :password, only: [:edit, :update]
   resource :profile, only: [:edit, :update, :show]
-  resources :events, only: [:index, :show]
+  resources :sessions, only: [:index, :show]
   resource :password_reset, only: [:new, :create, :edit, :update] do
     get :post_submit
   end
