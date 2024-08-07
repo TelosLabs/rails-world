@@ -1,2 +1,4 @@
 <h1>Homepage</h1>
 <%= link_to "Profile", profile_path(current_profile&.uuid) %>
+
+<p>Current time is <%= Time.zone.now %></p>
