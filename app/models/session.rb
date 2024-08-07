@@ -32,6 +32,7 @@ class Session < ApplicationRecord
   validates_datetime :ends_at, after: :starts_at
 
   scope :on_date, ->(date) { where(starts_at: date.all_day) }
+  scope :from_user, ->(user) { joins(:users).where(users: {id: user.id}) }
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[title]

@@ -11,11 +11,11 @@ Rails.application.routes.draw do
   resource :user_session, only: [:new, :create, :destroy]
   resource :password, only: [:edit, :update]
   resources :speakers, only: [:show]
-  resources :sessions, only: [:index, :show]
   resource :password_reset, only: [:new, :create, :edit, :update] do
     get :post_submit
   end
-  resources :sessions, only: [:index, :update]
+  resources :sessions, only: [:index, :update, :show]
+  resources :schedules, only: [:index, :update, :show]
   resources :profiles, only: [:show, :edit, :update], param: :uuid
   resource :about, only: [:show]
 end
