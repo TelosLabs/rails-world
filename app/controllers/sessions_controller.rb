@@ -11,6 +11,11 @@ class SessionsController < ApplicationController
 
     redirect_to sessions_path(on_date: params[:on_date])
   end
+  
+  def show
+    @session = Session.find(params[:id])
+    @speaker = @session.speakers.first
+  end
 
   private
 
