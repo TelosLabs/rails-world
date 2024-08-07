@@ -19,6 +19,7 @@ class Avo::Resources::Session < Avo::BaseResource
     field :ends_at, as: :date_time,
       help: "The datetime field will use your browser's current timezone.", sortable: true,
       format: "FFFF"
+    field :sent_reminders, only_on: :show
     field :location, as: :belongs_to
     field :conference, as: :belongs_to
     field :speakers, as: :has_and_belongs_to_many, can_create: false
