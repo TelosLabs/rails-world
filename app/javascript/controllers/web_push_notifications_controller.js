@@ -10,7 +10,7 @@ export default class extends Controller {
     if (Notification.permission === 'denied') return
 
     if (Notification.permission === 'granted') {
-      this.getSubscription()
+      this.setUpSubscription()
     } else {
       this.promptNotificationPermission()
     }
@@ -23,7 +23,7 @@ export default class extends Controller {
       Notification.requestPermission()
         .then((permission) => {
           if (permission === 'granted') {
-            this.setupSubscription()
+            this.setUpSubscription()
           } else if (permission === 'denied') {
             console.warn('Notifications Denied.')
           }
@@ -32,7 +32,7 @@ export default class extends Controller {
     })
   }
 
-  async setupSubscription () {
+  async setUpSubscription () {
     if (!navigator.serviceWorker) {
       console.error('Service workers are not supported by this browser.')
       return
@@ -42,32 +42,19 @@ export default class extends Controller {
       console.error('VAPID key is not available.')
       return
     }
-
-    const vapidKey = new Uint8Array(JSON.parse(this.vapidKeyValue))
 
     await navigator.serviceWorker.register('/service_worker.js')
     const registration = await navigator.serviceWorker.ready
-    const subscription = await registration.pushManager.subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: vapidKey
-    })
+    let subscription = await registration.pushManager.getSubscription()
 
-    await this.sendSubscriptionToServer(subscription)
-  }
+    if (!subscription) {
+      const vapidKey = new Uint8Array(JSON.parse(this.vapidKeyValue))
 
-  async getSubscription () {
-    if (!navigator.serviceWorker) {
-      console.error('Service workers are not supported by this browser.')
-      return
+      subscription = await registration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: vapidKey
+      })
     }
-
-    if (!this.vapidKeyValue) {
-      console.error('VAPID key is not available.')
-      return
-    }
-
-    const registration = await navigator.serviceWorker.ready
-    const subscription = await registration.pushManager.getSubscription()
 
     await this.sendSubscriptionToServer(subscription)
   }

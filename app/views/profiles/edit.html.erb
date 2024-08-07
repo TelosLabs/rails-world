@@ -2,7 +2,8 @@
   <div class="flex flex-col w-full max-w-screen-sm p-4 border-t b-white">
     <h1 class="w-full mb-6 text-4xl font-black text-white">Set up your account</h1>
 
-    <%= form_with model: @profile, url: profile_path(@profile.uuid), class: "flex flex-col items-center" do |form| %>
+    <%= form_with model: @profile, url: profile_path(@profile.uuid), class: "flex flex-col items-center",
+      data: { controller: "web-push-notifications", web_push_notifications_vapid_key_value: vapid_public_key } do |form| %>
       <div class="relative" data-controller="image-previewer">
         <%= form.label :image, class: "overflow-hidden relative font-bold text-white text-base w-32 h-32 bg-white cursor-pointer rounded-full flex flex-col items-center justify-center" do %>
           <%= form.file_field :image, data: {image_previewer_target: "input"}, accept:"image/*,image/apng,image/avif,image/gif,image/gif,image/jpeg,image/png,image/svg+xml", class: "text-white border-2 border-white bg-transparent rounded-sm hidden mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white" %>
@@ -59,7 +60,11 @@
           </div>
           <div class="flex flex-row items-center justify-between w-full p-4 bg-white">
             <%= form.label :in_app_notifications, "In-app notifications", class: "grow font-medium text-slate-900 text-base cursor-pointer mr-2" %>
-            <%= form.toggle_field :in_app_notifications %>
+            <label>
+              <%= form.check_box :in_app_notifications, class: "sr-only peer",
+                data: {web_push_notifications_target: "enableNotifications"} %>
+              <div class="relative w-11 h-6 bg-gray-6 rounded-full peer dark:bg-gray-6 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red"></div>
+            </label>
           </div>
         </div>
       </div>
