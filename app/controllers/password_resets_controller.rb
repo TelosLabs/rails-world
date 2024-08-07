@@ -24,7 +24,7 @@ class PasswordResetsController < ApplicationController
 
   def update
     if @user.update(password_params)
-      redirect_to new_session_path, notice: t("controllers.password_resets.update.notice")
+      redirect_to new_user_session_path, notice: t("controllers.password_resets.update.notice")
     else
       render :edit, status: :unprocessable_entity
     end

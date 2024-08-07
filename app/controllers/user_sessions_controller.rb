@@ -1,4 +1,4 @@
-class SessionsController < ApplicationController
+class UserSessionsController < ApplicationController
   allow_unauthenticated_access only: [:new, :create]
 
   before_action :redirect_if_signed_in, only: [:new, :create]
@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
       login @user
       redirect_to root_path, notice: t("controllers.sessions.create.notice")
     else
-      redirect_to new_session_path, alert: t("controllers.sessions.create.alert")
+      redirect_to new_user_session_path, alert: t("controllers.sessions.create.alert")
     end
   end
 

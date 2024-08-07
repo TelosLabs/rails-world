@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   mount Avo::Engine, at: Avo.configuration.root_path
 
   resource :registration, only: [:new, :create]
-  resource :session, only: [:new, :create, :destroy]
+  resource :user_session, only: [:new, :create, :destroy]
   resource :password, only: [:edit, :update]
   resource :profile, only: [:edit, :update, :show]
   resources :events, only: [:index, :show]
