@@ -8,9 +8,12 @@
 
     <div class="flex justify-between w-full mb-6">
       <div class="flex gap-2">
-        <%= link_to 'All dates', sessions_path, class: "flex items-center px-5 py-1.5 rounded-full font-medium #{request.params[:on_date] == nil ? "bg-red text-white" : "bg-white text-red"}" %>
-        <%= link_to 'Tue, 12', sessions_path(on_date: '12-08-2024'), class: "flex items-center px-4 py-1.5 font-medium rounded-full #{request.params[:on_date] == '12-08-2024' ? "bg-red text-white" : "bg-white text-red"}" %>
-        <%= link_to 'Wed, 13', sessions_path(on_date: '13-08-2024'), class: "flex items-center px-4 py-1.5 font-medium rounded-full #{request.params[:on_date] == '13-08-2024' ? "bg-red text-white" : "bg-white text-red"}" %>
+        <%= link_to 'All dates', sessions_path, class: "flex items-center px-5 py-1.5 rounded-full font-medium #{session_pill_class}" %>
+        <% current_conference.session_dates.each do |session_date| %>
+          <%= link_to session_date.strftime("%a, %d"),
+                      sessions_path(on_date: session_date),
+                      class: "flex items-center px-4 py-1.5 font-medium rounded-full #{session_pill_class(session_date)}" %>
+        <% end %>
       </div>
 
       <div class="flex items-center justify-center p-2 bg-white rounded-full">
@@ -64,7 +67,8 @@
               </div>
               <div class="flex items-center mb-3">
                 <%= inline_svg_tag("icons/clock.svg", class: "w-[16px] h-[16px] mr-1") %>
-                <span class="font-sans text-sm text-gray-600"><%= session.starts_at.strftime("%H:%M") %> - <%= session.ends_at.strftime("%H:%M") %></span>
+                <span class="font-sans text-sm text-gray-600"><%= session.starts_at.strftime("%H:%M") %>
+                  - <%= session.ends_at.strftime("%H:%M") %></span>
               </div>
               <div class="flex items-center">
                 <%= inline_svg_tag("icons/location.svg", class: "w-[16px] h-[16px] mr-1") %>
