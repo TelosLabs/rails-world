@@ -5,6 +5,7 @@ class CreateSessions < ActiveRecord::Migration[7.1]
       t.string :description
       t.datetime :starts_at, null: false
       t.datetime :ends_at, null: false
+      t.json :sent_reminders, default: []
       t.references :location, null: false, foreign_key: true
       t.references :conference, null: false, foreign_key: true
 
