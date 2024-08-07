@@ -5,36 +5,28 @@
       <div class="c-event-card__speaker-img">
       </div>
       <div>
-        <div class="c-event-card__speaker-title">Melia Antiqua</div>
-        <div class="c-event-card__speaker-subtitle">CTO, Bionis, Inc.</div>
+        <div class="c-event-card__speaker-title"><%= @speaker.name %></div>
+        <div class="c-event-card__speaker-subtitle"><%= @speaker.job_title %></div>
       </div>
     </div>
     <div class="c-event-card__title">
-      Level up performance with simple coding changes
+      <%= @session.title %>
     </div>
     <div class="c-event-card__tags">
-      <div class="c-event-card__tags-tag">Front-end</div>
-      <div class="c-event-card__tags-tag">Tailwind</div>
-      <div class="c-event-card__tags-tag">CSS</div>
+      <% @session.tags.each do |tag| %>
+        <div class="c-event-card__tags-tag"><%= tag.name %></div>
+      <% end %>
     </div>
 
     <div class="c-event-card__description">
-      This presentation will first highlight some of the major improvements Bionis, Inc. has achieved using straightforward Ruby techniques and her approach to solving technical problems centers around ensuring the continued stability and extensibility for individual developers and companies large and small.
+      <%= @session.description %>
     </div>
 
     <div class="c-event-card__time">
       <div class="c-event-card__time-icon">
       </div>
       <div class="c-event-card__time-item">
-        Thursday, Sept 26
-      </div>
-    </div>
-
-    <div class="c-event-card__time">
-      <div class="c-event-card__time-icon">
-      </div>
-      <div class="c-event-card__time-item">
-        18:00 - 20:00
+        <%= @session.starts_at.strftime("%A, %b %d") %>
       </div>
     </div>
 
@@ -42,7 +34,15 @@
       <div class="c-event-card__time-icon">
       </div>
       <div class="c-event-card__time-item">
-        Alabama Arena
+        <%= @session.starts_at.strftime("%H:%M") %> - <%= @session.ends_at.strftime("%H:%M") %>
+      </div>
+    </div>
+
+    <div class="c-event-card__time">
+      <div class="c-event-card__time-icon">
+      </div>
+      <div class="c-event-card__time-item">
+        <%= @session.location.name %>
       </div>
     </div>
   </div>
