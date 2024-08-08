@@ -7,6 +7,9 @@ default: &default
           class: LitestreamVerificationJob
           args: []
           schedule: every day at 1am EST
+        session_reminder:
+          class: SessionReminderJob
+          schedule: every minute
   workers:
     - queues: "*"
       threads: 3

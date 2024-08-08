@@ -86,3 +86,7 @@ Run tests by using `bundle exec rspec`.
 - If you want to see the logs you can use `:log`, e.g. `it "xxx", :log do`
 - Use `data-test-id` to find elements instead of classes/ids, e.g. `data-test-id="decline_modal"`
 - Use the methods in the `DataTestId` module to select HTML elements, e.g., `find_dti("decline_modal")`
+
+## Feature Flags
+
+Use ENV variables to enable features, the name should follow the convention `"#{feature_name}_ENABLED"`. For example, to enable the `payment` feature, use `ENV["PAYMENT_ENABLED"]="true"`.
