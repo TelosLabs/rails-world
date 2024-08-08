@@ -12,7 +12,8 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="flex flex-col h-full bg-gray-8">
+  <body class="flex flex-col h-full bg-gray-8"
+  <%= user_signed_in? ? "data-controller=web-push-notifications data-web-push-notifications-vapid-key-value=#{vapid_public_key}" : '' %>>
     <main class="relative flex flex-col flex-1 w-full mx-auto overflow-auto">
       <% if show_header? %>
         <%= render partial: "layouts/header" %>

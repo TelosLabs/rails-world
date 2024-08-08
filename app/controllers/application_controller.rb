@@ -15,6 +15,6 @@ class ApplicationController < ActionController::Base
     return nil if Rails.env.test?
 
     vapid_key = Rails.application.credentials.dig(:vapid, :public_key)
-    Base64.urlsafe_decode64(vapid_key).bytes
+    Base64.urlsafe_decode64(vapid_key).bytes.to_json
   end
 end

@@ -12,24 +12,30 @@ export default class extends Controller {
     if (Notification.permission === 'granted') {
       this.setUpSubscription()
     } else {
-      this.promptNotificationPermission()
+      if (this.hasEnableNotificationsTarget) {
+        this.handleNotificationToggle()
+      }
     }
   }
 
-  promptNotificationPermission () {
+  handleNotificationToggle () {
     this.enableNotificationsTarget.addEventListener('change', (event) => {
       if (!event.target.checked) { return }
 
-      Notification.requestPermission()
-        .then((permission) => {
-          if (permission === 'granted') {
-            this.setUpSubscription()
-          } else if (permission === 'denied') {
-            console.warn('Notifications Denied.')
-          }
-        })
-        .catch((error) => { console.error(error) })
+      this.promptNotificationPermission()
     })
+  }
+
+  promptNotificationPermission () {
+    Notification.requestPermission()
+      .then((permission) => {
+        if (permission === 'granted') {
+          this.setUpSubscription()
+        } else if (permission === 'denied') {
+          console.warn('Notifications Denied.')
+        }
+      })
+      .catch((error) => { console.error(error) })
   }
 
   async setUpSubscription () {

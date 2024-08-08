@@ -3,11 +3,8 @@
   url: notifications_settings_path,
   method: :put,
   class: "flex flex-col items-center w-full",
-  data: {
-    controller: "form web-push-notifications",
-    form_target: 'form',
-    web_push_notifications_vapid_key_value: vapid_public_key
-  }) do |form| %>
+  data: { controller: "form", form_target: 'form' }
+  ) do |form| %>
     <div class="flex items-center mt-10">
       <%= form.label :in_app_notifications, "In-app notifications", class: "grow font-medium text-slate-900 text-base cursor-pointer mr-2" %>
       <label>
