@@ -12,7 +12,7 @@
           </div>
         <% end %>
         <div class="flex flex-col items-start ml-5">
-          <div class="text-xl italic font-black text-red"> <%= @profile.name.presence || "Anonymous" %> </div>
+          <div class="text-xl italic font-black text-secondary-500"> <%= @profile.name.presence || "Anonymous" %> </div>
           <% if @profile.job_title.present? %>
             <div class="text-lg"><%= @profile.job_title %></div>
           <% end %>
@@ -26,7 +26,7 @@
           @profile.github_url,
           class: [
             "flex flex-row grow items-center justify-center w-28 h-14 rounded-lg mt-6",
-            "bg-red": @profile.github_url.present?,
+            "bg-secondary-500": @profile.github_url.present?,
             "bg-gray-6 cursor-not-allowed": @profile.github_url.blank?
           ]
         ) do %>
@@ -36,7 +36,7 @@
           @profile.twitter_url,
           class: [
             "flex flex-row grow items-center justify-center w-28 h-14 rounded-lg mt-6",
-            "bg-red": @profile.twitter_url.present?,
+            "bg-secondary-500": @profile.twitter_url.present?,
             "bg-gray-6 cursor-not-allowed": @profile.twitter_url.blank?
           ]
         ) do %>
@@ -46,7 +46,7 @@
           @profile.linkedin_url,
           class: [
             "flex flex-row grow items-center justify-center w-28 h-14 rounded-lg mt-6",
-            "bg-red": @profile.linkedin_url.present?,
+            "bg-secondary-500": @profile.linkedin_url.present?,
             "bg-gray-6 cursor-not-allowed": @profile.linkedin_url.blank?
           ]
         ) do %>
@@ -59,13 +59,13 @@
 
   <% if allowed_to?(:edit?, @profile, with: ProfilePolicy) %>
     <div class="flex flex-col items-center w-full gap-4 p-4">
-      <%= link_to 'Edit Profile', edit_profile_path(@profile.uuid), class: "text-red font-bold rounded-sm underline italic text-lg" %>
+      <%= link_to 'Edit Profile', edit_profile_path(@profile.uuid), class: "text-secondary-500 font-bold rounded-sm underline italic text-lg" %>
     </div>
 
     <%= button_to(
       "Log out", user_session_path, method: :delete,
       form_class: "w-full max-w-screen-sm px-4",
-      class: "w-full bg-red py-4 text-white font-black italic rounded-[10px] uppercase mb-6"
+      class: "w-full bg-secondary-500 py-4 text-white font-black italic rounded-[10px] uppercase mb-6"
     ) %>
   <% end %>
 </div>
