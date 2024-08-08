@@ -7,18 +7,30 @@ export default class extends Controller {
   static targets = ['enableNotifications']
 
   connect () {
-    if (Notification.permission === 'denied') {
-      if (!this.inAppNotificationsValue) return
+    switch (Notification.permission) {
+      case 'denied':
+        this.handleDeniedPermission()
+        break
+      case 'granted':
+        this.setUpSubscription()
+        break
+      default:
+        this.handleDefaultPermission()
+        break
+    }
+  }
 
-      this.displayNotificationBlockingMessage()
-    } else if (Notification.permission === 'granted') {
-      this.setUpSubscription()
-    } else {
-      if (this.hasEnableNotificationsTarget) {
-        this.handleNotificationToggle()
-      } else if (this.inAppNotificationsValue) {
-        this.promptNotificationPermission()
-      }
+  handleDeniedPermission () {
+    if (!this.inAppNotificationsValue) return
+
+    this.displayNotificationBlockingMessage()
+  }
+
+  handleDefaultPermission () {
+    if (this.hasEnableNotificationsTarget) {
+      this.handleNotificationToggle()
+    } else if (this.inAppNotificationsValue) {
+      this.promptNotificationPermission()
     }
   }
 
