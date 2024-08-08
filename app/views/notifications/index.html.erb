@@ -1,5 +1,5 @@
 <div class="flex flex-col items-center flex-1 p-5">
-  <div class="flex flex-col items-start w-full max-w-screen-sm">
+  <div class="flex flex-col items-start w-full max-w-screen-sm flex-1">
     <h1 class="mb-6 text-[34px] mb-4 font-bold italic">Notifications</h1>
     <h2 class="text-[23px] mb-4 font-bold italic">Recent</h2>
     <div class="flex flex-col w-full gap-4">
@@ -9,6 +9,8 @@
     <div class="flex flex-col w-full gap-4">
       <%= render partial: "card", locals: { profile: current_user.profile, message: "message"} %>
     </div>
+  </div>
+  <div class="flex flex-col items-start w-full max-w-screen-sm">
     <div class="flex flex-col items-center w-full mt-10 mb-10">
       <%= link_to 'Notification settings', notifications_settings_path, class: "text-red font-bold  text-center rounded-sm underline italic text-lg" %>
     </div>
