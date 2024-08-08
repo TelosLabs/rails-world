@@ -44,3 +44,7 @@
 /node_modules
 
 .idea/
+*.DS_Store
+
+# Ignore asdf version files
+/.tool-versions
