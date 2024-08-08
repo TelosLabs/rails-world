@@ -11,8 +11,7 @@ export default class extends Controller {
       if (!this.inAppNotificationsValue) return
 
       this.displayNotificationBlockingMessage()
-    }
-    else if (Notification.permission === 'granted') {
+    } else if (Notification.permission === 'granted') {
       this.setUpSubscription()
     } else {
       if (this.hasEnableNotificationsTarget) {
@@ -44,10 +43,10 @@ export default class extends Controller {
   }
 
   displayNotificationBlockingMessage () {
-    const notificationBlockingMessage = document.getElementById("notification_blocking_message")
+    const notificationBlockingMessage = document.getElementById('notification_blocking_message')
     if (!notificationBlockingMessage) return
 
-    notificationBlockingMessage.classList.remove("hidden");
+    notificationBlockingMessage.classList.remove('hidden')
   }
 
   async setUpSubscription () {
