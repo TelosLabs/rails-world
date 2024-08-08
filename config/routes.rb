@@ -17,4 +17,7 @@ Rails.application.routes.draw do
   end
   resource :about, only: [:show]
   resources :profiles, only: [:show, :edit, :update], param: :uuid
+
+  get "/service-worker.js" => "service_worker#service_worker"
+  get "/manifest.json" => "service_worker#manifest"
 end
