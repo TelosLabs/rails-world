@@ -7,9 +7,12 @@ export default class extends Controller {
   static targets = ['enableNotifications']
 
   connect () {
-    if (Notification.permission === 'denied') return
+    if (Notification.permission === 'denied') {
+      if (!this.inAppNotificationsValue) return
 
-    if (Notification.permission === 'granted') {
+      this.displayNotificationBlockingMessage()
+    }
+    else if (Notification.permission === 'granted') {
       this.setUpSubscription()
     } else {
       if (this.hasEnableNotificationsTarget) {
@@ -34,10 +37,17 @@ export default class extends Controller {
         if (permission === 'granted') {
           this.setUpSubscription()
         } else if (permission === 'denied') {
-          console.warn('Notifications Denied.')
+          this.displayNotificationBlockingMessage()
         }
       })
       .catch((error) => { console.error(error) })
+  }
+
+  displayNotificationBlockingMessage () {
+    const notificationBlockingMessage = document.getElementById("notification_blocking_message")
+    if (!notificationBlockingMessage) return
+
+    notificationBlockingMessage.classList.remove("hidden");
   }
 
   async setUpSubscription () {
