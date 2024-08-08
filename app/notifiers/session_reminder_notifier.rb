@@ -5,6 +5,17 @@ class SessionReminderNotifier < ApplicationNotifier
     config.if = -> { recipient.profile&.mail_notifications }
   end
 
+  deliver_by :webpush, class: "DeliveryMethods::Webpush" do |config|
+    config.payload_message = -> {
+      {
+        title: title,
+        body: record.title,
+        icon: "/pwa_home_screen_icon.png"
+      }
+    }
+    config.if = -> { recipient.profile&.in_app_notifications }
+  end
+
   notification_methods do
     def title
       if params[:time_before_session].match?(/^0\s/)
