@@ -15,6 +15,9 @@ en:
     profiles:
       update:
         success: "Your profile has been updated successfully."
+    notifications_settings:
+      update:
+        success: "Your notifications settings have been updated successfully."
     sessions:
       create:
         notice: "Signed in successfully."
