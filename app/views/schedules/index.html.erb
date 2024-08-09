@@ -1,87 +1,27 @@
 <div class="flex flex-col items-center bg-gray-light">
   <div class="flex flex-col items-center w-full max-w-screen-md px-5 py-10">
     <div class="flex w-full mb-4">
-      <div class="flex">
-        <h1 class="text-4xl italic font-black text-gray-800">My Schedule</h1>
-      </div>
+      <h1 class="text-4xl italic font-black text-gray-800">My Schedule</h1>
     </div>
 
     <div class="flex justify-between w-full mb-6">
-      <div class="flex gap-2">
-        <%= link_to 'All dates', sessions_path, class: "flex items-center px-5 py-1.5 rounded-full font-medium #{request.params[:on_date] == nil ? "bg-red text-white" : "bg-white text-red"}" %>
-        <%= link_to 'Tue, 12', sessions_path(on_date: '12-08-2024'), class: "flex items-center px-4 py-1.5 font-medium rounded-full #{request.params[:on_date] == '12-08-2024' ? "bg-red text-white" : "bg-white text-red"}" %>
-        <%= link_to 'Wed, 13', sessions_path(on_date: '13-08-2024'), class: "flex items-center px-4 py-1.5 font-medium rounded-full #{request.params[:on_date] == '13-08-2024' ? "bg-red text-white" : "bg-white text-red"}" %>
+      <div class="flex items-center gap-2 overflow-x-scroll no-scrollbar">
+        <%= link_to 'All dates', sessions_path, class: "flex min-w-fit items-center justify-center px-4 py-2 rounded-full font-medium #{session_pill_class}" %>
+        <% current_conference.session_dates.each do |session_date| %>
+          <%= link_to session_date.strftime("%a, %d"),
+                      sessions_path(on_date: session_date),
+                      class: "flex min-w-fit items-center justify-center px-4 py-2 font-medium rounded-full #{session_pill_class(session_date)}" %>
+        <% end %>
       </div>
 
-      <div class="flex items-center justify-center p-2 bg-white rounded-full">
+      <div class="flex items-center justify-center ml-3 p-2 bg-white rounded-full min-w-[40px] min-h-[40px]">
         <%= inline_svg_tag("icons/filters.svg", size: "18") %>
       </div>
     </div>
 
     <div class="flex flex-col w-full h-full">
-      <% if @sessions.presence %>
-        <% @sessions.each do |session| %>
-          <div class="flex flex-col w-full p-5 mb-4 bg-white rounded-[20px]">
-            <div class="flex flex-col w-full">
-              <div class="flex justify-between w-full mb-4">
-                <div class="flex">
-                  <%= image_tag("placeholder.png", class: "w-[48px] h-[48px] mr-5 rounded-full object-cover") %>
-                  <div class="flex flex-col justify-center h-full">
-                    <a href="<%= speaker_path(session.speakers.first) %>">
-                      <h2 class="italic font-black text-red"><%= session.speakers.first.profile.name %></h2>
-                      <p class="text-sm text-gray-800"><%= session.speakers.first.profile.job_title %></p>
-                    </a>
-                  </div>
-                </div>
-                <div class="flex items-center px-1">
-                  <%= button_to schedule_path(id: session.id, on_date: request.params[:on_date]), method: :put, form_class: "flex items-center" do %>
-                    <% if current_user.sessions.include?(session) %>
-                      <%= inline_svg_tag("icons/bookmark-full.svg") %>
-                    <% else %>
-                      <%= inline_svg_tag("icons/bookmark-outline.svg") %>
-                    <% end %>
-                  <% end %>
-                </div>
-              </div>
-
-              <div class="flex flex-col mb-4">
-                <a href="<%= session_path(session) %>">
-                  <h3 class="text-xl italic font-bold text-red"><%= session.title %></h3>
-                </a>
-              </div>
-
-              <div class="flex flex-wrap w-full gap-2 mb-4">
-                <% session.tags.each do |tag| %>
-                  <div class="px-3 py-1.5 text-sm font-medium bg-transparent border rounded-lg border-bluegray text-bluegray">
-                    <%= tag.name %>
-                  </div>
-                <% end %>
-              </div>
-
-              <div class="flex flex-col">
-                <div class="flex items-center mb-3">
-                  <%= inline_svg_tag("icons/calendar.svg", class: "w-[16px] h-[16px] mr-1") %>
-                  <span class="font-sans text-sm text-gray-600"><%= session.starts_at.strftime("%A, %d %B %Y") %></span>
-                </div>
-                <div class="flex items-center mb-3">
-                  <%= inline_svg_tag("icons/clock.svg", class: "w-[16px] h-[16px] mr-1") %>
-                  <span class="font-sans text-sm text-gray-600"><%= session.starts_at.strftime("%H:%M") %> - <%= session.ends_at.strftime("%H:%M") %></span>
-                </div>
-                <div class="flex items-center">
-                  <%= inline_svg_tag("icons/location.svg", class: "w-[16px] h-[16px] mr-1") %>
-                  <span class="font-sans text-sm text-gray-600"><%= session.location.name %></span>
-                </div>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      <% else %>
-        <div class="flex flex-col items-center justify-center w-full h-full">
-          <div class="flex flex-col items-center justify-center w-full h-full">
-            <h2 class="text-xl font-bold text-gray-800">No sessions scheduled</h2>
-            <p class="text-sm text-gray-600">You haven't added any sessions to your schedule yet.</p>
-          </div>
-        </div>
+      <% @sessions.each do |session| %>
+        <%= render partial:'sessions/card', locals: { session: session, speaker: session.speakers.first} %>
       <% end %>
     </div>
   </div>
