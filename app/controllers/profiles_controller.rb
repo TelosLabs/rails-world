@@ -1,4 +1,6 @@
 class ProfilesController < ApplicationController
+  allow_unauthenticated_access only: %i[show]
+
   before_action :set_profile
 
   def show
