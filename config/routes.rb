@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resource :notifications_settings, only: [:show, :update]
   resource :about, only: [:show]
   resources :profiles, only: [:show, :edit, :update], param: :uuid
+  resource :read_notifications, only: [:create]
 
   get "/service-worker.js" => "service_worker#service_worker"
   get "/manifest.json" => "service_worker#manifest"
