@@ -3,33 +3,62 @@
 import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
-  static values = { vapidKey: String }
+  static values = { vapidKey: String, inAppNotifications: Boolean }
   static targets = ['enableNotifications']
 
   connect () {
-    if (Notification.permission === 'denied') return
+    switch (Notification.permission) {
+      case 'denied':
+        this.handleDeniedPermission()
+        break
+      case 'granted':
+        this.setUpSubscription()
+        break
+      default:
+        this.handleDefaultPermission()
+        break
+    }
+  }
 
-    if (Notification.permission === 'granted') {
-      this.setUpSubscription()
-    } else {
+  handleDeniedPermission () {
+    if (!this.inAppNotificationsValue) return
+
+    this.displayNotificationBlockingMessage()
+  }
+
+  handleDefaultPermission () {
+    if (this.hasEnableNotificationsTarget) {
+      this.handleNotificationToggle()
+    } else if (this.inAppNotificationsValue) {
       this.promptNotificationPermission()
     }
   }
 
-  promptNotificationPermission () {
+  handleNotificationToggle () {
     this.enableNotificationsTarget.addEventListener('change', (event) => {
       if (!event.target.checked) { return }
 
-      Notification.requestPermission()
-        .then((permission) => {
-          if (permission === 'granted') {
-            this.setUpSubscription()
-          } else if (permission === 'denied') {
-            console.warn('Notifications Denied.')
-          }
-        })
-        .catch((error) => { console.error(error) })
+      this.promptNotificationPermission()
     })
+  }
+
+  promptNotificationPermission () {
+    Notification.requestPermission()
+      .then((permission) => {
+        if (permission === 'granted') {
+          this.setUpSubscription()
+        } else if (permission === 'denied') {
+          this.displayNotificationBlockingMessage()
+        }
+      })
+      .catch((error) => { console.error(error) })
+  }
+
+  displayNotificationBlockingMessage () {
+    const notificationBlockingMessage = document.getElementById('notification_blocking_message')
+    if (!notificationBlockingMessage) return
+
+    notificationBlockingMessage.classList.remove('hidden')
   }
 
   async setUpSubscription () {

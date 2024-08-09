@@ -3,11 +3,8 @@
   url: notifications_settings_path,
   method: :put,
   class: "flex flex-col items-center w-full",
-  data: {
-    controller: "form web-push-notifications",
-    form_target: 'form',
-    web_push_notifications_vapid_key_value: vapid_public_key
-  }) do |form| %>
+  data: { controller: "form", form_target: 'form' }
+  ) do |form| %>
     <div class="flex items-center mt-10">
       <%= form.label :in_app_notifications, "In-app notifications", class: "grow font-medium text-slate-900 text-base cursor-pointer mr-2" %>
       <label>
@@ -16,4 +13,9 @@
         <div class="relative w-11 h-6 bg-gray-6 rounded-full peer dark:bg-gray-6 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red"></div>
       </label>
     </div>
+
+    <p class="hidden mt-4" id="notification_blocking_message">
+      It looks like you've blocked notifications. To stay updated,
+      please enable notifications in your browser settings.
+    </p>
 <% end %>
