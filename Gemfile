@@ -43,7 +43,6 @@ gem "validates_timeliness", "~> 7.0.0.beta1"
 gem "web-push"
 
 group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "better_errors"
   gem "binding_of_caller"
   gem "brakeman"
@@ -80,4 +79,12 @@ group :test do
   gem "rspec-instafail", require: false
   gem "rspec-retry"
   gem "timecop"
+end
+
+group :staging, :production do
+  gem "appsignal"
+  gem "aws-sdk-s3", require: false
+  gem "litestream", "~> 0.10.4"
+  gem "lograge"
+  gem "mailpace-rails"
 end
