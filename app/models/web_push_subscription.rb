@@ -28,8 +28,8 @@ class WebPushSubscription < ApplicationRecord
       p256dh: p256dh,
       auth: auth,
       vapid: {
-        public_key: Rails.application.credentials.dig(:vapid, :public_key),
-        private_key: Rails.application.credentials.dig(:vapid, :private_key)
+        public_key: ENV["VAPID_PUBLIC_KEY"],
+        private_key: ENV["VAPID_PRIVATE_KEY"]
       }
     )
   end

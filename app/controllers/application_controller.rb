@@ -12,9 +12,6 @@ class ApplicationController < ActionController::Base
   def current_profile = current_user&.profile
 
   def vapid_public_key
-    return nil if Rails.env.test?
-
-    vapid_key = Rails.application.credentials.dig(:vapid, :public_key)
-    Base64.urlsafe_decode64(vapid_key).bytes.to_json
+    Base64.urlsafe_decode64(ENV["VAPID_PUBLIC_KEY"]).bytes.to_json
   end
 end
