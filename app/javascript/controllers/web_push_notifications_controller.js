@@ -72,7 +72,6 @@ export default class extends Controller {
       return
     }
 
-    await navigator.serviceWorker.register('/service_worker.js')
     const registration = await navigator.serviceWorker.ready
     let subscription = await registration.pushManager.getSubscription()
 
