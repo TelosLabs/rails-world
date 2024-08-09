@@ -1,6 +1,6 @@
-class CreateWebpushSubscriptions < ActiveRecord::Migration[7.1]
+class CreateWebPushSubscriptions < ActiveRecord::Migration[7.1]
   def change
-    create_table :webpush_subscriptions do |t|
+    create_table :web_push_subscriptions do |t|
       t.string :endpoint, null: false
       t.string :p256dh, null: false
       t.string :auth, null: false

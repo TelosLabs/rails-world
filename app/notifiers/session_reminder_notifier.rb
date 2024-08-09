@@ -5,7 +5,7 @@ class SessionReminderNotifier < ApplicationNotifier
     config.if = -> { recipient.profile&.mail_notifications }
   end
 
-  deliver_by :webpush, class: "DeliveryMethods::Webpush" do |config|
+  deliver_by :web_push, class: "DeliveryMethods::WebPush" do |config|
     config.payload_message = -> {
       {
         title: title,

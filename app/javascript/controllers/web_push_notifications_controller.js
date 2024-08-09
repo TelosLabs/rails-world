@@ -89,7 +89,7 @@ export default class extends Controller {
   }
 
   async sendSubscriptionToServer (subscription) {
-    await fetch('/webpush_subscription', {
+    await fetch('/web_push_subscription', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

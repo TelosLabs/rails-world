@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: webpush_subscriptions
+# Table name: web_push_subscriptions
 #
 #  id         :integer          not null, primary key
 #  auth       :string           not null
@@ -12,9 +12,9 @@
 #
 # Indexes
 #
-#  index_webpush_subscriptions_on_user_id  (user_id)
+#  index_web_push_subscriptions_on_user_id  (user_id)
 #
-class WebpushSubscription < ApplicationRecord
+class WebPushSubscription < ApplicationRecord
   belongs_to :user
 
   validates :auth, presence: true

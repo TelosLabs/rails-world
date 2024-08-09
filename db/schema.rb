@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_07_150821) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_30_231514) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -162,14 +162,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_07_150821) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  create_table "webpush_subscriptions", force: :cascade do |t|
+  create_table "web_push_subscriptions", force: :cascade do |t|
     t.string "endpoint", null: false
     t.string "p256dh", null: false
     t.string "auth", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_webpush_subscriptions_on_user_id"
+    t.index ["user_id"], name: "index_web_push_subscriptions_on_user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -183,5 +183,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_07_150821) do
   add_foreign_key "sessions_tags", "tags"
   add_foreign_key "sessions_users", "sessions"
   add_foreign_key "sessions_users", "users"
-  add_foreign_key "webpush_subscriptions", "users"
+  add_foreign_key "web_push_subscriptions", "users"
 end

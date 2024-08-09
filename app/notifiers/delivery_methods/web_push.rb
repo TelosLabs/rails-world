@@ -1,6 +1,6 @@
-class DeliveryMethods::Webpush < Noticed::DeliveryMethod
+class DeliveryMethods::WebPush < Noticed::DeliveryMethod
   def deliver
-    recipient.webpush_subscriptions.each do |subscription|
+    recipient.web_push_subscriptions.each do |subscription|
       subscription.publish(evaluate_option(:payload_message))
     rescue WebPush::ExpiredSubscription => e
       Rails.logger.error(e.message)
