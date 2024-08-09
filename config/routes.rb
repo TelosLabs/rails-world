@@ -13,8 +13,6 @@ Rails.application.routes.draw do
 
   root "user_sessions#new"
 
-  get "up" => "rails/health#show", :as => :rails_health_check
-
   resource :registration, only: [:new, :create]
   resource :user_session, only: [:new, :create, :destroy]
   resource :password, only: [:edit, :update]
@@ -24,4 +22,11 @@ Rails.application.routes.draw do
   resource :password_reset, only: [:new, :create, :edit, :update] do
     get :post_submit
   end
+
+  resource :about, only: [:show]
+  resources :profiles, only: [:show], param: :uuid
+
+  get "up" => "rails/health#show", :as => :rails_health_check
+  get "/service-worker.js" => "service_worker#service_worker"
+  get "/manifest.json" => "service_worker#manifest"
 end
