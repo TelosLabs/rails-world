@@ -1,22 +1,26 @@
 <div class="flex flex-col items-center flex-1 p-5">
   <div class="flex flex-col items-start flex-1 w-full max-w-screen-sm">
     <h1 class="mb-6 text-[34px] mb-4 font-bold italic">Notifications</h1>
-    <h2 class="text-[23px] mb-4 font-bold italic">Recent</h2>
-    <div class="flex flex-col w-full gap-4">
-      <%= render(
-        partial: "notification",
-        collection: @notifications,
-        as: :notification
-      ) %>
-    </div>
-    <h2 class="text-[23px] mb-4 font-bold italic mt-10">Past</h2>
-    <div class="flex flex-col w-full gap-4">
-      <%= render(
-        partial: "notification",
-        collection: @notifications,
-        as: :notification
-      ) %>
-    </div>
+    <% if @recent_notifications.present? %>
+      <h2 class="text-[23px] mb-4 font-bold italic">Recent</h2>
+      <div class="flex flex-col w-full gap-4">
+        <%= render(
+          partial: "notification",
+          collection: @recent_notifications,
+          as: :notification
+        ) %>
+      </div>
+    <% end %>
+    <% if @past_notifications.present? %>
+      <h2 class="text-[23px] mb-4 font-bold italic mt-10">Past</h2>
+      <div class="flex flex-col w-full gap-4">
+        <%= render(
+          partial: "notification",
+          collection: @past_notifications,
+          as: :notification
+        ) %>
+      </div>
+    <% end %>
   </div>
   <div class="flex flex-col items-start w-full max-w-screen-sm">
     <div class="flex flex-col items-center w-full mt-10 mb-10">
