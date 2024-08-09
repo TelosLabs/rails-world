@@ -3,32 +3,106 @@ import { Controller } from '@hotwired/stimulus'
 export default class extends Controller {
   static targets = ['element']
   connect () {
-    this.elementTarget.addEventListener('mousedown', this.onMouseDown.bind(this))
-    window.addEventListener('mouseup', this.onMouseUp.bind(this))
-    window.addEventListener('mousemove', this.onMouseMove.bind(this))
+    console.log(this.isMobileDevice())
+    if(this.isMobileDevice()){
+      this.elementTarget.addEventListener('touchstart', this.onMouseDownTouch.bind(this))
+      window.addEventListener('touchend', this.onMouseUpTouch.bind(this))
+      window.addEventListener('touchmove', this.onMouseMoveTouch.bind(this))
+    }else{
+      this.elementTarget.addEventListener('mousedown', this.onMouseDown.bind(this))
+      window.addEventListener('mouseup', this.onMouseUp.bind(this))
+      window.addEventListener('mousemove', this.onMouseMove.bind(this))
+    }
   }
 
   disconnect () {
-    if (this.hasElementTarget) {
-      this.elementTarget.removeEventListener('mousedown', this.onMouseDown.bind(this))
+    this.removeEventListeners()
+  }
+
+  removeEventListeners(){
+    if(this.isMobileDevice()){
+      if (this.hasElementTarget) {
+        this.elementTarget.removeEventListener('touchstart', this.onMouseDownTouch.bind(this))
+      }
+      window.addEventListener('touchend', this.onMouseUpTouch.bind(this))
+      window.addEventListener('touchmove', this.onMouseMoveTouch.bind(this))
+    }else{
+      if (this.hasElementTarget) {
+        this.elementTarget.removeEventListener('mousedown', this.onMouseDown.bind(this))
+      }
+      window.removeEventListener('mouseup', this.onMouseUp.bind(this))
+      window.removeEventListener('mousemove', this.onMouseMove.bind(this))
     }
-    window.removeEventListener('mouseup', this.onMouseUp.bind(this))
-    window.removeEventListener('mousemove', this.onMouseMove.bind(this))
   }
 
   onMouseDown (event) {
     if (!this._active) {
       this._startPos = { x: event.clientX, y: event.clientY }
       this._active = true
-      this._scheduledAnimationFrame = false
+    }
+  }
+
+  onMouseDownTouch (event) {
+    if (!this._active) {
+      const clientX = event.touches[0].clientX;
+      const clientY = event.touches[0].clientY;
+      this._startPos = { x: clientX, y: clientY }
+      this._active = true
     }
   }
 
   onMouseUp (event) {
     this._active = false
+    this.updateElementToFinalTransitionIfPassedTreshold(
+      this._startPos.x, 
+      this._startPos.y, 
+      event.clientX, 
+      event.clientY)
+  }
 
-    const dx = event.clientX - this._startPos.x
-    const dy = event.clientY - this._startPos.y
+  onMouseUpTouch (event) {
+    this._active = false
+
+    const clientX = event.changedTouches[0].clientX;
+    const clientY = event.changedTouches[0].clientY;
+
+    this.updateElementToFinalTransitionIfPassedTreshold(
+      this._startPos.x,
+      this._startPos.y,
+      clientX,
+      clientY
+    )
+    
+  }
+
+  onMouseMove (event) {
+    if (!this._active) return
+
+    this.updateElementPositionAndOpacityUpToTreshold(
+      this._startPos.x,
+      this._startPos.y,
+      event.clientX,
+      event.clientY
+    )
+  }
+
+  onMouseMoveTouch (event) {
+    if (!this._active) return
+    
+    const clientX = event.touches[0].clientX;
+    const clientY = event.touches[0].clientY; 
+
+    this.updateElementPositionAndOpacityUpToTreshold(
+      this._startPos.x,
+      this._startPos.y,
+      clientX,
+      clientY
+    )
+  }
+
+  updateElementToFinalTransitionIfPassedTreshold(initialPosX, initialPosY, finalPosX, finalPosY){
+    const dx = finalPosX - initialPosX;
+    const dy = finalPosY - initialPosY;
 
     const horizontalDir = Math.abs(dx) > Math.abs(dy)
     const horizontalThreshold = 120
@@ -52,19 +126,14 @@ export default class extends Controller {
     this.elementTarget.style.opacity = opacity
     if (opacity === 0) {
       setTimeout(() => {
-        this.elementTarget.remove()
-        window.removeEventListener('mouseup', this.onMouseUp.bind(this))
-        window.removeEventListener('mousemove', this.onMouseMove.bind(this))
+        this.removeEventListeners()
       }, 500)
     }
   }
 
-  onMouseMove (event) {
-    if (!this._active) return
-
-    const dx = event.clientX - this._startPos.x
-    const dy = event.clientY - this._startPos.y
-
+  updateElementPositionAndOpacityUpToTreshold(initialPosX, initialPosY, clientX, clientY){
+    const dx = clientX - initialPosX
+    const dy = clientY - initialPosY
     const horizontalDir = Math.abs(dx) > Math.abs(dy)
     const horizontalThreshold = 120
     const verticalThreshold = 40
@@ -94,5 +163,9 @@ export default class extends Controller {
 
     this.elementTarget.style.transform = `translate(${translateX}px, ${translateY}px)`
     this.elementTarget.style.opacity = opacity
+  }
+
+  isMobileDevice() {
+    return /mobile/i.test(navigator.userAgent);
   }
 }
