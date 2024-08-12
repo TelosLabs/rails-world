@@ -1,5 +1,5 @@
 class SessionReminderJob < ApplicationJob
-  REMINDER_TIME_BEFORE_EVENT = [5.minutes].freeze
+  REMINDER_TIME_BEFORE_EVENT = [10.minutes].freeze
 
   def perform
     if Feature.disabled?(:session_reminders)
