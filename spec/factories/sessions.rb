@@ -32,7 +32,7 @@ FactoryBot.define do
     end
 
     trait :live do
-      starts_at { 1.hour.ago }
+      starts_at { 30.minutes.ago }
     end
 
     trait :starting_soon do

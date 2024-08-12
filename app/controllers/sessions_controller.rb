@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def index
     @sessions = SessionQuery.new(
-      params: filter_params.to_h,
+      params: filter_params,
       includes: [:location, :speakers, :tags]
     ).call
   end

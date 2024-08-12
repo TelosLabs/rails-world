@@ -24,11 +24,34 @@ RSpec.describe SessionQuery, type: :query do
       end
     end
 
-    context "when filtering by multiple status" do
-      let(:params) { {live: "1", past: "1"} }
+    context "when filtering by all statuses" do
+      let(:params) { {live: "1", past: "1", starting_soon: "1"} }
 
-      it "returns live sessions" do
-        expect(session_query.call).to contain_exactly(live_session, past_session)
+      it "returns all sessions" do
+        expect(session_query.call).to contain_exactly(past_session, live_session, starting_soon_session)
+      end
+    end
+
+    # Filter by all combinations of statuses
+    SessionQuery::STATUS_SCOPES.combination(2).each do |combo|
+      context "when filtering by #{combo.join(" and ")} status" do
+        let(:params) { combo.index_with { |filter| "1" }.to_h }
+
+        it "returns #{combo.join(" and ")} sessions" do
+          expected_sessions = combo.map { |filter| send(:"#{filter}_session") }
+          expect(session_query.call).to match_array(expected_sessions)
+        end
+      end
+    end
+
+    # Filter by each status
+    SessionQuery::STATUS_SCOPES.each do |filter|
+      context "when filtering by #{filter} status" do
+        let(:params) { {filter => "1"} }
+
+        it "returns #{filter} sessions" do
+          expect(session_query.call).to contain_exactly(send(:"#{filter}_session"))
+        end
       end
     end
   end

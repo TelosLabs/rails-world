@@ -3,7 +3,7 @@ class SessionQuery
 
   def initialize(relation: Session.all, params: {}, includes: {})
     @relation = relation
-    @params = params.symbolize_keys
+    @params = params.to_h.symbolize_keys
     @includes = includes
   end
 
@@ -23,8 +23,6 @@ class SessionQuery
     return if on_date.blank?
 
     self.relation = relation.on_date(on_date)
-  rescue Date::Error
-    relation
   end
 
   def filter_by_status
@@ -32,7 +30,7 @@ class SessionQuery
   end
 
   def on_date
-    params[:on_date]&.to_date
+    @_on_date ||= params[:on_date]&.to_date
   rescue Date::Error
     nil
   end
