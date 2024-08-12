@@ -4,7 +4,7 @@ class NotificationSettingsController < ApplicationController
 
   def update
     current_user.profile.update!(permitted_params)
-    redirect_to notification_settings_path
+    redirect_to notification_settings_path, notice: t("controllers.notification_settings.update.success")
   end
 
   private

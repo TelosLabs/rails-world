@@ -14,15 +14,12 @@ Rails.application.routes.draw do
   resource :password_reset, only: [:new, :create, :edit, :update] do
     get :post_submit
   end
-
-  resources :notifications, only: [:index]
-  resource :notifications_settings, only: [:show, :update]
   resource :about, only: [:show]
   resource :notification_settings, only: [:show, :update]
 
   resources :profiles, only: [:show, :edit, :update], param: :uuid
-  resources :notifications, only: [:index]
   resources :speakers, only: [:show]
   resources :sessions, only: [:index, :show]
+  resources :notifications, only: [:index]
   resources :web_push_subscriptions, only: [:create]
 end
