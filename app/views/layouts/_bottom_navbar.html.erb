@@ -1,4 +1,4 @@
-<div class="sticky bottom-0 flex flex-row items-center justify-center gap-8 bg-white py-1 border-t border-b border-gray-7 text-[11px]">
+<div class="sticky bottom-0 flex flex-row items-center justify-center gap-6 bg-white py-1 border-t border-b border-gray-7 text-[11px]">
   <a href="<%= sessions_path %>" class="<%= nav_text_class_for [sessions_path] %> flex flex-col items-center">
     <%= inline_svg_tag "calendar.svg", class: nav_icon_class_for([sessions_path]) %>
     Agenda
@@ -11,8 +11,8 @@
     <%= inline_svg_tag "avatar_no_fill.svg", class: nav_icon_class_for([profile_path(current_profile&.uuid), edit_profile_path(current_profile&.uuid)]) %>
     Profile
   </a>
-  <a href="<%= notifications_path %>" class="<%= nav_text_class_for [root_path] %> flex flex-col items-center justify-center">
-    <%= inline_svg_tag "bell.svg", class: nav_icon_class_for([root_path]) %>
+  <a href="<%= notifications_path %>" class="<%= nav_text_class_for [notifications_path, notifications_settings_path] %> flex flex-col items-center justify-center">
+    <%= inline_svg_tag "bell.svg", class: nav_icon_class_for([notifications_path, notifications_settings_path]) %>
     Notifications
   </a>
   <a href="<%= about_path %>" class="<%= nav_text_class_for [about_path] %> flex flex-col items-center justify-center">
