@@ -28,5 +28,11 @@ en:
       remove_user:
         notice: "Session was removed from My Schedule"
         alert: "Could not remove session from My Schedule. Please try again"
+  views:
+    status_filters:
+      past: "Past"
+      live: "Live"
+      starting_soon: "Starting soon"
+      submit: "Apply"
   authorization:
     unauthorized: "You are not authorized to access this page."

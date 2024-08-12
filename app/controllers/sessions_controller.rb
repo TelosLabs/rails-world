@@ -1,7 +1,9 @@
 class SessionsController < ApplicationController
   def index
-    @sessions = Session.includes(:location, :speakers, :tags)
-    @sessions = @sessions.on_date(params[:on_date].to_date) if params[:on_date].present?
+    @sessions = SessionQuery.new(
+      params: filter_params.to_h,
+      includes: [:location, :speakers, :tags]
+    ).call
   end
 
   def show
@@ -33,5 +35,9 @@ class SessionsController < ApplicationController
     else
       flash[:alert] = I18n.t("controllers.sessions.add_user.alert")
     end
+  end
+
+  def filter_params
+    params.permit(:on_date, :live, :past, :starting_soon)
   end
 end
