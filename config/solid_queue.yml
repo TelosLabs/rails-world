@@ -3,6 +3,10 @@ default: &default
     - polling_interval: 1
       batch_size: 500
       recurring_tasks:
+        periodic_backup_verification:
+          class: LitestreamVerificationJob
+          args: []
+          schedule: every day at 1am EST
         session_reminder:
           class: SessionReminderJob
           schedule: every minute
@@ -16,6 +20,9 @@ development:
  <<: *default
 
 test:
+ <<: *default
+
+staging:
  <<: *default
 
 production:

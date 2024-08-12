@@ -87,4 +87,5 @@ Rails.application.configure do
 
   # Allow ngrok hosts
   config.hosts << /[a-z0-9.\-]+\.ngrok\.io/
+  config.hosts << ENV["NGROK_HOST"] if ENV["NGROK_HOST"]
 end

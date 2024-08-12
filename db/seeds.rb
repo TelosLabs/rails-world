@@ -1,3 +1,5 @@
+return if Rails.env.production? || Rails.env.staging?
+
 conference = Conference.find_or_create_by!(name: "RailsWorld 2024")
 
 # Users

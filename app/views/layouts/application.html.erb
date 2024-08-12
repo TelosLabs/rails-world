@@ -5,9 +5,15 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-refresh-scroll" content="preserve">
     <meta name="turbo-refresh-method" content="morph">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="<%= image_path "homescreen_icon.png" %>">
+
+    <%= render 'layouts/apple_splash_screen' %>
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <link rel="manifest" crossorigin="use-credentials" href="/manifest.json">
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
@@ -15,7 +21,7 @@
   </head>
 
   <body class="flex flex-col h-full bg-gray-8">
-    <main class="relative flex flex-col flex-1 w-full mx-auto overflow-auto">
+    <main class="flex overflow-auto relative flex-col flex-1 mx-auto w-full">
       <% if show_header? %>
         <%= render partial: "layouts/header" %>
       <% end %>
