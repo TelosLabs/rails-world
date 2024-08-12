@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     resources :profiles, only: [:edit, :update], param: :uuid
     resources :speakers, only: [:show]
     resources :sessions, only: [:index, :show]
+    resources :notifications, only: [:index]
+    resource :notifications_settings, only: [:show, :update]
   end
 
   root "user_sessions#new"
