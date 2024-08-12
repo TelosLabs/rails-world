@@ -29,7 +29,9 @@ export default class extends Controller {
   handleDefaultPermission () {
     if (this.hasEnableNotificationsTarget) {
       this.handleNotificationToggle()
-    } else if (this.inAppNotificationsValue) {
+    }
+
+    if (this.inAppNotificationsValue) {
       this.promptNotificationPermission()
     }
   }

@@ -7,10 +7,6 @@ class WebPushSubscriptionsController < ApplicationController
       user_id: current_user.id
     )
 
-    if web_push_subscription.save
-      render json: web_push_subscription, status: :created
-    else
-      render json: web_push_subscription.errors, status: :unprocessable_entity
-    end
+    web_push_subscription.save!
   end
 end
