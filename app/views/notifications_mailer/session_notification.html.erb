@@ -1,5 +1,12 @@
 <div class="container">
-  <h1 class="title">Your bookmarked session is starting now</h1>
+  <% starts_in = minutes_between(DateTime.now, @session.starts_at) %>
+  <% if starts_in > 1  && starts_in < 60 %>
+    <h1 class="title">Your bookmarked session is starting in <%= starts_in %> minutes </h1>
+  <% elsif starts_in <= 1 %>
+    <h1 class="title">Your bookmarked session is starting now</h1>
+  <% else %>
+    <h1 class="title">Your bookmarked session is starting soon </h1>
+  <% end %>
   <div class="c-event-card">
     <div class="c-event-card__speaker">
       <div class="c-event-card__speaker-img">
@@ -36,6 +43,8 @@
       <div class="c-event-card__time-item">
         <%= @session.starts_at.strftime("%H:%M") %> - <%= @session.ends_at.strftime("%H:%M") %>
       </div>
+
+      
     </div>
 
     <div class="c-event-card__time">

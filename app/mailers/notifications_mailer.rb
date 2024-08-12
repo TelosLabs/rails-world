@@ -1,5 +1,6 @@
 class NotificationsMailer < ApplicationMailer
-  default from: "notifications@railsworld.com"
+  helper :datetime
+
   def session_notification
     @user = params[:user]
     @message = params[:message]
