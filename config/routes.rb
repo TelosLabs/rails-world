@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   end
   resource :about, only: [:show]
   resource :notification_settings, only: [:show, :update]
+  resource :landing_page, only: [:show]
 
   resources :profiles, only: [:show, :edit, :update], param: :uuid
   resources :speakers, only: [:show]
