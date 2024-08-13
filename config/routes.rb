@@ -9,18 +9,18 @@ Rails.application.routes.draw do
   resource :registration, only: [:new, :create]
   resource :user_session, only: [:new, :create, :destroy]
   resource :password, only: [:edit, :update]
-  resources :speakers, only: [:show]
   resource :password_reset, only: [:new, :create, :edit, :update] do
     get :post_submit
   end
-  resources :sessions, only: [:index, :update, :show]
-  resources :schedules, only: [:index, :update, :show]
-  resources :profiles, only: [:show, :edit, :update], param: :uuid
-  resource :about, only: [:show]
-  resources :notifications, only: [:index]
   resource :notifications_settings, only: [:show, :update]
   resource :about, only: [:show]
+  resource :attendee, only: [:create, :destroy]
+
+  resources :speakers, only: [:show]
   resources :profiles, only: [:show, :edit, :update], param: :uuid
+  resources :sessions, only: [:index, :update, :show]
+  resources :schedules, only: [:index, :update, :show]
+  resources :notifications, only: [:index]
 
   get "/service-worker.js" => "service_worker#service_worker"
   get "/manifest.json" => "service_worker#manifest"

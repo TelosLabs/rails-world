@@ -6,10 +6,10 @@
 
     <div class="flex justify-between w-full mb-6">
       <div class="flex items-center gap-2 overflow-x-scroll no-scrollbar">
-        <%= link_to 'All dates', sessions_path, class: "flex min-w-fit items-center justify-center px-4 py-2 rounded-full font-medium #{session_pill_class}" %>
+        <%= link_to 'All dates', schedules_path, class: "flex min-w-fit items-center justify-center px-4 py-2 rounded-full font-medium #{session_pill_class}" %>
         <% current_conference.session_dates.each do |session_date| %>
           <%= link_to session_date.strftime("%a, %d"),
-                      sessions_path(on_date: session_date),
+                      schedules_path(on_date: session_date),
                       class: "flex min-w-fit items-center justify-center px-4 py-2 font-medium rounded-full #{session_pill_class(session_date)}" %>
         <% end %>
       </div>
@@ -21,7 +21,7 @@
 
     <div class="flex flex-col w-full h-full">
       <% @sessions.each do |session| %>
-        <%= render partial:'sessions/card', locals: { session: session, speaker: session.speakers.first} %>
+        <%= render partial:'sessions/card', locals: { session: session, speaker: session.speakers.first } %>
       <% end %>
     </div>
   </div>

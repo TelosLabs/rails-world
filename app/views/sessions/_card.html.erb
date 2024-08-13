@@ -19,10 +19,12 @@
       </div>
 
       <div class="flex items-center px-1">
-        <%= button_to session_path(id: session.id, on_date: request.params[:on_date]), method: :put, form_class: "flex items-center" do %>
-          <% if current_user.sessions.include?(session) %>
+        <% if session.attendees.include?(current_user) %>
+          <%= button_to attendee_path(session_id: session.id, on_date: request.params[:on_date]), method: :delete, form_class: "flex items-center" do %>
             <%= inline_svg_tag("icons/bookmark-full.svg") %>
-          <% else %>
+          <% end %>
+        <% else %>
+          <%= button_to attendee_path(session_id: session.id, on_date: request.params[:on_date]), form_class: "flex items-center" do %>
             <%= inline_svg_tag("icons/bookmark-outline.svg") %>
           <% end %>
         <% end %>
