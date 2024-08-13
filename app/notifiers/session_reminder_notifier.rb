@@ -28,7 +28,7 @@ class SessionReminderNotifier < ApplicationNotifier
     end
 
     def delivered_at
-      time_difference = distance_of_time_in_words(Time.zone.now, created_at, scope: "date_time.distance_in_words.short")
+      time_difference = distance_of_time_in_words(Time.current, created_at, scope: "date_time.distance_in_words.short")
       (time_difference == "now") ? time_difference : "#{time_difference} ago"
     end
   end
