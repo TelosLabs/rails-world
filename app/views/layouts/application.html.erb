@@ -2,24 +2,33 @@
 <html class="h-full">
   <head>
     <title>RailsWorld</title>
+
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
     <link rel="apple-touch-icon" href="<%= image_path "homescreen_icon.png" %>">
+    <link rel="manifest" crossorigin="use-credentials" href="/manifest.json">
 
     <%= render 'layouts/apple_splash_screen' %>
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <link rel="manifest" crossorigin="use-credentials" href="/manifest.json">
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
 
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
+    <script async src="https://ga.jspm.io/npm:es-module-shims@1.8.2/dist/es-module-shims.js" data-turbo-track="reload"></script>
+
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="flex flex-col h-full bg-gray-8">
-    <main class="flex overflow-auto relative flex-col flex-1 mx-auto w-full">
+  <body class="flex flex-col h-full bg-gray-8"
+    <%= user_signed_in? ? "data-controller=web-push-notifications
+    data-web-push-notifications-vapid-key-value=#{vapid_public_key}
+    data-web-push-notifications-in-app-notifications-value=#{current_profile.in_app_notifications}" : '' %>>
+
+    <main class="relative flex flex-col flex-1 w-full mx-auto overflow-auto">
       <% if show_header? %>
         <%= render partial: "layouts/header" %>
       <% end %>
@@ -32,6 +41,7 @@
 
       <%= yield %>
     </main>
+
     <%= render partial: "layouts/bottom_navbar" if user_signed_in? %>
   </body>
 </html>
