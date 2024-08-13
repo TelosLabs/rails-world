@@ -9,6 +9,6 @@ div.field_with_errors > label {
 div.field_with_errors > input {
   @apply w-full bg-transparent border-2 border-red
   rounded-md text-white placeholder:text-white/50
-  focus:bg-white focus:text-black focus:placeholder-gray
+  focus:bg-white focus:text-black focus:placeholder-grey-300
   focus:border-white focus:ring-white mb-2
 }
