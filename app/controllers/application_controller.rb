@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include Authentication
   include Authorization
+  include Pagy::Backend
 
   default_form_builder ApplicationFormBuilder
 
