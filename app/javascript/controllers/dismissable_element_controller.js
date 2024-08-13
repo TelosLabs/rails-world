@@ -53,7 +53,7 @@ export default class extends Controller {
 
   onMouseUp (event) {
     this._active = false
-    this.updateElementToFinalTransitionIfPassedTreshold(
+    this.updateElementToFinalTransitionIfPassedThreshold(
       this._startPos.x,
       this._startPos.y,
       event.clientX,
@@ -66,7 +66,7 @@ export default class extends Controller {
     const clientX = event.changedTouches[0].clientX
     const clientY = event.changedTouches[0].clientY
 
-    this.updateElementToFinalTransitionIfPassedTreshold(
+    this.updateElementToFinalTransitionIfPassedThreshold(
       this._startPos.x,
       this._startPos.y,
       clientX,
@@ -77,7 +77,7 @@ export default class extends Controller {
   onMouseMove (event) {
     if (!this._active) return
 
-    this.updateElementPositionAndOpacityUpToTreshold(
+    this.updateElementPositionAndOpacityUpToThreshold(
       this._startPos.x,
       this._startPos.y,
       event.clientX,
@@ -91,7 +91,7 @@ export default class extends Controller {
     const clientX = event.touches[0].clientX
     const clientY = event.touches[0].clientY
 
-    this.updateElementPositionAndOpacityUpToTreshold(
+    this.updateElementPositionAndOpacityUpToThreshold(
       this._startPos.x,
       this._startPos.y,
       clientX,
@@ -99,7 +99,7 @@ export default class extends Controller {
     )
   }
 
-  updateElementToFinalTransitionIfPassedTreshold (initialPosX, initialPosY, finalPosX, finalPosY) {
+  updateElementToFinalTransitionIfPassedThreshold (initialPosX, initialPosY, finalPosX, finalPosY) {
     const dx = finalPosX - initialPosX
     const dy = finalPosY - initialPosY
 
@@ -130,7 +130,7 @@ export default class extends Controller {
     }
   }
 
-  updateElementPositionAndOpacityUpToTreshold (initialPosX, initialPosY, clientX, clientY) {
+  updateElementPositionAndOpacityUpToThreshold (initialPosX, initialPosY, clientX, clientY) {
     const dx = clientX - initialPosX
     const dy = clientY - initialPosY
     const horizontalDir = Math.abs(dx) > Math.abs(dy)
