@@ -4,8 +4,7 @@ class ApplicationController < ActionController::Base
 
   default_form_builder ApplicationFormBuilder
 
-  helper_method :current_profile
-  helper_method :vapid_public_key
+  helper_method :current_profile, :vapid_public_key
 
   private
 

@@ -1,12 +1,11 @@
 class WebPushSubscriptionsController < ApplicationController
   def create
-    web_push_subscription = WebPushSubscription.find_or_initialize_by(
-      endpoint: params[:endpoint],
-      p256dh: params.dig(:keys, :p256dh),
-      auth: params.dig(:keys, :auth),
-      user_id: current_user.id
-    )
+    WebPushSubscription.find_or_create_by!(endpoint: params[:endpoint]) do |subscription|
+      subscription.p256dh = params.dig(:keys, :p256dh)
+      subscription.auth = params.dig(:keys, :auth)
+      subscription.user = current_user
+    end
 
-    web_push_subscription.save!
+    head :ok
   end
 end
