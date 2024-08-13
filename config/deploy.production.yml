@@ -1,0 +1,30 @@
+# Deploy to these servers.
+servers:
+  - 149.248.53.52
+
+# Inject ENV variables into containers (secrets come from .env).
+# Remember to run `kamal env push` after making changes!
+env:
+  clear:
+    RAILS_ENV: production
+    MAILER_SENDER: hello@railsworld.com
+    WEB_CONCURRENCY: 4
+    LITESTREAM_BACKUP_ENABLED: true
+  secret:
+    - APP_HOST
+    - RAILS_MASTER_KEY
+    - MAILPACE_API_TOKEN
+    - LITESTREAM_BUCKET
+    - AWS_ACCESS_KEY_ID
+    - AWS_SECRET_ACCESS_KEY
+    - APPSIGNAL_PUSH_API_KEY
+
+accessories:
+  vector:
+    image: timberio/vector:0.39.0-debian
+    roles:
+      - web
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    files:
+      - "./config/vector/vector_production.yaml:/etc/vector/vector.yaml"
