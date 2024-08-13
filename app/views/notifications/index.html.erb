@@ -3,26 +3,13 @@
     <h1 class="text-[34px] font-bold italic">Notifications</h1>
     <% if @notifications.present? %>
       <div class="flex flex-col items-start flex-1 w-full">
-        <% if @recent_notifications.present? %>
-          <h2 class="text-[23px] mb-4 font-bold italic mt-6">Recent</h2>
-          <div class="flex flex-col w-full gap-4">
-            <%= render(
-              partial: "notification",
-              collection: @recent_notifications,
-              as: :notification
-            ) %>
-          </div>
-        <% end %>
-        <% if @past_notifications.present? %>
-          <h2 class="text-[23px] mb-4 font-bold italic mt-10">Past</h2>
-          <div class="flex flex-col w-full gap-4">
-            <%= render(
-              partial: "notification",
-              collection: @past_notifications,
-              as: :notification
-            ) %>
-          </div>
-        <% end %>
+        <div class="flex flex-col w-full gap-4 mt-6">
+          <%= render(
+            partial: "notification",
+            collection: @notifications,
+            as: :notification
+          ) %>
+        </div>
       </div>
 
       <div class="flex flex-col items-start w-full">
@@ -31,7 +18,7 @@
             class: "text-red font-bold  text-center rounded-sm underline italic text-lg" %>
         </div>
         <%= button_to "CLEAR ALL", read_notifications_path,
-          class: "w-full bg-red rounded-[10px] p-4 text-lg font-black text-white
+          class: "w-full bg-white rounded-[10px] p-4 text-lg font-black text-red
             cursor-pointer italic items-center text-center",
           form_class: "w-full" %>
       </div>
