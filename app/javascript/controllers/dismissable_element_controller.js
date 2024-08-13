@@ -4,11 +4,11 @@ export default class extends Controller {
   static targets = ['element']
   connect () {
     console.log(this.isMobileDevice())
-    if(this.isMobileDevice()){
+    if (this.isMobileDevice()) {
       this.elementTarget.addEventListener('touchstart', this.onMouseDownTouch.bind(this))
       window.addEventListener('touchend', this.onMouseUpTouch.bind(this))
       window.addEventListener('touchmove', this.onMouseMoveTouch.bind(this))
-    }else{
+    } else {
       this.elementTarget.addEventListener('mousedown', this.onMouseDown.bind(this))
       window.addEventListener('mouseup', this.onMouseUp.bind(this))
       window.addEventListener('mousemove', this.onMouseMove.bind(this))
@@ -19,14 +19,14 @@ export default class extends Controller {
     this.removeEventListeners()
   }
 
-  removeEventListeners(){
-    if(this.isMobileDevice()){
+  removeEventListeners () {
+    if (this.isMobileDevice()) {
       if (this.hasElementTarget) {
         this.elementTarget.removeEventListener('touchstart', this.onMouseDownTouch.bind(this))
       }
       window.addEventListener('touchend', this.onMouseUpTouch.bind(this))
       window.addEventListener('touchmove', this.onMouseMoveTouch.bind(this))
-    }else{
+    } else {
       if (this.hasElementTarget) {
         this.elementTarget.removeEventListener('mousedown', this.onMouseDown.bind(this))
       }
@@ -44,8 +44,8 @@ export default class extends Controller {
 
   onMouseDownTouch (event) {
     if (!this._active) {
-      const clientX = event.touches[0].clientX;
-      const clientY = event.touches[0].clientY;
+      const clientX = event.touches[0].clientX
+      const clientY = event.touches[0].clientY
       this._startPos = { x: clientX, y: clientY }
       this._active = true
     }
@@ -54,17 +54,17 @@ export default class extends Controller {
   onMouseUp (event) {
     this._active = false
     this.updateElementToFinalTransitionIfPassedTreshold(
-      this._startPos.x, 
-      this._startPos.y, 
-      event.clientX, 
+      this._startPos.x,
+      this._startPos.y,
+      event.clientX,
       event.clientY)
   }
 
   onMouseUpTouch (event) {
     this._active = false
 
-    const clientX = event.changedTouches[0].clientX;
-    const clientY = event.changedTouches[0].clientY;
+    const clientX = event.changedTouches[0].clientX
+    const clientY = event.changedTouches[0].clientY
 
     this.updateElementToFinalTransitionIfPassedTreshold(
       this._startPos.x,
@@ -72,7 +72,6 @@ export default class extends Controller {
       clientX,
       clientY
     )
-    
   }
 
   onMouseMove (event) {
@@ -88,9 +87,9 @@ export default class extends Controller {
 
   onMouseMoveTouch (event) {
     if (!this._active) return
-    
-    const clientX = event.touches[0].clientX;
-    const clientY = event.touches[0].clientY; 
+
+    const clientX = event.touches[0].clientX
+    const clientY = event.touches[0].clientY
 
     this.updateElementPositionAndOpacityUpToTreshold(
       this._startPos.x,
@@ -100,9 +99,9 @@ export default class extends Controller {
     )
   }
 
-  updateElementToFinalTransitionIfPassedTreshold(initialPosX, initialPosY, finalPosX, finalPosY){
-    const dx = finalPosX - initialPosX;
-    const dy = finalPosY - initialPosY;
+  updateElementToFinalTransitionIfPassedTreshold (initialPosX, initialPosY, finalPosX, finalPosY) {
+    const dx = finalPosX - initialPosX
+    const dy = finalPosY - initialPosY
 
     const horizontalDir = Math.abs(dx) > Math.abs(dy)
     const horizontalThreshold = 120
@@ -131,7 +130,7 @@ export default class extends Controller {
     }
   }
 
-  updateElementPositionAndOpacityUpToTreshold(initialPosX, initialPosY, clientX, clientY){
+  updateElementPositionAndOpacityUpToTreshold (initialPosX, initialPosY, clientX, clientY) {
     const dx = clientX - initialPosX
     const dy = clientY - initialPosY
     const horizontalDir = Math.abs(dx) > Math.abs(dy)
@@ -165,7 +164,7 @@ export default class extends Controller {
     this.elementTarget.style.opacity = opacity
   }
 
-  isMobileDevice() {
-    return /mobile/i.test(navigator.userAgent);
+  isMobileDevice () {
+    return /mobile/i.test(navigator.userAgent)
   }
 }

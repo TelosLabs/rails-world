@@ -4,20 +4,20 @@ export default class extends Controller {
   initialize () {
     this._closeTimeout = null
   }
-  
+
   connect () {
     this.close()
   }
 
   cancelClose () {
-    if(this._closeTimeout){
+    if (this._closeTimeout) {
       clearTimeout(this._closeTimeout)
       this._closeTimeout = null
     }
   }
 
   close (event) {
-    if(this._closeTimeout == null){
+    if (this._closeTimeout == null) {
       this._closeTimeout = setTimeout(() => {
         // Animate element to disappear towards the right
         this.element.style.transition = 'transform 600ms, opacity 600ms'
