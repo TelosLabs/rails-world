@@ -21,20 +21,20 @@ module.exports = {
         'screen-sm': '425px'
       },
       colors: {
-        grey:{
+        grey: {
           50: '#F3F2F8',
           200: '#D7D7D8',
           300: '#C6C6C8',
           400: '#A2A2A2',
           600: '#3A3A3C',
           700: '#262626',
-          800: '#1C1C1E',
+          800: '#1C1C1E'
         },
-        green:{
-          500: "#62C554"
+        green: {
+          500: '#62C554'
         },
-        bluegray:{
-          600: "#829ECE",
+        bluegray: {
+          600: '#829ECE'
         },
         'purple-dark': '#432463',
         'purple-light': '#4E2A73',
