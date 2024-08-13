@@ -22,7 +22,7 @@ RSpec.describe SessionReminderJob, type: :job do
       starts_at: starts_at, ends_at: starts_at + 30.minutes)
     session.attendees << user
 
-    Timecop.travel(Time.zone.parse("6:50"))
+    Timecop.travel(Time.zone.parse("6:45"))
 
     expect {
       described_class.perform_now
@@ -56,7 +56,7 @@ RSpec.describe SessionReminderJob, type: :job do
       starts_at: starts_at, ends_at: starts_at + 30.minutes)
     session.attendees << user
 
-    Timecop.travel(Time.zone.parse("6:55"))
+    Timecop.travel(Time.zone.parse("6:50"))
 
     expect {
       described_class.perform_now
@@ -65,7 +65,7 @@ RSpec.describe SessionReminderJob, type: :job do
     }.by(1)
 
     session.reload
-    expect(session.sent_reminders).to eq(["5 minutes"])
+    expect(session.sent_reminders).to eq(["10 minutes"])
   end
 
   it "delivers the notification if the reminder window is active (grace period)" do
@@ -74,7 +74,7 @@ RSpec.describe SessionReminderJob, type: :job do
       starts_at: starts_at, ends_at: starts_at + 30.minutes)
     session.attendees << user
 
-    Timecop.travel(Time.zone.parse("6:56"))
+    Timecop.travel(Time.zone.parse("6:51"))
 
     expect {
       described_class.perform_now
@@ -83,7 +83,7 @@ RSpec.describe SessionReminderJob, type: :job do
     }.by(1)
 
     session.reload
-    expect(session.sent_reminders).to eq(["5 minutes"])
+    expect(session.sent_reminders).to eq(["10 minutes"])
   end
 
   it "prevents multiple deliveries of the same notification" do
@@ -92,7 +92,7 @@ RSpec.describe SessionReminderJob, type: :job do
       starts_at: starts_at, ends_at: starts_at + 30.minutes)
     session.attendees << user
 
-    Timecop.travel(Time.zone.parse("6:55"))
+    Timecop.travel(Time.zone.parse("6:50"))
 
     expect {
       described_class.perform_now
