@@ -10,6 +10,6 @@ class NotificationSettingsController < ApplicationController
   private
 
   def permitted_params
-    params.require(:profile).permit(:in_app_notifications, :mail_notifications)
+    params.require(:profile).permit(:web_push_notifications, :mail_notifications)
   end
 end

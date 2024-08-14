@@ -14,7 +14,7 @@ class SessionReminderNotifier < ApplicationNotifier
         path: session_path(record.id)
       }
     }
-    config.if = -> { recipient.profile&.in_app_notifications }
+    config.if = -> { recipient.profile&.web_push_notifications }
   end
 
   notification_methods do

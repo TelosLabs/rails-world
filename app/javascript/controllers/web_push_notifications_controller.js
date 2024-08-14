@@ -3,7 +3,7 @@
 import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
-  static values = { vapidKey: String, inAppNotifications: Boolean }
+  static values = { vapidKey: String, notificationsEnabled: Boolean }
   static targets = ['enableNotifications']
 
   connect () {
@@ -21,7 +21,7 @@ export default class extends Controller {
   }
 
   handleDeniedPermission () {
-    if (!this.inAppNotificationsValue) return
+    if (!this.notificationsEnabledValue) return
 
     this.displayNotificationBlockingMessage()
   }
@@ -36,7 +36,7 @@ export default class extends Controller {
       this.handleNotificationToggle()
     }
 
-    if (this.inAppNotificationsValue) {
+    if (this.notificationsEnabledValue) {
       this.promptNotificationPermission()
     }
   }
