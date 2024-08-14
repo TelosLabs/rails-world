@@ -1,9 +1,7 @@
 class SessionsController < ApplicationController
   def index
-    @sessions = SessionQuery.new(
-      params: filter_params,
-      includes: [:attendees, :location, :speakers, :tags]
-    ).call
+    @sessions = SessionQuery.new(params: filter_params).call
+      .includes(:attendees, :location, :speakers, :tags)
   end
 
   def show

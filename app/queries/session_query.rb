@@ -1,23 +1,21 @@
 class SessionQuery
   STATUS_SCOPES = %w[live starting_soon past].freeze
 
-  def initialize(relation: Session.all, params: {}, includes: {})
+  def initialize(relation: Session.all, params: {})
     @relation = relation
     @params = params
-    @includes = includes
   end
 
   def call
     filter_by_date
     filter_by_status
-    assign_includes
 
     relation
   end
 
   private
 
-  attr_accessor :relation, :params, :includes
+  attr_accessor :relation, :params
 
   def filter_by_date
     return if starts_at.blank?
@@ -37,11 +35,5 @@ class SessionQuery
 
   def status_scopes
     STATUS_SCOPES & params.keys
-  end
-
-  def assign_includes
-    return if includes.empty?
-
-    self.relation = relation.includes(*includes)
   end
 end
