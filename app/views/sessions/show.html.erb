@@ -1,4 +1,4 @@
-<div class="relative flex flex-col items-center justify-between flex-1 pb-5 bg-gray-8">
+<div class="relative flex flex-col items-center justify-between flex-1 pb-5 bg-grey-50">
   <div class="w-full px-5 pt-6 pb-12 bg-bottom bg-no-repeat bg-cover" style="background-image: url(<%= asset_path 'background_design.svg' %>)">
     <div class="flex flex-col max-w-screen-sm mx-auto">
       <div class="flex flex-row items-center mb-4">
@@ -24,7 +24,7 @@
 
       <div class="flex flex-row flex-wrap items-center gap-4 mb-[18px]">
         <% @session.tags.each do |tag| %>
-          <div class="bg-white border border-blue-2 rounded-lg px-3 py-[6px] text-[13px] text-blue-2">
+          <div class="bg-white border border-bluegray-600 rounded-lg px-3 py-[6px] text-[13px] text-bluegray-600">
             <%= tag.name %>
           </div>
         <% end %>
@@ -32,13 +32,13 @@
 
       <p class="mb-4 text-base font-medium leading-6"><%= @session.description %></p>
       <div class="flex flex-row items-center mb-3">
-        <%= inline_svg_tag "calendar.svg", class: "fill-gray-4 w-3 h-3 mr-2" %> <p class="text-[13px] text-gray-4"><%= @session.starts_at.strftime("%A, %b %d") %></p>
+        <%= inline_svg_tag "calendar.svg", class: "fill-grey-600 w-3 h-3 mr-2" %> <p class="text-[13px] text-grey-600"><%= @session.starts_at.strftime("%A, %b %d") %></p>
       </div>
       <div class="flex flex-row items-center mb-3">
-        <%= inline_svg_tag "clock.svg", class: "fill-gray-4 w-3 h-3 mr-2" %><p class="text-[13px] text-gray-4"><%= @session.starts_at.strftime("%H:%M") %> - <%= @session.ends_at.strftime("%H:%M") %></p>
+        <%= inline_svg_tag "clock.svg", class: "fill-grey-600 w-3 h-3 mr-2" %><p class="text-[13px] text-grey-600"><%= @session.starts_at.strftime("%H:%M") %> - <%= @session.ends_at.strftime("%H:%M") %></p>
       </div>
       <div class="flex flex-row items-center mb-3">
-        <%= inline_svg_tag "location_pin.svg", class: "fill-gray-4 w-3 h-3 mr-2" %><p class="text-[13px] text-gray-4"><%= @session.location.name %></p>
+        <%= inline_svg_tag "location_pin.svg", class: "fill-grey-600 w-3 h-3 mr-2" %><p class="text-[13px] text-grey-600"><%= @session.location.name %></p>
       </div>
     </div>
 

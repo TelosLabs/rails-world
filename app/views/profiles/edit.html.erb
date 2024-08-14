@@ -54,7 +54,7 @@
         <p class="mb-2 font-bold text-white">Notifications</p>
         <div class="w-full mb-10">
           <div class="w-full overflow-hidden rounded-md">
-            <div class="flex flex-row items-center justify-between w-full p-4 bg-white border-b border-gray-6">
+            <div class="flex flex-row items-center justify-between w-full p-4 bg-white border-b border-grey-300">
               <%= form.label :mail_notifications, "Mail notifications", class: "grow font-medium text-slate-900 text-base cursor-pointer mr-2" %>
               <%= form.toggle_field :mail_notifications %>
             </div>
@@ -63,7 +63,7 @@
               <label>
                 <%= form.check_box :in_app_notifications, class: "sr-only peer",
                   data: {web_push_notifications_target: "enableNotifications"} %>
-                <div class="relative w-11 h-6 bg-gray-6 rounded-full peer dark:bg-gray-6 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red"></div>
+                <div class="relative w-11 h-6 bg-grey-300 rounded-full peer dark:bg-grey-300 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red"></div>
               </label>
             </div>
           </div>
@@ -73,7 +73,6 @@
           </p>
         </div>
       </div>
-
       <%= form.submit "SAVE PROFILE", class:"w-full bg-red rounded-[10px] p-4 text-lg font-black text-white cursor-pointer" %>
       <%= link_to "Skip for now", root_path, class: "text-lg underline font-black italic text-white mt-10" %>
     <% end %>
