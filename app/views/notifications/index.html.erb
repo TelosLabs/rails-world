@@ -4,11 +4,7 @@
     <% if @notifications.present? %>
       <div class="flex flex-col items-start flex-1 w-full">
         <div class="flex flex-col w-full gap-4 mt-6">
-          <%= render(
-            partial: "notification",
-            collection: @notifications,
-            as: :notification
-          ) %>
+          <%= render partial: "notification", collection: @notifications, as: :notification %>
         </div>
 
         <% if @pagy.pages > 1 %>
@@ -31,7 +27,7 @@
     <% else %>
       <div class="flex flex-col items-center justify-center w-full h-full gap-6">
         <div class="flex items-center justify-center w-32 h-32 bg-white rounded-full">
-          <%= inline_svg_tag "big_bell.svg", width: "56", height: "56" %>
+          <%= inline_svg_tag "big_bell.svg", size: "56" %>
         </div>
         <p class="text-base font-bold text-center">You don’t have <br> any notifications</p>
         <%= link_to 'Notification settings', notification_settings_path,
