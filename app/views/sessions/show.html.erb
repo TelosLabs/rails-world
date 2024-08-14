@@ -14,8 +14,8 @@
 
         <div class="flex flex-row items-center justify-between w-full ml-5 grow ">
           <div class="flex flex-col">
-            <p class="text-base italic font-black text-red"><%= @speaker.profile.name %></p>
-            <p class="font-normal text-[13px]"><%= @speaker.profile.job_title %></p>
+            <p class="text-base italic font-black text-red"><%= @speaker&.profile&.name %></p>
+            <p class="font-normal text-[13px]"><%= @speaker&.profile&.job_title %></p>
           </div>
           <%= inline_svg_tag "icon_bookmark.svg", class: "fill-red stroke-red min-w-4 min-h-4 w-4 h-4 ml-5" %>
         </div>
@@ -58,12 +58,12 @@
             </div>
           <% end %>
           <div class="flex flex-col ml-5">
-            <p class="text-base italic font-black text-red"><%= @speaker.profile.name %></p>
-            <p class="font-normal text-[13px]"><%= @speaker.profile.job_title %></p>
+            <p class="text-base italic font-black text-red"><%= @speaker&.profile&.name %></p>
+            <p class="font-normal text-[13px]"><%= @speaker&.profile&.job_title %></p>
           </div>
         </div>
         <p class="text-base font-medium leading-5">
-          <%= @speaker.profile.bio %>
+          <%= @speaker&.profile&.bio %>
         </p>
       </div>
     </div>
