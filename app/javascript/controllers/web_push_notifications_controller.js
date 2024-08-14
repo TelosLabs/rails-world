@@ -12,10 +12,10 @@ export default class extends Controller {
         this.handleDeniedPermission()
         break
       case 'granted':
-        this.setUpSubscription()
+        this.handleGrantedPermission()
         break
       default:
-        this.handleDefaultPermission()
+        this.handlePendingPermission()
         break
     }
   }
@@ -26,7 +26,12 @@ export default class extends Controller {
     this.displayNotificationBlockingMessage()
   }
 
-  handleDefaultPermission () {
+  handleGrantedPermission () {
+    this.setUpSubscription()
+    this.removeNotificationBlockingMessage()
+  }
+
+  handlePendingPermission () {
     if (this.hasEnableNotificationsTarget) {
       this.handleNotificationToggle()
     }
@@ -48,19 +53,12 @@ export default class extends Controller {
     Notification.requestPermission()
       .then((permission) => {
         if (permission === 'granted') {
-          this.setUpSubscription()
+          this.handleGrantedPermission()
         } else if (permission === 'denied') {
           this.displayNotificationBlockingMessage()
         }
       })
       .catch((error) => { console.error(error) })
-  }
-
-  displayNotificationBlockingMessage () {
-    const notificationBlockingMessage = document.getElementById('notification_blocking_message')
-    if (!notificationBlockingMessage) return
-
-    notificationBlockingMessage.classList.remove('hidden')
   }
 
   async setUpSubscription () {
@@ -98,5 +96,24 @@ export default class extends Controller {
       },
       body: JSON.stringify(subscription)
     })
+  }
+
+  displayNotificationBlockingMessage() {
+    this.toggleNotificationBlockingMessage(true);
+  }
+
+  removeNotificationBlockingMessage() {
+    this.toggleNotificationBlockingMessage(false);
+  }
+
+  toggleNotificationBlockingMessage(show) {
+    const message = document.querySelector('.notification-blocking-message');
+    if (!message) return;
+
+    if (show) {
+      message.classList.remove('hidden');
+    } else {
+      message.classList.add('hidden');
+    }
   }
 }
