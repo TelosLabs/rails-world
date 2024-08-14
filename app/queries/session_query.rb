@@ -1,9 +1,9 @@
 class SessionQuery
-  STATUS_SCOPES = %i[live starting_soon past].freeze
+  STATUS_SCOPES = %w[live starting_soon past].freeze
 
   def initialize(relation: Session.all, params: {}, includes: {})
     @relation = relation
-    @params = params.to_h.symbolize_keys
+    @params = params
     @includes = includes
   end
 
@@ -36,7 +36,7 @@ class SessionQuery
   end
 
   def status_scopes
-    STATUS_SCOPES & params.select { |_, v| v == "1" }.keys
+    STATUS_SCOPES & params.keys
   end
 
   def assign_includes

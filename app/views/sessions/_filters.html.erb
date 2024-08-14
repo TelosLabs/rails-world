@@ -43,7 +43,7 @@
 
             <% SessionQuery::STATUS_SCOPES.each do |name| %>
               <div class="self-stretch px-4 py-2 items-center gap-2 inline-flex">
-                <%= form.check_box name, checked: params[name] == "1", class: "w-4 h-4 rounded text-red", skip_base_styling: true %>
+                <%= form.check_box name, checked: params[name] == "1", class: "w-4 h-4 rounded text-red", skip_base_styling: true, include_hidden: false %>
                 <div class="text-gray-800">
                   <%= form.label name, class: "text-base font-medium" do %>
                     <%= t("views.status_filters.#{name}") %>
