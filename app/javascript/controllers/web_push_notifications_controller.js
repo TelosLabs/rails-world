@@ -3,7 +3,7 @@
 import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
-  static values = { vapidKey: String, inAppNotifications: Boolean }
+  static values = { vapidKey: String, notificationsEnabled: Boolean }
   static targets = ['enableNotifications']
 
   connect () {
@@ -12,26 +12,31 @@ export default class extends Controller {
         this.handleDeniedPermission()
         break
       case 'granted':
-        this.setUpSubscription()
+        this.handleGrantedPermission()
         break
       default:
-        this.handleDefaultPermission()
+        this.handlePendingPermission()
         break
     }
   }
 
   handleDeniedPermission () {
-    if (!this.inAppNotificationsValue) return
+    if (!this.notificationsEnabledValue) return
 
     this.displayNotificationBlockingMessage()
   }
 
-  handleDefaultPermission () {
+  handleGrantedPermission () {
+    this.setUpSubscription()
+    this.removeNotificationBlockingMessage()
+  }
+
+  handlePendingPermission () {
     if (this.hasEnableNotificationsTarget) {
       this.handleNotificationToggle()
     }
 
-    if (this.inAppNotificationsValue) {
+    if (this.notificationsEnabledValue) {
       this.promptNotificationPermission()
     }
   }
@@ -48,19 +53,12 @@ export default class extends Controller {
     Notification.requestPermission()
       .then((permission) => {
         if (permission === 'granted') {
-          this.setUpSubscription()
+          this.handleGrantedPermission()
         } else if (permission === 'denied') {
           this.displayNotificationBlockingMessage()
         }
       })
       .catch((error) => { console.error(error) })
-  }
-
-  displayNotificationBlockingMessage () {
-    const notificationBlockingMessage = document.getElementById('notification_blocking_message')
-    if (!notificationBlockingMessage) return
-
-    notificationBlockingMessage.classList.remove('hidden')
   }
 
   async setUpSubscription () {
@@ -98,5 +96,24 @@ export default class extends Controller {
       },
       body: JSON.stringify(subscription)
     })
+  }
+
+  displayNotificationBlockingMessage () {
+    this.toggleNotificationBlockingMessage(true)
+  }
+
+  removeNotificationBlockingMessage () {
+    this.toggleNotificationBlockingMessage(false)
+  }
+
+  toggleNotificationBlockingMessage (show) {
+    const message = document.querySelector('.notification-blocking-message')
+    if (!message) return
+
+    if (show) {
+      message.classList.remove('hidden')
+    } else {
+      message.classList.add('hidden')
+    }
   }
 }

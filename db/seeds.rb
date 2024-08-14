@@ -13,8 +13,8 @@ user.create_profile!(
   job_title: "Software Developer",
   bio: "I'm a Ruby on Rails developer.",
   is_public: true,
-  mail_notifications: true,
-  in_app_notifications: true,
+  mail_notifications: false,
+  web_push_notifications: false,
   github_url: "https://github.com/TelosLabs",
   twitter_url: "https://x.com/teloslabs",
   linkedin_url: "https://www.linkedin.com/company/telos-labs"
