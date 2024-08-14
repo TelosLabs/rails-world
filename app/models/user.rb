@@ -37,10 +37,6 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :profile
 
-  scope :with_at_least_one_notification_enabled, -> {
-    joins(:profile).where("profiles.web_push_notifications = ? OR profiles.mail_notifications = ?", true, true)
-  }
-
   generates_token_for :password_reset, expires_in: PASSWORD_RESET_EXPIRATION do
     password_salt&.last(10)
   end
