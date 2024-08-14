@@ -1,13 +1,6 @@
 <div class="u-w-full">
   <div class="container">
-    <% starts_in = minutes_between(DateTime.now, @session.starts_at) %>
-    <% if starts_in > 1  && starts_in < 60 %>
-      <h1 class="title">Your bookmarked session is starting in <%= starts_in %> minutes </h1>
-    <% elsif starts_in <= 1 %>
-      <h1 class="title">Your bookmarked session is starting now</h1>
-    <% else %>
-      <h1 class="title">Your bookmarked session is starting soon </h1>
-    <% end %>
+    <h1 class="title"><%= @notification.title %></h1>
     <div class="c-event-card">
       <div class="c-event-card__speaker">
         <div class="c-event-card__speaker-img">
