@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_26_171428) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_30_231514) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -87,7 +87,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_26_171428) do
     t.string "linkedin_url"
     t.string "twitter_url"
     t.boolean "mail_notifications", default: true, null: false
-    t.boolean "in_app_notifications", default: true, null: false
+    t.boolean "in_app_notifications", default: false, null: false
     t.boolean "is_public", default: false, null: false
     t.string "profileable_type", null: false
     t.integer "profileable_id", null: false
@@ -162,6 +162,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_26_171428) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  create_table "web_push_subscriptions", force: :cascade do |t|
+    t.string "endpoint", null: false
+    t.string "p256dh", null: false
+    t.string "auth", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_web_push_subscriptions_on_user_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "locations", "conferences"
@@ -173,4 +183,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_26_171428) do
   add_foreign_key "sessions_tags", "tags"
   add_foreign_key "sessions_users", "sessions"
   add_foreign_key "sessions_users", "users"
+  add_foreign_key "web_push_subscriptions", "users"
 end

@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   root "sessions#index"
 
   get "up" => "rails/health#show", :as => :rails_health_check
+  get "/service-worker.js" => "service_worker#service_worker"
+  get "/manifest.json" => "service_worker#manifest"
 
   mount MissionControl::Jobs::Engine, at: "/jobs"
   mount Avo::Engine, at: Avo.configuration.root_path
@@ -9,19 +11,17 @@ Rails.application.routes.draw do
   resource :registration, only: [:new, :create]
   resource :user_session, only: [:new, :create, :destroy]
   resource :password, only: [:edit, :update]
-  resources :speakers, only: [:show]
   resource :password_reset, only: [:new, :create, :edit, :update] do
     get :post_submit
   end
-  resources :sessions, only: [:index, :update, :show]
-  resources :schedules, only: [:index, :update, :show]
-  resources :profiles, only: [:show, :edit, :update], param: :uuid
+  resource :notification_settings, only: [:show, :update]
   resource :about, only: [:show]
-  resources :notifications, only: [:index]
-  resource :notifications_settings, only: [:show, :update]
-  resource :about, only: [:show]
-  resources :profiles, only: [:show, :edit, :update], param: :uuid
+  resource :attendee, only: [:create, :destroy]
+  resource :schedule, only: [:show]
 
-  get "/service-worker.js" => "service_worker#service_worker"
-  get "/manifest.json" => "service_worker#manifest"
+  resources :sessions, only: [:index, :show]
+  resources :speakers, only: [:show]
+  resources :profiles, only: [:show, :edit, :update], param: :uuid
+  resources :notifications, only: [:index]
+  resources :web_push_subscriptions, only: [:create]
 end

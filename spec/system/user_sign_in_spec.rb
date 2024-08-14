@@ -14,6 +14,7 @@ RSpec.describe "User sign in", type: :system do
       find_dti("email_field").set("test@test.com")
       find_dti("password_field").set("wrongpassword")
       find_dti("sign_in_button").click
+      expect(page).to have_content("Invalid email or password.")
 
       visit edit_password_path
       expect(page).to have_current_path(new_user_session_path)

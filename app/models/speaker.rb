@@ -15,6 +15,8 @@ class Speaker < ApplicationRecord
     delegate attr, "#{attr}=", to: :profile, allow_nil: true
   end
 
+  accepts_nested_attributes_for :profile
+
   def profile
     super || build_profile
   end

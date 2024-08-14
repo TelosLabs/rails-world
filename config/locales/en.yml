@@ -15,16 +15,16 @@ en:
     profiles:
       update:
         success: "Your profile has been updated successfully."
-    notifications_settings:
+    notification_settings:
       update:
-        success: "Your notifications settings have been updated successfully."
-    sessions:
+        success: "Your notification settings have been updated successfully."
+    user_sessions:
       create:
         notice: "Signed in successfully."
         alert: "Invalid email or password."
       destroy:
         notice: "You have been logged out."
-    sessions:
+    attendees:
       add_user:
         notice: "Session was added to My Schedule"
         alert: "Could not add session to My Schedule. Please try again"

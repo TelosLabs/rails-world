@@ -14,7 +14,7 @@ class UserSessionsController < ApplicationController
       login @user
       redirect_to root_path
     else
-      redirect_to new_user_session_path
+      redirect_to new_user_session_path, alert: t("controllers.user_sessions.create.alert")
     end
   end
 

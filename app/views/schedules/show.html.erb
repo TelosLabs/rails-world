@@ -1,0 +1,28 @@
+<div class="flex flex-col items-center h-full bg-gray-light">
+  <div class="flex flex-col items-center w-full h-full max-w-screen-md px-5 py-10">
+    <div class="flex w-full mb-4">
+      <h1 class="text-4xl italic font-black text-gray-800">My Schedule</h1>
+    </div>
+
+    <%= render partial: 'sessions/filters', locals: { resource: :schedule } %>
+
+    <div class="flex flex-col w-full h-full">
+      <% if @sessions.present? %>
+        <%= render partial: 'sessions/card', collection: @sessions, as: :session %>
+      <% elsif params[:starts_at].present? %>
+        <div class="flex flex-col items-center justify-center w-full h-full">
+          <p class="max-w-xs mb-4 font-bold text-center">No sessions found with the selected filters</p>
+          <%= link_to 'Clear filters', schedule_path, class: "text-red underline font-bold italic text-lg" %>
+        </div>
+      <% else %>
+        <div class="flex flex-col items-center justify-center w-full h-full">
+          <div class="p-8 mb-6 bg-white rounded-full w-fit h-fit">
+            <%= inline_svg_tag("icons/clock.svg", size: "56", class: "fill-gray-400") %>
+          </div>
+          <p class="mb-4 font-bold text-center max-w-52">You don't have any sessions in your schedule yet</p>
+          <%= link_to 'Explore the Agenda', sessions_path, class: "text-red underline font-bold italic text-lg" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -20,17 +20,17 @@ class SessionQuery
   attr_accessor :relation, :params, :includes
 
   def filter_by_date
-    return if on_date.blank?
+    return if starts_at.blank?
 
-    self.relation = relation.on_date(on_date)
+    self.relation = relation.starts_at(starts_at)
   end
 
   def filter_by_status
     self.relation = relation.send_chain_or(status_scopes)
   end
 
-  def on_date
-    @_on_date ||= params[:on_date]&.to_date
+  def starts_at
+    @_starts_at ||= params[:starts_at]&.to_date
   rescue Date::Error
     nil
   end
