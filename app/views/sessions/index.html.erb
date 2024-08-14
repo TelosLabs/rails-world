@@ -3,32 +3,8 @@
     <div class="flex w-full mb-4">
       <h1 class="text-4xl italic font-black text-gray-800">Agenda</h1>
     </div>
+
     <%= render partial: 'sessions/filters', locals: { resource: :sessions } %>
-
-    <% if active_filters? %>
-      <div class="flex w-full mb-2 gap-2">
-        <div class="flex flex-wrap ">
-          <div class="h-8 py-1 text-base font-bold leading-tight">Active filters:</div>
-        </div>
-        <div class="flex flex-wrap gap-2">
-          <% SessionQuery::STATUS_SCOPES.each do |name| %>
-            <% next unless params[name] == "1" %>
-            <div class="h-8 px-4 py-2 bg-green-dark bg-opacity-[.08] rounded-lg gap-2 inline-flex">
-              <div class="gap-2 flex">
-                <div class="w-4 h-4 bg-green-dark rounded-full"></div>
-                <div class="text-xs font-medium"><%= t("views.status_filters.#{name}") %></div>
-              </div>
-              <div class="w-4 h-4">
-                <% modified_params = request.query_parameters.deep_dup %>
-                <% modified_params.delete(name) %>
-
-                <%= link_to inline_svg_tag("icons/close.svg"), sessions_path(modified_params) %>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
 
     <div class="flex flex-col w-full h-full">
       <% if @sessions.present? %>

@@ -17,7 +17,7 @@ RSpec.describe SessionQuery, type: :query do
     end
 
     context "when filtering by date" do
-      let(:params) { {on_date: past_session.starts_at.to_date} }
+      let(:params) { {starts_at: past_session.starts_at.to_date} }
 
       it "returns sessions on that date" do
         expect(session_query.call).to contain_exactly(past_session)
