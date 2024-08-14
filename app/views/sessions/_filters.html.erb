@@ -37,7 +37,7 @@
         data-transition-enter-to="opacity-100 scale-100"
         data-transition-leave-from="opacity-100 scale-100"
         data-transition-leave-to="opacity-0 scale-95">
-        <div class="pt-2 pb-2 bg-white rounded-lg shadow-lg flex-col inline-flex absolute top-4 right-[-8px] right-0 w-40 max-w-40">
+        <div class="pt-2 pb-2 bg-white rounded-lg shadow-[0_10px_50px_0_rgba(0,0,0,0.40)] flex-col inline-flex absolute top-4 right-[-8px] right-0 w-40 max-w-40">
           <%= form_with url: sessions_path, class: "grid", method: :get do |form| %>
             <%= form.hidden_field :starts_at, value: params[:starts_at] %>
 
