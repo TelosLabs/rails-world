@@ -1,10 +1,18 @@
-# fix sending params
-first_day = params[:start_date] || 26
-second_day = first_day + 1
+start_day = ENV["START_DATE"].present? ? ENV["START_DATE"].to_i : 26
+second_day = start_day + 1
 image_path = "db/images"
 
 # Create admin
-# User.create!(email: "admin@example.com", password: "foobar2024", password_confirmation: "foobar2024", role: "admin")
+user = User.find_or_initialize_by(email: "admin@example.com", role: "admin")
+user.assign_attributes(password: "foobar2024", password_confirmation: "foobar2024")
+user.save!
+
+# Clean up existing data
+Session.destroy_all
+Speaker.destroy_all
+Tag.destroy_all
+Location.destroy_all
+Conference.destroy_all
 
 # Create Conference
 conference = Conference.find_or_create_by!(name: "RailsWorld 2024")
@@ -15,6 +23,7 @@ track_2 = conference.locations.create(name: "Track 2")
 lightning_track = conference.locations.create(name: "Lightning Track")
 
 # Create Tags
+# No tags for now
 
 # Create Speakers
 matz_speaker = Speaker.create!(
@@ -293,8 +302,8 @@ Session.create!(
   conference: conference,
   title: "Opening Keynote",
   description: "DHH will kick off the second edition of Rails World in Toronto with an Opening Keynote highlighting what is new in Rails today, and where the framework is headed tomorrow.",
-  starts_at: Time.zone.local(2023, 9, first_day, 9, 45),
-  ends_at: Time.zone.local(2023, 9, first_day, 11, 0),
+  starts_at: Time.zone.local(2023, 9, start_day, 9, 45),
+  ends_at: Time.zone.local(2023, 9, start_day, 11, 0),
   location: track_1,
   speakers: [david_heinemeier_hansson_speaker]
 )
@@ -303,8 +312,8 @@ Session.create!(
   conference: conference,
   title: "Solid Queue internals, externals and all the things in between",
   description: "We’ve used Resque and Redis to run background jobs in multiple apps for many years at 37signals. However, performance, reliability, and our own apps’ idiosyncrasies led us to use a lot of different gems, some developed by us, some forked or patched to address our struggles. After multiple war stories with background jobs, looking at our increasingly complex setup, we wanted something we could use out-of-the-box without having to port our collection of hacks to every new app and with fewer moving pieces. After exploring existing alternatives, we decided to build our own and aim to make it the default for Rails 8. In this talk, I’ll present Solid Queue, explain some of the problems we had over the years, how we designed Solid Queue to address them, and all the Fun™ we had doing that.",
-  starts_at: Time.zone.local(2023, 9, first_day, 11, 15),
-  ends_at: Time.zone.local(2023, 9, first_day, 11, 45),
+  starts_at: Time.zone.local(2023, 9, start_day, 11, 15),
+  ends_at: Time.zone.local(2023, 9, start_day, 11, 45),
   location: track_1,
   speakers: [rosa_gutierrez_speaker]
 )
@@ -313,8 +322,8 @@ Session.create!(
   conference: conference,
   title: "Going beyond a Single Postgres Instance with Rails",
   description: "We’ll look at the journey of evolving Instacart’s Rails application beyond a single Postgres instance, how we managed the added complexity from adding read replicas, and later vertically and horizontally sharding. We’ll touch on some topics around query routing, connection pooling and load balancing.",
-  starts_at: Time.zone.local(2023, 9, first_day, 11, 15),
-  ends_at: Time.zone.local(2023, 9, first_day, 11, 45),
+  starts_at: Time.zone.local(2023, 9, start_day, 11, 15),
+  ends_at: Time.zone.local(2023, 9, start_day, 11, 45),
   location: track_2,
   speakers: [mostafa_abdelraouf_speaker]
 )
@@ -323,8 +332,8 @@ Session.create!(
   conference: conference,
   title: "The Modern Programmer’s Guide to Neovim and Zellij",
   description: "", # TODO: add description
-  starts_at: Time.zone.local(2023, 9, first_day, 13, 0),
-  ends_at: Time.zone.local(2023, 9, first_day, 14, 15),
+  starts_at: Time.zone.local(2023, 9, start_day, 13, 0),
+  ends_at: Time.zone.local(2023, 9, start_day, 14, 15),
   location: lightning_track,
   speakers: [chris_power_speaker, robert_beene_speaker]
 )
@@ -333,8 +342,8 @@ Session.create!(
   conference: conference,
   title: "Kamal 2.0 - Deploy web apps anywhere",
   description: "Kamal is an imperative deployment tool from 37signals for running your apps with Docker. We’ll run through how it works, what we’ve learned from v1.0, and the changes we’ve made for v2.0.",
-  starts_at: Time.zone.local(2023, 9, first_day, 13, 0),
-  ends_at: Time.zone.local(2023, 9, first_day, 13, 30),
+  starts_at: Time.zone.local(2023, 9, start_day, 13, 0),
+  ends_at: Time.zone.local(2023, 9, start_day, 13, 30),
   location: track_1,
   speakers: [donal_mcbreen_speaker]
 )
@@ -343,8 +352,8 @@ Session.create!(
   conference: conference,
   title: "Repurposing the Rails CLI",
   description: "The Rails CLI works great for the vast majority of us, but what do you do when it doesn’t? At MongoDB, we recently wanted to add a tighter integration between Rails and Mongoid (our ODM), and were able to create our own CLI tool that extends the Rails CLI, overriding the pieces that weren’t compatible or relevant and extending it with the functionality we wanted. I’ll show you how we did it, and how you can do it yourself.",
-  starts_at: Time.zone.local(2023, 9, first_day, 13, 0),
-  ends_at: Time.zone.local(2023, 9, first_day, 13, 30),
+  starts_at: Time.zone.local(2023, 9, start_day, 13, 0),
+  ends_at: Time.zone.local(2023, 9, start_day, 13, 30),
   location: track_2,
   speakers: [jamis_buck_speaker]
 )
@@ -352,8 +361,8 @@ Session.create!(
   conference: conference,
   title: "Introducing Kamal Proxy",
   description: "Kamal Proxy is a new, purpose-built HTTP proxy service that powers Kamal 2.0. It’s designed to make zero-downtime deployments simpler, and comes with additional features to make your Rails applications faster and easier to operate. In this talk, we’ll look at what Kamal Proxy does, why we built it, and how it works.",
-  starts_at: Time.zone.local(2023, 9, first_day, 13, 45),
-  ends_at: Time.zone.local(2023, 9, first_day, 14, 15),
+  starts_at: Time.zone.local(2023, 9, start_day, 13, 45),
+  ends_at: Time.zone.local(2023, 9, start_day, 14, 15),
   location: track_1,
   speakers: [kevin_mcconnell_speaker]
 )
@@ -362,8 +371,8 @@ Session.create!(
   conference: conference,
   title: "The state of security in Rails 8",
   description: "Security is a crucial aspect of any web application and Rails is one of the best options for an application with high security standards. In this talk, I will highlight the recent security related improvements in Rails.",
-  starts_at: Time.zone.local(2023, 9, first_day, 13, 45),
-  ends_at: Time.zone.local(2023, 9, first_day, 14, 15),
+  starts_at: Time.zone.local(2023, 9, start_day, 13, 45),
+  ends_at: Time.zone.local(2023, 9, start_day, 14, 15),
   location: track_2,
   speakers: [greg_molnar_speaker]
 )
@@ -372,8 +381,8 @@ Session.create!(
   conference: conference,
   title: "An upgrade handbook to Rails 8",
   description: "Each new major version of Rails unlocks so many great features, and Rails 8 is no exception. However, upgrading a Rails application can be difficult. This talk will look at ways to address the major changes for Rails 8 to get your Rails app prepared to run on the latest version in no time! We’ll also explore how Shopify was able to automate the Rails upgrade process for hundreds of their applications.",
-  starts_at: Time.zone.local(2023, 9, first_day, 14, 45),
-  ends_at: Time.zone.local(2023, 9, first_day, 15, 15),
+  starts_at: Time.zone.local(2023, 9, start_day, 14, 45),
+  ends_at: Time.zone.local(2023, 9, start_day, 15, 15),
   location: track_1,
   speakers: [jenny_shen_speaker]
 )
@@ -382,8 +391,8 @@ Session.create!(
   conference: conference,
   title: "The Empowered Programmer",
   description: "In 2021, DHH dubbed Rails, 'The One Person Framework.' Is it? This talk will explore how Rails 7 equips solo developers more than ever before. Drawing from personal experience, I'll share how building a new app with Rails 7 felt like half the work of my previous Rails 5 project. You'll learn about the benefits of sticking with omakase, how Rails includes more batteries than ever, and why scaling back a team doesn't have to mean slowing down.",
-  starts_at: Time.zone.local(2023, 9, first_day, 14, 45),
-  ends_at: Time.zone.local(2023, 9, first_day, 15, 15),
+  starts_at: Time.zone.local(2023, 9, start_day, 14, 45),
+  ends_at: Time.zone.local(2023, 9, start_day, 15, 15),
   location: track_2,
   speakers: [justin_searls_speaker]
 )
@@ -392,8 +401,8 @@ Session.create!(
   conference: conference,
   title: "Frontiers of development productivity in Rails",
   description: "Rails is known to be one of the best frameworks in terms of empowering developers to build great products, and has kept this place for 20 years. Can we do better? In this talk, we will see how we are pushing Rails to continue making developers lives easier in new frontiers.",
-  starts_at: Time.zone.local(2023, 9, first_day, 15, 45),
-  ends_at: Time.zone.local(2023, 9, first_day, 16, 15),
+  starts_at: Time.zone.local(2023, 9, start_day, 15, 45),
+  ends_at: Time.zone.local(2023, 9, start_day, 16, 15),
   location: track_1,
   speakers: [rafael_franca_speaker]
 )
@@ -402,8 +411,8 @@ Session.create!(
   conference: conference,
   title: "Progressive Web Apps for Rails developers",
   description: "Explore the evolving world of Progressive Web Apps (PWAs), built with familiar Rails technologies and designed for seamless use in all compatible browsers. Rails 8 promises to simplify PWA development, offering innovative methods to swiftly generate essential PWA scaffolding. This talk covers PWA basics, their inner workings, and Rails 8’s crucial development role. We’ll examine service worker lifecycle, offline strategies via background sync, and the CacheStorage API for cross-device performance. Additionally, we’ll investigate local data storage via IndexDB and exploiting Push Notifications to elevate the user experience to that of native applications.",
-  starts_at: Time.zone.local(2023, 9, first_day, 15, 45),
-  ends_at: Time.zone.local(2023, 9, first_day, 16, 15),
+  starts_at: Time.zone.local(2023, 9, start_day, 15, 45),
+  ends_at: Time.zone.local(2023, 9, start_day, 16, 15),
   location: track_2,
   speakers: [emmanuel_hayford_speaker]
 )
@@ -412,8 +421,8 @@ Session.create!(
   conference: conference,
   title: "Matz & DHH Fireside chat, hosted by Tobias Lütke",
   description: "We are pleased to welcome Ruby creator and special guest Yukihiro Matsumoto (Matz) to the Rails World stage for a fireside chat with Rails creator David Heinemeier Hansson (DHH). Together on stage for the very first time! Hosted by Shopify founder Tobias Lütke, this is sure to be a conversation you don’t want to miss.",
-  starts_at: Time.zone.local(2023, 9, first_day, 16, 30),
-  ends_at: Time.zone.local(2023, 9, first_day, 17, 30),
+  starts_at: Time.zone.local(2023, 9, start_day, 16, 30),
+  ends_at: Time.zone.local(2023, 9, start_day, 17, 30),
   location: track_1,
   speakers: [matz_speaker, david_heinemeier_hansson_speaker, tobias_luetke_speaker]
 )
