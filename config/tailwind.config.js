@@ -40,7 +40,7 @@ module.exports = {
         red: '#CB0C1C',
         'blue-marine': '#003A5D',
         'blue-light': '#EFF6FF',
-        'blue-teal': '#00AFAA',
+        'blue-teal': '#00AFAA'
       }
     }
   },
