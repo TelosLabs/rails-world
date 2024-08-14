@@ -25,7 +25,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="flex flex-col h-full bg-gray-8"
+  <body class="flex flex-col h-full bg-grey-50"
     <%= user_signed_in? ? "data-controller=web-push-notifications
     data-web-push-notifications-vapid-key-value=#{vapid_public_key}
     data-web-push-notifications-in-app-notifications-value=#{current_profile.in_app_notifications}" : '' %>>

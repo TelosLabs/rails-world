@@ -50,8 +50,8 @@
     </a>
 
     <div class="flex flex-wrap w-full gap-2 mb-4">
-      <% session&.tags&.each do |tag| %>
-        <div class="px-3 py-1.5 text-sm font-medium bg-transparent border rounded-lg border-bluegray text-bluegray">
+      <% session.tags&.each do |tag| %>
+        <div class="px-3 py-1.5 text-sm font-medium bg-transparent border rounded-lg border-bluegray-600 text-bluegray-600">
           <%= tag&.name %>
         </div>
       <% end %>
@@ -59,19 +59,19 @@
 
     <div class="flex flex-col">
       <div class="flex items-center mb-3">
-        <%= inline_svg_tag("icons/calendar.svg", class: "w-[16px] h-[16px] mr-1") %>
-        <span class="font-sans text-sm text-gray-600"><%= session&.starts_at.strftime("%A, %b %d") %></span>
+        <%= inline_svg_tag("icons/calendar.svg", class: "w-[16px] h-[16px] mr-1 fill-grey-600") %>
+        <span class="font-sans text-sm text-grey-600"><%= session.starts_at.strftime("%A, %b %d") %></span>
       </div>
 
       <div class="flex items-center mb-3">
-        <%= inline_svg_tag("icons/clock.svg", class: "w-[16px] h-[16px] mr-1") %>
-        <span class="font-sans text-sm text-gray-600"><%= session&.starts_at.strftime("%H:%M") %>
+        <%= inline_svg_tag("icons/clock.svg", class: "w-[16px] h-[16px] mr-1 fill-grey-600") %>
+        <span class="font-sans text-sm text-grey-600"><%= session.starts_at.strftime("%H:%M") %>
           - <%= session&.ends_at.strftime("%H:%M") %></span>
       </div>
 
       <div class="flex items-center">
-        <%= inline_svg_tag("icons/location.svg", class: "w-[16px] h-[16px] mr-1") %>
-        <span class="font-sans text-sm text-gray-600"><%= session&.location&.name %></span>
+        <%= inline_svg_tag("icons/location.svg", class: "w-[16px] h-[16px] mr-1 fill-grey-600") %>
+        <span class="font-sans text-sm text-grey-600"><%= session.location&.name %></span>
       </div>
     </div>
   </div>
