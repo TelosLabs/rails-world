@@ -12,6 +12,6 @@ class SessionsController < ApplicationController
   private
 
   def sessions
-    @sessions ||= current_conference&.sessions
+    current_conference&.sessions
   end
 end
