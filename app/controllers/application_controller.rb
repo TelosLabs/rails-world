@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   default_form_builder ApplicationFormBuilder
 
-  helper_method :current_profile, :current_conference
+  helper_method :current_profile, :current_conference, :vapid_public_key
 
   private
 
@@ -12,4 +12,8 @@ class ApplicationController < ActionController::Base
 
   # TODO: Must change after implementing multi-conference support
   def current_conference = Conference.last
+
+  def vapid_public_key
+    Base64.urlsafe_decode64(ENV["VAPID_PUBLIC_KEY"]).bytes.to_json
+  end
 end

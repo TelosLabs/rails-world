@@ -248,6 +248,8 @@ GEM
       concurrent-ruby (~> 1.1)
       webrick (~> 1.7)
       websocket-driver (~> 0.7)
+    ffi (1.17.0-arm64-darwin)
+    ffi (1.17.0-x86_64-linux-gnu)
     flay (2.13.3)
       erubi (~> 1.10)
       path_expander (~> 1.0)
@@ -272,6 +274,9 @@ GEM
     i18n (1.14.5)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
+    image_processing (1.13.0)
+      mini_magick (>= 4.9.5, < 5)
+      ruby-vips (>= 2.0.17, < 3)
     importmap-rails (2.0.1)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
@@ -285,6 +290,8 @@ GEM
       reline (>= 0.4.2)
     jmespath (1.6.2)
     json (2.7.2)
+    jwt (2.8.2)
+      base64
     language_server-protocol (3.17.0.3)
     launchy (3.0.1)
       addressable (~> 2.8)
@@ -293,6 +300,7 @@ GEM
       launchy (>= 2.2, < 4)
     lint_roller (1.1.0)
     literal (0.2.1)
+    logger (1.6.0)
     litestream (0.10.4)
       logfmt (>= 0.0.10)
       sqlite3
@@ -324,6 +332,7 @@ GEM
     meta-tags (2.22.0)
       actionpack (>= 6.0.0, < 8.1)
     method_source (1.1.0)
+    mini_magick (4.13.2)
     mini_mime (1.1.5)
     minitest (5.24.0)
     mission_control-jobs (0.2.1)
@@ -353,6 +362,7 @@ GEM
       racc (~> 1.4)
     noticed (2.4.0)
       rails (>= 6.1.0)
+    openssl (3.2.0)
     pagy (8.6.3)
     parallel (1.25.1)
     parser (3.3.3.0)
@@ -500,6 +510,9 @@ GEM
       rubocop-rspec (~> 3, >= 3.0.1)
     ruby-next-core (1.0.3)
     ruby-progressbar (1.13.0)
+    ruby-vips (2.2.2)
+      ffi (~> 1.12)
+      logger
     ruby2_keywords (0.0.5)
     ruby_parser (3.21.0)
       racc (~> 1.5)
@@ -586,6 +599,9 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
+    web-push (3.0.1)
+      jwt (~> 2.0)
+      openssl (~> 3.0)
     webrick (1.8.1)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
@@ -604,6 +620,7 @@ PLATFORMS
 DEPENDENCIES
   action_policy
   activerecord-enhancedsqlite3-adapter (~> 0.8.0)
+  activestorage
   annotate
   appsignal
   avo (>= 3.2.1)
@@ -624,6 +641,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   fuubar
+  image_processing
   importmap-rails
   inline_svg
   letter_opener (~> 1.10)
@@ -659,6 +677,7 @@ DEPENDENCIES
   tzinfo-data
   validates_timeliness (~> 7.0.0.beta1)
   web-console
+  web-push
 
 RUBY VERSION
    ruby 3.3.3p89
