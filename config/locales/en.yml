@@ -18,7 +18,7 @@ en:
     notifications_settings:
       update:
         success: "Your notifications settings have been updated successfully."
-    sessions:
+    user_sessions:
       create:
         notice: "Signed in successfully."
         alert: "Invalid email or password."

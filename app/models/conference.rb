@@ -10,6 +10,7 @@
 class Conference < ApplicationRecord
   has_many :locations, dependent: :restrict_with_error
   has_many :sessions, dependent: :restrict_with_error
+  has_many :speakers, through: :sessions, dependent: :restrict_with_error
 
   validates :name, presence: true
 
@@ -18,8 +19,6 @@ class Conference < ApplicationRecord
   end
 
   def session_dates
-    Rails.cache.fetch("conference_#{id}_session_dates") do
-      sessions.distinct.pluck(Arel.sql("date(starts_at)")).map(&:to_date)
-    end
+    sessions.distinct.pluck(Arel.sql("date(starts_at)")).map(&:to_date)
   end
 end

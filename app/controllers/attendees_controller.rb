@@ -8,7 +8,7 @@ class AttendeesController < ApplicationController
       flash[:alert] = I18n.t("controllers.sessions.add_user.alert")
     end
 
-    redirect_back_or_to(sessions_path, on_date: params[:on_date])
+    redirect_back_or_to(sessions_path, params: params[:starts_at])
   end
 
   def destroy
@@ -18,12 +18,12 @@ class AttendeesController < ApplicationController
       flash[:alert] = I18n.t("controllers.sessions.remove_user.alert")
     end
 
-    redirect_back_or_to(sessions_path, on_date: params[:on_date])
+    redirect_back_or_to(sessions_path, params: params[:starts_at])
   end
 
   private
 
   def set_session
-    @session = Session.find(params[:session_id])
+    @session = current_conference.sessions.find(params[:session_id])
   end
 end

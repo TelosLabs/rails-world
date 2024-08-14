@@ -1,11 +1,17 @@
 class SessionsController < ApplicationController
   def index
-    @sessions = Session.includes(:location, :speakers, :tags)
-    @sessions = @sessions.on_date(params[:on_date].to_date) if params[:on_date].present?
+    @sessions = sessions.includes(:attendees, :speakers, :location, :tags)
+    @sessions = @sessions.starts_at(params[:starts_at].to_date) if params[:starts_at].present?
   end
 
   def show
-    @session = Session.find(params[:id])
+    @session = sessions.find(params[:id])
     @speaker = @session.speakers.first
+  end
+
+  private
+
+  def sessions
+    @sessions ||= current_conference&.sessions
   end
 end
