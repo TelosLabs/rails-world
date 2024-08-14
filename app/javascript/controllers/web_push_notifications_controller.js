@@ -98,22 +98,22 @@ export default class extends Controller {
     })
   }
 
-  displayNotificationBlockingMessage() {
-    this.toggleNotificationBlockingMessage(true);
+  displayNotificationBlockingMessage () {
+    this.toggleNotificationBlockingMessage(true)
   }
 
-  removeNotificationBlockingMessage() {
-    this.toggleNotificationBlockingMessage(false);
+  removeNotificationBlockingMessage () {
+    this.toggleNotificationBlockingMessage(false)
   }
 
-  toggleNotificationBlockingMessage(show) {
-    const message = document.querySelector('.notification-blocking-message');
-    if (!message) return;
+  toggleNotificationBlockingMessage (show) {
+    const message = document.querySelector('.notification-blocking-message')
+    if (!message) return
 
     if (show) {
-      message.classList.remove('hidden');
+      message.classList.remove('hidden')
     } else {
-      message.classList.add('hidden');
+      message.classList.add('hidden')
     }
   }
 }
