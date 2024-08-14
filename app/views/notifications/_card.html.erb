@@ -18,11 +18,11 @@
     <div class="flex flex-row items-center justify-start mb-1">
       <% starts_in = minutes_between(DateTime.now, DateTime.now) %>
       <% if starts_in > 1 %>
-        <p class="text-base font-bold text-black">Starting in <%= starts_in %> minutes <span class="text-[13px] text-gray-6">&nbsp;· <%= starts_in %>m</span></p>
+        <p class="text-base text-black font-bold">Starting in <%= starts_in %> minutes <span class="text-[13px] text-grey-300">&nbsp;· <%= starts_in %>m</span></p>
       <% else %>
-        <p class="text-base font-bold text-black">Starting now</p> <span class="text-[13px] text-gray-6">&nbsp;· now</span>
+        <p class="text-base text-black font-bold">Starting now</p> <span class="text-[13px] text-grey-300">&nbsp;· now</span>
       <% end %>
     </div>
-    <p class="text-base text-gray-400"><%= message %></p>
+    <p class="text-base text-grey-60000"><%= message %></p>
   </div>
 </div>
