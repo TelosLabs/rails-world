@@ -24,7 +24,7 @@ en:
         alert: "Invalid email or password."
       destroy:
         notice: "You have been logged out."
-    sessions:
+    attendees:
       add_user:
         notice: "Session was added to My Schedule"
         alert: "Could not add session to My Schedule. Please try again"

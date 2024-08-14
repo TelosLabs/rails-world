@@ -3,9 +3,9 @@ class AttendeesController < ApplicationController
 
   def create
     if @session.attendees.push(current_user)
-      flash[:notice] = I18n.t("controllers.sessions.add_user.notice")
+      flash[:notice] = I18n.t("controllers.attendees.add_user.notice")
     else
-      flash[:alert] = I18n.t("controllers.sessions.add_user.alert")
+      flash[:alert] = I18n.t("controllers.attendees.add_user.alert")
     end
 
     redirect_back_or_to(sessions_path, params: params[:starts_at])
@@ -13,9 +13,9 @@ class AttendeesController < ApplicationController
 
   def destroy
     if @session.attendees.delete(current_user)
-      flash[:notice] = I18n.t("controllers.sessions.remove_user.notice")
+      flash[:notice] = I18n.t("controllers.attendees.remove_user.notice")
     else
-      flash[:alert] = I18n.t("controllers.sessions.remove_user.alert")
+      flash[:alert] = I18n.t("controllers.attendees.remove_user.alert")
     end
 
     redirect_back_or_to(sessions_path, params: params[:starts_at])
