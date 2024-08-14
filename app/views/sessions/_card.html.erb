@@ -22,7 +22,7 @@
       </div>
 
       <div class="flex items-center px-1">
-        <% if session&.attendees&.include?(current_user) %>
+        <% if session.attendees.include?(current_user) %>
           <%= button_to attendee_path(session_id: session&.id, params: request.params[:starts_at]), method: :delete, form_class: "flex items-center" do %>
             <%= inline_svg_tag("icons/bookmark-full.svg") %>
           <% end %>
