@@ -3,7 +3,7 @@ class ApplicationFormBuilder < ActionView::Helpers::FormBuilder
 
   STYLES = {
     default: "bg-transparent border border-2 border-white rounded-md text-white
-    placeholder-white/50 focus:bg-white focus:text-black focus:placeholder-gray
+    placeholder-white/50 focus:bg-white focus:text-black focus:placeholder-grey-300
     focus:border-white focus:ring-white transition-all",
     toggle_field: "relative w-11 h-6 bg-grey-300 rounded-full peer dark:bg-grey-300
     peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full
