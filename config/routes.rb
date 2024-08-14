@@ -15,11 +15,11 @@ Rails.application.routes.draw do
   resource :notifications_settings, only: [:show, :update]
   resource :about, only: [:show]
   resource :attendee, only: [:create, :destroy]
+  resource :schedule, only: [:index, :update, :show]
 
+  resources :sessions, only: [:index, :update, :show]
   resources :speakers, only: [:show]
   resources :profiles, only: [:show, :edit, :update], param: :uuid
-  resources :sessions, only: [:index, :update, :show]
-  resources :schedules, only: [:index, :update, :show]
   resources :notifications, only: [:index]
 
   get "/service-worker.js" => "service_worker#service_worker"
