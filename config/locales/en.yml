@@ -31,6 +31,6 @@ en:
         notice: "Session was removed from My Schedule"
   authorization:
     unauthorized: "You are not authorized to access this page."
-  notification_mailer:
-    session_notification:
-      "Notification"
+  session_mailer:
+    reminder:
+      subject: "This session is starting soon"

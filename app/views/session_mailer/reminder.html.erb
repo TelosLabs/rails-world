@@ -1,18 +1,23 @@
 <div class="u-w-full">
   <div class="container">
-    <h1 class="title"><%= @notification.title %></h1>
+    <h1 class="title">Your bookmarked session is <%= @notification.title.downcase %></h1>
     <div class="c-event-card">
-      <div class="c-event-card__speaker">
-        <div class="c-event-card__speaker-img">
-        </div>
-        <div>
-          <div class="c-event-card__speaker-title"><%= @speaker&.name %></div>
-          <div class="c-event-card__speaker-subtitle"><%= @speaker&.job_title %></div>
-        </div>
-      </div>
       <div class="c-event-card__title">
         <%= @session.title %>
       </div>
+
+      <% if @speaker&.name.present? %>
+        <div class="c-event-card__speaker">
+          <div class="c-event-card__speaker-img">
+            <%= @speaker.name.split.map { |word| word[0].upcase }.join %>
+          </div>
+          <div>
+            <div class="c-event-card__speaker-title"><%= @speaker.name %></div>
+            <div class="c-event-card__speaker-subtitle"><%= @speaker&.job_title %></div>
+          </div>
+        </div>
+      <% end %>
+      
       <div class="c-event-card__tags">
         <% @session.tags.each do |tag| %>
           <span class="c-event-card__tags-tag"><%= tag.name %></span>
@@ -24,31 +29,31 @@
       </div>
 
       <div class="c-event-card__time">
-        <div class="c-event-card__time-icon">
-        </div>
+        <%# <div class="c-event-card__time-icon">
+        </div> %>
         <div class="c-event-card__time-item">
           <%= @session.starts_at.strftime("%A, %b %d") %>
         </div>
       </div>
 
       <div class="c-event-card__time">
-        <div class="c-event-card__time-icon">
-        </div>
+        <%# <div class="c-event-card__time-icon">
+        </div> %>
         <div class="c-event-card__time-item">
           <%= @session.starts_at.strftime("%H:%M") %> - <%= @session.ends_at.strftime("%H:%M") %>
         </div>
       </div>
 
       <div class="c-event-card__time">
-        <div class="c-event-card__time-icon">
-        </div>
+        <%# <div class="c-event-card__time-icon">
+        </div> %>
         <div class="c-event-card__time-item">
           <%= @session.location.name %>
         </div>
       </div>
     </div>
   </div>
-  <div class="c-footer">
-    <span class="container u-text-center">RAILS WORLD</span>
+  <div class="c-footer u-text-center">
+    <span style="margin: 0 auto;">RAILS WORLD</span>
   </div>
 </div>
