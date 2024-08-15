@@ -34,3 +34,21 @@ en:
   session_mailer:
     reminder:
       subject: "This session is starting soon"
+  date_time:
+    distance_in_words:
+      short:
+        less_than_x_minutes:
+          one: "now"
+          other: "%{count}m"
+        x_minutes: "%{count}m"
+        about_x_hours:
+          one: "1hr"
+          other: "%{count}hrs"
+        x_days:
+          one: "1day"
+          other: "%{count}days"
+        about_x_months:
+          one: "1month"
+          other: "%{count}months"
+        x_months: "%{count}months"
+
