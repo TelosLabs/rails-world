@@ -1,6 +1,4 @@
-<%# locals: (notification:) %>
-
-<% speaker = notification.record.speakers&.first %>
+<%# locals: (notification:, speaker: notification.record.speakers&.first) %>
 
 <div class="p-5 bg-white flex flex-row items-start w-full rounded-[20px]">
   <div class="mr-4 rounded-full">
@@ -16,6 +14,7 @@
       </div>
     <% end %>
   </div>
+
   <div class="flex flex-col items-start">
     <div class="flex flex-row items-center justify-start mb-1">
       <p class="text-base font-bold text-black"><%= notification.title %></p> <span class="text-[13px] text-gray-6">&nbsp; · <%= notification.delivered_at %></span>

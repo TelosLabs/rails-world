@@ -16,13 +16,16 @@
 
       <div class="flex flex-col items-start w-full">
         <div class="flex flex-col items-center w-full mt-10 mb-10">
-          <%= link_to 'Notification settings', notification_settings_path,
-            class: "text-red font-bold  text-center rounded-sm underline italic text-lg" %>
+          <%= link_to(
+            'Notification settings', notification_settings_path,
+            class: "text-red font-bold  text-center rounded-sm underline italic text-lg"
+          ) %>
         </div>
-        <%= button_to "CLEAR ALL", read_notifications_path,
-          class: "w-full bg-white rounded-[10px] p-4 text-lg font-black text-red
-            cursor-pointer italic items-center text-center",
-          form_class: "w-full" %>
+        <%= button_to(
+          "CLEAR ALL", read_notifications_path,
+          class: "w-full bg-white rounded-[10px] p-4 text-lg font-black text-red cursor-pointer italic items-center text-center",
+          form_class: "w-full"
+        ) %>
       </div>
     <% else %>
       <div class="flex flex-col items-center justify-center w-full h-full gap-6">
@@ -30,8 +33,10 @@
           <%= inline_svg_tag "big_bell.svg", size: "56" %>
         </div>
         <p class="text-base font-bold text-center">You don’t have <br> any notifications</p>
-        <%= link_to 'Notification settings', notification_settings_path,
-          class: "text-red font-bold  text-center rounded-sm underline italic text-lg" %>
+        <%= link_to(
+          'Notification settings', notification_settings_path,
+          class: "text-red font-bold  text-center rounded-sm underline italic text-lg"
+        ) %>
       </div>
     <% end %>
   </div>
