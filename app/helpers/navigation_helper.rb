@@ -10,7 +10,14 @@ module NavigationHelper
   end
 
   def show_header?
-    !current_page?(new_user_session_path) && !current_page?(about_path)
+    !current_page?(new_user_session_path) &&
+      !current_page?(about_path) &&
+      !current_page?(landing_page_path)
+  end
+
+  def show_bottom_navbar?
+    user_signed_in? &&
+      !current_page?(landing_page_path)
   end
 
   # Todo: A better approach would be to support authenticated root and unauthenticated root in routes.rb
