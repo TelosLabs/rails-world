@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   end
   resource :read_notifications, only: [:create]
   resource :notification_settings, only: [:show, :update]
+  resource :landing_page, only: [:show]
   resource :about, only: [:show]
   resource :schedule, only: [:show]
 
