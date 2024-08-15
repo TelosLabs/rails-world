@@ -12,3 +12,14 @@ div.field_with_errors > input {
   focus:bg-white focus:text-black focus:placeholder-grey-300
   focus:border-white focus:ring-white mb-2
 }
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

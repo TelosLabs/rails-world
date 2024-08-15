@@ -18,12 +18,17 @@ en:
     notification_settings:
       update:
         success: "Your notification settings have been updated successfully."
-    sessions:
+    user_sessions:
       create:
         notice: "Signed in successfully."
         alert: "Invalid email or password."
       destroy:
         notice: "You have been logged out."
+    attendees:
+      add_user:
+        notice: "Session was added to My Schedule"
+      remove_user:
+        notice: "Session was removed from My Schedule"
   authorization:
     unauthorized: "You are not authorized to access this page."
   notification_mailer:

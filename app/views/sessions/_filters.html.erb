@@ -1,0 +1,30 @@
+<%# locals: (resource:) %>
+
+<div class="flex justify-between w-full mb-6">
+  <div class="flex items-center gap-2 overflow-x-scroll no-scrollbar">
+    <%= link_to(
+      'All dates',
+      url_for(resource),
+      class: [
+        "flex min-w-fit items-center justify-center px-4 py-2 rounded-full font-medium",
+        "bg-red text-white": params[:starts_at].blank?,
+        "bg-white text-red": params[:starts_at].present?
+      ]
+    ) %>
+    <% current_conference.session_dates.each do |session_date| %>
+      <%= link_to(
+        session_date.strftime("%a, %d"),
+        url_for([resource, starts_at: session_date]),
+        class: [
+          "flex min-w-fit items-center justify-center px-4 py-2 font-medium rounded-full",
+          "bg-red text-white": params[:starts_at] == session_date.to_s,
+          "bg-white text-red": params[:starts_at] != session_date.to_s
+        ]
+      ) %>
+    <% end %>
+  </div>
+
+  <div class="flex items-center justify-center ml-3 p-2 bg-white rounded-full min-w-[40px] min-h-[40px]">
+    <%= inline_svg_tag("icons/filters.svg", size: "18") %>
+  </div>
+</div>

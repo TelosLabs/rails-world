@@ -300,7 +300,6 @@ GEM
       launchy (>= 2.2, < 4)
     lint_roller (1.1.0)
     literal (0.2.1)
-    logger (1.6.0)
     litestream (0.10.4)
       logfmt (>= 0.0.10)
       sqlite3
@@ -311,6 +310,7 @@ GEM
       logfmt (>= 0.0.10)
       sqlite3
     logfmt (0.0.10)
+    logger (1.6.0)
     lograge (0.14.0)
       actionpack (>= 4)
       activesupport (>= 4)
