@@ -4,6 +4,7 @@ class SessionsController < ApplicationController
     @sessions = sessions
       .joins(:speakers, :location)
       .includes(:attendees, :tags)
+      .distinct
 
     @sessions = @sessions.starts_at(params[:starts_at].to_date) if params[:starts_at].present?
   end
