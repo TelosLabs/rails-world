@@ -9,7 +9,7 @@
       <% if @speaker&.name.present? %>
         <div class="c-event-card__speaker">
           <div class="c-event-card__speaker-img">
-            <%= @speaker.name.split.map { |word| word[0].upcase }.join %>
+            <%= @speaker.name.split.take(2).map { |word| word[0].upcase }.join %>
           </div>
           <div>
             <div class="c-event-card__speaker-title"><%= @speaker.name %></div>
