@@ -16,7 +16,7 @@ Location.destroy_all
 Conference.destroy_all
 
 # Create Conference
-conference = Conference.find_or_create_by!(name: "RailsWorld 2024")
+conference = Conference.find_or_create_by!(name: "Rails World 2024")
 
 # Create Locations
 track_1 = conference.locations.create(name: "Track 1")
