@@ -16,15 +16,15 @@
         </label>
       </div>
       <div class="flex flex-row items-center justify-between w-full p-4 bg-white">
-        <%= form.label :in_app_notifications, "In-app notifications", class: "grow font-medium text-slate-900 text-base cursor-pointer mr-2" %>
+        <%= form.label :web_push_notifications, "Web-push notifications", class: "grow font-medium text-slate-900 text-base cursor-pointer mr-2" %>
         <label class="inline-flex items-center cursor-pointer">
-          <%= form.check_box :in_app_notifications, class: "sr-only peer",
+          <%= form.check_box :web_push_notifications, class: "sr-only peer",
             data: {web_push_notifications_target: "enableNotifications", action: 'change->form#submit' } %>
           <div class="relative w-11 h-6 bg-grey-300 rounded-full peer dark:bg-grey-300 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red"></div>
         </label>
       </div>
     </div>
-    <p class="hidden text-sm font-medium" id="notification_blocking_message">
+    <p class="hidden text-sm font-medium notification-blocking-message">
       It looks like you've blocked notifications. To stay updated,
       please enable notifications in your browser settings.
     </p>
