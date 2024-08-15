@@ -17,7 +17,7 @@
             }
           ) %>
         <% end %>
-      <% elsif params[:starts_at].present? %>
+      <% elsif params[:starts_at].present? || active_session_filters? %>
         <div class="flex flex-col items-center justify-center w-full h-full">
           <p class="max-w-xs mb-4 font-bold text-center">No sessions match your current filters</p>
           <%= link_to 'Clear filters', sessions_path, class: "text-red underline font-bold italic text-lg" %>

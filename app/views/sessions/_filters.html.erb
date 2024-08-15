@@ -71,16 +71,17 @@
     <div class="flex flex-wrap gap-2">
       <% SessionQuery::STATUS_SCOPES.each do |name| %>
         <% next unless params[name] == "1" %>
-        <div class="h-8 px-4 py-2 bg-green-500 bg-opacity-[.08] rounded-lg gap-2 inline-flex">
+        <% bg_color = session_filter_color(name) %>
+        <div class="h-8 px-4 py-2 <%= bg_color %> bg-opacity-[.08] rounded-lg gap-2 inline-flex">
           <div class="gap-2 flex">
-            <div class="w-4 h-4 bg-green-500 rounded-full"></div>
+            <div class="w-4 h-4 <%= bg_color %> rounded-full"></div>
             <div class="text-xs font-medium"><%= t("views.status_filters.#{name}") %></div>
           </div>
           <div class="w-4 h-4">
             <% modified_params = request.query_parameters.deep_dup %>
             <% modified_params.delete(name) %>
 
-            <%= link_to inline_svg_tag("icons/close.svg"), sessions_path(modified_params) %>
+            <%= link_to inline_svg_tag("icons/close.svg"), url_for(controller: resource, params: modified_params) %>
           </div>
         </div>
       <% end %>

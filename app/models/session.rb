@@ -44,4 +44,12 @@ class Session < ApplicationRecord
   def live?
     Time.current.between?(starts_at, ends_at)
   end
+
+  def starting_soon?
+    Time.current.between?(starts_at, 1.hour.from_now)
+  end
+
+  def past?
+    ends_at < Time.current
+  end
 end
