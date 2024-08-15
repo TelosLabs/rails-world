@@ -10,6 +10,7 @@ env:
     MAILER_SENDER: hello@teloslabs.co
     LITESTREAM_BACKUP_ENABLED: true
     SESSION_REMINDERS_ENABLED: true
+    REGISTRATION_ENABLED: true
   secret:
     - APP_HOST
     - RAILS_MASTER_KEY
