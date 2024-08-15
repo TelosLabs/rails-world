@@ -5,7 +5,8 @@
     <div class="flex justify-between w-full mb-4">
       <div class="flex">
         <% if speaker.image.attached? %>
-          <%= image_tag url_for(speaker.image), class: "text-red w-12 h-12 rounded-full mr-4" %>
+          <div class="relative flex flex-col items-center justify-center w-12 h-12 rounded-full min-w-12 min-h-12 bg-cover bg-no-repeat bg-center mr-4" style="background-image: url(<%= url_for(@speaker.profile.image) %>)">
+          </div>
         <% else %>
           <div class="flex flex-row items-center justify-center w-12 h-12 p-2 mr-4 rounded-full min-w-12 min-h-12 bg-slate-300">
             <%= inline_svg_tag "icons/user_avatar.svg" %>
@@ -43,13 +44,15 @@
       <h3 class="text-xl italic font-bold text-red"><%= session.title %></h3>
     </a>
 
-    <div class="flex flex-wrap w-full gap-2 mb-4">
-      <% session.tags.each do |tag| %>
-        <div class="px-3 py-1.5 text-sm font-medium bg-transparent border rounded-lg border-bluegray-600 text-bluegray-600">
-          <%= tag.name %>
-        </div>
-      <% end %>
-    </div>
+    <% if session&.tags.present? %>
+      <div class="flex flex-wrap w-full gap-2 mb-4">
+        <% session.tags.each do |tag| %>
+          <div class="px-3 py-1.5 text-sm font-medium bg-transparent border rounded-lg border-bluegray-600 text-bluegray-600">
+            <%= tag.name %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
 
     <div class="flex flex-col">
       <div class="flex items-center mb-3">
