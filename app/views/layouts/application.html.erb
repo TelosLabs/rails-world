@@ -44,6 +44,8 @@
       <%= yield %>
     </main>
 
-    <%= render partial: "layouts/bottom_navbar" if user_signed_in? %>
+    <% if show_bottom_navbar? %>
+      <%= render partial: "layouts/bottom_navbar", locals: { unread_notifications: current_user.notifications.unread } %>
+    <% end %>
   </body>
 </html>

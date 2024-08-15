@@ -23,3 +23,21 @@ div.field_with_errors > input {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+/* Pagy */
+.pagy {
+  @apply inline-flex gap-x-2;
+
+  a,
+  .current {
+    @apply inline-flex items-center px-2.5 py-1 text-lg font-medium rounded-md;
+  }
+
+  .current {
+    @apply text-white bg-red;
+  }
+
+  .gap {
+    @apply px-0;
+  }
+}
