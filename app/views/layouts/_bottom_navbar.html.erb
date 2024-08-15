@@ -11,8 +11,16 @@
     <%= inline_svg_tag "avatar_no_fill.svg", class: nav_icon_class_for([profile_path(current_profile&.uuid), edit_profile_path(current_profile&.uuid)]) %>
     Profile
   </a>
-  <a href="<%= notifications_path %>" class="<%= nav_text_class_for [notifications_path, notification_settings_path] %> flex flex-col items-center justify-center">
+  <a href="<%= notifications_path %>" class="<%= nav_text_class_for [notifications_path, notification_settings_path] %> relative flex flex-col items-center justify-center">
     <%= inline_svg_tag "bell.svg", class: nav_icon_class_for([notifications_path, notification_settings_path]) %>
+    <% if unread_notifications.present? %>
+      <div class="absolute -top-0.5 right-0 w-fit min-w-[18px] min-h-[18px]
+            rounded-full bg-red flex justify-center items-center">
+        <span class="text-[13px] text-white font-bold px-1">
+          <%= unread_notifications.count %>
+        </span>
+      </div>
+    <% end %>
     Notifications
   </a>
   <a href="<%= about_path %>" class="<%= nav_text_class_for [about_path] %> flex flex-col items-center justify-center">
