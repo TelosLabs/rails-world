@@ -36,9 +36,6 @@ class Session < ApplicationRecord
   scope :past, -> { where(ends_at: ...Time.current) }
   scope :live, -> { where("? BETWEEN starts_at AND ends_at", Time.current) }
   scope :starting_soon, -> { where("starts_at BETWEEN ? and ?", Time.current, 1.hour.from_now) }
-  scope :from_user, ->(user) { joins(:attendees).where(attendees: {id: user.id}) }
-
-  after_commit :invalidate_cache
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[title]
@@ -46,11 +43,5 @@ class Session < ApplicationRecord
 
   def live?
     Time.current.between?(starts_at, ends_at)
-  end
-
-  private
-
-  def invalidate_cache
-    Rails.cache.delete("conference_#{conference_id}_session_dates")
   end
 end

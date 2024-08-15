@@ -1,6 +1,12 @@
 class SchedulesController < ApplicationController
   def show
-    @sessions = current_user.sessions.includes(:attendees, :speakers, :location, :tags)
-    @sessions = @sessions.starts_at(params[:starts_at].to_date) if params[:starts_at].present?
+    @sessions = SessionQuery.new(params: filter_params).call
+      .includes(:attendees, :location, :speakers, :tags)
+  end
+
+  private
+
+  def filter_params
+    params.permit(:starts_at, :live, :past, :starting_soon)
   end
 end
