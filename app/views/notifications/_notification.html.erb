@@ -1,10 +1,10 @@
 <%# locals: (notification:, speaker: notification.record.speakers&.first) %>
 
-<div class="p-5 bg-white flex flex-row items-start w-full rounded-[20px]">
+<%= link_to session_path(notification.record), class: "p-5 bg-white flex flex-row items-center w-full rounded-[20px]" do %>
   <div class="mr-4 rounded-full">
-    <% if speaker&.profile&.image&.attached? %>
-      <div class="flex flex-col items-center justify-center relative w-[48px] h-[48px] rounded-full">
-        <%= image_tag url_for(speaker.profile.image) %>
+    <% if speaker&.image&.attached? %>
+      <div class="flex flex-col items-center justify-center relative w-[48px] h-[48px]">
+        <%= image_tag url_for(speaker.image), class: "rounded-full" %>
         <%= inline_svg_tag "icon_notification.svg", class: "absolute z-10 bottom-[-4px] right-[-4px]" %>
       </div>
     <% else %>
@@ -19,6 +19,6 @@
     <div class="flex flex-row items-center justify-start mb-1">
       <p class="text-base font-bold text-black"><%= notification.title %></p> <span class="text-[13px] text-gray-6">&nbsp; · <%= notification.delivered_at %></span>
     </div>
-    <p class="text-base text-gray-400"><%= notification.record.title %></p>
+    <p class="text-base text-gray-400 line-clamp-2"><%= notification.record.title %></p>
   </div>
-</div>
+<% end %>
