@@ -1,3 +1,5 @@
+<%# locals: (session:) %>
+
 <%# TODO: remove when we add support for multiple speakers %>
 <% speaker = session.speakers.first %>
 
@@ -5,8 +7,8 @@
   <div class="flex flex-col w-full">
     <div class="flex justify-between w-full mb-4">
       <div class="flex">
-        <% if speaker&.image&.attached? %>
-          <%= image_tag url_for(speaker&.image), class: "text-red w-12 h-12 rounded-full mr-4" %>
+        <% if speaker.image&.attached? %>
+          <%= image_tag url_for(speaker.image), class: "text-red w-12 h-12 rounded-full mr-4" %>
         <% else %>
           <div class="flex flex-row items-center justify-center w-12 h-12 p-2 mr-4 rounded-full min-w-12 min-h-12 bg-slate-300">
             <%= inline_svg_tag "icons/user_avatar.svg" %>
@@ -15,19 +17,19 @@
 
         <div class="flex flex-col justify-center h-full">
           <a href="<%= speaker_path(speaker) %>">
-            <h2 class="italic font-black text-red"><%= speaker&.name %></h2>
-            <p class="text-sm text-gray-800"><%= speaker&.job_title %></p>
+            <h2 class="italic font-black text-red"><%= speaker.name %></h2>
+            <p class="text-sm text-gray-800"><%= speaker.job_title %></p>
           </a>
         </div>
       </div>
 
       <div class="flex items-center px-1">
-        <% if session.attendees.include?(current_user) %>
-          <%= button_to attendee_path(session_id: session&.id, params: request.params[:starts_at]), method: :delete, form_class: "flex items-center" do %>
+        <% if session.attendees&.include?(current_user) %>
+          <%= button_to session_attendee_path(session_id: session.id, params: request.params[:starts_at]), method: :delete, form_class: "flex items-center" do %>
             <%= inline_svg_tag("icons/bookmark-full.svg") %>
           <% end %>
         <% else %>
-          <%= button_to attendee_path(session_id: session&.id, params: request.params[:starts_at]), form_class: "flex items-center" do %>
+          <%= button_to session_attendee_path(session_id: session.id, params: request.params[:starts_at]), form_class: "flex items-center" do %>
             <%= inline_svg_tag("icons/bookmark-outline.svg") %>
           <% end %>
         <% end %>
@@ -35,13 +37,13 @@
     </div>
 
     <a href="<%= session_path(session) %>" class="mb-4">
-      <h3 class="text-xl italic font-bold text-red"><%= session&.title %></h3>
+      <h3 class="text-xl italic font-bold text-red"><%= session.title %></h3>
     </a>
 
     <div class="flex flex-wrap w-full gap-2 mb-4">
       <% session.tags&.each do |tag| %>
         <div class="px-3 py-1.5 text-sm font-medium bg-transparent border rounded-lg border-bluegray-600 text-bluegray-600">
-          <%= tag&.name %>
+          <%= tag.name %>
         </div>
       <% end %>
     </div>
@@ -49,13 +51,13 @@
     <div class="flex flex-col">
       <div class="flex items-center mb-3">
         <%= inline_svg_tag("icons/calendar.svg", class: "w-[16px] h-[16px] mr-1 fill-grey-600") %>
-        <span class="font-sans text-sm text-grey-600"><%= session.starts_at.strftime("%A, %b %d") %></span>
+        <span class="font-sans text-sm text-grey-600"><%= session.starts_at&.strftime("%A, %b %d") %></span>
       </div>
 
       <div class="flex items-center mb-3">
         <%= inline_svg_tag("icons/clock.svg", class: "w-[16px] h-[16px] mr-1 fill-grey-600") %>
-        <span class="font-sans text-sm text-grey-600"><%= session.starts_at.strftime("%H:%M") %>
-          - <%= session&.ends_at.strftime("%H:%M") %></span>
+        <span class="font-sans text-sm text-grey-600"><%= session.starts_at&.strftime("%H:%M") %>
+          - <%= session.ends_at&.strftime("%H:%M") %></span>
       </div>
 
       <div class="flex items-center">

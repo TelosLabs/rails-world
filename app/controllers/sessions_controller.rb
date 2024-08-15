@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def index
-    @sessions = sessions.includes(:attendees, :speakers, :location, :tags)
+    @sessions = sessions.joins(:speakers, :location).includes(:attendees, :tags)
     @sessions = @sessions.starts_at(params[:starts_at].to_date) if params[:starts_at].present?
   end
 

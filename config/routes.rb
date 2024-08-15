@@ -16,10 +16,11 @@ Rails.application.routes.draw do
   end
   resource :notification_settings, only: [:show, :update]
   resource :about, only: [:show]
-  resource :attendee, only: [:create, :destroy]
   resource :schedule, only: [:show]
 
-  resources :sessions, only: [:index, :show]
+  resources :sessions, only: [:index, :show] do
+    resource :attendee, only: [:create, :destroy]
+  end
   resources :speakers, only: [:show]
   resources :profiles, only: [:show, :edit, :update], param: :uuid
   resources :notifications, only: [:index]
