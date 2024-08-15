@@ -27,10 +27,8 @@ en:
     attendees:
       add_user:
         notice: "Session was added to My Schedule"
-        alert: "Could not add session to My Schedule. Please try again"
       remove_user:
         notice: "Session was removed from My Schedule"
-        alert: "Could not remove session from My Schedule. Please try again"
   views:
     status_filters:
       past: "Past"

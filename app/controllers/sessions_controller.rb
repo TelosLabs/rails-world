@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def index
-    @sessions = SessionQuery.new(params: filter_params).call
-      .includes(:attendees, :location, :speakers, :tags)
+    @sessions = SessionQuery.new(relation: Session.joins(:speakers, :location), params: filter_params).call
+      .includes(:attendees, :tags)
   end
 
   def show
@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
   private
 
   def sessions
-    @sessions ||= current_conference&.sessions
+    current_conference&.sessions
   end
 
   def filter_params
