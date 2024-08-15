@@ -10,10 +10,11 @@ class SessionReminderNotifier < ApplicationNotifier
       {
         title: title,
         body: record.title,
-        icon: "/pwa_home_screen_icon.png"
+        icon: "/pwa_home_screen_icon.png",
+        path: session_path(record.id)
       }
     }
-    config.if = -> { recipient.profile&.in_app_notifications }
+    config.if = -> { recipient.profile&.web_push_notifications }
   end
 
   notification_methods do

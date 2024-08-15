@@ -27,7 +27,7 @@ class SessionReminderJob < ApplicationJob
 
         SessionReminderNotifier
           .with(record: session, time_before_session: time_before_session.inspect)
-          .deliver(session.attendees.with_at_least_one_notification_enabled)
+          .deliver(session.attendees)
       end
     end
   end
