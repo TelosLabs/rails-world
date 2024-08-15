@@ -1,6 +1,6 @@
 # Deploy to these servers.
 servers:
-  - 149.248.53.52
+  - 159.203.62.190
 
 # Inject ENV variables into containers (secrets come from .env).
 # Remember to run `kamal env push` after making changes!
@@ -8,16 +8,20 @@ env:
   clear:
     RAILS_ENV: production
     MAILER_SENDER: hello@railsworld.com
-    WEB_CONCURRENCY: 4
+    WEB_CONCURRENCY: 2
     LITESTREAM_BACKUP_ENABLED: true
+    SESSION_REMINDERS_ENABLED: true
   secret:
     - APP_HOST
     - RAILS_MASTER_KEY
     - MAILPACE_API_TOKEN
-    - LITESTREAM_BUCKET
+    - APPSIGNAL_PUSH_API_KEY
     - AWS_ACCESS_KEY_ID
     - AWS_SECRET_ACCESS_KEY
-    - APPSIGNAL_PUSH_API_KEY
+    - LITESTREAM_BUCKET
+    - SECRET_KEY_BASE
+    - VAPID_PUBLIC_KEY
+    - VAPID_PRIVATE_KEY
 
 accessories:
   vector:
