@@ -14,10 +14,10 @@
   <a href="<%= notifications_path %>" class="<%= nav_text_class_for [notifications_path, notification_settings_path] %> relative flex flex-col items-center justify-center">
     <%= inline_svg_tag "bell.svg", class: nav_icon_class_for([notifications_path, notification_settings_path]) %>
     <% if unread_notifications.present? %>
-      <div class="absolute -top-0.5 right-0 w-fit min-w-[18px] min-h-[18px]
+      <div class="absolute -top-0.5 right-0 w-[18px] h-[18px]
             rounded-full bg-red flex justify-center items-center">
-        <span class="text-[13px] text-white font-bold px-1">
-          <%= unread_notifications.count %>
+        <span class="text-[11px] text-white font-bold px-1">
+          <%= unread_notifications.count < 10 ? unread_notifications.count : "+9" %>
         </span>
       </div>
     <% end %>
