@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resource :password_reset, only: [:new, :create, :edit, :update] do
     get :post_submit
   end
+  resource :read_notifications, only: [:create]
   resource :notification_settings, only: [:show, :update]
   resource :about, only: [:show]
   resource :schedule, only: [:show]
