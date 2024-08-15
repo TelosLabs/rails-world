@@ -2,21 +2,21 @@
 #
 # Table name: profiles
 #
-#  id                   :integer          not null, primary key
-#  bio                  :text
-#  github_url           :string
-#  in_app_notifications :boolean          default(FALSE), not null
-#  is_public            :boolean          default(FALSE), not null
-#  job_title            :string
-#  linkedin_url         :string
-#  mail_notifications   :boolean          default(TRUE), not null
-#  name                 :string
-#  profileable_type     :string           not null
-#  twitter_url          :string
-#  uuid                 :string           not null
-#  created_at           :datetime         not null
-#  updated_at           :datetime         not null
-#  profileable_id       :integer          not null
+#  id                     :integer          not null, primary key
+#  bio                    :text
+#  github_url             :string
+#  is_public              :boolean          default(FALSE), not null
+#  job_title              :string
+#  linkedin_url           :string
+#  mail_notifications     :boolean          default(FALSE), not null
+#  name                   :string
+#  profileable_type       :string           not null
+#  twitter_url            :string
+#  uuid                   :string           not null
+#  web_push_notifications :boolean          default(FALSE), not null
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  profileable_id         :integer          not null
 #
 # Indexes
 #
