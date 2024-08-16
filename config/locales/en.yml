@@ -37,6 +37,9 @@ en:
       submit: "Apply"
   authorization:
     unauthorized: "You are not authorized to access this page."
+  session_mailer:
+    reminder:
+      subject: "This session is starting soon"
   date_time:
     distance_in_words:
       short:

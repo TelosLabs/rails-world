@@ -24,7 +24,7 @@ class SessionReminderNotifier < ApplicationNotifier
       if params[:time_before_session].match?(/^0\s/)
         "Starting Now"
       else
-        "Starting in about #{params[:time_before_session]}"
+        "Starting in #{params[:time_before_session]}"
       end
     end
 
