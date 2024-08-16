@@ -29,7 +29,7 @@ class ProfilesController < ApplicationController
     params.require(:profile).permit(
       :name, :job_title, :bio, :is_public, :image,
       :twitter_url, :linkedin_url, :github_url,
-      :in_app_notifications, :mail_notifications
+      :web_push_notifications, :mail_notifications
     )
   end
 

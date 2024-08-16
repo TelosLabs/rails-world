@@ -14,12 +14,15 @@ Rails.application.routes.draw do
   resource :password_reset, only: [:new, :create, :edit, :update] do
     get :post_submit
   end
+  resource :read_notifications, only: [:create]
   resource :notification_settings, only: [:show, :update]
+  resource :landing_page, only: [:show]
   resource :about, only: [:show]
-  resource :attendee, only: [:create, :destroy]
   resource :schedule, only: [:show]
 
-  resources :sessions, only: [:index, :show]
+  resources :sessions, only: [:index, :show] do
+    resource :attendee, only: [:create, :destroy]
+  end
   resources :speakers, only: [:show]
   resources :profiles, only: [:show, :edit, :update], param: :uuid
   resources :notifications, only: [:index]

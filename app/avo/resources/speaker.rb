@@ -11,7 +11,7 @@ class Avo::Resources::Speaker < Avo::BaseResource
 
   def fields
     field :id, as: :id
-    field :name, as: :text, sortable: true
+    field :name, as: :text, sortable: -> { query.order("profiles.name #{direction}") }
     field :image, as: :file, accept: "image/*", only_on: [:show, :forms]
     field :image_presence, name: "Image", as: :boolean, only_on: :index do
       record.image.attached?

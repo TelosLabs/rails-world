@@ -1,20 +1,20 @@
-<%# locals: (resource_path: nil) %>
+<%# locals: (resource:) %>
 
 <div class="flex justify-between w-full mb-6">
   <div class="flex items-center gap-2 overflow-x-scroll no-scrollbar">
     <%= link_to(
       'All dates',
-      resource_path,
+      url_for(resource),
       class: [
         "flex min-w-fit items-center justify-center px-4 py-2 rounded-full font-medium",
-        "bg-red text-white": params[:starts_at].nil?,
+        "bg-red text-white": params[:starts_at].blank?,
         "bg-white text-red": params[:starts_at].present?
       ]
     ) %>
     <% current_conference.session_dates.each do |session_date| %>
       <%= link_to(
         session_date.strftime("%a, %d"),
-        url_for(path: resource_path, params: { starts_at: session_date }),
+        url_for([resource, starts_at: session_date]),
         class: [
           "flex min-w-fit items-center justify-center px-4 py-2 font-medium rounded-full",
           "bg-red text-white": params[:starts_at] == session_date.to_s,

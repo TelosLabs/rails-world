@@ -4,14 +4,22 @@
       <h1 class="text-4xl italic font-black text-gray-800">Agenda</h1>
     </div>
 
-    <%= render partial: 'sessions/filters', locals: { resource_path: sessions_path } %>
+    <%= render partial: 'sessions/filters', locals: { resource: :sessions } %>
 
     <div class="flex flex-col w-full h-full">
       <% if @sessions.present? %>
-        <%= render partial: 'sessions/card', collection: @sessions, as: :session %>
+        <% @sessions.each do |session| %>
+          <%= render(
+            partial: 'sessions/card',
+            locals: {
+              session: session, speaker: session.speakers.first,
+              user_is_an_attendee: @user_session_ids.include?(session.id)
+            }
+          ) %>
+        <% end %>
       <% elsif params[:starts_at].present? %>
         <div class="flex flex-col items-center justify-center w-full h-full">
-          <p class="max-w-xs mb-4 font-bold text-center">No sessions found with the selected filters</p>
+          <p class="max-w-xs mb-4 font-bold text-center">No sessions match your current filters</p>
           <%= link_to 'Clear filters', sessions_path, class: "text-red underline font-bold italic text-lg" %>
         </div>
       <% else %>

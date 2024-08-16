@@ -7,7 +7,7 @@ namespace :db do
     image_path = "app/assets/images/speakers"
 
     # Create Conference
-    conference = Conference.find_or_create_by!(name: "RailsWorld 2024")
+    conference = Conference.find_or_create_by!(name: "Rails World 2024")
 
     # Create Locations
     track_1 = conference.locations.find_or_create_by!(name: "Track 1")

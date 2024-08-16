@@ -1,6 +1,11 @@
 class SessionsController < ApplicationController
   def index
-    @sessions = sessions.includes(:attendees, :speakers, :location, :tags)
+    @user_session_ids = current_user.sessions.pluck(:id)
+    @sessions = sessions
+      .joins(:speakers, :location)
+      .includes(:attendees, :tags)
+      .distinct
+
     @sessions = @sessions.starts_at(params[:starts_at].to_date) if params[:starts_at].present?
   end
 
@@ -12,6 +17,6 @@ class SessionsController < ApplicationController
   private
 
   def sessions
-    @sessions ||= current_conference&.sessions
+    current_conference&.sessions
   end
 end
