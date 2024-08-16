@@ -26,6 +26,9 @@ class Session < ApplicationRecord
   has_and_belongs_to_many :attendees, class_name: "User", join_table: "sessions_users"
   has_and_belongs_to_many :tags
 
+  has_many :noticed_events, as: :record, dependent: :destroy, class_name: "Noticed::Event"
+  has_many :notifications, through: :noticed_events, class_name: "Noticed::Notification"
+
   validates :title, presence: true
   validates :starts_at, presence: true
   validates :ends_at, presence: true

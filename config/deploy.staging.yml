@@ -1,6 +1,6 @@
 # Deploy to these servers.
 servers:
-  - 138.197.150.179
+  - 134.122.34.75
 
 # Inject ENV variables into containers (secrets come from .env).
 # Remember to run `kamal env push` after making changes!
@@ -8,6 +8,9 @@ env:
   clear:
     RAILS_ENV: staging
     MAILER_SENDER: hello@teloslabs.co
+    LITESTREAM_BACKUP_ENABLED: true
+    SESSION_REMINDERS_ENABLED: true
+    REGISTRATION_ENABLED: true
   secret:
     - APP_HOST
     - RAILS_MASTER_KEY
@@ -15,6 +18,10 @@ env:
     - APPSIGNAL_PUSH_API_KEY
     - AWS_ACCESS_KEY_ID
     - AWS_SECRET_ACCESS_KEY
+    - LITESTREAM_BUCKET
+    - SECRET_KEY_BASE
+    - VAPID_PUBLIC_KEY
+    - VAPID_PRIVATE_KEY
 
 accessories:
   vector:
