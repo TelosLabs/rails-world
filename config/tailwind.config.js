@@ -1,5 +1,4 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
-
 module.exports = {
   content: [
     './public/*.html',
@@ -21,21 +20,24 @@ module.exports = {
         'screen-sm': '425px'
       },
       colors: {
-        gray: '#C6C6C8',
-        'gray-8': '#F3F2F8',
-        'gray-7': '#D7D7D8',
-        'gray-6': '#C6C6C8',
-        'gray-5': '#A2A2A2',
-        'gray-400': '#A2A2A2',
-        'gray-4': '#3A3A3C',
-        'gray-3': '#262626',
+        grey: {
+          50: '#F3F2F8',
+          200: '#D7D7D8',
+          300: '#C6C6C8',
+          400: '#A2A2A2',
+          600: '#3A3A3C',
+          700: '#262626',
+          800: '#1C1C1E'
+        },
+        green: {
+          500: '#62C554'
+        },
+        bluegray: {
+          600: '#829ECE'
+        },
         'purple-dark': '#432463',
         'purple-light': '#4E2A73',
         red: '#CB0C1C',
-        blue: '#0A4E6B',
-        'blue-2': '#829ECE',
-        'green-dark': '#62C554',
-        'green-light': '#D8F1D4',
         'blue-marine': '#003A5D',
         'blue-light': '#EFF6FF',
         'blue-teal': '#00AFAA'

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "main#index"
+  root "sessions#index"
 
   get "up" => "rails/health#show", :as => :rails_health_check
   get "/service-worker.js" => "service_worker#service_worker"
@@ -14,12 +14,17 @@ Rails.application.routes.draw do
   resource :password_reset, only: [:new, :create, :edit, :update] do
     get :post_submit
   end
-  resource :about, only: [:show]
+  resource :read_notifications, only: [:create]
   resource :notification_settings, only: [:show, :update]
+  resource :landing_page, only: [:show]
+  resource :about, only: [:show]
+  resource :schedule, only: [:show]
 
-  resources :profiles, only: [:show, :edit, :update], param: :uuid
+  resources :sessions, only: [:index, :show] do
+    resource :attendee, only: [:create, :destroy]
+  end
   resources :speakers, only: [:show]
-  resources :sessions, only: [:index, :show]
+  resources :profiles, only: [:show, :edit, :update], param: :uuid
   resources :notifications, only: [:index]
   resources :web_push_subscriptions, only: [:create]
 end
