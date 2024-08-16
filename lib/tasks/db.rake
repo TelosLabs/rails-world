@@ -1,8 +1,9 @@
 namespace :db do
   desc "Loading Rails World 2024 conference data."
-  task :prod_seed, [:month_number, :day_number] => :environment do |t, args|
-    month = args[:month_number].present? ? args[:month_number].to_i : 9
-    start_day = args[:day_number].present? ? args[:day_number].to_i : 26
+  task :rails_world_2024_seed, [:start_date] => :environment do |t, args|
+    start_date = args[:start_date].present? ? Date.parse(args[:start_date]) : Date.new(2024, 9, 26)
+    month = start_date.month
+    start_day = start_date.day
     second_day = start_day + 1
     image_path = "app/assets/images/speakers"
 
