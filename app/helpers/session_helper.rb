@@ -1,8 +1,4 @@
 module SessionHelper
-  def active_session_filters?
-    (SessionQuery::STATUS_SCOPES & params.keys).any?
-  end
-
   def session_filter_color(scope)
     case scope
     when "live"
@@ -12,5 +8,9 @@ module SessionHelper
     when "starting_soon"
       "bg-yellow"
     end
+  end
+
+  def session_filter_params
+    params.permit(SessionQuery::STATUS_SCOPES)
   end
 end

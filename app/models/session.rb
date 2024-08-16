@@ -46,7 +46,9 @@ class Session < ApplicationRecord
   end
 
   def starting_soon?
-    Time.current.between?(starts_at, 1.hour.from_now)
+    return false if starts_at < Time.current
+
+    (starts_at - Time.current) < 1.hour
   end
 
   def past?

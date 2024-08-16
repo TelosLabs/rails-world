@@ -4,7 +4,7 @@
   <div class="flex items-center gap-2 overflow-x-scroll no-scrollbar">
     <%= link_to(
           'All dates',
-          url_for(resource),
+          url_for([resource, session_filter_params.to_h]),
           class: [
             "flex min-w-fit items-center justify-center px-4 py-2 rounded-full font-medium",
             "bg-red text-white": params[:starts_at].blank?,
@@ -14,7 +14,7 @@
     <% current_conference.session_dates.each do |session_date| %>
       <%= link_to(
             session_date.strftime("%a, %d"),
-            url_for([resource, starts_at: session_date]),
+            url_for([resource, session_filter_params.to_h.merge(starts_at: session_date)]),
             class: [
               "flex min-w-fit items-center justify-center px-4 py-2 font-medium rounded-full",
               "bg-red text-white": params[:starts_at] == session_date.to_s,
@@ -24,7 +24,7 @@
     <% end %>
   </div>
 
-  <div class="flex items-center justify-center ml-3 p-2 rounded-full min-w-[40px] min-h-[40px] <%= active_session_filters? ? "bg-red fill-white" : "bg-white fill-red" %>">
+  <div class="flex items-center justify-center ml-3 p-2 rounded-full min-w-[40px] min-h-[40px] <%= session_filter_params.present? ? "bg-red fill-white" : "bg-white fill-red" %>">
     <div class="relative" data-controller="dropdown">
       <button type="button" data-action="dropdown#toggle click@window->dropdown#hide" class="flex items-center justify-center p-2 rounded-full">
         <%= inline_svg_tag("icons/filters.svg", size: "18") %>
@@ -63,7 +63,7 @@
   </div>
 </div>
 
-<% if active_session_filters? %>
+<% if session_filter_params.present? %>
   <div class="flex w-full mb-2 gap-2">
     <div class="flex flex-wrap ">
       <div class="h-8 py-1 text-base font-bold leading-tight">Active filters:</div>
