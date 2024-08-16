@@ -30,7 +30,7 @@
         <% end %>
       </div>
 
-      <p class="mb-4 text-base font-medium leading-6"><%= @session.description %></p>
+      <p class="mb-4 text-base font-medium leading-6"><%= simple_format(@session.description) %></p>
       <div class="flex flex-row items-center mb-3">
         <%= inline_svg_tag "calendar.svg", class: "fill-grey-600 w-3 h-3 mr-2" %> <p class="text-[13px] text-grey-600"><%= @session.starts_at.strftime("%A, %b %d") %></p>
       </div>
