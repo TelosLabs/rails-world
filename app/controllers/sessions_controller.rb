@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   def index
     @user_session_ids = current_user.sessions.pluck(:id)
     @sessions = SessionQuery.new(relation: Session.joins(:speakers, :location), params: filter_params).call
-      .includes(:attendees, :tags)
+      .includes(:attendees, :tags).order(:starts_at)
   end
 
   def show
