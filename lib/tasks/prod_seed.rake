@@ -18,7 +18,7 @@ namespace :db do
     # No tags for now
 
     # Create Speakers
-    matz_speaker = Speaker.find_or_create_by!(name: "Yukihiro \"Matz\" Matsumoto") do |speaker|
+    matz_speaker = Speaker.joins(:profile).find_or_create_by!("profiles.name": "Yukihiro \"Matz\" Matsumoto") do |speaker|
       speaker.job_title = "Creator of Ruby"
       speaker.bio = "Matz is the creator and chief designer of the Ruby programming language."
       speaker.github_url = "https://github.com/matz"
@@ -27,7 +27,7 @@ namespace :db do
       speaker.image = Rails.root.join("#{image_path}/m-matsumoto.jpg").open
     end
 
-    aaron_patterson_speaker = Speaker.find_or_create_by!(name: "Aaron Patterson") do |speaker|
+    aaron_patterson_speaker = Speaker.joins(:profile).find_or_create_by!("profiles.name": "Aaron Patterson") do |speaker|
       speaker.job_title = "Rails Core & Senior Staff Engineer, Shopify"
       speaker.bio = "Aaron is on the Rails core team, the Ruby core team, and is a Senior Staff Engineer working at Shopify. In his free time, he enjoys cooking, playing with cats, and writing weird software."
       speaker.github_url = "https://github.com/tenderlove"
@@ -36,7 +36,7 @@ namespace :db do
       speaker.image = Rails.root.join("#{image_path}/a-patterson.jpg").open
     end
 
-    david_heinemeier_hansson_speaker = Speaker.find_or_create_by!(name: "David Heinemeier Hansson") do |speaker|
+    david_heinemeier_hansson_speaker = Speaker.joins(:profile).find_or_create_by!("profiles.name": "David Heinemeier Hansson") do |speaker|
       speaker.job_title = "Rails Core, CTO, 37signals"
       speaker.bio = "Creator of Ruby on Rails."
       speaker.github_url = "https://github.com/dhh"
@@ -45,7 +45,7 @@ namespace :db do
       speaker.image = Rails.root.join("#{image_path}/d-hansson.jpg").open
     end
 
-    eileen_uchitelle_speaker = Speaker.find_or_create_by!(name: "Eileen Uchitelle") do |speaker|
+    eileen_uchitelle_speaker = Speaker.joins(:profile).find_or_create_by!("profiles.name": "Eileen Uchitelle") do |speaker|
       speaker.job_title = "Rails Core & Senior Staff Engineer, Shopify"
       speaker.bio = "Eileen M. Uchitelle is a Senior Staff Engineer at Shopify where she helps lead the effort to improve and maintain the Rails framework and Ruby language. Her approach to solving technical problems centers around ensuring the continued stability and extensibility for individual developers and companies large and small. As a member of the Rails Core Team, her goal is to ensure the long-term sustainability of the Rails framework and its continued adoption as one of the leading open-source frameworks."
       speaker.github_url = "https://github.com/eileencodes"
@@ -54,7 +54,7 @@ namespace :db do
       speaker.image = Rails.root.join("#{image_path}/e-uchitelle.jpg").open
     end
 
-    rafael_franca_speaker = Speaker.find_or_create_by!(name: "Rafael França") do |speaker|
+    rafael_franca_speaker = Speaker.joins(:profile).find_or_create_by!("profiles.name": "Rafael França") do |speaker|
       speaker.job_title = "Rails Core & Senior Staff Engineer, Shopify"
       speaker.bio = "Rails Core member and technical leader in the Ruby and Rails infrastructure team at Shopify."
       speaker.github_url = "https://github.com/rafaelfranca"
@@ -62,7 +62,7 @@ namespace :db do
       speaker.twitter_url = "https://twitter.com/rafaelfranca"
       speaker.image = Rails.root.join("#{image_path}/r-franca.jpg").open
     end
-    tobias_luetke_speaker = Speaker.find_or_create_by!(name: "Tobias Lütke") do |speaker|
+    tobias_luetke_speaker = Speaker.joins(:profile).find_or_create_by!("profiles.name": "Tobias Lütke") do |speaker|
       speaker.job_title = "CEO, Shopify"
       speaker.bio = "Tobi Lütke is the founder and Chief Executive Officer of Shopify. In 2004, Tobi began building software to launch an online snowboard store called Snowdevil. It quickly became obvious that the software was more valuable than the snowboards, so Tobi and his founding team launched the Shopify platform in 2008 built on Rails. Tobi is a vocal advocate for sustainability, computer literacy, and education. He has served as a board member of Coinbase since 2022 and he is actively involved with the open source community, having contributed significantly to Ruby on Rails as one of the earliest members of Rails Core. He also created Liquid and ActiveMerchant, key libraries for ecommerce. Tobi firmly believes that technology is essential for growth and innovation. He is passionate about paving the way for more builders."
       speaker.github_url = "https://github.com/tobi"
@@ -71,7 +71,7 @@ namespace :db do
       speaker.image = Rails.root.join("#{image_path}/t-lutke.jpg").open
     end
 
-    xavier_noria_speaker = Speaker.find_or_create_by!(name: "Xavier Noria") do |speaker|
+    xavier_noria_speaker = Speaker.joins(:profile).find_or_create_by!("profiles.name": "Xavier Noria") do |speaker|
       speaker.job_title = "Rails Core, Zeitwerk, Independent Consultant"
       speaker.bio = "Everlasting student · Zeitwerk · Rails Core · Fukuoka Ruby Award · Rails SaaS Conference Award · Ruby Hero Award · Freelance · Life lover"
       speaker.github_url = "https://github.com/fxn"
@@ -80,7 +80,7 @@ namespace :db do
       speaker.image = Rails.root.join("#{image_path}/x-noria.jpg").open
     end
 
-    andrea_fomera_speaker = Speaker.find_or_create_by!(name: "Andrea Fomera") do |speaker|
+    andrea_fomera_speaker = Speaker.joins(:profile).find_or_create_by!("profiles.name": "Andrea Fomera") do |speaker|
       speaker.job_title = "Senior Software Developer, Hire me!"
       speaker.bio = "Andrea Fomera is a Senior Software Developer at Podia who finds enjoyment in updating dependencies and crafting high quality, robust and maintainable code. She enjoys sharing what she knows through courses and screencasts."
       speaker.github_url = "https://github.com/afomera"
@@ -89,7 +89,7 @@ namespace :db do
       speaker.image = Rails.root.join("#{image_path}/a-fomera.png").open
     end
 
-    bruno_prieto_speaker = Speaker.find_or_create_by!(name: "Bruno Prieto") do |speaker|
+    bruno_prieto_speaker = Speaker.joins(:profile).find_or_create_by!("profiles.name": "Bruno Prieto") do |speaker|
       speaker.job_title = "Programmer, 37signals"
       speaker.bio = "I’m a blind programmer who fell in love with Rails at first sight, enjoying building web apps that solve real problems while keeping things simple. Whenever I can, I try to collaborate to make the web more accessible for everyone."
       speaker.github_url = "https://github.com/brunoprietog"
@@ -98,7 +98,7 @@ namespace :db do
       speaker.image = Rails.root.join("#{image_path}/b-prieto.jpg").open
     end
 
-    chris_power_speaker = Speaker.find_or_create_by!(name: "Chris Power") do |speaker|
+    chris_power_speaker = Speaker.joins(:profile).find_or_create_by!("profiles.name": "Chris Power") do |speaker|
       speaker.job_title = "Founder, Typecraft"
       speaker.bio = "Chris is a seasoned Rails engineer and the face behind the “typecraft” Youtube channel. When not slinging code, Chris is spending time with his Wife of 8 years and coaching T-Ball to his 5-year old twins."
       speaker.github_url = "https://github.com/typecraft-dev/"
@@ -107,7 +107,7 @@ namespace :db do
       speaker.image = Rails.root.join("#{image_path}/c-power.jpg").open
     end
 
-    david_henner_speaker = Speaker.find_or_create_by!(name: "David Henner") do |speaker|
+    david_henner_speaker = Speaker.joins(:profile).find_or_create_by!("profiles.name": "David Henner") do |speaker|
       speaker.job_title = "Staff Engineer, Zendesk"
       speaker.bio = "I’ve been programming in Ruby for almost 19 years. In a past life, I wrote ROR ecommerce which was a large open source e-commerce starter application. Today I work for Zendesk on the Ruby scaling team."
       speaker.github_url = "https://github.com/drhenner"
@@ -116,7 +116,7 @@ namespace :db do
       speaker.image = Rails.root.join("#{image_path}/d-henner.jpg").open
     end
 
-    donal_mcbreen_speaker = Speaker.find_or_create_by!(name: "Donal McBreen") do |speaker|
+    donal_mcbreen_speaker = Speaker.joins(:profile).find_or_create_by!("profiles.name": "Donal McBreen") do |speaker|
       speaker.job_title = "Lead Programmer (Security, Infrastructure and Performance), 37signals"
       speaker.bio = "Donal has been a web programmer for over 25 years, working with Rails for the last 10 years. He works in the Security, Infrastructure and Performance (SIP) team at 37signals where he maintains the open source gems Solid Cache and Kamal."
       speaker.github_url = "https://github.com/djmb"
@@ -125,7 +125,7 @@ namespace :db do
       speaker.image = Rails.root.join("#{image_path}/d-mcbreen.jpg").open
     end
 
-    emmanuel_hayford_speaker = Speaker.find_or_create_by!(name: "Emmanuel Hayford") do |speaker|
+    emmanuel_hayford_speaker = Speaker.joins(:profile).find_or_create_by!("profiles.name": "Emmanuel Hayford") do |speaker|
       speaker.job_title = "Senior Software Engineer, Curacubby"
       speaker.bio = "The Rails Changelog Podcast host, Senior Software Engineer at Curacubby, This Week in Rails co-editor."
       speaker.github_url = "https://github.com/siaw23"
@@ -134,7 +134,7 @@ namespace :db do
       speaker.image = Rails.root.join("#{image_path}/e-hayford.jpg").open
     end
 
-    greg_molnar_speaker = Speaker.find_or_create_by!(name: "Greg Molnar") do |speaker|
+    greg_molnar_speaker = Speaker.joins(:profile).find_or_create_by!("profiles.name": "Greg Molnar") do |speaker|
       speaker.job_title = "Independent Contractor, Spektr Security"
       speaker.bio = "I am an independent Rails developer, and OSCP-certified penetration tester."
       speaker.github_url = "https://github.com/gregmolnar"
@@ -143,7 +143,7 @@ namespace :db do
       speaker.image = Rails.root.join("#{image_path}/g-molnar.jpg").open
     end
 
-    jamis_buck_speaker = Speaker.find_or_create_by!(name: "Jamis Buck") do |speaker|
+    jamis_buck_speaker = Speaker.joins(:profile).find_or_create_by!("profiles.name": "Jamis Buck") do |speaker|
       speaker.job_title = "Senior Ruby Software Engineer, DBX, MongoDB"
       speaker.bio = "Jamis is a Rails core alumnus, created Capistrano, Net::SSH, SQLite3-Ruby and various other OSS projects, and is the author of “Mazes for Programmers,” and “The Ray-Tracer Challenge.”"
       speaker.github_url = "https://github.com/jamis"
@@ -152,7 +152,7 @@ namespace :db do
       speaker.image = Rails.root.join("#{image_path}/j-buck.jpg").open
     end
 
-    jenny_shen_speaker = Speaker.find_or_create_by!(name: "Jenny Shen") do |speaker|
+    jenny_shen_speaker = Speaker.joins(:profile).find_or_create_by!("profiles.name": "Jenny Shen") do |speaker|
       speaker.job_title = "Senior Developer, Shopify"
       speaker.bio = "Jenny is a Senior Developer at Shopify, based in Toronto, Canada. She is a RubyGems.org maintainer, and is passionate about open source."
       speaker.github_url = "https://github.com/jenshenny"
@@ -161,7 +161,7 @@ namespace :db do
       speaker.image = Rails.root.join("#{image_path}/j-shen.jpg").open
     end
 
-    julia_lopez_speaker = Speaker.find_or_create_by!(name: "Julia López") do |speaker|
+    julia_lopez_speaker = Speaker.joins(:profile).find_or_create_by!("profiles.name": "Julia López") do |speaker|
       speaker.job_title = "Senior Software Engineer, Harvest"
       speaker.bio = "I am Julia López and I’ve been working with Rails for over a decade! Currently, I am working as a Senior Software Engineer at Harvest, where we navigate the intricacies of maintaining and enhancing a 17-year-old Rails application. After the conference talks, you can find me at the Karaoke events!"
       speaker.github_url = "https://github.com/yukideluxe"
@@ -170,7 +170,7 @@ namespace :db do
       speaker.image = Rails.root.join("#{image_path}/j-lopez.png").open
     end
 
-    justin_searls_speaker = Speaker.find_or_create_by!(name: "Justin Searls") do |speaker|
+    justin_searls_speaker = Speaker.joins(:profile).find_or_create_by!("profiles.name": "Justin Searls") do |speaker|
       speaker.job_title = "Co-founder, Test Double"
       speaker.bio = "Justin is a co-founder Test Double, a consulting agency on a mission to improve how the world builds software. His one gift as a programmer is his ability to cause software to fail. (Which, it turns out, is a surprisingly handy tool in figuring out how to fix it.)"
       speaker.github_url = "https://github.com/searls"
@@ -179,7 +179,7 @@ namespace :db do
       speaker.image = Rails.root.join("#{image_path}/j-searls.jpg").open
     end
 
-    kevin_mcconnell_speaker = Speaker.find_or_create_by!(name: "Kevin McConnell") do |speaker|
+    kevin_mcconnell_speaker = Speaker.joins(:profile).find_or_create_by!("profiles.name": "Kevin McConnell") do |speaker|
       speaker.job_title = "Lead Programmer, 37signals"
       speaker.bio = "Kevin is a programmer at 37signals, where he writes a lot of Ruby, and sometimes a bit of Go. When he’s not doing that, he enjoys making electronic music and hiking."
       speaker.github_url = "https://github.com/kevinmcconnell"
@@ -188,7 +188,7 @@ namespace :db do
       speaker.image = Rails.root.join("#{image_path}/k-mcconnell.jpg").open
     end
 
-    miles_mcguire_speaker = Speaker.find_or_create_by!(name: "Miles McGuire") do |speaker|
+    miles_mcguire_speaker = Speaker.joins(:profile).find_or_create_by!("profiles.name": "Miles McGuire") do |speaker|
       speaker.job_title = "Staff Engineer, Intercom"
       speaker.bio = "Miles has spent 7 years at Intercom working on datastore performance, scalability, and availability from the application layer all the way down."
       speaker.github_url = "https://github.com/minuteman3"
@@ -197,7 +197,7 @@ namespace :db do
       speaker.image = Rails.root.join("#{image_path}/m-mcguire.jpg").open
     end
 
-    mostafa_abdelraouf_speaker = Speaker.find_or_create_by!(name: "Mostafa Abdelraouf") do |speaker|
+    mostafa_abdelraouf_speaker = Speaker.joins(:profile).find_or_create_by!("profiles.name": "Mostafa Abdelraouf") do |speaker|
       speaker.job_title = "Infrastructure Engineer, Instacart"
       speaker.bio = "Mostafa is a Senior Staff Software Engineer on the Infrastructure team at Instacart his focus is on the data access layer between Rails and Postgres, he also contributes to PgCat (A PostgreSQL connection pool written in Rust)."
       speaker.github_url = ""
@@ -206,7 +206,7 @@ namespace :db do
       speaker.image = Rails.root.join("#{image_path}/m-abdelraouf.jpg").open
     end
 
-    obie_fernandez_speaker = Speaker.find_or_create_by!(name: "Obie Fernandez") do |speaker|
+    obie_fernandez_speaker = Speaker.joins(:profile).find_or_create_by!("profiles.name": "Obie Fernandez") do |speaker|
       speaker.job_title = "Author of The Rails Way, and Chief Scientist, Olympia"
       speaker.bio = "With 30 years in tech and 2 decades in Ruby, Obie, author of “The Rails Way,” is a pivotal and well-loved figure. As co-founder and sole engineer of Olympia, a Rails-based AI startup, he exemplifies building scalable applications with the “One Person Framework”."
       speaker.github_url = "https://github.com/obie"
@@ -215,7 +215,7 @@ namespace :db do
       speaker.image = Rails.root.join("#{image_path}/o-fernandez.jpg").open
     end
 
-    ridhwana_khan_speaker = Speaker.find_or_create_by!(name: "Ridhwana Khan") do |speaker|
+    ridhwana_khan_speaker = Speaker.joins(:profile).find_or_create_by!("profiles.name": "Ridhwana Khan") do |speaker|
       speaker.job_title = "Lead Software Engineer & Writer"
       speaker.bio = "Ridhwana Khan is a Lead Engineer, an entrepreneur, and a technical writer for the Ruby on Rails Guides. She is driven by the satisfaction of building systems that positively impact people’s lives. She enjoys mentoring, speaking at conferences, and community building."
       speaker.github_url = "https://github.com/ridhwana"
@@ -224,7 +224,7 @@ namespace :db do
       speaker.image = Rails.root.join("#{image_path}/r-khan.jpg").open
     end
 
-    robby_russell_speaker = Speaker.find_or_create_by!(name: "Robby Russell") do |speaker|
+    robby_russell_speaker = Speaker.joins(:profile).find_or_create_by!("profiles.name": "Robby Russell") do |speaker|
       speaker.job_title = "CEO, Planet Argon"
       speaker.bio = "Co-founder of Planet Argon, Host of Maintainable Software Podcast, and Creator of Oh My Zsh."
       speaker.github_url = "https://github.com/robbyrussell"
@@ -232,7 +232,7 @@ namespace :db do
       speaker.twitter_url = "https://twitter.com/robbyrussell"
       speaker.image = Rails.root.join("#{image_path}/r-russell.jpg").open
     end
-    robert_beene_speaker = Speaker.find_or_create_by!(name: "Robert Beene") do |speaker|
+    robert_beene_speaker = Speaker.joins(:profile).find_or_create_by!("profiles.name": "Robert Beene") do |speaker|
       speaker.job_title = "Founder, Typecraft"
       speaker.bio = "Robert has been working with Rails for nearly 20 years, helping clients deliver solutions in the healthcare space. When I’m not building apps with my team, I’m raising three kids in the heart of NYC."
       speaker.github_url = "https://github.com/typecraft-dev/"
@@ -241,7 +241,7 @@ namespace :db do
       speaker.image = Rails.root.join("#{image_path}/r-beene.jpg").open
     end
 
-    rosa_gutierrez_speaker = Speaker.find_or_create_by!(name: "Rosa Gutierrez") do |speaker|
+    rosa_gutierrez_speaker = Speaker.joins(:profile).find_or_create_by!("profiles.name": "Rosa Gutierrez") do |speaker|
       speaker.job_title = "Principal programmer, 37signals"
       speaker.bio = "European. Loves cities, mathematics, theoretical computer science, learning languages for humans and computers, puzzles & bicycles. Human to Mochi."
       speaker.github_url = "https://github.com/rosa"
@@ -250,7 +250,7 @@ namespace :db do
       speaker.image = Rails.root.join("#{image_path}/r-gutierrez.jpg").open
     end
 
-    stephen_margheim_speaker = Speaker.find_or_create_by!(name: "Stephen Margheim") do |speaker|
+    stephen_margheim_speaker = Speaker.joins(:profile).find_or_create_by!("profiles.name": "Stephen Margheim") do |speaker|
       speaker.job_title = "Rubyist, Web Developer, and Engineering Manager, Test IO"
       speaker.bio = "Hey, I’m Stephen. I’m an American expat living in Berlin with my wife and two dogs. I am a contributor to Rails and the sqlite3-ruby gem as well as the maintainer of a handful of gems aimed at making Ruby and Rails the absolute best platforms in the world to run SQLite projects."
       speaker.github_url = "https://github.com/fractaledmind"
