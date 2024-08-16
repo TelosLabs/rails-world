@@ -13,6 +13,11 @@ namespace :db do
     track_1 = conference.locations.find_or_create_by!(name: "Track 1")
     track_2 = conference.locations.find_or_create_by!(name: "Track 2")
     lightning_track = conference.locations.find_or_create_by!(name: "Lightning Track")
+    sponsor_garden = conference.locations.find_or_create_by!(name: "Sponsor Garden")
+    sponsor_lounge = conference.locations.find_or_create_by!(name: "Sponsor Lounge")
+    break_location = conference.locations.find_or_create_by!(name: "Sponsor Garden, Shopify Lounge, Lightning Track, Kilns, Pavilions")
+    tbd_location = conference.locations.find_or_create_by!(name: "TBD (will be shared with registered attendees)")
+    shopify_port = conference.locations.find_or_create_by!(name: "Shopify Port")
 
     # Create Tags
     # No tags for now
@@ -67,6 +72,7 @@ namespace :db do
       profile.image = Rails.root.join("#{image_path}/r-franca.jpg").open
       Speaker.find_or_create_by!(profile: profile)
     end.profileable
+
     tobias_luetke_speaker = Profile.find_or_create_by!(name: "Tobias Lütke") do |profile|
       profile.job_title = "CEO, Shopify"
       profile.bio = "Tobi Lütke is the founder and Chief Executive Officer of Shopify. In 2004, Tobi began building software to launch an online snowboard store called Snowdevil. It quickly became obvious that the software was more valuable than the snowboards, so Tobi and his founding team launched the Shopify platform in 2008 built on Rails. Tobi is a vocal advocate for sustainability, computer literacy, and education. He has served as a board member of Coinbase since 2022 and he is actively involved with the open source community, having contributed significantly to Ruby on Rails as one of the earliest members of Rails Core. He also created Liquid and ActiveMerchant, key libraries for ecommerce. Tobi firmly believes that technology is essential for growth and innovation. He is passionate about paving the way for more builders."
@@ -286,7 +292,17 @@ namespace :db do
       profile.image = Rails.root.join("#{image_path}/s-margheim.png").open
       Speaker.find_or_create_by!(profile: profile)
     end.profileable
+
     # Create Sessions
+    Session.find_or_create_by!(
+      conference: conference,
+      title: "Doors Open",
+      starts_at: Time.zone.local(2024, month, start_day, 9, 0)
+    ) do |session|
+      session.description = "Rails World attendees are welcome to register, enter, and grab a coffee and light breakfast before the keynote begins."
+      session.ends_at = Time.zone.local(2024, month, start_day, 9, 45)
+      session.location = sponsor_garden
+    end
 
     Session.find_or_create_by!(
       conference: conference,
@@ -319,6 +335,16 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, start_day, 11, 45)
       session.location = track_2
       session.speakers = [mostafa_abdelraouf_speaker]
+    end
+
+    Session.find_or_create_by!(
+      conference: conference,
+      title: "What to do in the breaks",
+      starts_at: Time.zone.local(2024, month, start_day, 11, 45)
+    ) do |session|
+      session.description = "<p> During lunch and breaks between sessions on both days, attendees can: </p> <ul> <li> Catch 10-15 min Community talks on the Lightning Track (sponsored by Shopify) </li> <li> Chat with our sponsors in the Sponsor Garden </li> <li> Hang out in the Shopify Lounge </li> <li> Follow a workshop (sponsored by Coder) </li> <li> Drop by the Test Double Office Hours for pair programming and career advice </li> <li> Explore the historic venue </li> <li> Take a walk in the nature park located behind the venue </li> <li> Grab an espresso or latte from the coffee carts (sponsored by Cedarcode) </li> <li> Or grab an item from the Food Trucks (sponsored by Shopify) </li> </ul> <p> There will be an official Rails World app by Telos Labs so attendees can build their schedule. </p>"
+      session.ends_at = Time.zone.local(2024, month, start_day, 13, 0)
+      session.location = break_location
     end
 
     Session.find_or_create_by!(
@@ -433,6 +459,26 @@ namespace :db do
 
     Session.find_or_create_by!(
       conference: conference,
+      title: "What to do in the breaks",
+      starts_at: Time.zone.local(2024, month, start_day, 19, 0)
+    ) do |session|
+      session.description = "<p>Come hang out with the local Toronto Ruby meetup group. Grab a beer and have a bite, and recharge for Day 2.</p> <p>This evening event wouldn’t be possible without the generous support and sponsorship of our Gold sponsor, Clio. Stop by their booth for a ticket to the event. Badges still required.</p>"
+      session.ends_at = Time.zone.local(2024, month, start_day, 22, 30)
+      session.location = tbd_location
+    end
+
+    Session.find_or_create_by!(
+      conference: conference,
+      title: "Doors Open",
+      starts_at: Time.zone.local(2024, month, second_day, 9, 0)
+    ) do |session|
+      session.description = "Rails World attendees are welcome to register, enter, and grab a coffee before the keynote begins."
+      session.ends_at = Time.zone.local(2024, month, second_day, 10, 0)
+      session.location = sponsor_lounge
+    end
+
+    Session.find_or_create_by!(
+      conference: conference,
       title: "Opening Keynote",
       starts_at: Time.zone.local(2024, month, second_day, 10, 0)
     ) do |session|
@@ -462,6 +508,16 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, second_day, 11, 45)
       session.location = track_2
       session.speakers = [ridhwana_khan_speaker]
+    end
+
+    Session.find_or_create_by!(
+      conference: conference,
+      title: "What to do in the breaks",
+      starts_at: Time.zone.local(2024, month, second_day, 11, 45)
+    ) do |session|
+      session.description = "<p> During lunch and breaks between sessions on both days, attendees can: </p> <ul> <li> Catch 10-15 min Community talks on the Lightning Track (sponsored by Shopify) </li> <li> Chat with our sponsors in the Sponsor Garden </li> <li> Hang out in the Shopify Lounge </li> <li> Follow a workshop (sponsored by Coder) </li> <li> Drop by the Test Double Office Hours for pair programming and career advice </li> <li> Explore the historic venue </li> <li> Take a walk in the nature park located behind the venue </li> <li> Grab an espresso or latte from the coffee carts (sponsored by Cedarcode) </li> <li> Or grab an item from the Food Trucks (sponsored by Shopify) </li> </ul> <p> There will be an official Rails World app by Telos Labs so attendees can build their schedule. </p>"
+      session.ends_at = Time.zone.local(2024, month, second_day, 13, 0)
+      session.location = break_location
     end
 
     Session.find_or_create_by!(
@@ -571,6 +627,16 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, second_day, 17, 30)
       session.location = track_1
       session.speakers = [aaron_patterson_speaker]
+    end
+
+    Session.find_or_create_by!(
+      conference: conference,
+      title: "Shopify Closing Party",
+      starts_at: Time.zone.local(2024, month, second_day, 19, 0)
+    ) do |session|
+      session.description = "Join us as we close out Rails World with a takeover at the Shopify Port. Three floors of music, games, food, drink, and fun, with plenty of space for pair programming if you have any code you need to tackle. Pre-registration will be required (attendees will be sent more details). Don’t forget your badge!"
+      session.ends_at = Time.zone.local(2024, month, second_day, 22, 0)
+      session.location = shopify_port
     end
   end
 end

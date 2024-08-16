@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
   def index
     @user_session_ids = current_user.sessions.pluck(:id)
     @sessions = sessions
-      .joins(:speakers, :location)
+      .joins(:location)
       .includes(:attendees, :tags)
       .distinct
 
