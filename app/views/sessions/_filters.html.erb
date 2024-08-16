@@ -24,7 +24,7 @@
     <% end %>
   </div>
 
-  <div class="flex items-center justify-center ml-3 p-2 rounded-full min-w-[40px] min-h-[40px] <%= active_session_filters? ? "bg-red text-white" : "bg-white text-red" %>">
+  <div class="flex items-center justify-center ml-3 p-2 rounded-full min-w-[40px] min-h-[40px] <%= active_session_filters? ? "bg-red fill-white" : "bg-white fill-red" %>">
     <div class="relative" data-controller="dropdown">
       <button type="button" data-action="dropdown#toggle click@window->dropdown#hide" class="flex items-center justify-center p-2 rounded-full">
         <%= inline_svg_tag("icons/filters.svg", size: "18") %>

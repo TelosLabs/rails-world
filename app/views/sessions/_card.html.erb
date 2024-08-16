@@ -4,30 +4,30 @@
   <div class="flex flex-col w-full">
     <% if session.live? %>
       <div class="h-8 px-4 py-2 bg-green-500 rounded-lg bg-opacity-[.08] justify-center items-center inline-flex mb-4">
-        <div class="grow shrink basis-0 h-4 justify-center items-center gap-2 flex">
+        <div class="grow basis-0 h-4 justify-center items-center gap-2 flex">
           <span class="relative flex h-4 w-4">
             <span class="animate-slow-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-4 w-4 bg-green-500"></span>
+            <span class="rounded-full h-4 w-4 bg-green-500"></span>
           </span>
-          <div class="grow shrink">Session is live now.</div>
+          <span class="w-full text-xs">Session is live now.</span>
         </div>
       </div>
     <% elsif session.starting_soon? %>
       <div class="h-8 px-4 py-2 bg-yellow rounded-lg bg-opacity-[.08] justify-center items-center inline-flex mb-4">
-        <div class="grow shrink basis-0 h-4 justify-center items-center gap-2 flex">
+        <div class="grow basis-0 h-4 justify-center items-center gap-2 flex">
           <span class="relative flex h-4 w-4">
-            <span class="relative inline-flex rounded-full h-4 w-4 bg-yellow"></span>
+            <span class="rounded-full h-4 w-4 bg-yellow"></span>
           </span>
-          <div class="grow shrink">Session is starting soon.</div>
+          <span class="w-full text-xs">Session is starting soon.</span>
         </div>
       </div>
     <% elsif session.past? %>
       <div class="h-8 px-4 py-2 bg-blue-teal-light rounded-lg bg-opacity-[.08] justify-center items-center inline-flex mb-4">
-        <div class="grow shrink basis-0 h-4 justify-center items-center gap-2 flex">
+        <div class="grow basis-0 h-4 justify-center items-center gap-2 flex">
           <span class="relative flex h-4 w-4">
-            <span class="relative inline-flex rounded-full h-4 w-4 bg-blue-teal-light"></span>
+            <span class="rounded-full h-4 w-4 bg-blue-teal-light"></span>
           </span>
-          <div class="grow shrink">Session is over.</div>
+          <span class="w-full text-xs">Session is over.</span>
         </div>
       </div>
     <% end %>
