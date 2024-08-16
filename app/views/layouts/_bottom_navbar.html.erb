@@ -1,6 +1,6 @@
 <div class="sticky bottom-0 flex flex-row items-center justify-center gap-6 bg-white pt-2 pb-1 border-t border-b border-grey-200 text-[11px]">
-  <a href="<%= sessions_path %>" class="<%= nav_text_class_for [sessions_path] %> flex flex-col items-center">
-    <%= inline_svg_tag "calendar.svg", class: nav_icon_class_for([sessions_path]) %>
+  <a href="<%= sessions_path %>" class="<%= nav_text_class_for [sessions_path, root_path] %> flex flex-col items-center">
+    <%= inline_svg_tag "calendar.svg", class: nav_icon_class_for([sessions_path, root_path]) %>
     Agenda
   </a>
   <a href="<%= schedule_path %>" class="<%= nav_text_class_for [schedule_path] %> flex flex-col items-center justify-center">
