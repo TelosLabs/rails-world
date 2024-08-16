@@ -1,9 +1,12 @@
 <%# locals: (notification:, speaker: notification.record&.speakers&.first) %>
 
 <% if notification.record.present? %>
-  <%= link_to session_path(notification.record), class: "p-5 bg-white flex flex-row items-center w-full rounded-[20px]" do %>
+  <%= link_to(
+    session_path(notification.record),
+    class: "p-5 bg-white flex flex-row items-center w-full rounded-[20px]"
+  ) do %>
     <div class="mr-4 rounded-full">
-      <% if speaker.image.attached? %>
+      <% if speaker&.image&.attached? %>
         <div class="flex flex-col items-center justify-center relative w-[48px] h-[48px]">
           <%= image_tag url_for(speaker.image), class: "rounded-full" %>
           <%= inline_svg_tag "icon_notification.svg", class: "absolute z-10 bottom-[-4px] right-[-4px]" %>
