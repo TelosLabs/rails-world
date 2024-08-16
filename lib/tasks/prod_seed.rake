@@ -3,6 +3,7 @@ namespace :db do
   task :prod_seed, [:month_number, :day_number] => :environment do |t, args|
     month = args[:month_number].present? ? args[:month_number].to_i : 9
     start_day = args[:day_number].present? ? args[:day_number].to_i : 26
+    registration_day = start_day - 1
     second_day = start_day + 1
     image_path = "app/assets/images/speakers"
 
@@ -16,7 +17,8 @@ namespace :db do
     sponsor_garden = conference.locations.find_or_create_by!(name: "Sponsor Garden")
     sponsor_lounge = conference.locations.find_or_create_by!(name: "Sponsor Lounge")
     break_location = conference.locations.find_or_create_by!(name: "Sponsor Garden, Shopify Lounge, Lightning Track, Kilns, Pavilions")
-    tbd_location = conference.locations.find_or_create_by!(name: "TBD (will be shared with registered attendees)")
+    tbd_location = conference.locations.find_or_create_by!(name: "TBD")
+    tbd_attendees_location = conference.locations.find_or_create_by!(name: "TBD (will be shared with registered attendees)")
     shopify_port = conference.locations.find_or_create_by!(name: "Shopify Port")
 
     # Create Tags
@@ -296,6 +298,26 @@ namespace :db do
     # Create Sessions
     Session.find_or_create_by!(
       conference: conference,
+      title: "Early registration, sponsored by Shopify",
+      starts_at: Time.zone.local(2024, month, registration_day, 16, 0)
+    ) do |session|
+      session.description = "Registration opens for those who are already in town. Avoid the Thursday morning line, get your badge, and grab a drink with other attendees. Sponsored by Shopify, Rails World City Host. (Location: TBD, will be published in the Rails World app for attendees)"
+      session.ends_at = Time.zone.local(2024, month, registration_day, 19, 0o0)
+      session.location = tbd_location
+    end
+
+    Session.find_or_create_by!(
+      conference: conference,
+      title: "WNB.rb pre-Rails World meetup, sponsored by Shopify",
+      starts_at: Time.zone.local(2024, month, registration_day, 16, 0)
+    ) do |session|
+      session.description = "A chance for women and non-binary Rails World attendees to meet up before Rails World. Hosted by WNB.rb and sponsored by Shopify. The location and time of this event will be shared with registered attendees via the event app."
+      session.ends_at = Time.zone.local(2024, month, registration_day, 19, 0o0)
+      session.location = shopify_port
+    end
+
+    Session.find_or_create_by!(
+      conference: conference,
       title: "Doors Open",
       starts_at: Time.zone.local(2024, month, start_day, 9, 0)
     ) do |session|
@@ -459,12 +481,12 @@ namespace :db do
 
     Session.find_or_create_by!(
       conference: conference,
-      title: "What to do in the breaks",
+      title: "Toronto Ruby drinks sponsored by Clio",
       starts_at: Time.zone.local(2024, month, start_day, 19, 0)
     ) do |session|
       session.description = "<p>Come hang out with the local Toronto Ruby meetup group. Grab a beer and have a bite, and recharge for Day 2.</p> <p>This evening event wouldn’t be possible without the generous support and sponsorship of our Gold sponsor, Clio. Stop by their booth for a ticket to the event. Badges still required.</p>"
       session.ends_at = Time.zone.local(2024, month, start_day, 22, 30)
-      session.location = tbd_location
+      session.location = tbd_attendees_location
     end
 
     Session.find_or_create_by!(
