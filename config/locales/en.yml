@@ -29,6 +29,12 @@ en:
         notice: "Session was added to My Schedule"
       remove_user:
         notice: "Session was removed from My Schedule"
+  views:
+    status_filters:
+      past: "Past"
+      live: "Live"
+      starting_soon: "Starting soon"
+      submit: "Apply"
   authorization:
     unauthorized: "You are not authorized to access this page."
   session_mailer:

@@ -35,9 +35,26 @@ class Session < ApplicationRecord
 
   validates_datetime :ends_at, after: :starts_at
 
-  scope :starts_at, ->(date) { where(starts_at: date.all_day) }
+  scope :starts_at, ->(date) { where("date(starts_at) = ?", date) }
+  scope :past, -> { where(ends_at: ...Time.current) }
+  scope :live, -> { where("? BETWEEN starts_at AND ends_at", Time.current) }
+  scope :starting_soon, -> { where("starts_at BETWEEN ? and ?", Time.current, 1.hour.from_now) }
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[title]
+  end
+
+  def live?
+    Time.current.between?(starts_at, ends_at)
+  end
+
+  def starting_soon?
+    return false if starts_at < Time.current
+
+    (starts_at - Time.current) < 1.hour
+  end
+
+  def past?
+    ends_at < Time.current
   end
 end

@@ -21,7 +21,7 @@
 require "rails_helper"
 
 RSpec.describe Session, type: :model do
-  let(:session) { build_stubbed(:session, :with_conference, :with_location) }
+  let(:session) { build_stubbed(:session) }
 
   it "has a valid factory" do
     expect(session).to be_valid
