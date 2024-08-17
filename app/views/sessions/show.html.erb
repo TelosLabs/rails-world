@@ -7,26 +7,41 @@
           </div>
         <% elsif @speaker.present? %>
           <div class="flex flex-row items-center justify-center w-12 h-12 p-3 rounded-full min-w-12 min-h-12 bg-slate-300">
-            <%= inline_svg_tag "user_avatar.svg" %>
+            <%= inline_svg_tag "icons/user_avatar.svg" %>
           </div>
         <% end %>
 
         <% if @speaker.present? %>
           <div class="flex flex-row items-center justify-between w-full ml-5 grow">
-              <div class="flex flex-col">
-                <p class="text-base italic font-black text-red"><%= @speaker&.profile&.name %></p>
-                <p class="font-normal text-[13px]"><%= @speaker&.profile&.job_title %></p>
-              </div>
-            <%= inline_svg_tag "icon_bookmark.svg", class: "fill-red stroke-red min-w-4 min-h-4 w-4 h-4 ml-5" %>
+            <a href="<%= speaker_path(@speaker) %>" class="flex flex-col">
+              <p class="text-base italic font-black text-red"><%= @speaker.profile&.name %></p>
+              <p class="font-normal text-[13px]"><%= @speaker.profile&.job_title %></p>
+            </a>
+
+            <% if current_user.sessions.pluck(:id).include?(@session.id) %>
+              <%= button_to(
+                session_attendee_path(session_id: @session.id, params: request.params[:starts_at]),
+                method: :delete, form_class: "flex items-center ml-5"
+              ) do %>
+                <%= inline_svg_tag("icons/bookmark-full.svg") %>
+              <% end %>
+            <% else %>
+              <%= button_to(
+                session_attendee_path(session_id: @session.id, params: request.params[:starts_at]),
+                form_class: "flex items-center ml-5"
+              ) do %>
+                <%= inline_svg_tag("icons/bookmark-outline.svg") %>
+              <% end %>
+          <% end %>
           </div>
         <% end %>
       </div>
 
       <% if @speaker.present? %>
-        <h1 class="text-[20px] text-black italic mb-4 font-bold"><%= @session.title %></h1>
+        <h1 class="text-[20px] text-red italic mb-4 font-bold"><%= @session.title %></h1>
       <% else %>
         <div class="flex flex-row justify-between w-full grow">
-          <h1 class="text-[20px] text-black italic mb-4 font-bold"><%= @session.title %></h1>
+          <h1 class="text-[20px] text-red italic mb-4 font-bold"><%= @session.title %></h1>
           <%= inline_svg_tag "icon_bookmark.svg", class: "fill-red stroke-red min-w-4 min-h-4 w-4 h-4 mt-2 ml-5" %>
         </div>
       <% end %>
@@ -41,9 +56,11 @@
         </div>
       <% end %>
 
-      <div class="mb-4 text-base font-medium leading-6">
-        <%= simple_format(@session.description) %>
-      </div>
+      <% if @session.description.present? %>
+        <div class="mb-4 text-base font-medium leading-6">
+          <%= simple_format(@session.description) %>
+        </div>
+      <% end %>
 
       <div class="flex flex-row items-center mb-3">
         <%= inline_svg_tag "calendar.svg", class: "fill-grey-600 w-3 h-3 mr-2" %>
@@ -65,23 +82,22 @@
 
   <% if @speaker %>
     <div class="flex flex-col items-center w-full p-5 mt-6">
-      <div class="flex flex-col items-start max-w-screen-sm">
+      <div class="flex flex-col items-start w-full max-w-screen-sm">
         <p class="text-black mb-4 text-[23px] font-bold italic">About this speaker</p>
-        <div class="p-5 bg-white rounded-lg">
+        <div class="w-full p-5 bg-white rounded-lg">
           <div class="flex flex-row items-center mb-4">
             <% if @speaker.profile&.image&.attached? %>
-              <div class="relative flex flex-col items-center justify-center w-12 h-12 rounded-full min-w-12 min-h-12">
-                <%= image_tag url_for(@speaker.profile.image), class: "rounded-full absolute" %>
+              <div class="relative flex flex-col items-center justify-center w-12 h-12 bg-center bg-no-repeat bg-cover rounded-full min-w-12 min-h-12 " style="background-image: url(<%= url_for(@speaker.profile.image) %>)">
               </div>
             <% else %>
               <div class="flex flex-row items-center justify-center w-12 h-12 p-3 rounded-full bg-slate-300">
-                <%= inline_svg_tag "user_avatar.svg" %>
+                <%= inline_svg_tag "icons/user_avatar.svg" %>
               </div>
             <% end %>
-            <div class="flex flex-col ml-5">
+            <a href="<%= speaker_path(@speaker) %>" class="flex flex-col ml-5">
               <p class="text-base italic font-black text-red"><%= @speaker.profile&.name %></p>
               <p class="font-normal text-[13px]"><%= @speaker.profile&.job_title %></p>
-            </div>
+            </a>
           </div>
           <p class="text-base font-medium leading-5">
             <%= @speaker.profile&.bio %>
