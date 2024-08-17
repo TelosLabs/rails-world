@@ -17,10 +17,16 @@ RSpec.describe SessionQuery, type: :query do
     end
 
     context "when filtering by date" do
-      let(:params) { {starts_at: past_session.starts_at.to_date} }
+      let(:params) { {starts_at: Date.new(2024, 5, 19)} }
 
       it "returns sessions on that date" do
-        expect(session_query.call).to contain_exactly(past_session)
+        _session_may_18 = create(:session, starts_at: Date.new(2024, 5, 18),
+          location: past_session.location, conference: past_session.conference)
+        session_may_19 = create(:session, starts_at: Date.new(2024, 5, 19),
+          location: past_session.location, conference: past_session.conference)
+        _session_may_20 = create(:session, starts_at: Date.new(2024, 5, 20),
+          location: past_session.location, conference: past_session.conference)
+        expect(session_query.call).to contain_exactly(session_may_19)
       end
     end
 
