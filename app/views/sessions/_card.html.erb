@@ -35,7 +35,8 @@
       <div class="flex justify-between w-full mb-4">
         <div class="flex">
           <% if speaker.image&.attached? %>
-            <%= image_tag url_for(speaker.image), class: "text-red w-12 h-12 rounded-full mr-4" %>
+            <div class="relative flex flex-col items-center justify-center w-12 h-12 mr-4 bg-center bg-no-repeat bg-cover rounded-full min-w-12 min-h-12" style="background-image: url(<%= url_for(speaker.image) %>)">
+            </div>
           <% else %>
             <div class="flex flex-row items-center justify-center w-12 h-12 p-2 mr-4 rounded-full min-w-12 min-h-12 bg-slate-300">
               <%= inline_svg_tag "icons/user_avatar.svg" %>
@@ -51,7 +52,7 @@
         </div>
 
         <%# TODO: Bookmark location will be redesigned %>
-        <div class="flex items-center px-1">
+        <div class="flex items-center pl-3 pr-1">
           <% if user_is_an_attendee %>
             <%= button_to(
                   session_attendee_path(session_id: session.id, params: request.params[:starts_at]),
