@@ -40,7 +40,12 @@ module.exports = {
         red: '#CB0C1C',
         'blue-marine': '#003A5D',
         'blue-light': '#EFF6FF',
-        'blue-teal': '#00AFAA'
+        'blue-teal': '#00AFAA',
+        'blue-teal-light': '#CDD9EC',
+        yellow: '#F4BF4F'
+      },
+      animation: {
+        'slow-ping': 'ping 4s cubic-bezier(0, 0, 0.2, 1) infinite'
       }
     }
   },
