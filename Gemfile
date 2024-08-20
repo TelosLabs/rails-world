@@ -38,6 +38,7 @@ gem "bootsnap", require: false
 gem "draper"
 gem "friendly_id", "~> 5.5.0"
 gem "inline_svg"
+gem "net-pop", github: "ruby/net-pop"
 gem "noticed"
 gem "puma", ">= 5.0"
 gem "rqrcode", "~> 2.0"

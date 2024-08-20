@@ -7,10 +7,6 @@ servers:
 env:
   clear:
     RAILS_ENV: staging
-    MAILER_SENDER: hello@teloslabs.co
-    LITESTREAM_BACKUP_ENABLED: true
-    SESSION_REMINDERS_ENABLED: true
-    REGISTRATION_ENABLED: true
   secret:
     - APP_HOST
     - RAILS_MASTER_KEY
@@ -22,6 +18,10 @@ env:
     - SECRET_KEY_BASE
     - VAPID_PUBLIC_KEY
     - VAPID_PRIVATE_KEY
+    - MAILER_SENDER
+    - LITESTREAM_BACKUP_ENABLED
+    - SESSION_REMINDERS_ENABLED
+    - REGISTRATION_ENABLED
 
 accessories:
   vector:
