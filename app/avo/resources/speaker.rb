@@ -8,9 +8,17 @@ class Avo::Resources::Speaker < Avo::BaseResource
       }
     end
   }
+  self.find_record_method = -> {
+    if id.is_a?(Array)
+      query.where(slug: id)
+    else
+      query.friendly.find id
+    end
+  }
 
   def fields
     field :id, as: :id
+    field :slug, as: :text, hide_on: :new
     field :name, as: :text, sortable: -> { query.order("profiles.name #{direction}") }
     field :image, as: :file, accept: "image/*", only_on: [:show, :forms]
     field :image_presence, name: "Image", as: :boolean, only_on: :index do
