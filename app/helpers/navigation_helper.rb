@@ -24,4 +24,8 @@ module NavigationHelper
   def homepage_link
     user_signed_in? ? root_path : new_user_session_path
   end
+
+  def page_title(title)
+    content_for :page_title, title
+  end
 end
