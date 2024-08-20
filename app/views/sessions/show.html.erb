@@ -21,9 +21,9 @@
       </div>
 
       <% if @session.speakers.present? %>
-        <div class="flex w-full mb-4 overflow-x-auto gap-x-5 no-scrollbar">
+        <div class="flex w-full mb-4 overflow-x-auto overflow-y-hidden gap-x-5 no-scrollbar">
           <% @session.speakers.each do |speaker| %>
-            <div class="inline-flex justify-between flex-shrink-0 pl-5 border-l first:border-0 first:pl-0">
+            <div class="inline-flex justify-between pl-5 border-l shrink-0 first:border-0 first:pl-0">
               <% if speaker.image&.attached? %>
                 <div class="relative flex flex-col items-center justify-center w-12 h-12 mr-4 bg-center bg-no-repeat bg-cover rounded-full min-w-12 min-h-12" style="background-image: url(<%= url_for(speaker.image) %>)">
                 </div>
@@ -43,7 +43,7 @@
       <% end %>
 
       <% if @session.tags.present? %>
-        <div class="flex flex-row flex-wrap items-center gap-4 mb-[18px]">
+        <div class="flex flex-row flex-wrap items-center gap-4 mb-4">
           <% @session.tags.each do |tag| %>
             <div class="bg-white border border-bluegray-600 rounded-lg px-3 py-[6px] text-[13px] text-bluegray-600">
               <%= tag.name %>
