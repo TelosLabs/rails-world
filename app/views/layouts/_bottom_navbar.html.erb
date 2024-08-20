@@ -3,7 +3,7 @@
     <%= inline_svg_tag "calendar.svg", class: nav_icon_class_for([sessions_path, root_path]) %>
     Agenda
   </a>
-  <a href="<%= schedule_path %>" class="<%= nav_text_class_for [schedule_path] %> flex flex-col items-center justify-center">
+  <a href="<%= schedule_path(starts_at: current_user.sessions.upcoming_today.first&.starts_at&.to_date, anchor: session_anchor(current_user.sessions.upcoming_today.first)) %>" class="<%= nav_text_class_for [schedule_path] %> flex flex-col items-center justify-center">
     <%= inline_svg_tag "clock.svg", class: nav_icon_class_for([schedule_path]) %>
     My Schedule
   </a>
