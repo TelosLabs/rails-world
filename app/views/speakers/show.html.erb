@@ -21,6 +21,7 @@
       <div class="flex flex-row items-center justify-center w-full gap-4 mt-6">
         <%= link_to(
           @profile.github_url,
+          target: "_blank",
           class: [
             "flex flex-row grow items-center justify-center w-28 h-14 rounded-lg",
             "bg-red": @profile.github_url.present?,
@@ -32,6 +33,7 @@
 
         <%= link_to(
           @profile.twitter_url,
+          target: "_blank",
           class: [
             "flex flex-row grow items-center justify-center w-28 h-14 rounded-lg",
             "bg-red": @profile.twitter_url.present?,
@@ -43,6 +45,7 @@
 
         <%= link_to(
           @profile.linkedin_url,
+          target: "_blank",
           class: [
             "flex flex-row grow items-center justify-center w-28 h-14 rounded-lg",
             "bg-red": @profile.linkedin_url.present?,
