@@ -1,7 +1,7 @@
 module NavigationHelper
   def nav_icon_class_for(path)
-    return "fill-red stroke-red w-6 h-6" if path.any? { |p| current_page?(p) }
-    "fill-grey-400 stroke-grey-400 w-6 h-6"
+    return "fill-red w-6 h-6" if path.any? { |p| current_page?(p) }
+    "fill-grey-400 w-6 h-6"
   end
 
   def nav_text_class_for(path)
