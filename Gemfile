@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 ruby "3.3.3"
 
-gem "rails", "~> 7.1.3", ">= 7.1.3.4"
+gem "rails", "~> 7.2"
 
 # Database
 gem "activerecord-enhancedsqlite3-adapter", "~> 0.8.0"
