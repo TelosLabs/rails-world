@@ -29,6 +29,9 @@ class Profile < ApplicationRecord
   belongs_to :profileable, polymorphic: true
 
   validates :uuid, uniqueness: true, presence: true
+  validates :github_url, url: {allow_blank: true}
+  validates :linkedin_url, url: {allow_blank: true}
+  validates :twitter_url, url: {allow_blank: true}
 
   before_validation :set_uuid
 
