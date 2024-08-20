@@ -97,8 +97,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_07_190915) do
     t.string "github_url"
     t.string "linkedin_url"
     t.string "twitter_url"
-    t.boolean "mail_notifications", default: true, null: false
-    t.boolean "in_app_notifications", default: true, null: false
+    t.boolean "mail_notifications", default: false, null: false
+    t.boolean "web_push_notifications", default: false, null: false
     t.boolean "is_public", default: false, null: false
     t.string "profileable_type", null: false
     t.integer "profileable_id", null: false
@@ -175,6 +175,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_07_190915) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  create_table "web_push_subscriptions", force: :cascade do |t|
+    t.string "endpoint", null: false
+    t.string "p256dh", null: false
+    t.string "auth", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_web_push_subscriptions_on_user_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "locations", "conferences"
@@ -186,4 +196,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_07_190915) do
   add_foreign_key "sessions_tags", "tags"
   add_foreign_key "sessions_users", "sessions"
   add_foreign_key "sessions_users", "users"
+  add_foreign_key "web_push_subscriptions", "users"
 end

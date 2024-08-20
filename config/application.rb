@@ -17,6 +17,7 @@ module RailsWorld
     config.autoload_lib(ignore: %w[assets tasks])
 
     config.solid_queue.connects_to = {database: {writing: :queue}}
+    config.mission_control.jobs.base_controller_class = "MissionControlBaseController"
 
     # Configuration for the application, engines, and railties goes here.
     #

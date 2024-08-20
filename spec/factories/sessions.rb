@@ -25,14 +25,20 @@ FactoryBot.define do
     title { "Keynote" }
     description { "The opening keynote" }
     starts_at { 1.day.from_now }
-    ends_at { 1.day.from_now + 1.hour }
+    ends_at { starts_at + 1.hour }
+    location
+    conference
 
-    trait :with_conference do
-      conference
+    trait :past do
+      starts_at { 1.day.ago }
     end
 
-    trait :with_location do
-      location
+    trait :live do
+      starts_at { 30.minutes.ago }
+    end
+
+    trait :starting_soon do
+      starts_at { 1.hour.from_now }
     end
   end
 end

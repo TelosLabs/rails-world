@@ -6,6 +6,11 @@ Rails.application.configure do
   # Code is not reloaded between requests.
   config.enable_reloading = false
 
+  # https://github.com/roidrage/lograge
+  config.logger = ActiveSupport::Logger.new($stdout)
+  config.lograge.enabled = true
+  config.lograge.formatter = Lograge::Formatters::Json.new
+
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
@@ -31,7 +36,7 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # for NGINX
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+  config.active_storage.service = :amazon
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
@@ -43,7 +48,7 @@ Rails.application.configure do
   # config.assume_ssl = true
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
+  config.force_ssl = false # TODO change me when you have SSL
 
   # Log to STDOUT by default
   config.logger = ActiveSupport::Logger.new($stdout)
@@ -70,6 +75,9 @@ Rails.application.configure do
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.delivery_method = :mailpace
+  config.action_mailer.mailpace_settings = {api_token: ENV["MAILPACE_API_TOKEN"]}
+  config.action_mailer.default_url_options = {host: ENV["APP_HOST"]}
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).

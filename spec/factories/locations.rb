@@ -16,9 +16,6 @@
 FactoryBot.define do
   factory :location do
     name { "Main Hall" }
-
-    trait :with_conference do
-      conference
-    end
+    conference
   end
 end

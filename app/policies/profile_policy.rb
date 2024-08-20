@@ -1,4 +1,6 @@
 class ProfilePolicy < ApplicationPolicy
+  authorize :user, optional: true
+
   def show?
     owner? || record.is_public
   end
@@ -14,6 +16,8 @@ class ProfilePolicy < ApplicationPolicy
   private
 
   def owner?
+    return unless user
+
     record.uuid == user.profile.uuid
   end
 end
