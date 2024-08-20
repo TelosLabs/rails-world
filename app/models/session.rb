@@ -22,6 +22,7 @@
 #
 class Session < ApplicationRecord
   extend FriendlyId
+
   friendly_id :title, use: :slugged
 
   belongs_to :location
@@ -35,6 +36,7 @@ class Session < ApplicationRecord
   has_many :notifications, through: :noticed_events, class_name: "Noticed::Notification"
 
   validates :title, presence: true
+  validates :slug, uniqueness: true
   validates :starts_at, presence: true
   validates :ends_at, presence: true
 
