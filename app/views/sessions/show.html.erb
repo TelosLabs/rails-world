@@ -1,19 +1,19 @@
 <div class="relative flex flex-col items-center justify-between flex-1 pb-5 bg-grey-50">
   <div class="w-full px-5 pt-6 pb-12 bg-bottom bg-no-repeat bg-cover" style="background-image: url(<%= asset_path 'background_design.svg' %>)">
     <div class="flex flex-col max-w-screen-sm mx-auto">
-      <div class="flex flex-row justify-between w-full grow">
-        <h1 class="text-[20px] text-red italic mb-4 font-bold"><%= @session.title %></h1>
+      <div class="flex flex-row justify-between w-full mb-4 grow">
+        <h1 class="text-[20px] italic font-bold"><%= @session.title %></h1>
         <% if current_user.sessions.pluck(:id).include?(@session.id) %>
           <%= button_to(
             session_attendee_path(session_id: @session.id, params: request.params[:starts_at]),
-            method: :delete, form_class: "flex items-center ml-5 mb-4"
+            method: :delete, form_class: "flex items-center ml-8"
           ) do %>
             <%= inline_svg_tag("icons/bookmark-full.svg") %>
           <% end %>
         <% else %>
           <%= button_to(
             session_attendee_path(session_id: @session.id, params: request.params[:starts_at]),
-            form_class: "flex items-center ml-5 mb-4"
+            form_class: "flex items-center ml-8"
           ) do %>
             <%= inline_svg_tag("icons/bookmark-outline.svg") %>
           <% end %>
@@ -23,18 +23,18 @@
       <% if @session.speakers.present? %>
         <div class="flex w-full mb-4 overflow-x-auto overflow-y-hidden gap-x-5 no-scrollbar">
           <% @session.speakers.each do |speaker| %>
-            <div class="inline-flex justify-between pl-5 border-l shrink-0 first:border-0 first:pl-0">
+            <div class="inline-flex items-center justify-between pl-5 border-l shrink-0 first:border-0 first:pl-0">
               <% if speaker.image&.attached? %>
-                <div class="relative flex flex-col items-center justify-center w-12 h-12 mr-4 bg-center bg-no-repeat bg-cover rounded-full min-w-12 min-h-12" style="background-image: url(<%= url_for(speaker.image) %>)">
+                <div class="relative flex flex-col items-center justify-center w-8 h-8 mr-4 bg-center bg-no-repeat bg-cover rounded-full min-w-8 min-h-8" style="background-image: url(<%= url_for(speaker.image) %>)">
                 </div>
               <% else %>
-                <div class="flex flex-row items-center justify-center w-12 h-12 p-3 mr-4 rounded-full min-w-12 min-h-12 bg-slate-300">
+                <div class="flex flex-row items-center justify-center w-8 h-8 p-3 mr-4 rounded-full min-w-8 min-h-8 bg-slate-300">
                   <%= inline_svg_tag "icons/user_avatar.svg" %>
                 </div>
               <% end %>
 
               <a href="<%= speaker_path(speaker) %>">
-                <h2 class="text-base italic font-black text-red"><%= speaker.name %></h2>
+                <h2 class="text-[13px] italic font-black"><%= speaker.name %></h2>
                 <p class="font-normal text-[13px]"><%= speaker.job_title %></p>
               </a>
             </div>
@@ -80,9 +80,9 @@
     <div class="flex flex-col items-center w-full p-5 mt-6">
       <div class="flex flex-col items-start w-full max-w-screen-sm">
         <p class="text-black mb-4 text-[23px] font-bold italic">
-          <%= @session.speakers.count > 1 ? 'About speakers' : 'About this speaker' %>
+          <%= "About the #{'speaker'.pluralize(@session.speakers.count)}" %>
         </p>
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col w-full gap-4">
           <% @session.speakers.each do |speaker| %>
             <div class="w-full p-5 bg-white rounded-lg">
               <div class="flex flex-row items-center mb-4">
