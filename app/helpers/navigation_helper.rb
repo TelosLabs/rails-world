@@ -25,7 +25,7 @@ module NavigationHelper
     user_signed_in? ? root_path : new_user_session_path
   end
 
-  def page_title(title)
-    content_for :page_title, title
+  def title(title)
+    content_for :title, title
   end
 end
