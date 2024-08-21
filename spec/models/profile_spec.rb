@@ -40,4 +40,25 @@ RSpec.describe Profile, type: :model do
       expect(profile.uuid).to be_present
     end
   end
+
+  describe "validations" do
+    it "validates socials urls" do
+      %i[github_url linkedin_url twitter_url].each do |url|
+        profile[url] = "http://foo bar.com"
+        expect(profile).not_to be_valid
+
+        profile[url] = "http://x.com"
+        expect(profile).to be_valid
+        expect(profile[url]).to eq("https://x.com")
+
+        profile[url] = "x.com"
+        expect(profile).to be_valid
+        expect(profile[url]).to eq("https://x.com")
+
+        profile[url] = "https://x.com"
+        expect(profile).to be_valid
+        expect(profile[url]).to eq("https://x.com")
+      end
+    end
+  end
 end
