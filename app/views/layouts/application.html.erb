@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="h-full">
   <head>
-    <title>RailsWorld</title>
+    <title><%= content_for(:title).presence || "Rails World 2024" %></title>
 
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-refresh-scroll" content="preserve">
@@ -24,6 +24,7 @@
     <script async src="https://ga.jspm.io/npm:es-module-shims@1.8.2/dist/es-module-shims.js" data-turbo-track="reload"></script>
 
     <%= javascript_importmap_tags %>
+    <%= favicon_link_tag asset_path('icons/favicon.svg') %>
 
     <%= yield :head %>
   </head>

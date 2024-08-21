@@ -2,6 +2,15 @@
 
 <div class="flex justify-between w-full mb-6">
   <div class="flex items-center gap-2 overflow-x-scroll no-scrollbar">
+    <%= link_to(
+      'All dates',
+      url_for([resource, session_filter_params.to_h]),
+      class: [
+        "flex min-w-fit items-center justify-center px-4 py-2 rounded-full font-medium",
+        "bg-red text-white": params[:starts_at].blank?,
+        "bg-white text-red hover:bg-[#FAE7E8] focus:bg-[#FAE7E8]": params[:starts_at].present?
+      ]
+    ) %>
     <% current_conference.session_dates.each do |session_date| %>
       <%= link_to(
         session_date.strftime("%a, %d"),
@@ -9,7 +18,7 @@
         class: [
           "flex min-w-fit items-center justify-center px-4 py-2 font-medium rounded-full",
           "bg-red text-white": params[:starts_at] == session_date.to_s,
-          "bg-white text-red hover:bg-[#FAE7E8]": params[:starts_at] != session_date.to_s
+          "bg-white text-red hover:bg-[#FAE7E8] focus:bg-[#FAE7E8]": params[:starts_at] != session_date.to_s
         ]
       ) %>
     <% end %>
@@ -29,7 +38,7 @@
     class: [
       "flex items-center justify-center ml-3 rounded-full min-w-[40px] min-h-[40px]",
       "bg-red fill-white": session_filter_params.present?,
-      "bg-white fill-red hover:bg-[#FAE7E8]": session_filter_params.blank?
+      "bg-white fill-red hover:bg-[#FAE7E8] focus:bg-[#FAE7E8]": session_filter_params.blank?
     ]
   ) do %>
     <div class="relative" data-controller="dropdown">
