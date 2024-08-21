@@ -17,6 +17,23 @@ registry:
 # When running commands, you can specify a destination with the -d flag, e.g. kamal deploy -d staging
 require_destination: true
 
+# Configure custom arguments for Traefik
+# traefik:
+#   options:
+#     publish:
+#       - "443:443"
+#     volume:
+#       - "/traefik/certs-conf.yaml:/traefik/certs-conf.yaml" # To save the configuration file.
+#       - "/traefik/certs:/traefik/certs" # To save the certificates.
+#   args:
+#     entryPoints.web.address: ":80"
+#     entryPoints.websecure.address: ":443"
+#     entrypoints.websecure.http.tls: true
+#     entryPoints.web.http.redirections.entryPoint.to: websecure
+#     entryPoints.web.http.redirections.entryPoint.scheme: https
+#     entryPoints.web.http.redirections.entrypoint.permanent: true
+#     providers.file.filename: "/traefik/certs-conf.yaml"
+
 # Configure builder setup.
 # builder:
 #   args:
