@@ -42,25 +42,15 @@ RSpec.describe Profile, type: :model do
   end
 
   describe "validations" do
-    it "validates github url" do
-      profile.github_url = "github.com"
-      expect(profile).not_to be_valid
-      profile.github_url = "https://github.com"
-      expect(profile).to be_valid
-    end
-
-    it "validates linkedin url" do
-      profile.linkedin_url = "linkedin.com"
-      expect(profile).not_to be_valid
-      profile.linkedin_url = "https://linkedin.com"
-      expect(profile).to be_valid
-    end
-
-    it "validates twitter url" do
-      profile.twitter_url = "x.com"
-      expect(profile).not_to be_valid
-      profile.twitter_url = "https://x.com"
-      expect(profile).to be_valid
+    it "validates socials urls" do
+      %i[github_url linkedin_url twitter_url].each do |url|
+        profile[url] = "http://x.com"
+        expect(profile).not_to be_valid
+        profile[url] = "x.com"
+        expect(profile).to be_valid
+        profile[url] = "https://x.com"
+        expect(profile).to be_valid
+      end
     end
   end
 end

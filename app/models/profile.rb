@@ -29,11 +29,12 @@ class Profile < ApplicationRecord
   belongs_to :profileable, polymorphic: true
 
   validates :uuid, uniqueness: true, presence: true
-  validates :github_url, url: {allow_blank: true}
-  validates :linkedin_url, url: {allow_blank: true}
-  validates :twitter_url, url: {allow_blank: true}
+  validates :github_url, url: {allow_blank: true, schemes: ["https"]}
+  validates :linkedin_url, url: {allow_blank: true, schemes: ["https"]}
+  validates :twitter_url, url: {allow_blank: true, schemes: ["https"]}
 
   before_validation :set_uuid
+  before_validation :set_url_scheme
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[name]
@@ -43,5 +44,11 @@ class Profile < ApplicationRecord
 
   def set_uuid
     self.uuid ||= SecureRandom.uuid
+  end
+
+  def set_url_scheme
+    %i[github_url linkedin_url twitter_url].each do |url|
+      self[url] = "https://" + self[url] if self[url].present? && URI.parse(self[url]).scheme.blank?
+    end
   end
 end
