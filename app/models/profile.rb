@@ -48,7 +48,17 @@ class Profile < ApplicationRecord
 
   def set_url_scheme
     %i[github_url linkedin_url twitter_url].each do |url|
-      self[url] = "https://" + self[url] if self[url].present? && URI.parse(self[url]).scheme.blank?
+      next if send(url).blank?
+
+      uri_parse = URI.parse(send(url))
+
+      if uri_parse.scheme.blank?
+        self[url] = "https://#{send(url)}"
+      elsif uri_parse.scheme == "http"
+        self[url] = send(url).gsub("http://", "https://")
+      end
+    rescue URI::InvalidURIError
+      next
     end
   end
 end
