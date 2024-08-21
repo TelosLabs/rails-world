@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-refresh-scroll" content="preserve">
     <meta name="turbo-refresh-method" content="morph">
+    <meta name="view-transition" content="same-origin">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
@@ -24,6 +25,8 @@
 
     <%= javascript_importmap_tags %>
     <%= favicon_link_tag asset_path('icons/favicon.svg') %>
+
+    <%= yield :head %>
   </head>
 
   <body class="flex flex-col h-full bg-grey-50"
