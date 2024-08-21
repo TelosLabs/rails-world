@@ -589,6 +589,9 @@ GEM
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.5.0)
     useragent (0.16.10)
+    validate_url (1.0.15)
+      activemodel (>= 3.0.0)
+      public_suffix
     validates_timeliness (7.0.0.beta2)
       activemodel (>= 7.0.0, < 8)
       timeliness (>= 0.3.10, < 1)
@@ -683,6 +686,7 @@ DEPENDENCIES
   timecop
   turbo-rails
   tzinfo-data
+  validate_url
   validates_timeliness (~> 7.0.0.beta1)
   web-console
   web-push
