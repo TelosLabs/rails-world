@@ -11,10 +11,14 @@
     <div class="flex flex-col w-full h-full">
       <% if @sessions.present? %>
         <% @sessions.group_by(&:starts_at).each do |starts_at, sessions| %>
-          <div class="text-grey-800 text-2xl font-bold w-full pb-4">
-            <a id="<%= session_anchor(sessions.first) %>">
-              <%= starts_at.strftime("%H:%M") %>
-            </a>
+          <div class="flex items-center">
+            <div class="text-grey-800 text-2xl font-bold pt-2 pb-4">
+              <a id="<%= session_anchor(sessions.first) %>">
+                <%= starts_at.strftime("%H:%M") %>
+              </a>
+            </div>
+            <div class="border-b w-full mx-2 mb-1"></div>
+            <div class="text-nowrap text-gray-400 mb-1"><%= pluralize(sessions.count, "Session") %></div>
           </div>
           <% sessions.each do |session| %>
             <%= render(

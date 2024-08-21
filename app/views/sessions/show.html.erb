@@ -6,7 +6,7 @@
 
       <% if @speaker.present? %>
         <div class="flex flex-row items-center mb-4">
-          <a href="<%= speaker_path(@speaker) %>" class="flex w-full hover:bg-[#FAE7E8]/[0.5] rounded-lg p-2">
+          <a href="<%= speaker_path(@speaker) %>" class="flex w-full hover:bg-[#FAE7E8]/[0.5] focus:bg-[#FAE7E8]/[0.5] rounded-lg p-2">
             <% if @speaker.profile&.image&.attached? %>
               <div class="relative w-12 h-12 bg-center bg-no-repeat bg-cover rounded-full min-w-12 min-h-12" style="background-image: url(<%= url_for(@speaker.profile.image) %>)">
               </div>
@@ -99,7 +99,7 @@
       <div class="flex flex-col items-start w-full max-w-screen-sm">
         <p class="text-black mb-4 text-[23px] font-bold italic">About this speaker</p>
         <div class="w-full p-5 bg-white rounded-lg">
-          <a href="<%= speaker_path(@speaker) %>" class="flex items-center w-full hover:bg-[#FAE7E8]/[0.5] rounded-lg mb-2 p-2 mr-2">
+          <a href="<%= speaker_path(@speaker) %>" class="flex items-center w-full hover:bg-[#FAE7E8]/[0.5] focus:bg-[#FAE7E8]/[0.5] rounded-lg mb-2 p-2 mr-2">
             <% if @speaker.profile&.image&.attached? %>
               <div class="relative flex flex-col items-center justify-center w-12 h-12 bg-center bg-no-repeat bg-cover rounded-full min-w-12 min-h-12 " style="background-image: url(<%= url_for(@speaker.profile.image) %>)">
               </div>
