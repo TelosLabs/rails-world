@@ -1,47 +1,52 @@
-<div class="flex flex-col items-center h-full bg-gray-light">
-  <div class="flex flex-col items-center w-full h-full max-w-screen-md px-5 py-10">
-    <div class="flex w-full mb-4">
-      <h1 class="text-4xl italic font-black text-gray-800">Agenda</h1>
+<div class="flex flex-col items-center bg-gray-light">
+  <div class="flex flex-col items-center w-full max-w-screen-md px-5 pt-10">
+
+    <div class="flex flex-col items-center w-full px-5 sticky z-30">
+      <div class="flex w-full mb-4">
+        <h1 class="text-4xl italic font-black text-gray-800">Agenda</h1>
+      </div>
+
+      <%= render partial: 'sessions/filters', locals: { resource: :sessions } %>
     </div>
 
-    <%= render partial: 'sessions/filters', locals: { resource: :sessions } %>
-
-    <div class="flex flex-col w-full h-full">
-      <% if @sessions.present? %>
-        <% @sessions.group_by(&:starts_at).each do |starts_at, sessions| %>
-          <div class="flex items-center">
-          <div class="text-grey-800 text-2xl font-bold pt-2 pb-4">
-            <a id="<%= session_anchor(sessions.first) %>">
-              <%= starts_at.strftime("%H:%M") %>
-            </a>
-          </div>
-          <div class="border-b w-full mx-2 mb-1"></div>
-          <div class="text-nowrap text-gray-400 mb-1"><%= pluralize(sessions.count, "Session") %></div>
-          </div>
-          <% sessions.each do |session| %>
-            <%= render(
-              partial: 'sessions/card',
-              locals: {
-                session: session, speaker: session.speakers.first,
-                user_is_an_attendee: @user_session_ids.include?(session.id)
-              }
-            ) %>
+    <div class="flex flex-col items-center w-full max-w-screen-md px-5 max-h-svh">
+      <div class="flex flex-col w-full overflow-auto mb-50">
+        <% if @sessions.present? %>
+          <% @sessions.group_by(&:starts_at).each do |starts_at, sessions| %>
+            <div class="flex items-center sticky top-0 bg-grey-50 mb-5 z-20">
+              <div class="text-grey-800 text-2xl font-bold pt-2 pb-4">
+                <a id="<%= session_anchor(sessions.first) %>">
+                  <%= starts_at.strftime("%H:%M") %>
+                </a>
+              </div>
+              <div class="border-b w-full mx-2 mb-1"></div>
+              <div class="text-nowrap text-gray-400 mb-1"><%= pluralize(sessions.count, "Session") %></div>
+            </div>
+            <% sessions.each do |session| %>
+              <%= render(
+                    partial: 'sessions/card',
+                    locals: {
+                      session: session, speaker: session.speakers.first,
+                      user_is_an_attendee: @user_session_ids.include?(session.id)
+                    }
+                  ) %>
+            <% end %>
           <% end %>
-        <% end %>
-      <% elsif params[:starts_at].present? || session_filter_params.present? %>
-        <div class="flex flex-col items-center justify-center w-full h-full">
-          <p class="max-w-xs mb-4 font-bold text-center">No sessions match your current filters</p>
-          <%= link_to 'Clear filters', sessions_path, class: "text-red underline font-bold italic text-lg" %>
-        </div>
-      <% else %>
-        <div class="flex flex-col items-center justify-center w-full h-full">
-          <div class="p-8 mb-6 bg-white rounded-full w-fit h-fit">
-            <%= inline_svg_tag("icons/calendar.svg", size: "56", class: "fill-gray-400") %>
+        <% elsif params[:starts_at].present? || session_filter_params.present? %>
+          <div class="flex flex-col items-center justify-center w-full h-full">
+            <p class="max-w-xs mb-4 font-bold text-center">No sessions match your current filters</p>
+            <%= link_to 'Clear filters', sessions_path, class: "text-red underline font-bold italic text-lg" %>
           </div>
-          <p class="mb-4 font-bold text-center max-w-44">There are no sessions planned yet</p>
-          <%= link_to 'Refresh', url_for, class: "text-red underline font-bold italic text-lg" %>
-        </div>
-      <% end %>
+        <% else %>
+          <div class="flex flex-col items-center justify-center w-full h-full">
+            <div class="p-8 mb-6 bg-white rounded-full w-fit h-fit">
+              <%= inline_svg_tag("icons/calendar.svg", size: "56", class: "fill-gray-400") %>
+            </div>
+            <p class="mb-4 font-bold text-center max-w-44">There are no sessions planned yet</p>
+            <%= link_to 'Refresh', url_for, class: "text-red underline font-bold italic text-lg" %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

@@ -1,7 +1,8 @@
 <div class="sticky bottom-0 flex flex-row items-center justify-center gap-6 bg-white pt-2 pb-1 border-t border-b border-grey-200 text-[11px]">
   <%= link_to(
     sessions_path(
-      starts_at: current_conference.sessions.upcoming_today.first&.starts_at&.to_date
+      starts_at: current_conference.sessions.upcoming_today.first&.starts_at&.to_date,
+      anchor: session_anchor(current_conference.sessions.upcoming_today.first)
     ),
     class: [
       nav_text_class_for([sessions_path, root_path]),

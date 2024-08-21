@@ -1,6 +1,6 @@
 <%# locals: (session:, speaker:, user_is_an_attendee:) %>
 
-<div class="flex flex-col w-full p-5 mb-4 bg-white rounded-[20px]">
+<div class="flex flex-col w-full p-5 mb-4 bg-white rounded-[20px] hover:shadow-[0_0_25px_rgba(0,0,0,0.1)]">
   <div class="flex flex-col w-full">
     <% if session.live? %>
       <div class="h-8 px-4 py-2 bg-green-500 rounded-lg bg-opacity-[.08] justify-center items-center inline-flex mb-4">
@@ -34,7 +34,7 @@
 
     <% if speaker %>
       <div class="flex justify-between w-full mb-2">
-        <a href="<%= speaker_path(speaker) %>" class="flex w-full hover:bg-[#FAE7E8]/[0.5] rounded-lg p-2 mr-2">
+        <a href="<%= speaker_path(speaker) %>" class="flex w-full rounded-lg p-2 mr-2">
           <% if speaker.image&.attached? %>
             <div class="relative flex flex-col items-center justify-center w-12 h-12 mr-4 bg-center bg-no-repeat bg-cover rounded-full min-w-12 min-h-12" style="background-image: url(<%= url_for(speaker.image) %>)">
             </div>
@@ -73,14 +73,14 @@
 
     <% if speaker %>
       <a href="<%= session_path(session) %>" class="mb-4 group">
-        <h3 class="text-xl italic font-bold text-red inline-block group-hover:border-b-2 group-hover:border-red">
+        <h3 class="text-xl italic font-bold text-red inline-block">
           <%= session.title %>
         </h3>
       </a>
     <% else %>
       <div class="flex flex-row justify-between w-full mb-4 grow">
         <a href="<%= session_path(session) %>" class="group w-full">
-          <h3 class="text-xl italic font-bold text-red inline-block group-hover:border-b-2 group-hover:border-red">
+          <h3 class="text-xl italic font-bold text-red inline-block">
             <%= session.title %>
           </h3>
         </a>

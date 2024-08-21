@@ -2,15 +2,6 @@
 
 <div class="flex justify-between w-full mb-6">
   <div class="flex items-center gap-2 overflow-x-scroll no-scrollbar">
-    <%= link_to(
-      'All dates',
-      url_for([resource, session_filter_params.to_h]),
-      class: [
-        "flex min-w-fit items-center justify-center px-4 py-2 rounded-full font-medium",
-        "bg-red text-white": params[:starts_at].blank?,
-        "bg-white text-red hover:bg-[#FAE7E8]": params[:starts_at].present?
-      ]
-    ) %>
     <% current_conference.session_dates.each do |session_date| %>
       <%= link_to(
         session_date.strftime("%a, %d"),
@@ -22,6 +13,15 @@
         ]
       ) %>
     <% end %>
+    <%= link_to(
+      'All dates',
+      url_for([resource, session_filter_params.to_h]),
+      class: [
+        "flex min-w-fit items-center justify-center px-4 py-2 rounded-full font-medium",
+        "bg-red text-white": params[:starts_at].blank?,
+        "bg-white text-red hover:bg-[#FAE7E8]": params[:starts_at].present?
+      ]
+    ) %>
   </div>
 
   <%= content_tag(
