@@ -13,4 +13,10 @@ module SessionHelper
   def session_filter_params
     params.permit(SessionQuery::STATUS_SCOPES)
   end
+
+  def session_anchor(session)
+    return unless session
+
+    session.starts_at&.strftime("%Y-%m-%d-%H-%M")
+  end
 end

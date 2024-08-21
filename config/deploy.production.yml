@@ -7,11 +7,6 @@ servers:
 env:
   clear:
     RAILS_ENV: production
-    MAILER_SENDER: hello@railsworld.com
-    WEB_CONCURRENCY: 2
-    LITESTREAM_BACKUP_ENABLED: true
-    SESSION_REMINDERS_ENABLED: true
-    REGISTRATION_ENABLED: false
   secret:
     - APP_HOST
     - RAILS_MASTER_KEY
@@ -23,6 +18,11 @@ env:
     - SECRET_KEY_BASE
     - VAPID_PUBLIC_KEY
     - VAPID_PRIVATE_KEY
+    - MAILER_SENDER
+    - LITESTREAM_BACKUP_ENABLED
+    - SESSION_REMINDERS_ENABLED
+    - REGISTRATION_ENABLED
+    - WEB_CONCURRENCY
 
 accessories:
   vector:

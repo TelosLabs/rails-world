@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
   end
 
   def show
-    @session = sessions.find(params[:id])
+    @session = sessions.friendly.find(params[:id])
     @speaker = @session.speakers.first
   end
 
