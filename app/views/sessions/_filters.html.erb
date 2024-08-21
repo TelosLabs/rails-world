@@ -32,7 +32,7 @@
 
       <div
         data-dropdown-target="menu"
-        class="hidden transition transform origin-top-right absolute right-0"
+        class="absolute right-0 hidden transition origin-top-right transform"
         data-transition-enter-from="opacity-0 scale-95"
         data-transition-enter-to="opacity-100 scale-100"
         data-transition-leave-from="opacity-100 scale-100"
@@ -42,7 +42,7 @@
             <%= form.hidden_field :starts_at, value: params[:starts_at] %>
 
             <% SessionQuery::STATUS_SCOPES.each do |name| %>
-              <div class="self-stretch px-4 py-2 items-center gap-2 inline-flex">
+              <div class="inline-flex items-center self-stretch gap-2 px-4 py-2">
                 <%= form.check_box(
                   name, checked: params[name] == "1",
                   class: "w-4 h-4 rounded text-red",
@@ -56,7 +56,7 @@
               </div>
             <% end %>
             <div class="h-6 px-2.5 py-4 rounded justify-center items-center gap-2.5 inline-flex">
-              <div class="text-lg text-red italic underline font-black">
+              <div class="text-lg italic font-black underline text-red">
                 <%= form.submit(
                   t("views.status_filters.submit"),
                   name: "",
@@ -72,16 +72,16 @@
 </div>
 
 <% if session_filter_params.present? %>
-  <div class="flex w-full mb-2 gap-2">
-    <div class="flex flex-wrap ">
-      <div class="h-8 py-1 text-base font-bold leading-tight">Active filters:</div>
+  <div class="flex w-full gap-2 mb-2">
+    <div class="flex flex-wrap">
+      <div class="flex items-center h-8 py-1 text-base font-bold leading-tight">Active filters:</div>
     </div>
     <div class="flex flex-wrap gap-2">
       <% SessionQuery::STATUS_SCOPES.each do |name| %>
         <% next unless params[name] == "1" %>
         <% bg_color = session_filter_color(name) %>
         <div class="h-8 px-4 py-2 <%= bg_color %> bg-opacity-[.08] rounded-lg gap-2 inline-flex">
-          <div class="gap-2 flex">
+          <div class="flex gap-2">
             <div class="w-4 h-4 <%= bg_color %> rounded-full"></div>
             <div class="text-xs font-medium"><%= t("views.status_filters.#{name}") %></div>
           </div>
