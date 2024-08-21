@@ -24,7 +24,45 @@ namespace :db do
     shopify_port = conference.locations.find_or_create_by!(name: "Shopify Port")
 
     # Create Tags
-    # No tags for now
+    community = Tag.find_or_create_by!(name: "Community")
+
+    security = Tag.find_or_create_by!(name: "Security")
+
+    rails_8 = Tag.find_or_create_by!(name: "Rails 8")
+
+    productivity = Tag.find_or_create_by!(name: "Productivity")
+
+    tools = Tag.find_or_create_by!(name: "Tools")
+
+    developer_experience = Tag.find_or_create_by!(name: "Developer Experience")
+
+    deployment = Tag.find_or_create_by!(name: "Deployment")
+
+    performance = Tag.find_or_create_by!(name: "Performance")
+
+    storage_solutions = Tag.find_or_create_by!(name: "Storage Solutions")
+
+    refactoring = Tag.find_or_create_by!(name: "Refactoring")
+
+    database = Tag.find_or_create_by!(name: "Database")
+
+    hotwire = Tag.find_or_create_by!(name: "Hotwire")
+
+    ai = Tag.find_or_create_by!(name: "AI")
+
+    integrations = Tag.find_or_create_by!(name: "Integrations")
+
+    testing = Tag.find_or_create_by!(name: "Testing")
+
+    best_practices = Tag.find_or_create_by!(name: "Best Practices")
+
+    pwa = Tag.find_or_create_by!(name: "PWA")
+
+    insights = Tag.find_or_create_by!(name: "Insights")
+
+    background_jobs = Tag.find_or_create_by!(name: "Background Jobs")
+
+    rails_internals = Tag.find_or_create_by!(name: "Rails Internals")
 
     # Create Speakers
     matz_speaker = Profile.find_or_create_by!(name: "Yukihiro \"Matz\" Matsumoto") do |profile|
@@ -337,6 +375,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, start_day, 11, 0)
       session.location = track_1
       session.speakers = [david_heinemeier_hansson_speaker]
+      session.tags = [community]
     end
 
     Session.find_or_create_by!(
@@ -348,6 +387,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, start_day, 11, 45)
       session.location = track_1
       session.speakers = [rosa_gutierrez_speaker]
+      session.tags = [background_jobs, performance, rails_8]
     end
 
     Session.find_or_create_by!(
@@ -359,6 +399,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, start_day, 11, 45)
       session.location = track_2
       session.speakers = [mostafa_abdelraouf_speaker]
+      session.tags = [database]
     end
 
     Session.find_or_create_by!(
@@ -380,6 +421,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, start_day, 14, 15)
       session.location = lightning_track
       session.speakers = [chris_power_speaker, robert_beene_speaker]
+      session.tags = [productivity, tools, developer_experience]
     end
 
     Session.find_or_create_by!(
@@ -391,6 +433,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, start_day, 13, 30)
       session.location = track_1
       session.speakers = [donal_mcbreen_speaker]
+      session.tags = [tools, deployment, performance]
     end
 
     Session.find_or_create_by!(
@@ -402,6 +445,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, start_day, 13, 30)
       session.location = track_2
       session.speakers = [jamis_buck_speaker]
+      session.tags = [tools, developer_experience]
     end
 
     Session.find_or_create_by!(
@@ -413,6 +457,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, start_day, 14, 15)
       session.location = track_1
       session.speakers = [kevin_mcconnell_speaker]
+      session.tags = [tools, deployment, performance]
     end
 
     Session.find_or_create_by!(
@@ -424,6 +469,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, start_day, 14, 15)
       session.location = track_2
       session.speakers = [greg_molnar_speaker]
+      session.tags = [security, rails_8]
     end
 
     Session.find_or_create_by!(
@@ -435,6 +481,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, start_day, 15, 15)
       session.location = track_1
       session.speakers = [jenny_shen_speaker]
+      session.tags = [rails_8]
     end
 
     Session.find_or_create_by!(
@@ -446,6 +493,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, start_day, 15, 15)
       session.location = track_2
       session.speakers = [justin_searls_speaker]
+      session.tags = [productivity, developer_experience]
     end
 
     Session.find_or_create_by!(
@@ -457,6 +505,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, start_day, 16, 15)
       session.location = track_1
       session.speakers = [rafael_franca_speaker]
+      session.tags = [productivity, developer_experience]
     end
 
     Session.find_or_create_by!(
@@ -468,6 +517,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, start_day, 16, 15)
       session.location = track_2
       session.speakers = [emmanuel_hayford_speaker]
+      session.tags = [pwa, rails_8]
     end
 
     Session.find_or_create_by!(
@@ -479,6 +529,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, start_day, 17, 30)
       session.location = track_1
       session.speakers = [matz_speaker, david_heinemeier_hansson_speaker, tobias_luetke_speaker]
+      session.tags = [community, insights]
     end
 
     Session.find_or_create_by!(
@@ -521,6 +572,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, second_day, 11, 45)
       session.location = track_1
       session.speakers = [stephen_margheim_speaker]
+      session.tags = [database, rails_8]
     end
 
     Session.find_or_create_by!(
@@ -532,6 +584,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, second_day, 11, 45)
       session.location = track_2
       session.speakers = [ridhwana_khan_speaker]
+      session.tags = [rails_internals, developer_experience]
     end
 
     Session.find_or_create_by!(
@@ -553,6 +606,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, second_day, 13, 30)
       session.location = track_1
       session.speakers = [miles_mcguire_speaker]
+      session.tags = [database, best_practices]
     end
 
     Session.find_or_create_by!(
@@ -564,6 +618,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, second_day, 13, 30)
       session.location = track_2
       session.speakers = [andrea_fomera_speaker]
+      session.tags = [performance, storage_solutions]
     end
 
     Session.find_or_create_by!(
@@ -575,6 +630,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, second_day, 14, 15)
       session.location = track_1
       session.speakers = [bruno_prieto_speaker]
+      session.tags = [hotwire]
     end
 
     Session.find_or_create_by!(
@@ -586,6 +642,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, second_day, 14, 15)
       session.location = lightning_track
       session.speakers = [chris_power_speaker, robert_beene_speaker]
+      session.tags = [productivity, tools, developer_experience]
     end
 
     Session.find_or_create_by(
@@ -597,6 +654,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, second_day, 14, 15)
       session.location = track_2
       session.speakers = [robby_russell_speaker]
+      session.tags = [performance, refactoring]
     end
 
     Session.find_or_create_by(
@@ -608,6 +666,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, second_day, 15, 15)
       session.location = track_1
       session.speakers = [xavier_noria_speaker]
+      session.tags = [rails_internals, performance]
     end
 
     Session.find_or_create_by(
@@ -619,6 +678,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, second_day, 15, 15)
       session.location = track_2
       session.speakers = [julia_lopez_speaker]
+      session.tags = [integrations, testing, best_practices]
     end
 
     Session.find_or_create_by(
@@ -630,7 +690,9 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, second_day, 16, 15)
       session.location = track_1
       session.speakers = [obie_fernandez_speaker]
+      session.tags = [ai]
     end
+
     Session.find_or_create_by(
       conference: conference,
       title: "Level up performance with simple coding changes",
@@ -640,6 +702,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, second_day, 16, 15)
       session.location = track_2
       session.speakers = [david_henner_speaker]
+      session.tags = [performance]
     end
 
     Session.find_or_create_by(
@@ -651,6 +714,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, second_day, 17, 30)
       session.location = track_1
       session.speakers = [aaron_patterson_speaker]
+      session.tags = [community]
     end
 
     Session.find_or_create_by!(
