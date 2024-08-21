@@ -4,7 +4,6 @@
       <div class="flex flex-row items-center">
         <% if @profile.image.attached? %>
           <div class="flex flex-col items-center justify-center relative w-[120px] bg-cover bg-no-repeat bg-center h-[120px] rounded-full" style="background-image: url(<%= url_for(@profile.image) %>)">
-            <%# <%= image_tag url_for(@profile.image), class: "rounded-full absolute" %>
           </div>
         <% else %>
           <div class="w-[120px] h-[120px] rounded-full bg-slate-300 p-5 flex flex-row items-center justify-center">
@@ -14,7 +13,7 @@
         <div class="flex flex-col items-start ml-5">
           <div class="text-xl italic font-black text-red"> <%= @profile.name.presence || "Anonymous" %> </div>
           <% if @profile.job_title.present? %>
-            <div class="text-lg"><%= @profile.job_title %></div>
+            <div class="text-lg text-gray-400"><%= @profile.job_title %></div>
           <% end %>
         </div>
       </div>

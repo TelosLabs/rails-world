@@ -8,14 +8,21 @@
 
     <div class="flex flex-col w-full h-full">
       <% if @sessions.present? %>
-        <% @sessions.each do |session| %>
-          <%= render(
-            partial: 'sessions/card',
-            locals: {
-              session: session, speaker: session.speakers.first,
-              user_is_an_attendee: true
-            }
-          ) %>
+        <% @sessions.group_by(&:starts_at).each do |starts_at, sessions| %>
+          <div class="text-grey-800 text-2xl font-bold w-full pb-4">
+            <a id="<%= session_anchor(sessions.first) %>">
+              <%= starts_at.strftime("%H:%M") %>
+            </a>
+          </div>
+          <% sessions.each do |session| %>
+            <%= render(
+                  partial: 'sessions/card',
+                  locals: {
+                    session: session, speaker: session.speakers.first,
+                    user_is_an_attendee: true
+                  }
+                ) %>
+          <% end %>
         <% end %>
       <% elsif params[:starts_at].present? || session_filter_params.present? %>
         <div class="flex flex-col items-center justify-center w-full h-full">
