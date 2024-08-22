@@ -2,65 +2,48 @@
 
 <div class="flex flex-col w-full p-5 mb-4 bg-white rounded-[20px]">
   <div class="flex flex-col w-full">
-    <% if session.live? %>
-      <div class="h-8 px-4 py-2 bg-green-500 rounded-lg bg-opacity-[.08] justify-center items-center inline-flex mb-4">
-        <div class="flex items-center justify-center h-4 gap-2 grow basis-0">
-          <span class="relative flex w-4 h-4">
-            <span class="absolute inline-flex w-full h-full bg-green-500 rounded-full opacity-75 animate-slow-ping"></span>
-            <span class="w-4 h-4 bg-green-500 rounded-full"></span>
-          </span>
-          <span class="w-full text-xs">Session is live now.</span>
-        </div>
-      </div>
-    <% elsif session.starting_soon? %>
-      <div class="h-8 px-4 py-2 bg-yellow rounded-lg bg-opacity-[.08] justify-center items-center inline-flex mb-4">
-        <div class="flex items-center justify-center h-4 gap-2 grow basis-0">
-          <span class="relative flex w-4 h-4">
-            <span class="w-4 h-4 rounded-full bg-yellow"></span>
-          </span>
-          <span class="w-full text-xs">Session is starting soon.</span>
-        </div>
-      </div>
-    <% elsif session.past? %>
-      <div class="h-8 px-4 py-2 bg-blue-teal-light rounded-lg bg-opacity-[.08] justify-center items-center inline-flex mb-4">
-        <div class="flex items-center justify-center h-4 gap-2 grow basis-0">
-          <span class="relative flex w-4 h-4">
-            <span class="w-4 h-4 rounded-full bg-blue-teal-light"></span>
-          </span>
-          <span class="w-full text-xs">Session is over.</span>
-        </div>
-      </div>
-    <% end %>
+    <%= render partial: "sessions/status", locals: { session: session } %>
 
-    <div class="flex flex-row justify-between w-full mb-4 grow">
+    <div class="flex flex-row justify-between w-full mb-2 grow">
       <a href="<%= session_path(session) %>" class="w-full group">
-        <h3 class="inline-block text-xl italic font-bold text-red group-hover:border-b-2 group-focus:border-b-2 group-hover:border-red group-focus:border-red">
+        <h3 class="inline-block text-xl italic font-bold text-red border-b-2 border-white group-hover:border-red group-focus:border-red">
           <%= session.title %>
         </h3>
       </a>
+
       <% if user_is_an_attendee %>
         <%= button_to(
-              session_attendee_path(session_id: session.id, params: request.params[:starts_at]),
-              method: :delete, form_class: "flex items-center"
-            ) do %>
-          <%= inline_svg_tag("icons/bookmark-full.svg") %>
+          session_attendee_path(session_id: session.id, params: request.params[:starts_at]),
+          method: :delete, form_class: "flex items-center"
+        ) do %>
+          <div class="p-2">
+            <%= inline_svg_tag("icons/bookmark-full.svg") %>
+          </div>
         <% end %>
       <% else %>
         <%= button_to(
-              session_attendee_path(session_id: session.id, params: request.params[:starts_at]),
-              form_class: "flex items-center"
-            ) do %>
-          <%= inline_svg_tag("icons/bookmark-outline.svg") %>
+          session_attendee_path(session_id: session.id, params: request.params[:starts_at]),
+          form_class: "flex items-center"
+        ) do %>
+          <div class="p-2">
+            <%= inline_svg_tag("icons/bookmark-outline.svg", class: "") %>
+          </div>
         <% end %>
       <% end %>
     </div>
 
     <% if session.speakers.present? %>
-      <div class="flex w-full mb-4 overflow-x-auto overflow-y-hidden gap-x-4 no-scrollbar">
+      <div class="flex w-full mb-2 overflow-x-auto overflow-y-hidden no-scrollbar">
         <% session.speakers.each do |speaker| %>
-          <a href="<%= speaker_path(speaker) %>" class="inline-flex items-center pl-4 border-l min-w-fit first:border-0 first:pl-0">
+          <%= link_to(
+            speaker_path(speaker),
+            class: [
+              "inline-flex items-center py-2 px-4 first:pl-0 rounded-lg min-w-fit",
+              "group hover:bg-[#FAE7E8]/[0.5] focus:bg-[#FAE7E8]/[0.5]"
+            ]
+          ) do %>
             <% if speaker.image&.attached? %>
-              <div class="relative flex flex-col items-center justify-center w-8 h-8 bg-center bg-no-repeat bg-cover rounded-full min-w-8 min-h-8" style="background-image: url(<%= url_for(speaker.image) %>)">
+              <div class="relative flex flex-col items-center justify-center w-10 h-10 bg-center bg-no-repeat bg-cover rounded-full min-w-10 min-h-10" style="background-image: url(<%= url_for(speaker.image) %>)">
               </div>
             <% else %>
               <a class="flex flex-row items-center justify-center w-8 h-8 p-2 rounded-full min-w-8 min-h-8 bg-slate-300">
@@ -68,29 +51,33 @@
               </div>
             <% end %>
 
-            <%= content_tag(:div, class: [
+            <%= content_tag(
+              :div,
+              class: [
                 "flex flex-col ml-2",
                 "max-w-[200px]": session.speakers.count > 1
-            ] ) do %>
-              <h2 class="italic font-black text-[13px]"><%= speaker.name %></h2>
-              <p class="text-[13px] text-gray-400 font-normal"><%= speaker.job_title %></p>
+              ]
+            ) do %>
+              <h2 class="italic font-black text-sm group-hover:text-red group-focus:text-red"><%= speaker.name %></h2>
+              <p class="text-sm text-gray-400 font-normal"><%= speaker.job_title %></p>
             <% end %>
-          </a>
+          <% end %>
+          <div class="border-l my-3 last:hidden"></div>
         <% end %>
       </div>
     <% end %>
 
-    <% if session.tags.exists? %>
-      <div class="flex flex-wrap w-full gap-2 mb-4">
-        <% session.tags.each do |tag| %>
-          <div class="px-3 py-1.5 text-sm font-medium bg-transparent border rounded-lg border-bluegray-600 text-bluegray-600">
-            <%= tag.name %>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
+    <a href="<%= session_path(session) %>" class="flex flex-col">
+      <% if session.tags.exists? %>
+        <div class="flex flex-wrap w-full gap-2 mb-3">
+          <% session.tags.each do |tag| %>
+            <div class="px-2 py-1 text-xs bg-transparent border rounded-lg border-bluegray-600 text-bluegray-600">
+              <%= tag.name %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
 
-    <div class="flex flex-col">
       <div class="flex items-center mb-2">
         <%= inline_svg_tag("icons/calendar.svg", class: "w-[16px] h-[16px] mr-1 fill-grey-600") %>
         <span class="font-sans text-sm text-grey-600">
@@ -103,6 +90,6 @@
         <%= inline_svg_tag("icons/location.svg", class: "w-[16px] h-[16px] mr-1 fill-grey-600") %>
         <span class="font-sans text-sm text-grey-600"><%= session.location&.name %></span>
       </div>
-    </div>
+    </a>
   </div>
 </div>
