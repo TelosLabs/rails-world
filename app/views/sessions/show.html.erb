@@ -1,72 +1,65 @@
 <%= title "#{@session.title} - Rails World 2024" %>
 
 <div class="relative flex flex-col items-center justify-between flex-1 pb-5 bg-grey-50">
-  <div class="w-full px-5 pt-6 pb-12 bg-bottom bg-no-repeat bg-cover" style="background-image: url(<%= asset_path 'background_design.svg' %>)">
+  <div class="w-full px-5 pt-3 pb-12 bg-bottom bg-no-repeat bg-cover" style="background-image: url(<%= asset_path 'background_design.svg' %>)">
     <div class="flex flex-col max-w-screen-sm mx-auto">
+      <%= render partial: "sessions/status", locals: { session: @session } %>
 
-      <% if @speaker.present? %>
-        <div class="flex flex-row items-center mb-4">
-          <a href="<%= speaker_path(@speaker) %>" class="flex w-full hover:bg-[#FAE7E8]/[0.5] focus:bg-[#FAE7E8]/[0.5] rounded-lg p-2">
-            <% if @speaker.profile&.image&.attached? %>
-              <div class="relative w-12 h-12 bg-center bg-no-repeat bg-cover rounded-full min-w-12 min-h-12" style="background-image: url(<%= url_for(@speaker.profile.image) %>)">
-              </div>
-            <% else %>
-              <div class="flex items-center justify-center w-12 h-12 p-3 rounded-full min-w-12 min-h-12 bg-slate-300">
-                <%= inline_svg_tag "icons/user_avatar.svg" %>
-              </div>
-            <% end %>
-
-            <div class="flex flex-col w-full ml-4">
-              <p class="text-base italic font-black text-red"><%= @speaker.profile&.name %></p>
-              <p class="font-normal text-[13px] text-gray-400"><%= @speaker.profile&.job_title %></p>
-            </div>
-          </a>
-
-          <% if current_user.sessions.pluck(:id).include?(@session.id) %>
-            <%= button_to(
-              session_attendee_path(session_id: @session.id, params: request.params[:starts_at]),
-              method: :delete, form_class: "flex items-center ml-5"
-            ) do %>
-              <%= inline_svg_tag("icons/bookmark-full.svg") %>
-            <% end %>
-          <% else %>
-            <%= button_to(
-              session_attendee_path(session_id: @session.id, params: request.params[:starts_at]),
-              form_class: "flex items-center ml-5"
-            ) do %>
-              <%= inline_svg_tag("icons/bookmark-outline.svg") %>
-            <% end %>
+      <div class="flex flex-row justify-between w-full mb-2 grow">
+        <h1 class="text-2xl text-red italic font-bold"><%= @session.title %></h1>
+        <% if current_user.sessions.pluck(:id).include?(@session.id) %>
+          <%= button_to(
+            session_attendee_path(session_id: @session.id, params: request.params[:starts_at]),
+            method: :delete, form_class: "flex items-center ml-8"
+          ) do %>
+            <%= inline_svg_tag("icons/bookmark-full.svg") %>
           <% end %>
-        </div>
-      <% end %>
+        <% else %>
+          <%= button_to(
+            session_attendee_path(session_id: @session.id, params: request.params[:starts_at]),
+            form_class: "flex items-center ml-8"
+          ) do %>
+            <%= inline_svg_tag("icons/bookmark-outline.svg") %>
+          <% end %>
+        <% end %>
+      </div>
 
-      <% if @speaker.present? %>
-        <h1 class="text-[20px] text-red italic mb-4 font-bold"><%= @session.title %></h1>
-      <% else %>
-        <div class="flex flex-row justify-between w-full grow">
-          <h1 class="text-[20px] text-red italic mb-4 font-bold"><%= @session.title %></h1>
-          <% if current_user.sessions.pluck(:id).include?(@session.id) %>
-            <%= button_to(
-              session_attendee_path(session_id: @session.id, params: request.params[:starts_at]),
-              method: :delete, form_class: "flex items-center ml-5 mb-4"
+      <% if @session.speakers.present? %>
+        <div class="flex w-full mb-2 overflow-x-auto overflow-y-hidden no-scrollbar">
+          <% @session.speakers.each do |speaker| %>
+            <%= link_to(
+              speaker_path(speaker),
+              class: [
+                "inline-flex items-center py-2 px-4 first:pl-0 rounded-lg min-w-fit",
+                "group hover:bg-[#FAE7E8]/[0.5] focus:bg-[#FAE7E8]/[0.5]"
+              ]
             ) do %>
-              <%= inline_svg_tag("icons/bookmark-full.svg") %>
+              <% if speaker.image&.attached? %>
+                <div class="relative flex flex-col items-center justify-center w-8 h-8 bg-center bg-no-repeat bg-cover rounded-full min-w-8 min-h-8" style="background-image: url(<%= url_for(speaker.image) %>)">
+                </div>
+              <% else %>
+                <div class="flex items-center justify-center w-8 h-8 p-3 rounded-full min-w-8 min-h-8 bg-slate-300">
+                  <%= inline_svg_tag "icons/user_avatar.svg" %>
+                </div>
+              <% end %>
+
+              <%= content_tag(:div, class: [
+                  "flex flex-col ml-2",
+                  "max-w-[200px]": @session.speakers.count > 1
+              ] ) do %>
+                <h2 class="italic font-black text-sm group-hover:text-red group-focus:text-red"><%= speaker.name %></h2>
+                <p class="text-sm text-gray-400 font-normal"><%= speaker.job_title %></p>
+              <% end %>
             <% end %>
-          <% else %>
-            <%= button_to(
-              session_attendee_path(session_id: @session.id, params: request.params[:starts_at]),
-              form_class: "flex items-center ml-5 mb-4"
-            ) do %>
-              <%= inline_svg_tag("icons/bookmark-outline.svg") %>
-            <% end %>
+            <div class="border-l my-3 last:hidden"></div>
           <% end %>
         </div>
       <% end %>
 
       <% if @session.tags.present? %>
-        <div class="flex flex-row flex-wrap items-center gap-4 mb-[18px]">
+        <div class="flex flex-row flex-wrap items-center gap-4 mb-4">
           <% @session.tags.each do |tag| %>
-            <div class="bg-white border border-bluegray-600 rounded-lg px-3 py-[6px] text-[13px] text-bluegray-600">
+            <div class="bg-white border border-bluegray-600 rounded-lg px-2 py-1 text-sm font-medium text-bluegray-600">
               <%= tag.name %>
             </div>
           <% end %>
@@ -80,42 +73,55 @@
       <% end %>
 
       <div class="flex flex-row items-center mb-2">
-        <%= inline_svg_tag "icons/calendar.svg", class: "fill-grey-600 w-3 h-3 mr-2" %>
-        <p class="font-sans text-[13px] text-grey-600">
+        <%= inline_svg_tag("icons/calendar.svg", class: "w-[16px] h-[16px] mr-1 fill-grey-600") %>
+        <p class="font-sans text-sm text-grey-600">
           <%= @session.starts_at&.strftime("%b %d") %> -
           <%= @session.starts_at&.strftime("%H:%M") %> to <%= @session.ends_at&.strftime("%H:%M") %>
         </p>
       </div>
 
       <div class="flex flex-row items-center mb-3">
-        <%= inline_svg_tag "icons/location.svg", class: "fill-grey-600 w-3 h-3 mr-2" %>
-        <p class="text-[13px] text-grey-600"><%= @session.location.name %></p>
+        <%= inline_svg_tag("icons/location.svg", class: "w-[16px] h-[16px] mr-1 fill-grey-600") %>
+        <p class="text-sm text-grey-600"><%= @session.location.name %></p>
       </div>
     </div>
   </div>
 
-  <% if @speaker %>
+  <% if @session.speakers.present? %>
     <div class="flex flex-col items-center w-full p-5 mt-6">
       <div class="flex flex-col items-start w-full max-w-screen-sm">
-        <p class="text-black mb-4 text-[23px] font-bold italic">About this speaker</p>
-        <div class="w-full p-5 bg-white rounded-lg">
-          <a href="<%= speaker_path(@speaker) %>" class="flex items-center w-full hover:bg-[#FAE7E8]/[0.5] focus:bg-[#FAE7E8]/[0.5] rounded-lg mb-2 p-2 mr-2">
-            <% if @speaker.profile&.image&.attached? %>
-              <div class="relative flex flex-col items-center justify-center w-12 h-12 bg-center bg-no-repeat bg-cover rounded-full min-w-12 min-h-12 " style="background-image: url(<%= url_for(@speaker.profile.image) %>)">
-              </div>
-            <% else %>
-              <div class="flex flex-row items-center justify-center w-12 h-12 p-3 rounded-full bg-slate-300">
-                <%= inline_svg_tag "icons/user_avatar.svg" %>
-              </div>
-            <% end %>
-            <div class="flex flex-col ml-5">
-              <p class="text-base italic font-black text-red"><%= @speaker.profile&.name %></p>
-              <p class="font-normal text-[13px] text-gray-400"><%= @speaker.profile&.job_title %></p>
+        <p class="text-black mb-4 text-2xl font-bold italic">
+          <%= "About the #{'speaker'.pluralize(@session.speakers.count)}" %>
+        </p>
+        <div class="flex flex-col w-full gap-4">
+          <% @session.speakers.each do |speaker| %>
+            <div class="w-full pb-5 pt-2 px-5 bg-white rounded-lg">
+              <%= link_to(
+                speaker_path(speaker),
+                class: [
+                  "flex items-center p-3 rounded-lg",
+                  "hover:bg-[#FAE7E8]/[0.5] focus:bg-[#FAE7E8]/[0.5]"
+                ]
+              ) do %>
+                <% if speaker.image&.attached? %>
+                  <div class="relative flex flex-col items-center justify-center w-12 h-12 bg-center bg-no-repeat bg-cover rounded-full min-w-12 min-h-12 " style="background-image: url(<%= url_for(speaker.image) %>)">
+                  </div>
+                <% else %>
+                  <a class="flex flex-row items-center justify-center w-12 h-12 p-3 rounded-full bg-slate-300">
+                    <%= inline_svg_tag "icons/user_avatar.svg" %>
+                  </div>
+                <% end %>
+                <div class="flex flex-col ml-5">
+                  <p class="text-base italic font-black text-red"><%= speaker.name %></p>
+                  <p class="font-normal text-sm text-gray-400"><%= speaker.job_title %></p>
+                </div>
+              <% end %>
+
+              <p class="text-base leading-5 mt-2">
+                <%= speaker.bio %>
+              </p>
             </div>
-          </a>
-          <p class="text-base font-medium leading-5">
-            <%= @speaker.profile&.bio %>
-          </p>
+          <% end %>
         </div>
       </div>
     </div>
