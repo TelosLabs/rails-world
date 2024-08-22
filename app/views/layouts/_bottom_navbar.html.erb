@@ -2,7 +2,8 @@
   <div class="flex flex-row items-center justify-around w-full max-w-screen-sm text-[11px]">
     <%= link_to(
       sessions_path(
-        starts_at: current_conference.sessions.upcoming_today.first&.starts_at&.to_date
+        starts_at: current_agenda_session&.starts_at&.to_date,
+        anchor: session_anchor(current_agenda_session)
       ),
       class: [
         nav_text_class_for([sessions_path, root_path]),
@@ -15,8 +16,8 @@
 
     <%= link_to(
       schedule_path(
-        starts_at: current_user.sessions.upcoming_today.first&.starts_at&.to_date,
-        anchor: session_anchor(current_user.sessions.upcoming_today.first)
+        starts_at: current_schedule_session&.starts_at&.to_date,
+        anchor: session_anchor(current_schedule_session)
       ),
       class: [
         nav_text_class_for([schedule_path]),
