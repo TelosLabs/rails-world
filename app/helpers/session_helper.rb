@@ -27,7 +27,7 @@ module SessionHelper
   end
 
   def current_agenda_session
-    @_current_agenda_session ||= current_conference.sessions.upcoming_today.first
+    @_current_agenda_session ||= current_conference&.sessions&.upcoming_today&.first
   end
 
   def current_schedule_session
