@@ -9,7 +9,6 @@ class SessionsController < ApplicationController
 
   def show
     @session = sessions.friendly.find(params[:id])
-    @speaker = @session.speakers.first
   end
 
   private
