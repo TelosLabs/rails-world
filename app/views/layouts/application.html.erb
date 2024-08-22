@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="turbo-refresh-scroll" content="preserve">
     <meta name="turbo-refresh-method" content="morph">
+    <meta name="view-transition" content="same-origin">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
@@ -23,6 +24,8 @@
     <script async src="https://ga.jspm.io/npm:es-module-shims@1.8.2/dist/es-module-shims.js" data-turbo-track="reload"></script>
 
     <%= javascript_importmap_tags %>
+
+    <%= yield :head %>
   </head>
 
   <body class="flex flex-col h-full bg-grey-50"

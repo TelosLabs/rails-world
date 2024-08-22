@@ -21,23 +21,26 @@
       </div>
 
       <% if @session.speakers.present? %>
-        <div class="flex w-full mb-4 overflow-x-auto overflow-y-hidden gap-x-5 no-scrollbar">
+        <div class="flex w-full mb-4 overflow-x-auto overflow-y-hidden gap-x-4 no-scrollbar">
           <% @session.speakers.each do |speaker| %>
-            <div class="inline-flex items-center justify-between pl-5 border-l shrink-0 first:border-0 first:pl-0">
+            <a href="<%= speaker_path(speaker) %>" class="inline-flex items-center w-full pl-4 border-l min-w-fit first:border-0 first:pl-0">
               <% if speaker.image&.attached? %>
-                <div class="relative flex flex-col items-center justify-center w-8 h-8 mr-4 bg-center bg-no-repeat bg-cover rounded-full min-w-8 min-h-8" style="background-image: url(<%= url_for(speaker.image) %>)">
+                <div class="relative flex flex-col items-center justify-center w-8 h-8 bg-center bg-no-repeat bg-cover rounded-full min-w-8 min-h-8" style="background-image: url(<%= url_for(speaker.image) %>)">
                 </div>
               <% else %>
-                <div class="flex flex-row items-center justify-center w-8 h-8 p-3 mr-4 rounded-full min-w-8 min-h-8 bg-slate-300">
+                <div class="flex items-center justify-center w-8 h-8 p-3 rounded-full min-w-8 min-h-8 bg-slate-300">
                   <%= inline_svg_tag "icons/user_avatar.svg" %>
                 </div>
               <% end %>
 
-              <a href="<%= speaker_path(speaker) %>">
-                <h2 class="text-[13px] italic font-black"><%= speaker.name %></h2>
-                <p class="font-normal text-[13px]"><%= speaker.job_title %></p>
-              </a>
-            </div>
+              <%= content_tag(:div, class: [
+                  "flex flex-col ml-2",
+                  "max-w-[200px]": @session.speakers.count > 1
+              ] ) do %>
+                <h2 class="italic font-black text-[13px]"><%= speaker.name %></h2>
+                <p class="text-[13px] text-gray-400 font-normal"><%= speaker.job_title %></p>
+              <% end %>
+            </a>
           <% end %>
         </div>
       <% end %>
@@ -58,15 +61,12 @@
         </div>
       <% end %>
 
-      <div class="flex flex-row items-center mb-3">
+      <div class="flex flex-row items-center mb-2">
         <%= inline_svg_tag "calendar.svg", class: "fill-grey-600 w-3 h-3 mr-2" %>
-        <p class="text-[13px] text-grey-600"><%= @session.starts_at.strftime("%A, %b %d") %></p>
-      </div>
-
-      <div class="flex flex-row items-center mb-3">
-        <%= inline_svg_tag "clock.svg", class: "fill-grey-600 w-3 h-3 mr-2" %>
-        <p class="text-[13px] text-grey-600"><%= @session.starts_at.strftime("%H:%M") %>
-          - <%= @session.ends_at.strftime("%H:%M") %></p>
+        <p class="font-sans text-[13px] text-grey-600">
+          <%= @session.starts_at&.strftime("%b %d") %> -
+          <%= @session.starts_at&.strftime("%H:%M") %> to <%= @session.ends_at&.strftime("%H:%M") %>
+        </p>
       </div>
 
       <div class="flex flex-row items-center mb-3">
@@ -85,20 +85,20 @@
         <div class="flex flex-col w-full gap-4">
           <% @session.speakers.each do |speaker| %>
             <div class="w-full p-5 bg-white rounded-lg">
-              <div class="flex flex-row items-center mb-4">
+              <a href="<%= speaker_path(speaker) %>" class="flex items-center w-full mb-2 mr-2 rounded-lg">
                 <% if speaker.image&.attached? %>
                   <div class="relative flex flex-col items-center justify-center w-12 h-12 bg-center bg-no-repeat bg-cover rounded-full min-w-12 min-h-12 " style="background-image: url(<%= url_for(speaker.image) %>)">
                   </div>
                 <% else %>
-                  <div class="flex flex-row items-center justify-center w-12 h-12 p-3 rounded-full bg-slate-300">
+                  <a class="flex flex-row items-center justify-center w-12 h-12 p-3 rounded-full bg-slate-300">
                     <%= inline_svg_tag "icons/user_avatar.svg" %>
                   </div>
                 <% end %>
-                <a href="<%= speaker_path(speaker) %>" class="flex flex-col ml-5">
+                <div class="flex flex-col ml-5">
                   <p class="text-base italic font-black text-red"><%= speaker.name %></p>
-                  <p class="font-normal text-[13px]"><%= speaker.job_title %></p>
-                </a>
-              </div>
+                  <p class="font-normal text-[13px] text-gray-400"><%= speaker.job_title %></p>
+                </div>
+              </a>
               <p class="text-base font-medium leading-5">
                 <%= speaker.bio %>
               </p>
@@ -108,5 +108,4 @@
       </div>
     </div>
   <% end %>
-
 </div>
