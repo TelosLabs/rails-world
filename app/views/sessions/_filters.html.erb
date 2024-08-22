@@ -80,8 +80,8 @@
 
 <% if session_filter_params.present? %>
   <div class="flex w-full gap-2 mb-2">
-    <div class="flex flex-wrap ">
-      <div class="h-8 py-1 text-base font-bold leading-tight">Active filters:</div>
+    <div class="flex flex-wrap">
+      <div class="flex items-center h-8 py-1 text-base font-bold leading-tight">Active filters:</div>
     </div>
     <div class="flex flex-wrap gap-2">
       <% SessionQuery::STATUS_SCOPES.each do |name| %>
