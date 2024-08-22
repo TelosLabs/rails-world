@@ -34,7 +34,7 @@
     data-web-push-notifications-vapid-key-value=#{vapid_public_key}
     data-web-push-notifications-notifications-enabled-value=#{current_profile.web_push_notifications}" : '' %>>
 
-    <main class="relative flex flex-col flex-1 w-full mx-auto max-h-screen overflow-hidden">
+    <main class="flex flex-col flex-1 w-full mx-auto">
       <% if show_header? %>
         <%= render partial: "layouts/header" %>
       <% end %>
@@ -46,10 +46,10 @@
       <% end %>
 
       <%= yield %>
-    </main>
 
-    <% if show_bottom_navbar? %>
-      <%= render partial: "layouts/bottom_navbar", locals: { unread_notifications: current_user.notifications.unread } %>
-    <% end %>
+      <% if show_bottom_navbar? %>
+        <%= render partial: "layouts/bottom_navbar", locals: { unread_notifications: current_user.notifications.unread } %>
+      <% end %>
+    </main>
   </body>
 </html>

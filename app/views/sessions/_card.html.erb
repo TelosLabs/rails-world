@@ -4,28 +4,28 @@
   <div class="flex flex-col w-full">
     <% if session.live? %>
       <div class="h-8 px-4 py-2 bg-green-500 rounded-lg bg-opacity-[.08] justify-center items-center inline-flex mb-4">
-        <div class="grow basis-0 h-4 justify-center items-center gap-2 flex">
-          <span class="relative flex h-4 w-4">
-            <span class="animate-slow-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-            <span class="rounded-full h-4 w-4 bg-green-500"></span>
+        <div class="flex items-center justify-center h-4 gap-2 grow basis-0">
+          <span class="relative flex w-4 h-4z">
+            <span class="absolute inline-flex w-full h-full bg-green-500 rounded-full opacity-75 animate-slow-ping"></span>
+            <span class="w-4 h-4 bg-green-500 rounded-full"></span>
           </span>
           <span class="w-full text-xs">Session is live now.</span>
         </div>
       </div>
     <% elsif session.starting_soon? %>
       <div class="h-8 px-4 py-2 bg-yellow rounded-lg bg-opacity-[.08] justify-center items-center inline-flex mb-4">
-        <div class="grow basis-0 h-4 justify-center items-center gap-2 flex">
-          <span class="relative flex h-4 w-4">
-            <span class="rounded-full h-4 w-4 bg-yellow"></span>
+        <div class="flex items-center justify-center h-4 gap-2 grow basis-0">
+          <span class="relative flex w-4 h-4">
+            <span class="w-4 h-4 rounded-full bg-yellow"></span>
           </span>
           <span class="w-full text-xs">Session is starting soon.</span>
         </div>
       </div>
     <% elsif session.past? %>
       <div class="h-8 px-4 py-2 bg-blue-teal-light rounded-lg bg-opacity-[.08] justify-center items-center inline-flex mb-4">
-        <div class="grow basis-0 h-4 justify-center items-center gap-2 flex">
-          <span class="relative flex h-4 w-4">
-            <span class="rounded-full h-4 w-4 bg-blue-teal-light"></span>
+        <div class="flex items-center justify-center h-4 gap-2 grow basis-0">
+          <span class="relative flex w-4 h-4">
+            <span class="w-4 h-4 rounded-full bg-blue-teal-light"></span>
           </span>
           <span class="w-full text-xs">Session is over.</span>
         </div>
@@ -34,9 +34,9 @@
 
     <% if speaker %>
       <div class="flex justify-between w-full mb-2">
-        <a href="<%= speaker_path(speaker) %>" class="flex w-full rounded-lg p-2 mr-2">
+        <a href="<%= speaker_path(speaker) %>" class="flex w-full p-2 mr-2 rounded-lg">
           <% if speaker.image&.attached? %>
-            <div class="relative flex flex-col items-center justify-center w-12 h-12 mr-4 bg-center bg-no-repeat bg-cover rounded-full min-w-12 min-h-12" style="background-image: url(<%= url_for(speaker.image) %>)">
+            <div class="flex flex-col items-center justify-center w-12 h-12 mr-4 bg-center bg-no-repeat bg-cover rounded-full min-w-12 min-h-12" style="background-image: url(<%= url_for(speaker.image) %>)">
             </div>
           <% else %>
             <div class="flex flex-row items-center justify-center w-12 h-12 p-2 mr-4 rounded-full min-w-12 min-h-12 bg-slate-300">
@@ -73,14 +73,14 @@
 
     <% if speaker %>
       <a href="<%= session_path(session) %>" class="mb-4 group">
-        <h3 class="text-xl italic font-bold text-red inline-block">
+        <h3 class="inline-block text-xl italic font-bold text-red">
           <%= session.title %>
         </h3>
       </a>
     <% else %>
       <div class="flex flex-row justify-between w-full mb-4 grow">
-        <a href="<%= session_path(session) %>" class="group w-full">
-          <h3 class="text-xl italic font-bold text-red inline-block">
+        <a href="<%= session_path(session) %>" class="w-full group">
+          <h3 class="inline-block text-xl italic font-bold text-red">
             <%= session.title %>
           </h3>
         </a>
