@@ -1,8 +1,8 @@
 <%= title "Agenda - Rails World 2024" %>
 
-<div class="flex flex-col items-center bg-grey-50">
-  <div class="flex flex-col items-center w-full max-w-screen-md px-5 pt-10">
-    <div class="sticky top-[79px] z-20 flex flex-col items-center w-full px-5 bg-grey-50">
+<div class="flex flex-col items-center h-full bg-grey-50">
+  <div class="flex flex-col items-center w-full h-full max-w-screen-md px-5">
+    <div class="sticky top-[79px] z-20 flex flex-col items-center w-full pt-10 px-5 bg-grey-50">
       <div class="flex w-full mb-4">
         <h1 class="text-4xl italic font-black text-gray-800">Agenda</h1>
       </div>
@@ -10,11 +10,11 @@
       <%= render partial: 'sessions/filters', locals: { resource: :sessions } %>
     </div>
 
-    <div class="flex flex-col items-center w-full px-5">
-      <div class="flex flex-col w-full mb-50">
+    <div class="flex flex-col items-center w-full h-full px-5">
+      <div class="flex flex-col w-full h-full mb-50">
         <% if @sessions.present? %>
           <% @sessions.group_by(&:starts_at).each do |starts_at, sessions| %>
-            <div class="sticky z-10 top-[200px] flex items-center mb-5 bg-grey-50">
+            <div class="sticky z-10 top-[249px] flex items-center mb-5 bg-grey-50">
               <div class="pt-2 pb-4 text-2xl font-bold text-grey-800">
                 <a id="<%= session_anchor(sessions.first) %>">
                   <%= starts_at.strftime("%H:%M") %>
