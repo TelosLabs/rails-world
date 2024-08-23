@@ -6,27 +6,33 @@
         <%= @session.title %>
       </div>
 
-      <% if @speaker&.name.present? %>
-        <div class="c-event-card__speaker">
-          <div class="c-event-card__speaker-img">
-            <%= @speaker.name.split.take(2).map { |word| word[0].upcase }.join %>
+      <% if @speakers.present? %>
+        <% @speakers.each do |speaker| %>
+          <div class="c-event-card__speaker">
+            <div class="c-event-card__speaker-img">
+              <%= speaker.name.split.take(2).map { |word| word[0].upcase }.join %>
+            </div>
+            <div>
+              <div class="c-event-card__speaker-title"><%= speaker.name %></div>
+              <div class="c-event-card__speaker-subtitle"><%= speaker.job_title %></div>
+            </div>
           </div>
-          <div>
-            <div class="c-event-card__speaker-title"><%= @speaker.name %></div>
-            <div class="c-event-card__speaker-subtitle"><%= @speaker&.job_title %></div>
-          </div>
+        <% end %>
+      <% end %>
+
+      <% if @session.tags.present? %>
+        <div class="c-event-card__tags">
+          <% @session.tags.each do |tag| %>
+            <span class="c-event-card__tags-tag"><%= tag.name %></span>
+          <% end %>
         </div>
       <% end %>
 
-      <div class="c-event-card__tags">
-        <% @session.tags.each do |tag| %>
-          <span class="c-event-card__tags-tag"><%= tag.name %></span>
-        <% end %>
-      </div>
-
-      <div class="c-event-card__description">
-        <%= @session.description %>
-      </div>
+      <% if @session.description.present? %>
+        <div class="c-event-card__description">
+          <%= @session.description %>
+        </div>
+      <% end %>
 
       <div class="c-event-card__time">
         <%# <div class="c-event-card__time-icon">

@@ -1,0 +1,31 @@
+<%# locals: (session:) %>
+
+<% if session.live? %>
+  <div class="h-8 px-4 py-2 bg-green-500 rounded-lg bg-opacity-[.08] justify-center items-center inline-flex mb-2">
+    <div class="flex items-center justify-center h-4 gap-2 grow basis-0">
+        <span class="relative flex w-4 h-4z">
+          <span class="absolute inline-flex w-full h-full bg-green-500 rounded-full opacity-75 animate-slow-ping"></span>
+          <span class="w-4 h-4 bg-green-500 rounded-full"></span>
+        </span>
+      <span class="w-full text-xs">Session is live now.</span>
+    </div>
+  </div>
+<% elsif session.starting_soon? %>
+  <div class="h-8 px-4 py-2 bg-yellow rounded-lg bg-opacity-[.08] justify-center items-center inline-flex mb-2">
+    <div class="flex items-center justify-center h-4 gap-2 grow basis-0">
+      <span class="relative flex w-4 h-4">
+        <span class="w-4 h-4 rounded-full bg-yellow"></span>
+      </span>
+      <span class="w-full text-xs">Session is starting soon.</span>
+    </div>
+  </div>
+<% elsif session.past? %>
+  <div class="h-8 px-4 py-2 bg-blue-teal-light rounded-lg bg-opacity-[.08] justify-center items-center inline-flex mb-2">
+    <div class="flex items-center justify-center h-4 gap-2 grow basis-0">
+      <span class="relative flex w-4 h-4">
+        <span class="w-4 h-4 rounded-full bg-blue-teal-light"></span>
+      </span>
+      <span class="w-full text-xs">Session is over.</span>
+    </div>
+  </div>
+<% end %>
