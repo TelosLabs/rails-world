@@ -1,7 +1,7 @@
 <%# locals: (resource:) %>
 
-<div class="flex justify-between w-full mb-4">
-  <div class="flex items-center gap-2 overflow-x-scroll no-scrollbar">
+<div class="flex justify-between w-full mb-4" data-controller="preserve-scroll">
+  <div id="<%= resource %>_filters" class="flex items-center gap-2 overflow-x-scroll no-scrollbar" data-preserve-scroll>
     <% current_conference.session_dates.each do |session_date| %>
       <%= link_to(
         session_date.strftime("%a, %d"),
