@@ -10,11 +10,19 @@
 
     <div class="flex flex-col w-full h-full">
       <% if @sessions.present? %>
+        <% previous_day = nil %>
+
         <% @sessions.group_by(&:starts_at).each do |starts_at, sessions| %>
+          <% current_day = starts_at.to_date %>
+
           <div class="flex items-center">
-            <div class="pt-2 pb-4 text-2xl font-bold text-grey-800">
+            <div class="pt-2 pb-4 text-2xl font-bold text-grey-800 text-nowrap">
               <a id="<%= session_anchor(sessions.first) %>">
-                <%= starts_at.strftime("%H:%M") %>
+                <% if current_day != previous_day && params[:starts_at].blank? %>
+                  <%= starts_at.strftime("%b %d - %H:%M") %>
+                <% else %>
+                  <%= starts_at.strftime("%H:%M") %>
+                <% end %>
               </a>
             </div>
             <div class="w-full mx-2 mb-1 border-b"></div>
@@ -29,6 +37,8 @@
                   }
                 ) %>
           <% end %>
+
+          <% previous_day = current_day %>
         <% end %>
       <% elsif params[:starts_at].present? || session_filter_params.present? %>
         <div class="flex flex-col items-center justify-center w-full h-full">
