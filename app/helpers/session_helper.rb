@@ -26,6 +26,10 @@ module SessionHelper
     "#" + session_anchor(current_agenda_session)
   end
 
+  def current_starts_at_filter
+    (current_conference.sessions.starts_at(Date.current).first || current_conference.sessions.order(:starts_at).first)&.starts_at&.to_date
+  end
+
   def current_agenda_session
     @_current_agenda_session ||= current_conference&.sessions&.upcoming_today&.first
   end
