@@ -32,7 +32,9 @@ en:
   mailers:
     session_mailer:
       reminder:
-        subject: "Your bookmarked session is starting in 10 minutes."
+        subject:
+          with_time: "Your bookmarked session is starting in %{time_before_session}."
+          without_time: "Your bookmarked session is starting soon."
   views:
     status_filters:
       past: "Past"
