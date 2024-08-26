@@ -20,7 +20,7 @@ class Avo::Resources::Session < Avo::BaseResource
     field :id, as: :id
     field :title, as: :text, sortable: true
     field :slug, as: :text, hide_on: :new
-    field :description, as: :textarea
+    field :description, as: :trix
     field :starts_at, as: :date_time,
       help: "The datetime field will use your browser's current timezone.", sortable: true,
       format: "FFFF"

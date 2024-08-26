@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+@import 'actiontext.css';
+
+@layer base {
+  ul, ol {
+    @apply block ml-4
+  }
+
+  ul {
+    @apply list-disc
+  }
+
+  ol {
+    @apply list-decimal
+  }
+}
+
+/* Form errors */
 div.field_with_errors > label {
   @apply mb-2 italic font-bold text-red;
 }
