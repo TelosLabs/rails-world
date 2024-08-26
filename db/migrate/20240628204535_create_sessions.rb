@@ -2,7 +2,6 @@ class CreateSessions < ActiveRecord::Migration[7.1]
   def change
     create_table :sessions do |t|
       t.string :title, null: false
-      t.string :description
       t.datetime :starts_at, null: false
       t.datetime :ends_at, null: false
       t.json :sent_reminders, default: []
