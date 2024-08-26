@@ -33,6 +33,7 @@ module.exports = {
           500: '#62C554'
         },
         bluegray: {
+          50: '#F4F7FB',
           600: '#829ECE'
         },
         'purple-dark': '#432463',
