@@ -8,3 +8,5 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 pin "@stimulus-components/dropdown", to: "@stimulus-components--dropdown.js" # @3.0.0
 pin "stimulus-use" # @0.52.2
 pin_all_from "app/javascript/custom", under: "custom"
+pin "trix"
+pin "@rails/actiontext", to: "actiontext.esm.js"
