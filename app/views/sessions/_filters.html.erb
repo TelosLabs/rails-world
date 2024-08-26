@@ -7,8 +7,8 @@
       url_for([resource, session_filter_params.to_h]),
       class: [
         "flex min-w-fit items-center justify-center px-4 py-2 rounded-full font-medium",
-        "bg-red text-white": params[:starts_at].blank?,
-        "bg-white text-red hover:bg-[#FAE7E8] focus:bg-[#FAE7E8]": params[:starts_at].present?
+        "bg-secondary-500 text-white": params[:starts_at].blank?,
+        "bg-white text-secondary-500 hover:bg-[#FAE7E8] focus:bg-[#FAE7E8]": params[:starts_at].present?
       ]
     ) %>
     <% current_conference.session_dates.each do |session_date| %>
@@ -17,8 +17,8 @@
         url_for([resource, session_filter_params.to_h.merge(starts_at: session_date)]),
         class: [
           "flex min-w-fit items-center justify-center px-4 py-2 font-medium rounded-full",
-          "bg-red text-white": params[:starts_at] == session_date.to_s,
-          "bg-white text-red hover:bg-[#FAE7E8] focus:bg-[#FAE7E8]": params[:starts_at] != session_date.to_s
+          "bg-secondary-500 text-white": params[:starts_at] == session_date.to_s,
+          "bg-white text-secondary-500 hover:bg-[#FAE7E8] focus:bg-[#FAE7E8]": params[:starts_at] != session_date.to_s
         ]
       ) %>
     <% end %>
@@ -28,8 +28,8 @@
     :div,
     class: [
       "flex items-center justify-center ml-3 rounded-full min-w-[40px] min-h-[40px]",
-      "bg-red fill-white": session_filter_params.present?,
-      "bg-white fill-red hover:bg-[#FAE7E8] focus:bg-[#FAE7E8]": session_filter_params.blank?
+      "bg-secondary-500 fill-white": session_filter_params.present?,
+      "bg-white fill-secondary-500 hover:bg-[#FAE7E8] focus:bg-[#FAE7E8]": session_filter_params.blank?
     ]
   ) do %>
     <div class="relative" data-controller="dropdown">
@@ -52,7 +52,7 @@
               <div class="inline-flex items-center self-stretch gap-2 px-4 py-2">
                 <%= form.check_box(
                   name, checked: params[name] == "1",
-                  class: "w-4 h-4 rounded text-red",
+                  class: "w-4 h-4 rounded text-secondary-500",
                   skip_base_styling: true, include_hidden: false
                 ) %>
                 <div class="text-gray-800">
@@ -63,11 +63,11 @@
               </div>
             <% end %>
             <div class="h-6 px-2.5 py-4 rounded justify-center items-center gap-2.5 inline-flex">
-              <div class="text-lg italic font-black underline text-red">
+              <div class="text-lg italic font-black underline text-secondary-500">
                 <%= form.submit(
                   t("views.status_filters.submit"),
                   name: "",
-                  class: "text-lg text-red italic underline font-black hover:cursor-pointer"
+                  class: "text-lg text-secondary-500 italic underline font-black hover:cursor-pointer"
                 ) %>
               </div>
             </div>

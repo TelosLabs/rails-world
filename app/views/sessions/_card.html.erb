@@ -6,7 +6,7 @@
 
     <div class="flex flex-row justify-between w-full mb-2 grow">
       <a href="<%= session_path(session) %>" class="w-full group">
-        <h3 class="inline-block text-xl italic font-bold text-red border-b-2 border-white group-hover:border-red group-focus:border-red">
+        <h3 class="inline-block text-xl italic font-bold text-secondary-500 border-b-2 border-white group-hover:border-secondary-500 group-focus:border-secondary-500">
           <%= session.title %>
         </h3>
       </a>
@@ -58,7 +58,7 @@
                 "max-w-[200px]": session.speakers.count > 1
               ]
             ) do %>
-              <h2 class="italic font-black text-sm group-hover:text-red group-focus:text-red"><%= speaker.name %></h2>
+              <h2 class="italic font-black text-sm group-hover:text-secondary-500 group-focus:text-secondary-500"><%= speaker.name %></h2>
               <p class="text-sm text-gray-400 font-normal"><%= speaker.job_title %></p>
             <% end %>
           <% end %>

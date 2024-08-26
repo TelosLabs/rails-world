@@ -20,12 +20,12 @@
         <div class="flex flex-col items-center w-full mt-10 mb-10">
           <%= link_to(
             'Notification settings', notification_settings_path,
-            class: "text-red font-bold  text-center rounded-sm underline italic text-lg"
+            class: "text-secondary-500 font-bold  text-center rounded-sm underline italic text-lg"
           ) %>
         </div>
         <%= button_to(
           "CLEAR ALL", read_notifications_path,
-          class: "w-full bg-white rounded-[10px] p-4 text-lg font-black text-red cursor-pointer italic items-center text-center",
+          class: "w-full bg-white rounded-[10px] p-4 text-lg font-black text-secondary-500 cursor-pointer italic items-center text-center",
           form_class: "w-full"
         ) %>
       </div>
@@ -37,7 +37,7 @@
         <p class="text-base font-bold text-center">You don’t have <br> any notifications</p>
         <%= link_to(
           'Notification settings', notification_settings_path,
-          class: "text-red font-bold  text-center rounded-sm underline italic text-lg"
+          class: "text-secondary-500 font-bold  text-center rounded-sm underline italic text-lg"
         ) %>
       </div>
     <% end %>

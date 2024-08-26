@@ -5,7 +5,7 @@ module NavigationHelper
   end
 
   def nav_text_class_for(path)
-    return "text-red" if path.any? { |p| current_page?(p) }
+    return "text-secondary-500" if path.any? { |p| current_page?(p) }
     "text-grey-400"
   end
 

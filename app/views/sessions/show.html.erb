@@ -6,7 +6,7 @@
       <%= render partial: "sessions/status", locals: { session: @session } %>
 
       <div class="flex flex-row justify-between w-full mb-2 grow">
-        <h1 class="text-2xl italic font-bold text-red"><%= @session.title %></h1>
+        <h1 class="text-2xl italic font-bold text-secondary-500"><%= @session.title %></h1>
         <% if current_user.sessions.pluck(:id).include?(@session.id) %>
           <%= button_to(
             session_attendee_path(session_id: @session.id, params: request.params[:starts_at]),
@@ -47,7 +47,7 @@
                   "flex flex-col ml-2",
                   "max-w-[200px]": @session.speakers.count > 1
               ] ) do %>
-                <h2 class="text-sm italic font-black group-hover:text-red group-focus:text-red"><%= speaker.name %></h2>
+                <h2 class="text-sm italic font-black group-hover:text-secondary-500 group-focus:text-secondary-500"><%= speaker.name %></h2>
                 <p class="text-sm font-normal text-gray-400"><%= speaker.job_title %></p>
               <% end %>
             <% end %>
@@ -112,7 +112,7 @@
                   </div>
                 <% end %>
                 <div class="flex flex-col ml-5">
-                  <p class="text-base italic font-black text-red"><%= speaker.name %></p>
+                  <p class="text-base italic font-black text-secondary-500"><%= speaker.name %></p>
                   <p class="text-sm font-normal text-gray-400"><%= speaker.job_title %></p>
                 </div>
               <% end %>
