@@ -3,7 +3,6 @@
 # Table name: sessions
 #
 #  id             :integer          not null, primary key
-#  description    :string
 #  ends_at        :datetime         not null
 #  sent_reminders :json
 #  slug           :string
