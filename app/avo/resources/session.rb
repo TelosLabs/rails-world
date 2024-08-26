@@ -8,11 +8,19 @@ class Avo::Resources::Session < Avo::BaseResource
       }
     end
   }
+  self.find_record_method = -> {
+    if id.is_a?(Array)
+      query.where(slug: id)
+    else
+      query.friendly.find id
+    end
+  }
 
   def fields
     field :id, as: :id
     field :title, as: :text, sortable: true
-    field :description, as: :textarea
+    field :slug, as: :text, hide_on: :new
+    field :description, as: :trix
     field :starts_at, as: :date_time,
       help: "The datetime field will use your browser's current timezone.", sortable: true,
       format: "FFFF"

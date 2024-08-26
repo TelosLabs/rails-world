@@ -1,5 +1,5 @@
 class SessionReminderJob < ApplicationJob
-  REMINDER_TIME_BEFORE_EVENT = [5.minutes].freeze
+  REMINDER_TIME_BEFORE_EVENT = [10.minutes].freeze
 
   def perform
     if Feature.disabled?(:session_reminders)
@@ -13,8 +13,8 @@ class SessionReminderJob < ApplicationJob
       # Grace time is the time window in which we send reminders that should have been sent already.
       grace_time = 2.minutes
 
-      start_reminder_time = (now + time_before_session - grace_time).end_of_minute
-      end_reminder_time = (start_reminder_time + grace_time).beginning_of_minute
+      start_reminder_time = (now + time_before_session - grace_time).beginning_of_minute
+      end_reminder_time = (start_reminder_time + grace_time).end_of_minute
 
       Rails.logger.info "Searching for sessions with starts_at between #{start_reminder_time} and #{end_reminder_time}"
 
@@ -27,7 +27,7 @@ class SessionReminderJob < ApplicationJob
 
         SessionReminderNotifier
           .with(record: session, time_before_session: time_before_session.inspect)
-          .deliver(session.attendees.with_at_least_one_notification_enabled)
+          .deliver(session.attendees)
       end
     end
   end

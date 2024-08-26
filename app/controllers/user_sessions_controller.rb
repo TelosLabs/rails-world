@@ -12,15 +12,15 @@ class UserSessionsController < ApplicationController
 
     if @user
       login @user
-      redirect_to root_path, notice: t("controllers.sessions.create.notice")
+      redirect_to root_path
     else
-      redirect_to new_user_session_path, alert: t("controllers.sessions.create.alert")
+      redirect_to new_user_session_path, alert: t("controllers.user_sessions.create.alert")
     end
   end
 
   def destroy
     logout
-    redirect_to root_path, notice: t("controllers.sessions.destroy.notice")
+    redirect_to root_path
   end
 
   private

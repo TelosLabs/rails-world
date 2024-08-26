@@ -1,0 +1,45 @@
+<%= title "Notifications - Rails World 2024" %>
+
+<div class="flex flex-col items-center flex-1 p-5">
+  <div class="flex flex-col items-start w-full h-full max-w-screen-sm">
+    <h1 class="text-[34px] font-bold italic">Notifications</h1>
+    <% if @notifications.present? %>
+      <div class="flex flex-col items-start flex-1 w-full">
+        <div class="flex flex-col w-full gap-4 mt-6">
+          <%= render partial: "notification", collection: @notifications, as: :notification %>
+        </div>
+
+        <% if @pagy.pages > 1 %>
+          <div class="flex justify-center w-full mt-8">
+            <%== pagy_nav(@pagy) %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="flex flex-col items-start w-full">
+        <div class="flex flex-col items-center w-full mt-10 mb-10">
+          <%= link_to(
+            'Notification settings', notification_settings_path,
+            class: "text-red font-bold  text-center rounded-sm underline italic text-lg"
+          ) %>
+        </div>
+        <%= button_to(
+          "CLEAR ALL", read_notifications_path,
+          class: "w-full bg-white rounded-[10px] p-4 text-lg font-black text-red cursor-pointer italic items-center text-center",
+          form_class: "w-full"
+        ) %>
+      </div>
+    <% else %>
+      <div class="flex flex-col items-center justify-center w-full h-full gap-6">
+        <div class="flex items-center justify-center w-32 h-32 bg-white rounded-full">
+          <%= inline_svg_tag "icons/bell.svg", size: "56", class: "fill-gray-400" %>
+        </div>
+        <p class="text-base font-bold text-center">You don’t have <br> any notifications</p>
+        <%= link_to(
+          'Notification settings', notification_settings_path,
+          class: "text-red font-bold  text-center rounded-sm underline italic text-lg"
+        ) %>
+      </div>
+    <% end %>
+  </div>
+</div>

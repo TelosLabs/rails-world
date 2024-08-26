@@ -10,9 +10,10 @@ on:
 
 env:
   CI: true
+  APP_HOST: http://localhost
+  REGISTRATION_ENABLED: true
   RSPEC_RETRY_RETRY_COUNT: 3
   RAILS_ENV: test
-  RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
 jobs:
   linters:

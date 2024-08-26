@@ -8,8 +8,8 @@ class CreateProfiles < ActiveRecord::Migration[7.1]
       t.string :github_url
       t.string :linkedin_url
       t.string :twitter_url
-      t.boolean :mail_notifications, default: true, null: false
-      t.boolean :in_app_notifications, default: true, null: false
+      t.boolean :mail_notifications, default: false, null: false
+      t.boolean :web_push_notifications, default: false, null: false
       t.boolean :is_public, default: false, null: false
       t.references :profileable, polymorphic: true, null: false
 

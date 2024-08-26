@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+@import 'actiontext.css';
+
+@layer base {
+  ul, ol {
+    @apply block ml-4
+  }
+
+  ul {
+    @apply list-disc
+  }
+
+  ol {
+    @apply list-decimal
+  }
+}
+
+/* Form errors */
 div.field_with_errors > label {
   @apply mb-2 italic font-bold text-red;
 }
@@ -9,6 +26,35 @@ div.field_with_errors > label {
 div.field_with_errors > input {
   @apply w-full bg-transparent border-2 border-red
   rounded-md text-white placeholder:text-white/50
-  focus:bg-white focus:text-black focus:placeholder-gray
+  focus:bg-white focus:text-black focus:placeholder-grey-300
   focus:border-white focus:ring-white mb-2
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Pagy */
+.pagy {
+  @apply inline-flex gap-x-2;
+
+  a,
+  .current {
+    @apply inline-flex items-center px-2.5 py-1 text-lg font-medium rounded-md;
+  }
+
+  .current {
+    @apply text-white bg-red;
+  }
+
+  .gap {
+    @apply px-0;
+  }
 }

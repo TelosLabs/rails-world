@@ -1,0 +1,12 @@
+services:
+  app:
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - ".:/rails"
+    environment:
+      - RAILS_ENV=development
+    tty: true # Needed to use binding.pry
+    stdin_open: true # Needed to use binding.pry
+    command: bundle exec rails server -b 0.0.0.0

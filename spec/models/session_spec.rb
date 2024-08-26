@@ -6,6 +6,7 @@
 #  description    :string
 #  ends_at        :datetime         not null
 #  sent_reminders :json
+#  slug           :string
 #  starts_at      :datetime         not null
 #  title          :string           not null
 #  created_at     :datetime         not null
@@ -17,11 +18,12 @@
 #
 #  index_sessions_on_conference_id  (conference_id)
 #  index_sessions_on_location_id    (location_id)
+#  index_sessions_on_slug           (slug) UNIQUE
 #
 require "rails_helper"
 
 RSpec.describe Session, type: :model do
-  let(:session) { build_stubbed(:session, :with_conference, :with_location) }
+  let(:session) { build_stubbed(:session) }
 
   it "has a valid factory" do
     expect(session).to be_valid

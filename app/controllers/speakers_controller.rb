@@ -1,6 +1,6 @@
 class SpeakersController < ApplicationController
   def show
-    @speaker = Speaker.find(params[:id])
+    @speaker = current_conference.speakers.friendly.find(params[:id])
     @profile = @speaker.profile.presence || Profile.new
     @sessions = @speaker.sessions
   end

@@ -1,22 +1,73 @@
-<div class="sticky bottom-0 flex flex-row items-center justify-center gap-8 bg-white py-1 border-t border-b border-gray-7 text-[11px]">
-  <a href="<%= sessions_path %>" class="<%= nav_text_class_for [sessions_path] %> flex flex-col items-center">
-    <%= inline_svg_tag "calendar.svg", class: nav_icon_class_for([sessions_path]) %>
-    Agenda
-  </a>
-  <a href="<%= root_path %>" class="<%= nav_text_class_for [root_path] %> flex flex-col items-center justify-center">
-    <%= inline_svg_tag "clock.svg", class: nav_icon_class_for([root_path]) %>
-    My Schedule
-  </a>
-  <a href="<%= profile_path(current_profile&.uuid) %>" class="<%= nav_text_class_for [profile_path(current_profile&.uuid), edit_profile_path(current_profile&.uuid)] %> flex flex-col items-center justify-center">
-    <%= inline_svg_tag "avatar_no_fill.svg", class: nav_icon_class_for([profile_path(current_profile&.uuid), edit_profile_path(current_profile&.uuid)]) %>
-    Profile
-  </a>
-  <a href="<%= root_path %>" class="<%= nav_text_class_for [root_path] %> flex flex-col items-center justify-center">
-    <%= inline_svg_tag "bell.svg", class: nav_icon_class_for([root_path]) %>
-    Notifications
-  </a>
-  <a href="<%= about_path %>" class="<%= nav_text_class_for [about_path] %> flex flex-col items-center justify-center">
-    <%= inline_svg_tag "info.svg", class: nav_icon_class_for([about_path]) %>
-    About
-  </a>
+<div class="sticky bottom-0 flex flex-row items-center justify-center pt-2 pb-1 bg-white border-t border-b border-grey-200">
+  <div class="flex flex-row items-center justify-around w-full max-w-screen-sm text-[11px]">
+    <%= link_to(
+      sessions_path(
+        starts_at: current_conference.sessions.upcoming_today.first&.starts_at&.to_date
+      ),
+      class: [
+        nav_text_class_for([sessions_path, root_path]),
+        "flex flex-col items-center justify-center"
+      ]
+    ) do %>
+      <%= inline_svg_tag "icons/calendar.svg", class: nav_icon_class_for([sessions_path, root_path]) %>
+      Agenda
+    <% end %>
+
+    <%= link_to(
+      schedule_path(
+        starts_at: current_user.sessions.upcoming_today.first&.starts_at&.to_date,
+        anchor: session_anchor(current_user.sessions.upcoming_today.first)
+      ),
+      class: [
+        nav_text_class_for([schedule_path]),
+        "flex flex-col items-center justify-center"
+      ]
+    ) do %>
+      <%= inline_svg_tag "icons/clock.svg", class: nav_icon_class_for([schedule_path]) %>
+      My Schedule
+    <% end %>
+
+    <%= link_to(
+      profile_path(current_profile&.uuid),
+      class: [
+        nav_text_class_for([profile_path(current_profile&.uuid), edit_profile_path(current_profile&.uuid)]),
+        "flex flex-col items-center justify-center"
+      ]
+    ) do %>
+      <%= inline_svg_tag(
+        "icons/avatar_no_fill.svg",
+        class: nav_icon_class_for([profile_path(current_profile&.uuid), edit_profile_path(current_profile&.uuid)])
+      ) %>
+      Profile
+    <% end %>
+
+    <%= link_to(
+      notifications_path,
+      class: [
+        nav_text_class_for([notifications_path, notification_settings_path]),
+        "relative flex flex-col items-center justify-center"
+      ]
+    ) do %>
+      <%= inline_svg_tag "icons/bell.svg", class: nav_icon_class_for([notifications_path, notification_settings_path]) %>
+      <% if unread_notifications.present? %>
+        <div class="absolute -top-0.5 right-0 w-[18px] h-[18px] rounded-full bg-red flex justify-center items-center">
+          <span class="text-[11px] text-white font-bold px-1">
+            <%= unread_notifications.count < 10 ? unread_notifications.count : "+9" %>
+          </span>
+        </div>
+      <% end %>
+      Notifications
+    <% end %>
+
+    <%= link_to(
+      about_path,
+      class: [
+        nav_text_class_for([about_path]),
+        "flex flex-col items-center justify-center"
+      ]
+    ) do %>
+      <%= inline_svg_tag "icons/info_circle.svg", class: nav_icon_class_for([about_path]) %>
+      About
+    <% end %>
+  </div>
 </div>

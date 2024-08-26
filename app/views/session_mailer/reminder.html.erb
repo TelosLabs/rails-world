@@ -1,2 +1,70 @@
-<h1><%= params[:notification].title %></h1>
-<p><%= params[:record].title %></p>
+<div class="u-w-full">
+  <div class="container">
+    <h1 class="title">Your bookmarked session is <%= @notification.title.downcase %></h1>
+    <div class="c-event-card">
+      <div class="c-event-card__title">
+        <%= @session.title %>
+      </div>
+
+      <% if @speakers.present? %>
+        <% @speakers.each do |speaker| %>
+          <div class="c-event-card__speaker">
+            <div class="c-event-card__speaker-img">
+              <%= speaker.name.split.take(2).map { |word| word[0].upcase }.join %>
+            </div>
+            <div>
+              <div class="c-event-card__speaker-title"><%= speaker.name %></div>
+              <div class="c-event-card__speaker-subtitle"><%= speaker.job_title %></div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+
+      <% if @session.tags.present? %>
+        <div class="c-event-card__tags">
+          <% @session.tags.each do |tag| %>
+            <span class="c-event-card__tags-tag"><%= tag.name %></span>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if @session.description.present? %>
+        <div class="c-event-card__description">
+          <%= @session.description %>
+        </div>
+      <% end %>
+
+      <div class="c-event-card__time">
+        <%# <div class="c-event-card__time-icon">
+        </div> %>
+        <div class="c-event-card__time-item">
+          <%= @session.starts_at.strftime("%A, %b %d") %>
+        </div>
+      </div>
+
+      <div class="c-event-card__time">
+        <%# <div class="c-event-card__time-icon">
+        </div> %>
+        <div class="c-event-card__time-item">
+          <%= @session.starts_at.strftime("%H:%M") %> - <%= @session.ends_at.strftime("%H:%M") %>
+        </div>
+      </div>
+
+      <% if @session.location.present? %>
+        <div class="c-event-card__time">
+          <%# <div class="c-event-card__time-icon">
+          </div> %>
+          <div class="c-event-card__time-item">
+            <%= @session.location.name %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="c-footer">
+    <span class="u-text-center">RAILS WORLD 2024</span>
+  </div>
+  <p class="c-unsubscribe-notifications">
+    You are receiving this email because your notification settings are configured to receive communications. If you wish to stop receiving these emails, you can <a href="<%= notification_settings_url %>" class="c-unsubscribe-notifications__link" style="color: #CB0C1C">edit your settings</a>.
+  </p>
+</div>
