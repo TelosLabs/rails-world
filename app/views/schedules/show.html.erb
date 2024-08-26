@@ -18,7 +18,7 @@
             <div class="pt-2 pb-4 text-2xl font-bold text-grey-800 text-nowrap">
               <a id="<%= session_anchor(sessions.first) %>">
                 <% if current_day != previous_day && params[:starts_at].blank? %>
-                  <%= starts_at.strftime("%b %d - %H:%M") %>
+                  <%= starts_at.strftime("%A, %d - %H:%M") %>
                 <% else %>
                   <%= starts_at.strftime("%H:%M") %>
                 <% end %>
