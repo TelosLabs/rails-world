@@ -12,4 +12,5 @@ extend-exclude = [
   "/lib/assets/**",
   "*.css",
   "*.pdf",
+  "*.cjs",
 ]
