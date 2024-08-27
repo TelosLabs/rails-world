@@ -29,6 +29,12 @@ en:
         notice: "Session was added to My Schedule"
       remove_user:
         notice: "Session was removed from My Schedule"
+  mailers:
+    session_mailer:
+      reminder:
+        subject:
+          with_time: "Your bookmarked session is starting in %{time_before_session}."
+          without_time: "Your bookmarked session is starting soon."
   views:
     status_filters:
       past: "Past"

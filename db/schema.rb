@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_22_233237) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_26_205135) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -109,7 +109,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_22_233237) do
 
   create_table "sessions", force: :cascade do |t|
     t.string "title", null: false
-    t.string "description"
     t.datetime "starts_at", null: false
     t.datetime "ends_at", null: false
     t.json "sent_reminders", default: []
