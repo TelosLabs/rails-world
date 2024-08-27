@@ -7,6 +7,6 @@ class SessionMailer < ApplicationMailer
     @speakers = @session.speakers
     @notification = params[:notification]
 
-    mail(to: "andres.alvidrez@teloslabs.co", subject: @notification&.subject)
+    mail(to: @recipient.email, subject: default_i18n_subject)
   end
 end
