@@ -1,0 +1,17 @@
+<div id="<%= dom_id(session, "bookmark") %>">
+  <% if current_user.sessions.pluck(:id).include?(session.id) %>
+    <%= button_to(
+      session_attendee_path(session_id: session.id, params: request.params[:starts_at]),
+      method: :delete, form_class: "flex items-center ml-8"
+    ) do %>
+      <%= inline_svg_tag("icons/bookmark-full.svg") %>
+    <% end %>
+  <% else %>
+    <%= button_to(
+      session_attendee_path(session_id: session.id, params: request.params[:starts_at]),
+      form_class: "flex items-center ml-8"
+    ) do %>
+      <%= inline_svg_tag("icons/bookmark-outline.svg") %>
+    <% end %>
+  <% end %>
+</div>

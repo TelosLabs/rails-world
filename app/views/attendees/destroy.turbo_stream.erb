@@ -1,0 +1,21 @@
+<%= turbo_stream.replace dom_id(@session, "bookmark") do %>
+  <%= render(
+      partial: 'sessions/bookmark',
+      locals: {
+        session: @session,
+        user_is_an_attendee: @user_session_ids.include?(@session.id)
+      }
+    ) %>
+<% end %>
+
+<%= turbo_stream.remove dom_id(@session, "schedule")%>
+
+<%= turbo_stream.append "flash_message" do %>
+  <%= render(
+    partial: "layouts/flash_message",
+    locals:  {
+      message: I18n.t("controllers.attendees.remove_user.notice")
+    }
+  )%>
+<% end %>
+<!--<turbo-stream action="refresh"></turbo-stream>-->
