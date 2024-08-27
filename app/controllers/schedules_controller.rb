@@ -4,6 +4,8 @@ class SchedulesController < ApplicationController
       relation: current_user.sessions.where(conference: current_conference),
       params: filter_params
     ).call.includes(:attendees, :location, :speakers, :tags).order(:starts_at)
+
+    @grouped_sessions = @sessions.group_by(&:starts_at)
   end
 
   private
