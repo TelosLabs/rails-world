@@ -3,7 +3,6 @@
 # Table name: sessions
 #
 #  id             :integer          not null, primary key
-#  description    :string
 #  ends_at        :datetime         not null
 #  sent_reminders :json
 #  slug           :string
@@ -25,6 +24,8 @@ class Session < ApplicationRecord
 
   friendly_id :title, use: :slugged
 
+  has_rich_text :description
+
   belongs_to :location
   belongs_to :conference
 
@@ -34,7 +35,6 @@ class Session < ApplicationRecord
 
   has_many :noticed_events, as: :record, dependent: :destroy, class_name: "Noticed::Event"
   has_many :notifications, through: :noticed_events, class_name: "Noticed::Notification"
-  has_rich_text :description
 
   validates :title, presence: true
   validates :slug, uniqueness: true
