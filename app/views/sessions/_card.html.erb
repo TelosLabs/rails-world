@@ -14,7 +14,7 @@
       <% if user_is_an_attendee %>
         <%= button_to(
           session_attendee_path(session_id: session.id, params: request.params[:starts_at], anchor: session_anchor(session)),
-          method: :delete, form_class: "flex items-center"
+          method: :delete, form_class: "flex items-center", data: { turbo_action: 'replace' }
         ) do %>
           <div class="p-2">
             <%= inline_svg_tag("icons/bookmark-full.svg") %>
@@ -23,7 +23,7 @@
       <% else %>
         <%= button_to(
           session_attendee_path(session_id: session.id, params: request.params[:starts_at], anchor: session_anchor(session)),
-          form_class: "flex items-center"
+          form_class: "flex items-center", data: { turbo_action: 'replace' }
         ) do %>
           <div class="p-2">
             <%= inline_svg_tag("icons/bookmark-outline.svg", class: "") %>
