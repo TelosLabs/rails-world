@@ -1,17 +1,21 @@
 <div class="u-w-full">
   <div class="container">
-    <h1 class="title">Your bookmarked session is <%= @notification.title.downcase %></h1>
+    <h1 class="title"><%= @notification&.subject %></h1>
     <div class="c-event-card">
       <div class="c-event-card__title">
-        <%= @session.title %>
+        <%= link_to @session.title, sessions_url, style: "color: #CB0C1C; text-decoration: none;" %>
       </div>
 
       <% if @speakers.present? %>
         <% @speakers.each do |speaker| %>
           <div class="c-event-card__speaker">
-            <div class="c-event-card__speaker-img">
-              <%= speaker.name.split.take(2).map { |word| word[0].upcase }.join %>
-            </div>
+            <% if speaker.image&.attached? %>
+                <%= image_tag speaker.image, class: "c-event-card__speaker-img" %>
+            <% else %>
+              <div class="c-event-card__speaker-img">
+                <%= speaker.name.split.take(2).map { |word| word[0].upcase }.join %>
+              </div>
+            <% end %>
             <div>
               <div class="c-event-card__speaker-title"><%= speaker.name %></div>
               <div class="c-event-card__speaker-subtitle"><%= speaker.job_title %></div>
@@ -35,25 +39,20 @@
       <% end %>
 
       <div class="c-event-card__time">
-        <%# <div class="c-event-card__time-icon">
-        </div> %>
-        <div class="c-event-card__time-item">
-          <%= @session.starts_at.strftime("%A, %b %d") %>
+        <div class="c-event-card__time-icon">
+          <%= image_tag url_for("icons/calendar.png") %>
         </div>
-      </div>
-
-      <div class="c-event-card__time">
-        <%# <div class="c-event-card__time-icon">
-        </div> %>
         <div class="c-event-card__time-item">
-          <%= @session.starts_at.strftime("%H:%M") %> - <%= @session.ends_at.strftime("%H:%M") %>
+          <%= @session.starts_at&.strftime("%b %d") %> -
+          <%= @session.starts_at&.strftime("%H:%M") %> to <%= @session.ends_at&.strftime("%H:%M") %>
         </div>
       </div>
 
       <% if @session.location.present? %>
         <div class="c-event-card__time">
-          <%# <div class="c-event-card__time-icon">
-          </div> %>
+          <div class="c-event-card__time-icon">
+            <%= image_tag url_for("icons/location.png") %>
+          </div>
           <div class="c-event-card__time-item">
             <%= @session.location.name %>
           </div>
@@ -62,7 +61,9 @@
     </div>
   </div>
   <div class="c-footer">
-    <span class="u-text-center">RAILS WORLD 2024</span>
+    <span class="u-text-center">
+      <%= image_tag url_for("main_logo.png"), class: "c-footer-img" %>
+    </span>
   </div>
   <p class="c-unsubscribe-notifications">
     You are receiving this email because your notification settings are configured to receive communications. If you wish to stop receiving these emails, you can <a href="<%= notification_settings_url %>" class="c-unsubscribe-notifications__link" style="color: #CB0C1C">edit your settings</a>.
