@@ -40,7 +40,7 @@
 
       <div class="c-event-card__time">
         <div class="c-event-card__time-icon">
-          <%= image_tag url_for("icons/calendar.svg") %>
+          <%= image_tag url_for("icons/calendar.png") %>
         </div>
         <div class="c-event-card__time-item">
           <%= @session.starts_at&.strftime("%b %d") %> -
@@ -51,7 +51,7 @@
       <% if @session.location.present? %>
         <div class="c-event-card__time">
           <div class="c-event-card__time-icon">
-            <%= image_tag url_for("icons/location.svg") %>
+            <%= image_tag url_for("icons/location.png") %>
           </div>
           <div class="c-event-card__time-item">
             <%= @session.location.name %>
@@ -62,7 +62,7 @@
   </div>
   <div class="c-footer">
     <span class="u-text-center">
-      <%= image_tag url_for("main_logo.svg"), class: "c-footer-img" %>
+      <%= image_tag url_for("main_logo.png"), class: "c-footer-img" %>
     </span>
   </div>
   <p class="c-unsubscribe-notifications">
