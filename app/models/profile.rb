@@ -35,6 +35,7 @@ class Profile < ApplicationRecord
   belongs_to :profileable, polymorphic: true
 
   validates :uuid, uniqueness: true, presence: true
+  validates :slug, uniqueness: true
   validates :github_url, url: {allow_blank: true, schemes: ["https"]}
   validates :linkedin_url, url: {allow_blank: true, schemes: ["https"]}
   validates :twitter_url, url: {allow_blank: true, schemes: ["https"]}
