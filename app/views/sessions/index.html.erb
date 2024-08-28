@@ -12,18 +12,23 @@
 
     <div class="flex flex-col w-full h-full mb-[12rem]">
       <% if @sessions.present? %>
+        <% previous_date = nil %>
         <% @sessions.group_by(&:starts_at).each do |starts_at, sessions| %>
           <%= content_tag(
                 :div,
                 class: [
                   "sticky z-10 flex items-center mb-5 bg-grey-50",
                   "top-[273px]": session_filter_params.present?,
-                  "top-[241px]": session_filter_params.blank?
+                  "top-[240px]": session_filter_params.blank?
                 ]
               ) do %>
-            <div class="pt-2 pb-4 text-2xl font-bold text-grey-800">
+            <div class="pt-2 pb-4 text-2xl font-bold text-grey-800 text-nowrap">
               <a id="<%= session_anchor(sessions.first) %>" class="scroll-mt-[240px]">
-                <%= starts_at.strftime("%H:%M") %>
+                <% if starts_at.to_date != previous_date && params[:starts_at].blank? %>
+                  <%= starts_at.strftime("%A, %d - %H:%M") %>
+                <% else %>
+                  <%= starts_at.strftime("%H:%M") %>
+                <% end %>
               </a>
             </div>
             <div class="w-full mx-2 mb-1 border-b"></div>
@@ -38,6 +43,7 @@
                   }
                 ) %>
           <% end %>
+          <% previous_date = starts_at.to_date %>
         <% end %>
       <% elsif params[:starts_at].present? || session_filter_params.present? %>
         <div class="flex flex-col items-center justify-center w-full h-full">
