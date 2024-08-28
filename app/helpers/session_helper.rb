@@ -4,7 +4,7 @@ module SessionHelper
     when "live"
       "bg-green-500"
     when "past"
-      "bg-blue-teal-light"
+      "bg-bluegray-200"
     when "starting_soon"
       "bg-yellow"
     end

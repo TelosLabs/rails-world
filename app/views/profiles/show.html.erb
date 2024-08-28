@@ -22,7 +22,7 @@
         </div>
       </div>
       <% if @profile.bio.present? %>
-        <p class="mt-6 text-base font-medium"><%= @profile.bio %></p>
+        <p class="mt-6 text-base"><%= @profile.bio %></p>
       <% end %>
       <div class="flex flex-row items-center justify-center w-full gap-4">
         <%= link_to(
@@ -64,7 +64,12 @@
 
   <% if allowed_to?(:edit?, @profile, with: ProfilePolicy) %>
     <div class="flex flex-col items-center w-full gap-6 p-4">
-      <%= render inline: @profile.svg_qr_code(module_size: 4) if @profile.is_public? %>
+      <% if @profile.is_public? %>
+        <div class="p-6 bg-white rounded-2xl">
+          <%= render inline: @profile.svg_qr_code(module_size: 4) %>
+        </div>
+      <% end %>
+
       <%= link_to(
         'Edit Profile', edit_profile_path(@profile.uuid),
         class: "text-red font-bold rounded-sm underline italic text-lg"
@@ -72,7 +77,7 @@
       <%= button_to(
         "Log out", user_session_path, method: :delete,
         form_class: "w-full max-w-screen-sm px-4",
-        class: "w-full bg-red py-4 text-white font-black italic rounded-[10px] uppercase mb-6"
+        class: "w-full bg-white py-4 text-red font-black italic rounded-[10px] uppercase mb-6"
       ) %>
     </div>
   <% end %>

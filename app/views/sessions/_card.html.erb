@@ -6,28 +6,30 @@
 
     <div class="flex flex-row justify-between w-full mb-2 grow">
       <a href="<%= session_path(session) %>" class="w-full group">
-        <h3 class="inline-block text-xl italic font-bold text-red border-b-2 border-white group-hover:border-red group-focus:border-red">
+        <h3 class="inline-block text-xl italic font-bold border-b-2 border-white text-red group-hover:border-red group-focus:border-red">
           <%= session.title %>
         </h3>
       </a>
 
-      <% if user_is_an_attendee %>
-        <%= button_to(
-          session_attendee_path(session_id: session.id, params: request.params[:starts_at], anchor: session_anchor(session)),
-          method: :delete, form_class: "flex items-center", data: { turbo_action: 'replace' }
-        ) do %>
-          <div class="p-2">
-            <%= inline_svg_tag("icons/bookmark-full.svg") %>
-          </div>
-        <% end %>
-      <% else %>
-        <%= button_to(
-          session_attendee_path(session_id: session.id, params: request.params[:starts_at], anchor: session_anchor(session)),
-          form_class: "flex items-center", data: { turbo_action: 'replace' }
-        ) do %>
-          <div class="p-2">
-            <%= inline_svg_tag("icons/bookmark-outline.svg", class: "") %>
-          </div>
+      <% unless session.past? %>
+        <% if user_is_an_attendee %>
+          <%= button_to(
+            session_attendee_path(session_id: session.id, params: request.params[:starts_at], anchor: session_anchor(session)),
+            method: :delete, form_class: "flex items-center", data: { turbo_action: 'replace' }
+          ) do %>
+            <div class="p-2">
+              <%= inline_svg_tag("icons/bookmark-full.svg") %>
+            </div>
+          <% end %>
+        <% else %>
+          <%= button_to(
+            session_attendee_path(session_id: session.id, params: request.params[:starts_at], anchor: session_anchor(session)),
+            form_class: "flex items-center", data: { turbo_action: 'replace' }
+          ) do %>
+            <div class="p-2">
+              <%= inline_svg_tag("icons/bookmark-outline.svg", class: "") %>
+            </div>
+          <% end %>
         <% end %>
       <% end %>
     </div>
@@ -58,11 +60,11 @@
                 "max-w-[200px]": session.speakers.count > 1
               ]
             ) do %>
-              <h2 class="italic font-black text-sm group-hover:text-red group-focus:text-red"><%= speaker.name %></h2>
-              <p class="text-sm text-gray-400 font-normal"><%= speaker.job_title %></p>
+              <h2 class="text-sm italic font-black group-hover:text-red group-focus:text-red"><%= speaker.name %></h2>
+              <p class="text-sm font-normal text-gray-400"><%= speaker.job_title %></p>
             <% end %>
           <% end %>
-          <div class="border-l my-3 last:hidden"></div>
+          <div class="my-3 border-l last:hidden"></div>
         <% end %>
       </div>
     <% end %>
