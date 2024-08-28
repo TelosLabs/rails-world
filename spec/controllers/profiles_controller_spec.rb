@@ -14,8 +14,7 @@ RSpec.describe ProfilesController, type: :controller do
   describe "GET #show" do
     context "when the profile is yourself" do
       it "returns a success response" do
-        # TODO: Change to use the friendly_id once defoult friendly id is implemented
-        get :show, params: {id: profile.friendly_id || profile.id}
+        get :show, params: {id: profile.friendly_id}
         expect(response).to have_http_status(:success)
       end
     end
@@ -26,16 +25,14 @@ RSpec.describe ProfilesController, type: :controller do
       end
 
       it "returns a success response" do
-        # TODO: Change to use the friendly_id once defoult friendly id is implemented
-        get :show, params: {id: other_profile.friendly_id || other_profile.id}
+        get :show, params: {id: other_profile.friendly_id}
         expect(response).to have_http_status(:success)
       end
     end
 
     context "when the profile is not public" do
       it "redirects to the root path" do
-        # TODO: Change to use the friendly_id once defoult friendly id is implemented
-        get :show, params: {id: other_profile.friendly_id || other_profile.id}
+        get :show, params: {id: other_profile.friendly_id}
         expect(response).to redirect_to(root_path)
       end
     end

@@ -11,6 +11,14 @@ class Avo::Resources::Profile < Avo::BaseResource
     end
   }
 
+  self.find_record_method = -> {
+    if id.is_a?(Array)
+      query.where(slug: id)
+    else
+      query.friendly.find id
+    end
+  }
+
   def fields
     field :id, as: :id
     field :uuid, as: :text, readonly: true, only_on: [:show]
