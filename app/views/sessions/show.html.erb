@@ -7,19 +7,22 @@
 
       <div class="flex flex-row justify-between w-full mb-2 grow">
         <h1 class="text-2xl italic font-bold text-red"><%= @session.title %></h1>
-        <% if current_user.sessions.pluck(:id).include?(@session.id) %>
-          <%= button_to(
-            session_attendee_path(session_id: @session.id, params: request.params[:starts_at]),
-            method: :delete, form_class: "flex items-center ml-8"
-          ) do %>
-            <%= inline_svg_tag("icons/bookmark-full.svg") %>
-          <% end %>
-        <% else %>
-          <%= button_to(
-            session_attendee_path(session_id: @session.id, params: request.params[:starts_at]),
-            form_class: "flex items-center ml-8"
-          ) do %>
-            <%= inline_svg_tag("icons/bookmark-outline.svg") %>
+
+        <% unless @session.past? %>
+          <% if current_user.sessions.pluck(:id).include?(@session.id) %>
+            <%= button_to(
+              session_attendee_path(session_id: @session.id, params: request.params[:starts_at]),
+              method: :delete, form_class: "flex items-center ml-8"
+            ) do %>
+              <%= inline_svg_tag("icons/bookmark-full.svg") %>
+            <% end %>
+          <% else %>
+            <%= button_to(
+              session_attendee_path(session_id: @session.id, params: request.params[:starts_at]),
+              form_class: "flex items-center ml-8"
+            ) do %>
+              <%= inline_svg_tag("icons/bookmark-outline.svg") %>
+            <% end %>
           <% end %>
         <% end %>
       </div>

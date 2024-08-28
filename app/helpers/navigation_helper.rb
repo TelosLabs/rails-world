@@ -20,11 +20,6 @@ module NavigationHelper
       !current_page?(coming_soon_path)
   end
 
-  # Todo: A better approach would be to support authenticated root and unauthenticated root in routes.rb
-  def homepage_link
-    user_signed_in? ? root_path : new_user_session_path
-  end
-
   def title(title)
     content_for :title, title
   end

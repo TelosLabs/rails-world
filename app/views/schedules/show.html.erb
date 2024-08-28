@@ -1,25 +1,39 @@
 <%= title "My Schedule - Rails World 2024" %>
 
-<div class="flex flex-col items-center h-full bg-gray-light">
-  <div class="flex flex-col items-center w-full h-full max-w-screen-md px-5 py-10">
-    <div class="flex w-full mb-4">
-      <h1 class="text-4xl italic font-black text-gray-800">My Schedule</h1>
+<div class="flex flex-col items-center h-full bg-grey-50">
+  <div class="flex flex-col items-center w-full h-full max-w-screen-md px-5">
+    <div class="sticky top-[79px] z-20 flex flex-col items-center w-full pt-10 bg-grey-50">
+      <div class="flex w-full mb-4">
+        <h1 class="text-4xl italic font-black text-gray-800">My Schedule</h1>
+      </div>
+
+      <%= render partial: 'sessions/filters', locals: { resource: :schedule } %>
     </div>
 
-    <%= render partial: 'sessions/filters', locals: { resource: :schedule } %>
-
-    <div class="flex flex-col w-full h-full">
+    <div class="flex flex-col w-full h-full mb-[12rem]">
       <% if @sessions.present? %>
+        <% previous_date = nil %>
         <% @sessions.group_by(&:starts_at).each do |starts_at, sessions| %>
-          <div class="flex items-center">
-            <div class="pt-2 pb-4 text-2xl font-bold text-grey-800">
-              <a id="<%= session_anchor(sessions.first) %>">
-                <%= starts_at.strftime("%H:%M") %>
+          <%= content_tag(
+                :div,
+                class: [
+                  "sticky z-10 flex items-center mb-5 bg-grey-50",
+                  "top-[273px]": session_filter_params.present?,
+                  "top-[240px]": session_filter_params.blank?
+                ]
+              ) do %>
+            <div class="pt-2 pb-4 text-2xl font-bold text-grey-800 text-nowrap">
+              <a id="<%= session_anchor(sessions.first) %>" class="scroll-mt-[240px]">
+                <% if starts_at.to_date != previous_date && params[:starts_at].blank? %>
+                  <%= starts_at.strftime("%A, %d - %H:%M") %>
+                <% else %>
+                  <%= starts_at.strftime("%H:%M") %>
+                <% end %>
               </a>
             </div>
             <div class="w-full mx-2 mb-1 border-b"></div>
             <div class="mb-1 text-gray-400 text-nowrap"><%= pluralize(sessions.count, "Session") %></div>
-          </div>
+          <% end %>
           <% sessions.each do |session| %>
             <%= render(
                   partial: 'sessions/card',
@@ -29,6 +43,7 @@
                   }
                 ) %>
           <% end %>
+          <% previous_date = starts_at.to_date %>
         <% end %>
       <% elsif params[:starts_at].present? || session_filter_params.present? %>
         <div class="flex flex-col items-center justify-center w-full h-full">
