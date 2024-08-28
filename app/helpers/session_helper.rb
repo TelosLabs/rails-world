@@ -21,7 +21,7 @@ module SessionHelper
   end
 
   def current_day_anchor(session_date)
-    return "" if session_date != Date.current
+    return "" if session_date != Date.current || current_agenda_session.blank?
 
     "#" + session_anchor(current_agenda_session)
   end
