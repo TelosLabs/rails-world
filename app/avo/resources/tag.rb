@@ -10,7 +10,7 @@ class Avo::Resources::Tag < Avo::BaseResource
 
   def fields
     field :id, as: :id
-    field :name, as: :text, sortable: true
+    field :name, as: :text, sortable: true, link_to_record: true
     field :sessions, as: :has_and_belongs_to_many
   end
 end
