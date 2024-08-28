@@ -1,7 +1,18 @@
 <%# locals: (resource:) %>
 
-<div class="flex justify-between w-full mb-6" data-controller="preserve-scroll">
+<div class="flex justify-between w-full mb-4" data-controller="preserve-scroll">
   <div id="<%= resource %>_filters" class="flex items-center gap-2 overflow-x-scroll no-scrollbar" data-preserve-scroll>
+    <% current_conference.dates.each do |session_date| %>
+      <%= link_to(
+        session_date.strftime("%a, %d"),
+        url_for([resource, session_filter_params.to_h.merge(starts_at: session_date)]) + current_day_anchor(session_date),
+        class: [
+          "flex min-w-fit items-center justify-center px-4 py-2 font-medium rounded-full",
+          "bg-red text-white": params[:starts_at] == session_date.to_s,
+          "bg-white text-red hover:bg-[#FAE7E8] focus:bg-[#FAE7E8]": params[:starts_at] != session_date.to_s
+        ]
+      ) %>
+    <% end %>
     <%= link_to(
       'All dates',
       url_for([resource, session_filter_params.to_h]),
@@ -11,17 +22,6 @@
         "bg-white text-red hover:bg-[#FAE7E8] focus:bg-[#FAE7E8]": params[:starts_at].present?
       ]
     ) %>
-    <% current_conference.session_dates.each do |session_date| %>
-      <%= link_to(
-        session_date.strftime("%a, %d"),
-        url_for([resource, session_filter_params.to_h.merge(starts_at: session_date)]),
-        class: [
-          "flex min-w-fit items-center justify-center px-4 py-2 font-medium rounded-full",
-          "bg-red text-white": params[:starts_at] == session_date.to_s,
-          "bg-white text-red hover:bg-[#FAE7E8] focus:bg-[#FAE7E8]": params[:starts_at] != session_date.to_s
-        ]
-      ) %>
-    <% end %>
   </div>
 
   <%= content_tag(
@@ -79,7 +79,7 @@
 </div>
 
 <% if session_filter_params.present? %>
-  <div class="flex w-full gap-2 mb-2">
+  <div class="flex w-full gap-2">
     <div class="flex flex-wrap">
       <div class="flex items-center h-8 py-1 text-base font-bold leading-tight">Active filters:</div>
     </div>
