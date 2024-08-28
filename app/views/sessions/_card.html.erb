@@ -13,8 +13,8 @@
 
       <% if user_is_an_attendee %>
         <%= button_to(
-          session_attendee_path(session_id: session.id, params: request.params[:starts_at]),
-          method: :delete, form_class: "flex items-center"
+          session_attendee_path(session_id: session.id, params: request.params[:starts_at], anchor: session_anchor(session)),
+          method: :delete, form_class: "flex items-center", data: { turbo_action: 'replace' }
         ) do %>
           <div class="p-2">
             <%= inline_svg_tag("icons/bookmark-full.svg") %>
@@ -22,8 +22,8 @@
         <% end %>
       <% else %>
         <%= button_to(
-          session_attendee_path(session_id: session.id, params: request.params[:starts_at]),
-          form_class: "flex items-center"
+          session_attendee_path(session_id: session.id, params: request.params[:starts_at], anchor: session_anchor(session)),
+          form_class: "flex items-center", data: { turbo_action: 'replace' }
         ) do %>
           <div class="p-2">
             <%= inline_svg_tag("icons/bookmark-outline.svg", class: "") %>
@@ -43,12 +43,12 @@
             ]
           ) do %>
             <% if speaker.image&.attached? %>
-              <div class="relative flex flex-col items-center justify-center w-10 h-10 bg-center bg-no-repeat bg-cover rounded-full min-w-10 min-h-10" style="background-image: url(<%= url_for(speaker.image) %>)">
+              <div class="flex flex-col items-center justify-center w-10 h-10 bg-center bg-no-repeat bg-cover rounded-full min-w-10 min-h-10" style="background-image: url(<%= url_for(speaker.image) %>)">
               </div>
             <% else %>
               <a class="flex flex-row items-center justify-center w-8 h-8 p-2 rounded-full min-w-8 min-h-8 bg-slate-300">
                 <%= inline_svg_tag "icons/user_avatar.svg" %>
-              </div>
+              </a>
             <% end %>
 
             <%= content_tag(
