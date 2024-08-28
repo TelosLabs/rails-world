@@ -18,7 +18,7 @@ class Conference < ApplicationRecord
     %w[name]
   end
 
-  def session_dates
+  def dates
     sessions.distinct.pluck(Arel.sql("date(starts_at)")).map(&:to_date).sort
   end
 end

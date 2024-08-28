@@ -19,4 +19,24 @@ module SessionHelper
 
     session.starts_at&.strftime("%Y-%m-%d-%H-%M")
   end
+
+  def current_day_anchor(session_date)
+    return "" if session_date != Date.current
+
+    "#" + session_anchor(current_agenda_session)
+  end
+
+  def current_starts_at_filter
+    return unless current_conference
+
+    (current_conference.sessions.starts_at(Date.current).first || current_conference.sessions.order(:starts_at).first)&.starts_at&.to_date
+  end
+
+  def current_agenda_session
+    @current_agenda_session ||= current_conference&.sessions&.live_or_upcoming_today&.first
+  end
+
+  def current_schedule_session
+    @current_schedule_session ||= current_user.sessions.live_or_upcoming_today.first
+  end
 end

@@ -1,9 +1,10 @@
 <div class="pb-14">
-  <div class="fixed bottom-0 left-0 right-0 flex flex-row items-center justify-center pt-2 pb-1 bg-white border-t border-b h-14 border-grey-200">
+  <div class="fixed bottom-0 left-0 right-0 z-30 flex flex-row items-center justify-center pt-2 pb-1 bg-white border-t border-b h-14 border-grey-200">
     <div class="flex flex-row items-center justify-around w-full max-w-screen-sm text-[11px]">
       <%= link_to(
         sessions_path(
-          starts_at: current_conference.sessions.upcoming_today.first&.starts_at&.to_date
+          starts_at: current_starts_at_filter,
+          anchor: session_anchor(current_agenda_session)
         ),
         class: [
           nav_text_class_for([sessions_path, root_path]),
@@ -16,8 +17,8 @@
 
       <%= link_to(
         schedule_path(
-          starts_at: current_user.sessions.upcoming_today.first&.starts_at&.to_date,
-          anchor: session_anchor(current_user.sessions.upcoming_today.first)
+          starts_at: current_starts_at_filter,
+          anchor: session_anchor(current_user.sessions.live_or_upcoming_today.first)
         ),
         class: [
           nav_text_class_for([schedule_path]),
