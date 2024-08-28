@@ -10,8 +10,8 @@
 
     <div class="flex flex-col w-full h-full">
       <% if @sessions.present? %>
-        <% @grouped_sessions.each_with_index do |(starts_at, sessions), index| %>
-          <% previous_date = index.zero? ? nil : @grouped_sessions.keys[index - 1].to_date %>
+        <% previous_date = nil %>
+        <% @sessions.group_by(&:starts_at).each do |starts_at, sessions| %>
 
           <div class="flex items-center">
             <div class="pt-2 pb-4 text-2xl font-bold text-grey-800 text-nowrap">
@@ -35,6 +35,7 @@
                   }
                 ) %>
           <% end %>
+          <% previous_date = starts_at.to_date %>
         <% end %>
       <% elsif params[:starts_at].present? || session_filter_params.present? %>
         <div class="flex flex-col items-center justify-center w-full h-full">

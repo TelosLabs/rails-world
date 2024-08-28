@@ -5,8 +5,6 @@ class SessionsController < ApplicationController
       relation: sessions.joins(:location).distinct,
       params: filter_params
     ).call.includes(:attendees, :tags).order(:starts_at)
-
-    @grouped_sessions = @sessions.group_by(&:starts_at)
   end
 
   def show
