@@ -11,6 +11,7 @@
 #  mail_notifications     :boolean          default(FALSE), not null
 #  name                   :string
 #  profileable_type       :string           not null
+#  slug                   :string
 #  twitter_url            :string
 #  uuid                   :string           not null
 #  web_push_notifications :boolean          default(FALSE), not null
@@ -21,6 +22,7 @@
 # Indexes
 #
 #  index_profiles_on_profileable  (profileable_type,profileable_id)
+#  index_profiles_on_slug         (slug) UNIQUE
 #  index_profiles_on_uuid         (uuid) UNIQUE
 #
 require "rails_helper"

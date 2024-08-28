@@ -30,15 +30,15 @@
       <% end %>
 
       <%= link_to(
-        profile_path(current_profile&.uuid),
+        profile_path(current_profile),
         class: [
-          nav_text_class_for([profile_path(current_profile&.uuid), edit_profile_path(current_profile&.uuid)]),
+          nav_text_class_for([profile_path(current_profile), edit_profile_path(current_profile)]),
           "flex flex-col items-center justify-center"
         ]
       ) do %>
         <%= inline_svg_tag(
           "icons/avatar_no_fill.svg",
-          class: nav_icon_class_for([profile_path(current_profile&.uuid), edit_profile_path(current_profile&.uuid)])
+          class: nav_icon_class_for([profile_path(current_profile), edit_profile_path(current_profile)])
         ) %>
         Profile
       <% end %>

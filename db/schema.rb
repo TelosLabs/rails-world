@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_26_205135) do
+ActiveRecord::Schema[7.2].define(version: 2024_08_28_181250) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -103,7 +103,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_26_205135) do
     t.integer "profileable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["profileable_type", "profileable_id"], name: "index_profiles_on_profileable"
+    t.index ["slug"], name: "index_profiles_on_slug", unique: true
     t.index ["uuid"], name: "index_profiles_on_uuid", unique: true
   end
 

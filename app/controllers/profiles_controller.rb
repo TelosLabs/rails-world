@@ -14,7 +14,7 @@ class ProfilesController < ApplicationController
 
     if @profile.save
       remove_profile_image_if_requested
-      redirect_to profile_path(@profile.uuid), notice: t("controllers.profiles.update.success")
+      redirect_to profile_path(@profile), notice: t("controllers.profiles.update.success")
     else
       render :edit, status: :unprocessable_entity
     end
@@ -23,7 +23,7 @@ class ProfilesController < ApplicationController
   private
 
   def set_profile
-    @profile = Profile.find_by!(uuid: params[:uuid]).decorate
+    @profile = Profile.friendly.find(params[:id]).decorate
     authorize! @profile, with: ProfilePolicy
   end
 
