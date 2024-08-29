@@ -7,11 +7,11 @@
           anchor: session_anchor(current_agenda_session)
         ),
         class: [
-          nav_text_class_for([sessions_path, root_path]),
+          nav_text_class_for([sessions_path, root_path, "speakers"]),
           "flex flex-col items-center justify-center"
         ]
       ) do %>
-        <%= inline_svg_tag "icons/calendar.svg", class: nav_icon_class_for([sessions_path, root_path]) %>
+        <%= inline_svg_tag "icons/calendar.svg", class: nav_icon_class_for([sessions_path, root_path, "speakers"]) %>
         Agenda
       <% end %>
 
@@ -32,13 +32,13 @@
       <%= link_to(
         profile_path(current_profile&.uuid),
         class: [
-          nav_text_class_for([profile_path(current_profile&.uuid), edit_profile_path(current_profile&.uuid)]),
+          nav_text_class_for(["profiles"]),
           "flex flex-col items-center justify-center"
         ]
       ) do %>
         <%= inline_svg_tag(
           "icons/avatar_no_fill.svg",
-          class: nav_icon_class_for([profile_path(current_profile&.uuid), edit_profile_path(current_profile&.uuid)])
+          class: nav_icon_class_for(["profiles"])
         ) %>
         Profile
       <% end %>
