@@ -49,7 +49,7 @@ class User < ApplicationRecord
   private
 
   def validate_tester_user
-    if ENV["ONLY_TESTER_USERS_ALLOWED"] == "true"
+    if Feature.enabled?(:only_tester_registration)
       errors.add(:base, "Only tester users are allowed to sign up") unless email.include?("+tester")
     end
   end
