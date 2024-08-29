@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   constraints AuthenticatedConstraint.new do
     root "sessions#index"
   end
