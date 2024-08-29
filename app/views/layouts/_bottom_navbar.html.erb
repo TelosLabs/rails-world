@@ -18,7 +18,7 @@
       <%= link_to(
         schedule_path(
           starts_at: current_starts_at_filter,
-          anchor: session_anchor(current_user.sessions.live_or_upcoming_today.first)
+          anchor: session_anchor(current_user&.sessions&.live_or_upcoming_today&.first)
         ),
         class: [
           nav_text_class_for([schedule_path]),
@@ -29,19 +29,36 @@
         My Schedule
       <% end %>
 
-      <%= link_to(
-        profile_path(current_profile&.uuid),
-        class: [
-          nav_text_class_for(["/profiles"]),
-          "flex flex-col items-center justify-center"
-        ]
-      ) do %>
-        <%= inline_svg_tag(
-          "icons/avatar_no_fill.svg",
-          class: nav_icon_class_for(["/profiles"])
-        ) %>
-        Profile
+      <% if user_signed_in? %>
+        <%= link_to(
+          profile_path(current_profile&.uuid),
+          class: [
+            nav_text_class_for(["/profiles"]),
+            "flex flex-col items-center justify-center"
+          ]
+        ) do %>
+          <%= inline_svg_tag(
+            "icons/avatar_no_fill.svg",
+            class: nav_icon_class_for(["/profiles"])
+          ) %>
+          Profile
+        <% end %>
+      <% else %>
+        <%= link_to(
+          new_user_session_path,
+          class: [
+            nav_text_class_for(["/profiles"]),
+            "flex flex-col items-center justify-center"
+          ]
+        ) do %>
+          <%= inline_svg_tag(
+            "icons/avatar_no_fill.svg",
+            class: nav_icon_class_for(["/profiles"])
+          ) %>
+          Profile
+        <% end %>
       <% end %>
+
 
       <%= link_to(
         notifications_path,

@@ -22,7 +22,13 @@ module NavigationHelper
   end
 
   def show_bottom_navbar?
-    user_signed_in? &&
+    current_page?(sessions_path) ||
+      (user_signed_in? || !current_page?(unauthenticated_root_path)) &&
+      !current_page?(new_registration_path) &&
+      !current_page?(new_user_session_path) &&
+      !current_page?(new_password_reset_path) &&
+      !current_page?(edit_password_reset_path) &&
+      !current_page?(post_submit_password_reset_path) &&
       !current_page?(coming_soon_path)
   end
 

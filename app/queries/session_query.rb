@@ -9,6 +9,7 @@ class SessionQuery
   def call
     filter_by_date
     filter_by_status
+    filter_privates
 
     relation
   end
@@ -25,6 +26,12 @@ class SessionQuery
 
   def filter_by_status
     self.relation = relation.send_chain_or(status_scopes)
+  end
+
+  def filter_privates
+    return if params["show_private"].present?
+
+    self.relation = relation.publics
   end
 
   def starts_at

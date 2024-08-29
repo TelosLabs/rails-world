@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
-  root "sessions#index"
+
+  constraints AuthenticatedConstraint.new do
+    root "sessions#index"
+  end
+
+  constraints UnauthenticatedConstraint.new do
+    root "user_sessions#new", as: :unauthenticated_root
+  end
 
   get "up" => "rails/health#show", :as => :rails_health_check
   get "/service-worker.js" => "service_worker#service_worker"

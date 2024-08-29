@@ -48,7 +48,7 @@
       <%= yield %>
 
       <% if show_bottom_navbar? %>
-        <%= render partial: "layouts/bottom_navbar", locals: { unread_notifications: current_user.notifications.unread } %>
+        <%= render partial: "layouts/bottom_navbar", locals: { unread_notifications: current_user&.notifications&.unread } %>
       <% end %>
     </main>
   </body>

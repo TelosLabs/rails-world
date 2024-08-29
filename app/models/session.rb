@@ -4,6 +4,7 @@
 #
 #  id             :integer          not null, primary key
 #  ends_at        :datetime         not null
+#  public         :boolean          default(TRUE), not null
 #  sent_reminders :json
 #  slug           :string
 #  starts_at      :datetime         not null
@@ -49,6 +50,8 @@ class Session < ApplicationRecord
   scope :starting_soon, -> { where("starts_at BETWEEN ? and ?", Time.current, 1.hour.from_now) }
   scope :upcoming_today, -> { where("date(starts_at) = ? and starts_at > ?", Date.current, Time.current) }
   scope :live_or_upcoming_today, -> { live.or(upcoming_today) }
+  scope :publics, -> { where(public: true) }
+  scope :privates, -> { where(public: false) }
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[title]
@@ -66,5 +69,9 @@ class Session < ApplicationRecord
 
   def past?
     ends_at < Time.current
+  end
+
+  def private?
+    !public?
   end
 end

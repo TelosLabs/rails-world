@@ -1,6 +1,8 @@
 class SessionsController < ApplicationController
+  skip_before_action :authenticate_user!
+
   def index
-    @user_session_ids = current_user.sessions.pluck(:id)
+    @user_session_ids = current_user&.sessions&.pluck(:id)
     @sessions = SessionQuery.new(
       relation: sessions.joins(:location).distinct,
       params: filter_params
@@ -9,6 +11,7 @@ class SessionsController < ApplicationController
 
   def show
     @session = sessions.friendly.find(params[:id])
+    raise ActiveRecord::RecordNotFound if @session.private? && !user_signed_in?
   end
 
   private
@@ -18,6 +21,6 @@ class SessionsController < ApplicationController
   end
 
   def filter_params
-    params.permit(:starts_at, :live, :past, :starting_soon)
+    params.permit(:starts_at, :live, :past, :starting_soon).merge(show_private: user_signed_in?)
   end
 end
