@@ -12,7 +12,7 @@ module NavigationHelper
   def active_path?(path)
     return request.path == path if root_path == path
 
-    request.path.include?(path)
+    request.path.starts_with?(path)
   end
 
   def show_header?
