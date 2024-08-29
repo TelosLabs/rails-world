@@ -10,7 +10,7 @@ class Avo::Resources::Conference < Avo::BaseResource
 
   def fields
     field :id, as: :id
-    field :name, as: :text
+    field :name, as: :text, link_to_record: true
     field :locations, as: :has_many
     field :sessions, as: :has_many
   end
