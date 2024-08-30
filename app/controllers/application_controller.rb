@@ -12,9 +12,11 @@ class ApplicationController < ActionController::Base
   def current_profile = current_user&.profile
 
   # TODO: Must change after implementing multi-conference support
-  def current_conference = Conference.last
+  def current_conference
+    @_current_conference ||= Conference.last
+  end
 
   def vapid_public_key
-    Base64.urlsafe_decode64(ENV["VAPID_PUBLIC_KEY"]).bytes.to_json
+    @_vapid_public_key ||= Base64.urlsafe_decode64(ENV["VAPID_PUBLIC_KEY"]).bytes.to_json
   end
 end
