@@ -18,6 +18,20 @@
   }
 }
 
+/* Adjustments for iOS PWA support */
+html {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-top);
+}
+
+.pt-header-safe-area {
+  padding-top: max(env(safe-area-inset-top), 24px);
+}
+
+.pb-navbar-safe-area {
+  padding-bottom: max(env(safe-area-inset-bottom), 4px);
+}
+
 /* Form errors */
 div.field_with_errors > label {
   @apply mb-2 italic font-bold text-red;
