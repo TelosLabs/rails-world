@@ -2,7 +2,7 @@
 
 <div class="flex justify-between w-full mb-4" data-controller="preserve-scroll">
   <div id="<%= resource %>_filters" class="flex items-center gap-2 overflow-x-scroll no-scrollbar" data-preserve-scroll>
-    <% current_conference.dates.each do |session_date| %>
+    <% current_conference&.dates&.each do |session_date| %>
       <%= link_to(
         session_date.strftime("%a, %d"),
         url_for([resource, session_filter_params.to_h.merge(starts_at: session_date)]) + current_day_anchor(session_date),
