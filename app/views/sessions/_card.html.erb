@@ -11,7 +11,7 @@
         <%= session.title %>
       </h3>
     </a>
-    <%= render partial: "sessions/bookmark", locals: { session: session } %>
+    <%= render partial: "sessions/bookmark", locals: { session: session, user_is_an_attendee: } %>
   </div>
 
   <% if session.speakers.present? %>
