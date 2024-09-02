@@ -46,6 +46,7 @@ en:
       submit: "Apply"
   authorization:
     unauthorized: "You are not authorized to access this page."
+    invalid_auth_token: "Your request has expired. Please try again."
   session_mailer:
     reminder:
       subject: "This session is starting soon"
@@ -66,4 +67,3 @@ en:
           one: "1month"
           other: "%{count}months"
         x_months: "%{count}months"
-
