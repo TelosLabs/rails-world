@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   get "/offline.html" => "service_worker#offline"
   get "/manifest.json" => "service_worker#manifest"
 
+  match "/404", to: "errors#not_found", via: :all
+  match "/500", to: "errors#internal_server_error", via: :all
+
   mount MissionControl::Jobs::Engine, at: "/jobs"
   mount Avo::Engine, at: Avo.configuration.root_path
 

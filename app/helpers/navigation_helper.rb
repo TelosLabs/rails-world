@@ -23,10 +23,17 @@ module NavigationHelper
 
   def show_bottom_navbar?
     user_signed_in? &&
-      !current_page?(coming_soon_path)
+      !current_page?(coming_soon_path) &&
+      !error_page?
   end
 
   def title(title)
     content_for :title, title
+  end
+
+  private
+
+  def error_page?
+    ["/404", "/500"].include?(request.path)
   end
 end
