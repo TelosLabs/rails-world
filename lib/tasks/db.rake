@@ -1,6 +1,5 @@
 namespace :db do
   desc "Loading Rails World 2024 conference data."
-
   task :rails_world_2024_seed, [:start_date] => :environment do |t, args|
     start_date = args[:start_date].present? ? Date.parse(args[:start_date]) : Date.new(2024, 9, 26)
     month = start_date.month
@@ -24,7 +23,26 @@ namespace :db do
     shopify_port = conference.locations.find_or_create_by!(name: "Shopify Port")
 
     # Create Tags
-    # No tags for now
+    community = Tag.find_or_create_by!(name: "Community")
+    security = Tag.find_or_create_by!(name: "Security")
+    rails_8 = Tag.find_or_create_by!(name: "Rails 8")
+    productivity = Tag.find_or_create_by!(name: "Productivity")
+    tools = Tag.find_or_create_by!(name: "Tools")
+    developer_experience = Tag.find_or_create_by!(name: "Developer Experience")
+    deployment = Tag.find_or_create_by!(name: "Deployment")
+    performance = Tag.find_or_create_by!(name: "Performance")
+    storage_solutions = Tag.find_or_create_by!(name: "Storage Solutions")
+    refactoring = Tag.find_or_create_by!(name: "Refactoring")
+    database = Tag.find_or_create_by!(name: "Database")
+    hotwire = Tag.find_or_create_by!(name: "Hotwire")
+    ai = Tag.find_or_create_by!(name: "AI")
+    integrations = Tag.find_or_create_by!(name: "Integrations")
+    testing = Tag.find_or_create_by!(name: "Testing")
+    best_practices = Tag.find_or_create_by!(name: "Best Practices")
+    pwa = Tag.find_or_create_by!(name: "PWA")
+    insights = Tag.find_or_create_by!(name: "Insights")
+    background_jobs = Tag.find_or_create_by!(name: "Background Jobs")
+    rails_internals = Tag.find_or_create_by!(name: "Rails Internals")
 
     # Create Speakers
     matz_speaker = Profile.find_or_create_by!(name: "Yukihiro \"Matz\" Matsumoto") do |profile|
@@ -99,7 +117,7 @@ namespace :db do
 
     andrea_fomera_speaker = Profile.find_or_create_by!(name: "Andrea Fomera") do |profile|
       profile.job_title = "Senior Software Developer, Hire me!"
-      profile.bio = "Andrea Fomera is a Senior Software Developer at Podia who finds enjoyment in updating dependencies and crafting high quality, robust and maintainable code. She enjoys sharing what she knows through courses and screencasts."
+      profile.bio = "Andrea Fomera is a Senior Software Developer who finds enjoyment in updating dependencies and crafting high quality, robust and maintainable code. She enjoys sharing what she knows through courses and screencasts."
       profile.github_url = "https://github.com/afomera"
       profile.linkedin_url = "https://www.linkedin.com/in/afomera/"
       profile.twitter_url = "https://twitter.com/afomera"
@@ -303,7 +321,7 @@ namespace :db do
       title: "Early registration, sponsored by Shopify",
       starts_at: Time.zone.local(2024, month, registration_day, 16, 0)
     ) do |session|
-      session.description = "Registration opens for those who are already in town. Avoid the Thursday morning line, get your badge, and grab a drink with other attendees. Sponsored by Shopify, Rails World City Host. (Location: TBD, will be published in the Rails World app for attendees)"
+      session.description = "Registration opens for those who are already in town. Avoid the Thursday morning line, get your badge, and grab a drink with other attendees. Sponsored by Shopify, Rails World City Host."
       session.ends_at = Time.zone.local(2024, month, registration_day, 19, 0o0)
       session.location = tbd_location
     end
@@ -313,7 +331,7 @@ namespace :db do
       title: "WNB.rb pre-Rails World meetup, sponsored by Shopify",
       starts_at: Time.zone.local(2024, month, registration_day, 16, 0)
     ) do |session|
-      session.description = "A chance for women and non-binary Rails World attendees to meet up before Rails World. Hosted by WNB.rb and sponsored by Shopify. The location and time of this event will be shared with registered attendees via the event app."
+      session.description = "A chance for women and non-binary Rails World attendees to meet up before Rails World. Hosted by WNB.rb and sponsored by Shopify."
       session.ends_at = Time.zone.local(2024, month, registration_day, 19, 0o0)
       session.location = shopify_port
     end
@@ -337,6 +355,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, start_day, 11, 0)
       session.location = track_1
       session.speakers = [david_heinemeier_hansson_speaker]
+      session.tags = [community]
     end
 
     Session.find_or_create_by!(
@@ -348,6 +367,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, start_day, 11, 45)
       session.location = track_1
       session.speakers = [rosa_gutierrez_speaker]
+      session.tags = [background_jobs, performance, rails_8]
     end
 
     Session.find_or_create_by!(
@@ -359,6 +379,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, start_day, 11, 45)
       session.location = track_2
       session.speakers = [mostafa_abdelraouf_speaker]
+      session.tags = [database]
     end
 
     Session.find_or_create_by!(
@@ -366,7 +387,7 @@ namespace :db do
       title: "What to do in the breaks",
       starts_at: Time.zone.local(2024, month, start_day, 11, 45)
     ) do |session|
-      session.description = "<p> During lunch and breaks between sessions on both days, attendees can: </p> <ul> <li> Catch 10-15 min Community talks on the Lightning Track (sponsored by Shopify) </li> <li> Chat with our sponsors in the Sponsor Garden </li> <li> Hang out in the Shopify Lounge </li> <li> Follow a workshop (sponsored by Coder) </li> <li> Drop by the Test Double Office Hours for pair programming and career advice </li> <li> Explore the historic venue </li> <li> Take a walk in the nature park located behind the venue </li> <li> Grab an espresso or latte from the coffee carts (sponsored by Cedarcode) </li> <li> Or grab an item from the Food Trucks (sponsored by Shopify) </li> </ul> <p> There will be an official Rails World app by Telos Labs so attendees can build their schedule. </p>"
+      session.description = "During lunch and breaks between sessions on both days, attendees can: <ul> <li> Catch 10-15 min Community talks on the Lightning Track (sponsored by Shopify) </li> <li> Chat with our sponsors in the Sponsor Garden </li> <li> Hang out in the Shopify Lounge </li> <li> Follow a workshop (sponsored by Coder) </li> <li> Drop by the Test Double Office Hours for pair programming and career advice </li> <li> Explore the historic venue </li> <li> Take a walk in the nature park located behind the venue </li> <li> Grab an espresso or latte from the coffee carts (sponsored by Cedarcode) </li> <li> Or grab an item from the Food Trucks (sponsored by Shopify) </li> </ul>"
       session.ends_at = Time.zone.local(2024, month, start_day, 13, 0)
       session.location = break_location
     end
@@ -376,10 +397,11 @@ namespace :db do
       title: "The Modern Programmer’s Guide to Neovim and Zellij",
       starts_at: Time.zone.local(2024, month, start_day, 13, 0)
     ) do |session|
-      session.description = "<p> Are you ready to revolutionize your coding environment? In a world dominated by VS Code and other Electron-based editors, there's a hidden gem that developers are rediscovering: Vim. Or rather, Neovim. Just as Rails transformed web development, Neovim is redefining how we write code, blending decades-old technology with modern tooling for an unparalleled experience. </p> <p> <strong>Workshop overview </strong>In this hands-on workshop, we dive into the world of Neovim and Zellij —showing you how to streamline your development process and achieve a true flow state. </p> <p> <strong>Here's what you can expect</strong> </p> <ul style='list-style: initial;'> <li> Introduction to Neovim: Understand the core principles that make Neovim a game-changer in the modern programming landscape. </li> <li> Learn how to effortlessly manage and customize plugins to suit your unique work-flow, shedding the bloat of heavier editors. </li> <li> Combine the power of Neovim and Zellij to increase developer productivity by achieving your optimal flow state. </li> </ul> <p> <strong>Key takeaways</strong> By the end of this 75-minute workshop, you will: </p> <ul style='list-style: initial;'> <li> Have a solid understanding of Neovim's capabilities and how it can enhance your productivity. </li> <li> Manage workspaces using Zellij to jump in and out of projects with ease. </li> <li> Walk away with a Neovim setup that empowers you to code with minimal distractions, maximizing your efficiency and creativity. </li> </ul> <p> <strong>Why Attend?</strong> This workshop is perfect for developers of all levels (with some famil- iarity with Vim) who are looking to optimize their workflow and embrace a light- weight, powerful, and highly customizable editor. Whether you're new to Neovim or looking to deepen your understanding, this session will provide you with practical skills and insights that you can apply immediately. </p> <p> <strong>Thank you Coder!</strong> This workshop is brought to you by <a href='https://coder.com/'>Coder</a>, and will be repeated on both days. It will be first-come, first-served. </p>"
+      session.description = "Are you ready to revolutionize your coding environment? In a world dominated by VS Code and other Electron-based editors, there's a hidden gem that developers are rediscovering: Vim. Or rather, Neovim. Just as Rails transformed web development, Neovim is redefining how we write code, blending decades-old technology with modern tooling for an unparalleled experience. <br/><br/> <strong>Workshop overview </strong>In this hands-on workshop, we dive into the world of Neovim and Zellij —showing you how to streamline your development process and achieve a true flow state. <br/><br/> <strong>Here's what you can expect</strong> </p> <ul> <li> Introduction to Neovim: Understand the core principles that make Neovim a game-changer in the modern programming landscape. </li> <li> Learn how to effortlessly manage and customize plugins to suit your unique work-flow, shedding the bloat of heavier editors. </li> <li> Combine the power of Neovim and Zellij to increase developer productivity by achieving your optimal flow state. </li> </ul> <br/> <strong>Key takeaways</strong> By the end of this 75-minute workshop, you will: <ul> <li> Have a solid understanding of Neovim's capabilities and how it can enhance your productivity. </li> <li> Manage workspaces using Zellij to jump in and out of projects with ease. </li> <li> Walk away with a Neovim setup that empowers you to code with minimal distractions, maximizing your efficiency and creativity. </li> </ul> <br/> <strong>Why Attend?</strong> This workshop is perfect for developers of all levels (with some familiarity with Vim) who are looking to optimize their workflow and embrace a lightweight, powerful, and highly customizable editor. Whether you're new to Neovim or looking to deepen your understanding, this session will provide you with practical skills and insights that you can apply immediately. <br/><br/> <strong>Thank you Coder!</strong> This workshop is brought to you by <a class='underline' href='https://coder.com/'>Coder</a>, and will be repeated on both days. It will be first-come, first-served."
       session.ends_at = Time.zone.local(2024, month, start_day, 14, 15)
       session.location = lightning_track
       session.speakers = [chris_power_speaker, robert_beene_speaker]
+      session.tags = [productivity, tools, developer_experience]
     end
 
     Session.find_or_create_by!(
@@ -391,6 +413,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, start_day, 13, 30)
       session.location = track_1
       session.speakers = [donal_mcbreen_speaker]
+      session.tags = [tools, deployment, performance]
     end
 
     Session.find_or_create_by!(
@@ -402,6 +425,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, start_day, 13, 30)
       session.location = track_2
       session.speakers = [jamis_buck_speaker]
+      session.tags = [tools, developer_experience]
     end
 
     Session.find_or_create_by!(
@@ -413,6 +437,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, start_day, 14, 15)
       session.location = track_1
       session.speakers = [kevin_mcconnell_speaker]
+      session.tags = [tools, deployment, performance]
     end
 
     Session.find_or_create_by!(
@@ -424,6 +449,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, start_day, 14, 15)
       session.location = track_2
       session.speakers = [greg_molnar_speaker]
+      session.tags = [security, rails_8]
     end
 
     Session.find_or_create_by!(
@@ -435,6 +461,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, start_day, 15, 15)
       session.location = track_1
       session.speakers = [jenny_shen_speaker]
+      session.tags = [rails_8]
     end
 
     Session.find_or_create_by!(
@@ -446,6 +473,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, start_day, 15, 15)
       session.location = track_2
       session.speakers = [justin_searls_speaker]
+      session.tags = [productivity, developer_experience]
     end
 
     Session.find_or_create_by!(
@@ -457,6 +485,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, start_day, 16, 15)
       session.location = track_1
       session.speakers = [rafael_franca_speaker]
+      session.tags = [productivity, developer_experience]
     end
 
     Session.find_or_create_by!(
@@ -468,6 +497,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, start_day, 16, 15)
       session.location = track_2
       session.speakers = [emmanuel_hayford_speaker]
+      session.tags = [pwa, rails_8]
     end
 
     Session.find_or_create_by!(
@@ -479,6 +509,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, start_day, 17, 30)
       session.location = track_1
       session.speakers = [matz_speaker, david_heinemeier_hansson_speaker, tobias_luetke_speaker]
+      session.tags = [community, insights]
     end
 
     Session.find_or_create_by!(
@@ -486,7 +517,7 @@ namespace :db do
       title: "Toronto Ruby drinks sponsored by Clio",
       starts_at: Time.zone.local(2024, month, start_day, 19, 0)
     ) do |session|
-      session.description = "<p>Come hang out with the local Toronto Ruby meetup group. Grab a beer and have a bite, and recharge for Day 2.</p> <p>This evening event wouldn’t be possible without the generous support and sponsorship of our Gold sponsor, Clio. Stop by their booth for a ticket to the event. Badges still required.</p>"
+      session.description = "Come hang out with the local Toronto Ruby meetup group. Grab a beer and have a bite, and recharge for Day 2. <br/><br/> This evening event wouldn’t be possible without the generous support and sponsorship of our Gold sponsor, Clio. Stop by their booth for a ticket to the event. Badges still required."
       session.ends_at = Time.zone.local(2024, month, start_day, 22, 30)
       session.location = tbd_attendees_location
     end
@@ -521,6 +552,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, second_day, 11, 45)
       session.location = track_1
       session.speakers = [stephen_margheim_speaker]
+      session.tags = [database, rails_8]
     end
 
     Session.find_or_create_by!(
@@ -532,6 +564,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, second_day, 11, 45)
       session.location = track_2
       session.speakers = [ridhwana_khan_speaker]
+      session.tags = [rails_internals, developer_experience]
     end
 
     Session.find_or_create_by!(
@@ -539,7 +572,7 @@ namespace :db do
       title: "What to do in the breaks",
       starts_at: Time.zone.local(2024, month, second_day, 11, 45)
     ) do |session|
-      session.description = "<p> During lunch and breaks between sessions on both days, attendees can: </p> <ul> <li> Catch 10-15 min Community talks on the Lightning Track (sponsored by Shopify) </li> <li> Chat with our sponsors in the Sponsor Garden </li> <li> Hang out in the Shopify Lounge </li> <li> Follow a workshop (sponsored by Coder) </li> <li> Drop by the Test Double Office Hours for pair programming and career advice </li> <li> Explore the historic venue </li> <li> Take a walk in the nature park located behind the venue </li> <li> Grab an espresso or latte from the coffee carts (sponsored by Cedarcode) </li> <li> Or grab an item from the Food Trucks (sponsored by Shopify) </li> </ul> <p> There will be an official Rails World app by Telos Labs so attendees can build their schedule. </p>"
+      session.description = "During lunch and breaks between sessions on both days, attendees can: <br/> <ul> <li> Catch 10-15 min Community talks on the Lightning Track (sponsored by Shopify) </li> <li> Chat with our sponsors in the Sponsor Garden </li> <li> Hang out in the Shopify Lounge </li> <li> Follow a workshop (sponsored by Coder) </li> <li> Drop by the Test Double Office Hours for pair programming and career advice </li> <li> Explore the historic venue </li> <li> Take a walk in the nature park located behind the venue </li> <li> Grab an espresso or latte from the coffee carts (sponsored by Cedarcode) </li> <li> Or grab an item from the Food Trucks (sponsored by Shopify) </li> </ul>"
       session.ends_at = Time.zone.local(2024, month, second_day, 13, 0)
       session.location = break_location
     end
@@ -553,6 +586,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, second_day, 13, 30)
       session.location = track_1
       session.speakers = [miles_mcguire_speaker]
+      session.tags = [database, best_practices]
     end
 
     Session.find_or_create_by!(
@@ -564,6 +598,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, second_day, 13, 30)
       session.location = track_2
       session.speakers = [andrea_fomera_speaker]
+      session.tags = [performance, storage_solutions]
     end
 
     Session.find_or_create_by!(
@@ -575,6 +610,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, second_day, 14, 15)
       session.location = track_1
       session.speakers = [bruno_prieto_speaker]
+      session.tags = [hotwire]
     end
 
     Session.find_or_create_by!(
@@ -582,10 +618,11 @@ namespace :db do
       title: "The Modern Programmer’s Guide to Neovim and Zellij",
       starts_at: Time.zone.local(2024, month, second_day, 13, 0)
     ) do |session|
-      session.description = "<p> Are you ready to revolutionize your coding environment? In a world dominated by VS Code and other Electron-based editors, there's a hidden gem that developers are rediscovering: Vim. Or rather, Neovim. Just as Rails transformed web development, Neovim is redefining how we write code, blending decades-old technology with modern tooling for an unparalleled experience. </p> <p> <strong>Workshop overview </strong>In this hands-on workshop, we dive into the world of Neovim and Zellij —showing you how to streamline your development process and achieve a true flow state. </p> <p> <strong>Here's what you can expect</strong> </p> <ul style='list-style: initial;'> <li> Introduction to Neovim: Understand the core principles that make Neovim a game-changer in the modern programming landscape. </li> <li> Learn how to effortlessly manage and customize plugins to suit your unique work-flow, shedding the bloat of heavier editors. </li> <li> Combine the power of Neovim and Zellij to increase developer productivity by achieving your optimal flow state. </li> </ul> <p> <strong>Key takeaways</strong> By the end of this 75-minute workshop, you will: </p> <ul style='list-style: initial;'> <li> Have a solid understanding of Neovim's capabilities and how it can enhance your productivity. </li> <li> Manage workspaces using Zellij to jump in and out of projects with ease. </li> <li> Walk away with a Neovim setup that empowers you to code with minimal distractions, maximizing your efficiency and creativity. </li> </ul> <p> <strong>Why Attend?</strong> This workshop is perfect for developers of all levels (with some famil- iarity with Vim) who are looking to optimize their workflow and embrace a light- weight, powerful, and highly customizable editor. Whether you're new to Neovim or looking to deepen your understanding, this session will provide you with practical skills and insights that you can apply immediately. </p> <p> <strong>Thank you Coder!</strong> This workshop is brought to you by <a href='https://coder.com/'>Coder</a>, and will be repeated on both days. It will be first-come, first-served. </p>"
+      session.description = "Are you ready to revolutionize your coding environment? In a world dominated by VS Code and other Electron-based editors, there's a hidden gem that developers are rediscovering: Vim. Or rather, Neovim. Just as Rails transformed web development, Neovim is redefining how we write code, blending decades-old technology with modern tooling for an unparalleled experience. <br/><br/> <strong>Workshop overview </strong>In this hands-on workshop, we dive into the world of Neovim and Zellij —showing you how to streamline your development process and achieve a true flow state. <br/><br/> <strong>Here's what you can expect</strong> </p> <ul> <li> Introduction to Neovim: Understand the core principles that make Neovim a game-changer in the modern programming landscape. </li> <li> Learn how to effortlessly manage and customize plugins to suit your unique work-flow, shedding the bloat of heavier editors. </li> <li> Combine the power of Neovim and Zellij to increase developer productivity by achieving your optimal flow state. </li> </ul> <br/> <strong>Key takeaways</strong> By the end of this 75-minute workshop, you will: <ul> <li> Have a solid understanding of Neovim's capabilities and how it can enhance your productivity. </li> <li> Manage workspaces using Zellij to jump in and out of projects with ease. </li> <li> Walk away with a Neovim setup that empowers you to code with minimal distractions, maximizing your efficiency and creativity. </li> </ul> <br/> <strong>Why Attend?</strong> This workshop is perfect for developers of all levels (with some familiarity with Vim) who are looking to optimize their workflow and embrace a lightweight, powerful, and highly customizable editor. Whether you're new to Neovim or looking to deepen your understanding, this session will provide you with practical skills and insights that you can apply immediately. <br/><br/> <strong>Thank you Coder!</strong> This workshop is brought to you by <a class='underline' href='https://coder.com/'>Coder</a>, and will be repeated on both days. It will be first-come, first-served."
       session.ends_at = Time.zone.local(2024, month, second_day, 14, 15)
       session.location = lightning_track
       session.speakers = [chris_power_speaker, robert_beene_speaker]
+      session.tags = [productivity, tools, developer_experience]
     end
 
     Session.find_or_create_by(
@@ -597,6 +634,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, second_day, 14, 15)
       session.location = track_2
       session.speakers = [robby_russell_speaker]
+      session.tags = [performance, refactoring]
     end
 
     Session.find_or_create_by(
@@ -608,6 +646,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, second_day, 15, 15)
       session.location = track_1
       session.speakers = [xavier_noria_speaker]
+      session.tags = [rails_internals, performance]
     end
 
     Session.find_or_create_by(
@@ -619,6 +658,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, second_day, 15, 15)
       session.location = track_2
       session.speakers = [julia_lopez_speaker]
+      session.tags = [integrations, testing, best_practices]
     end
 
     Session.find_or_create_by(
@@ -630,7 +670,9 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, second_day, 16, 15)
       session.location = track_1
       session.speakers = [obie_fernandez_speaker]
+      session.tags = [ai]
     end
+
     Session.find_or_create_by(
       conference: conference,
       title: "Level up performance with simple coding changes",
@@ -640,6 +682,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, second_day, 16, 15)
       session.location = track_2
       session.speakers = [david_henner_speaker]
+      session.tags = [performance]
     end
 
     Session.find_or_create_by(
@@ -651,6 +694,7 @@ namespace :db do
       session.ends_at = Time.zone.local(2024, month, second_day, 17, 30)
       session.location = track_1
       session.speakers = [aaron_patterson_speaker]
+      session.tags = [community]
     end
 
     Session.find_or_create_by!(

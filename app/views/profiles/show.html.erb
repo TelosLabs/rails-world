@@ -1,4 +1,8 @@
-<div class="relative flex flex-col items-center justify-between flex-1 bg-grey-50 ">
+<% profile_name = @profile.name.presence || "Anonymous" %>
+
+<%= title "#{profile_name}'s Profile - Rails World 2024" %>
+
+<div class="relative flex flex-col items-center justify-between flex-1 bg-grey-50">
   <div class="flex flex-col items-center bg-cover bg-bottom bg-no-repeat max-h-[430px] w-full pt-6 px-5 pb-12" style="background-image: url(<%= asset_path 'background_design.svg' %>)">
     <div class="z-10 flex flex-col items-start max-w-screen-sm">
       <div class="flex flex-row items-center">
@@ -11,18 +15,19 @@
           </div>
         <% end %>
         <div class="flex flex-col items-start ml-5">
-          <div class="text-xl italic font-black text-red"> <%= @profile.name.presence || "Anonymous" %> </div>
+          <div class="text-xl italic font-black text-red"> <%= profile_name %> </div>
           <% if @profile.job_title.present? %>
             <div class="text-lg text-gray-400"><%= @profile.job_title %></div>
           <% end %>
         </div>
       </div>
       <% if @profile.bio.present? %>
-        <p class="mt-6 text-base font-medium"><%= @profile.bio %></p>
+        <p class="mt-6 text-base"><%= @profile.bio %></p>
       <% end %>
       <div class="flex flex-row items-center justify-center w-full gap-4">
         <%= link_to(
           @profile.github_url,
+          target: "_blank",
           class: [
             "flex flex-row grow items-center justify-center w-28 h-14 rounded-lg mt-6",
             "bg-red": @profile.github_url.present?,
@@ -33,6 +38,7 @@
         <% end %>
         <%= link_to(
           @profile.twitter_url,
+          target: "_blank",
           class: [
             "flex flex-row grow items-center justify-center w-28 h-14 rounded-lg mt-6",
             "bg-red": @profile.twitter_url.present?,
@@ -43,6 +49,7 @@
         <% end %>
         <%= link_to(
           @profile.linkedin_url,
+          target: "_blank",
           class: [
             "flex flex-row grow items-center justify-center w-28 h-14 rounded-lg mt-6",
             "bg-red": @profile.linkedin_url.present?,
@@ -57,7 +64,12 @@
 
   <% if allowed_to?(:edit?, @profile, with: ProfilePolicy) %>
     <div class="flex flex-col items-center w-full gap-6 p-4">
-      <%= render inline: @profile.svg_qr_code(module_size: 4) if @profile.is_public? %>
+      <% if @profile.is_public? %>
+        <div class="p-6 bg-white rounded-2xl">
+          <%= render inline: @profile.svg_qr_code(module_size: 4) %>
+        </div>
+      <% end %>
+
       <%= link_to(
         'Edit Profile', edit_profile_path(@profile.uuid),
         class: "text-red font-bold rounded-sm underline italic text-lg"
@@ -65,7 +77,7 @@
       <%= button_to(
         "Log out", user_session_path, method: :delete,
         form_class: "w-full max-w-screen-sm px-4",
-        class: "w-full bg-red py-4 text-white font-black italic rounded-[10px] uppercase mb-6"
+        class: "w-full bg-white py-4 text-red font-black italic rounded-[10px] uppercase mb-6"
       ) %>
     </div>
   <% end %>

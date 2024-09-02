@@ -10,7 +10,7 @@ class Avo::Resources::Location < Avo::BaseResource
 
   def fields
     field :id, as: :id
-    field :name, as: :text, sortable: true
+    field :name, as: :text, sortable: true, link_to_record: true
     field :conference, as: :belongs_to
     field :sessions, as: :has_many
   end

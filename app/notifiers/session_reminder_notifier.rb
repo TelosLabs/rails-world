@@ -28,6 +28,14 @@ class SessionReminderNotifier < ApplicationNotifier
       end
     end
 
+    def subject
+      if params[:time_before_session].match?(/^0\s/)
+        t("mailers.session_mailer.reminder.subject.without_time")
+      else
+        t("mailers.session_mailer.reminder.subject.with_time", time_before_session: params[:time_before_session])
+      end
+    end
+
     def delivered_at
       time_difference = distance_of_time_in_words(Time.current, created_at, scope: "date_time.distance_in_words.short")
       (time_difference == "now") ? time_difference : "#{time_difference} ago"

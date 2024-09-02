@@ -3,7 +3,6 @@
 # Table name: sessions
 #
 #  id             :integer          not null, primary key
-#  description    :string
 #  ends_at        :datetime         not null
 #  sent_reminders :json
 #  slug           :string
@@ -24,6 +23,8 @@ class Session < ApplicationRecord
   extend FriendlyId
 
   friendly_id :title, use: :slugged
+
+  has_rich_text :description
 
   belongs_to :location
   belongs_to :conference
@@ -47,6 +48,7 @@ class Session < ApplicationRecord
   scope :live, -> { where("? BETWEEN starts_at AND ends_at", Time.current) }
   scope :starting_soon, -> { where("starts_at BETWEEN ? and ?", Time.current, 1.hour.from_now) }
   scope :upcoming_today, -> { where("date(starts_at) = ? and starts_at > ?", Date.current, Time.current) }
+  scope :live_or_upcoming_today, -> { live.or(upcoming_today) }
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[title]
