@@ -1,6 +1,5 @@
 namespace :db do
   desc "Loading Rails World 2024 conference data."
-
   task :rails_world_2024_seed, [:start_date] => :environment do |t, args|
     start_date = args[:start_date].present? ? Date.parse(args[:start_date]) : Date.new(2024, 9, 26)
     month = start_date.month
@@ -25,43 +24,24 @@ namespace :db do
 
     # Create Tags
     community = Tag.find_or_create_by!(name: "Community")
-
     security = Tag.find_or_create_by!(name: "Security")
-
     rails_8 = Tag.find_or_create_by!(name: "Rails 8")
-
     productivity = Tag.find_or_create_by!(name: "Productivity")
-
     tools = Tag.find_or_create_by!(name: "Tools")
-
     developer_experience = Tag.find_or_create_by!(name: "Developer Experience")
-
     deployment = Tag.find_or_create_by!(name: "Deployment")
-
     performance = Tag.find_or_create_by!(name: "Performance")
-
     storage_solutions = Tag.find_or_create_by!(name: "Storage Solutions")
-
     refactoring = Tag.find_or_create_by!(name: "Refactoring")
-
     database = Tag.find_or_create_by!(name: "Database")
-
     hotwire = Tag.find_or_create_by!(name: "Hotwire")
-
     ai = Tag.find_or_create_by!(name: "AI")
-
     integrations = Tag.find_or_create_by!(name: "Integrations")
-
     testing = Tag.find_or_create_by!(name: "Testing")
-
     best_practices = Tag.find_or_create_by!(name: "Best Practices")
-
     pwa = Tag.find_or_create_by!(name: "PWA")
-
     insights = Tag.find_or_create_by!(name: "Insights")
-
     background_jobs = Tag.find_or_create_by!(name: "Background Jobs")
-
     rails_internals = Tag.find_or_create_by!(name: "Rails Internals")
 
     # Create Speakers
