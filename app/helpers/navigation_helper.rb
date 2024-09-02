@@ -27,11 +27,29 @@ module NavigationHelper
       !error_page?
   end
 
+  def show_back_button?
+    current_page?(notification_settings_path) ||
+      resource_show_page?("speakers") ||
+      resource_show_page?("sessions")
+  end
+
+  def back_title
+    if controller_name.include?("_")
+      controller_name.humanize
+    else
+      "#{controller_name.singularize.capitalize} detail"
+    end
+  end
+
   def title(title)
     content_for :title, title
   end
 
   private
+
+  def resource_show_page?(resource)
+    controller_name == resource && action_name == "show"
+  end
 
   def error_page?
     ["/404", "/500"].include?(request.path)
