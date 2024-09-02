@@ -26,13 +26,13 @@ module NavigationHelper
       !current_page?(coming_soon_path)
   end
 
-  def show_back_btn?
+  def show_back_button?
     current_page?(notification_settings_path) ||
       resource_show_page?("speakers") ||
       resource_show_page?("sessions")
   end
 
-  def view_title
+  def back_title
     if controller_name.include?("_")
       controller_name.humanize
     else
