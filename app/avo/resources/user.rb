@@ -13,7 +13,7 @@ class Avo::Resources::User < Avo::BaseResource
 
   def fields
     field :id, as: :id
-    field :email, as: :text, sortable: true
+    field :email, as: :text, sortable: true, link_to_record: true
     field :role, as: :select, options: User.roles, include_blank: true, sortable: true, default: "user"
     field :password, as: :password, only_on: :new
     field :password_confirmation, as: :password, only_on: :new
