@@ -32,6 +32,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: {with: URI::MailTo::EMAIL_REGEXP}
   validates :password_digest, presence: true
   validates :password, length: {minimum: 8}, if: -> { password.present? }
+  validate :validate_tester_user
 
   after_create_commit { create_profile! }
 
@@ -43,5 +44,13 @@ class User < ApplicationRecord
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[email]
+  end
+
+  private
+
+  def validate_tester_user
+    if Feature.enabled?(:only_tester_registration)
+      errors.add(:base, "Only tester users are allowed to sign up") unless email.include?("+tester")
+    end
   end
 end

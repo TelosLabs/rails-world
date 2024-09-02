@@ -35,6 +35,9 @@ en:
         subject:
           with_time: "Your bookmarked session is starting in %{time_before_session}."
           without_time: "Your bookmarked session is starting soon."
+    password_mailer:
+      password_reset:
+        subject: "Password Reset - Rails World 2024"
   views:
     status_filters:
       past: "Past"
