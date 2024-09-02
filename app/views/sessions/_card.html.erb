@@ -58,7 +58,7 @@
             :div,
             class: [
               "flex flex-col ml-2",
-              "max-w-[200px]": session.speakers.count > 1
+              "max-w-[200px]": session.speakers.length > 1
             ]
           ) do %>
             <h2 class="text-sm italic font-black group-hover:text-red group-focus:text-red"><%= speaker.name %></h2>
@@ -71,7 +71,7 @@
   <% end %>
 
   <div class="flex flex-col">
-    <% if session.tags.exists? %>
+    <% if session.tags.present? %>
       <div class="flex flex-wrap w-full gap-2 mb-3">
         <% session.tags.each do |tag| %>
           <div class="px-2 py-1 text-xs bg-transparent border rounded-lg border-bluegray-600 text-bluegray-600">
