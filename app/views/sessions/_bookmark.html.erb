@@ -1,17 +1,21 @@
-<div id="<%= dom_id(session, "bookmark") %>">
-  <% if current_user.sessions.pluck(:id).include?(session.id) %>
+<% unless session.past? %>
+  <% if user_is_an_attendee %>
     <%= button_to(
-      session_attendee_path(session_id: session.id, params: request.params[:starts_at]),
-      method: :delete, form_class: "flex items-center ml-8"
+      session_attendee_path(session_id: session.id, params: request.params[:starts_at], anchor: session_anchor(session)),
+      method: :delete, form_class: "z-10 flex items-center", data: { turbo_action: 'replace' }
     ) do %>
-      <%= inline_svg_tag("icons/bookmark-full.svg") %>
+      <div class="p-2">
+        <%= inline_svg_tag("icons/bookmark-full.svg") %>
+      </div>
     <% end %>
   <% else %>
     <%= button_to(
-      session_attendee_path(session_id: session.id, params: request.params[:starts_at]),
-      form_class: "flex items-center ml-8"
+      session_attendee_path(session_id: session.id, params: request.params[:starts_at], anchor: session_anchor(session)),
+      form_class: "z-10 flex items-center", data: { turbo_action: 'replace' }
     ) do %>
-      <%= inline_svg_tag("icons/bookmark-outline.svg") %>
+      <div class="p-2">
+        <%= inline_svg_tag("icons/bookmark-outline.svg", class: "") %>
+      </div>
     <% end %>
   <% end %>
-</div>
+<% end %>
