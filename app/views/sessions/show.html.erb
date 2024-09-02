@@ -48,7 +48,7 @@
 
               <%= content_tag(:div, class: [
                   "flex flex-col ml-2",
-                  "max-w-[200px]": @session.speakers.count > 1
+                  "max-w-[200px]": @session.speakers.length > 1
               ] ) do %>
                 <h2 class="text-sm italic font-black group-hover:text-red group-focus:text-red"><%= speaker.name %></h2>
                 <p class="text-sm font-normal text-gray-400"><%= speaker.job_title %></p>
@@ -94,7 +94,7 @@
     <div class="flex flex-col items-center w-full p-5 mt-6">
       <div class="flex flex-col items-start w-full max-w-screen-sm">
         <p class="mb-4 text-2xl italic font-bold text-black">
-          <%= "About the #{'speaker'.pluralize(@session.speakers.count)}" %>
+          <%= "About the #{'speaker'.pluralize(@session.speakers.length)}" %>
         </p>
         <div class="flex flex-col w-full gap-4">
           <% @session.speakers.each do |speaker| %>
