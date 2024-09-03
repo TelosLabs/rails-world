@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
   end
 
   def show
+    @user_session_ids = current_user.sessions.pluck(:id)
     @session = sessions.friendly.includes(:location, :tags, speakers: [profile: :image_attachment]).find(params[:id])
   end
 
