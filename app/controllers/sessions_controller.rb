@@ -4,11 +4,11 @@ class SessionsController < ApplicationController
     @sessions = SessionQuery.new(
       relation: sessions.joins(:location).distinct,
       params: filter_params
-    ).call.includes(:attendees, :tags).order(:starts_at)
+    ).call.includes(:location, :tags, speakers: [profile: :image_attachment]).order(:starts_at)
   end
 
   def show
-    @session = sessions.friendly.find(params[:id])
+    @session = sessions.friendly.includes(:location, :tags, speakers: [profile: :image_attachment]).find(params[:id])
   end
 
   private
