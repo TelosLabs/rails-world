@@ -1,5 +1,5 @@
 class SpeakersController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:show]
+  allow_unauthenticated_access only: [:show]
   def show
     @speaker = current_conference.speakers.friendly.find(params[:id])
     @profile = @speaker.profile.presence || Profile.new
