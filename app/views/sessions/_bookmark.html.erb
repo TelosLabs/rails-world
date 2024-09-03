@@ -1,19 +1,21 @@
-<% if user_is_an_attendee %>
-  <%= button_to(
-    session_attendee_path(session_id: session.id, params: request.params[:starts_at], anchor: session_anchor(session)),
-    method: :delete, form: { class: "z-10 flex items-center", id: dom_id(session, "bookmark") }
-  ) do %>
-    <div class="p-2">
-      <%= inline_svg_tag("icons/bookmark-full.svg") %>
-    </div>
-  <% end %>
-<% else %>
-  <%= button_to(
-    session_attendee_path(session_id: session.id, params: request.params[:starts_at], anchor: session_anchor(session)),
-    form: {class: "z-10 flex items-center", id: dom_id(session, "bookmark"),}
-  ) do %>
-    <div class="p-2">
-      <%= inline_svg_tag("icons/bookmark-outline.svg", class: "") %>
-    </div>
+<% if show_bookmark_button?(session) %>
+  <% if user_is_an_attendee %>
+    <%= button_to(
+          session_attendee_path(session_id: session.id, params: request.params[:starts_at], anchor: session_anchor(session)),
+          method: :delete, form: { class: "z-10 flex items-center", id: dom_id(session, "bookmark") }
+        ) do %>
+      <div class="p-2">
+        <%= inline_svg_tag("icons/bookmark-full.svg") %>
+      </div>
+    <% end %>
+  <% else %>
+    <%= button_to(
+          session_attendee_path(session_id: session.id, params: request.params[:starts_at], anchor: session_anchor(session)),
+          form: { class: "z-10 flex items-center", id: dom_id(session, "bookmark"), }
+        ) do %>
+      <div class="p-2">
+        <%= inline_svg_tag("icons/bookmark-outline.svg", class: "") %>
+      </div>
+    <% end %>
   <% end %>
 <% end %>

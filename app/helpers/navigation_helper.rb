@@ -32,6 +32,12 @@ module NavigationHelper
       resource_show_page?("sessions")
   end
 
+  def show_bookmark_button?(session)
+    return true if controller_name == "schedules"
+
+    !session.past?
+  end
+
   def back_title
     if controller_name.include?("_")
       controller_name.humanize
