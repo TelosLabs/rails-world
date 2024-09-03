@@ -29,7 +29,7 @@ class SessionQuery
   end
 
   def filter_privates
-    return if params["show_private"].present?
+    return if params[:show_private].present?
 
     self.relation = relation.publics
   end
