@@ -53,7 +53,7 @@
       <% if unread_notifications.present? %>
         <div class="absolute -top-0.5 right-0 w-[18px] h-[18px] rounded-full bg-red flex justify-center items-center">
           <span class="text-[11px] text-white font-bold px-1">
-            <%= unread_notifications.count < 10 ? unread_notifications.count : "+9" %>
+            <%= unread_notifications.length < 10 ? unread_notifications.length : "+9" %>
           </span>
         </div>
       <% end %>

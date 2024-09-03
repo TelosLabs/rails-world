@@ -8,4 +8,7 @@ class ServiceWorkerController < ApplicationController
 
   def manifest
   end
+
+  def offline
+  end
 end
