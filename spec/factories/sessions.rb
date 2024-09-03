@@ -4,6 +4,7 @@
 #
 #  id             :integer          not null, primary key
 #  ends_at        :datetime         not null
+#  public         :boolean          default(TRUE), not null
 #  sent_reminders :json
 #  slug           :string
 #  starts_at      :datetime         not null

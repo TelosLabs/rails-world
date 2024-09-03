@@ -32,7 +32,8 @@ en:
   mailers:
     session_mailer:
       reminder:
-        subject:
+        subject: "%{title} is starting soon"
+        title:
           with_time: "Your bookmarked session is starting in %{time_before_session}."
           without_time: "Your bookmarked session is starting soon."
     password_mailer:
@@ -44,6 +45,8 @@ en:
       live: "Live"
       starting_soon: "Starting soon"
       submit: "Apply"
+  authentication:
+    unauthenticated: "You need to sign in or sign up before continuing."
   authorization:
     unauthorized: "You are not authorized to access this page."
     invalid_auth_token: "Your request has expired. Please try again."

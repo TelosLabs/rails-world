@@ -39,17 +39,19 @@
     <% end %>
 
     <main class="flex flex-col flex-1 w-full mx-auto">
-      <% flash.each do |type, message| %>
-        <% if message.present? && message.is_a?(String) %>
-          <%= render partial: "layouts/flash_message", locals: { message: message } %>
+      <div id="flash_message">
+        <% flash.each do |type, message| %>
+          <% if message.present? && message.is_a?(String) %>
+            <%= render partial: "layouts/flash_message", locals: { message: message } %>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
 
       <%= yield %>
     </main>
 
     <% if show_bottom_navbar? %>
-      <%= render partial: "layouts/bottom_navbar", locals: { unread_notifications: current_user.notifications.unread } %>
+      <%= render partial: "layouts/bottom_navbar", locals: { unread_notifications: current_user&.notifications&.unread } %>
     <% end %>
   </body>
 </html>
