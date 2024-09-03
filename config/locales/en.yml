@@ -36,6 +36,9 @@ en:
         title:
           with_time: "Your bookmarked session is starting in %{time_before_session}."
           without_time: "Your bookmarked session is starting soon."
+    password_mailer:
+      password_reset:
+        subject: "Password Reset - Rails World 2024"
   views:
     status_filters:
       past: "Past"
@@ -44,6 +47,7 @@ en:
       submit: "Apply"
   authorization:
     unauthorized: "You are not authorized to access this page."
+    invalid_auth_token: "Your request has expired. Please try again."
   session_mailer:
     reminder:
       subject: "This session is starting soon"
@@ -64,4 +68,3 @@ en:
           one: "1month"
           other: "%{count}months"
         x_months: "%{count}months"
-
