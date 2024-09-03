@@ -1,6 +1,6 @@
-<%# locals: (session:, user_is_an_attendee:) %>
+<%# locals: (session:, user_is_an_attendee:, id_prefix: nil) %>
 
-<div class="relative flex flex-col w-full p-5 mb-4 bg-white rounded-[20px]">
+<div class="relative flex flex-col w-full p-5 mb-4 bg-white rounded-[20px]" id="<%= dom_id(session, id_prefix) %>">
   <a href="<%= session_path(session) %>" class="absolute top-0 bottom-0 left-0 right-0 z-0"></a>
 
   <%= render partial: "sessions/status", locals: { session: session } %>
@@ -11,28 +11,7 @@
         <%= session.title %>
       </h3>
     </a>
-
-    <% unless session.past? %>
-      <% if user_is_an_attendee %>
-        <%= button_to(
-          session_attendee_path(session_id: session.id, params: request.params[:starts_at], anchor: session_anchor(session)),
-          method: :delete, form_class: "z-10 flex items-center", data: { turbo_action: 'replace' }
-        ) do %>
-          <div class="p-2">
-            <%= inline_svg_tag("icons/bookmark-full.svg") %>
-          </div>
-        <% end %>
-      <% else %>
-        <%= button_to(
-          session_attendee_path(session_id: session.id, params: request.params[:starts_at], anchor: session_anchor(session)),
-          form_class: "z-10 flex items-center", data: { turbo_action: 'replace' }
-        ) do %>
-          <div class="p-2">
-            <%= inline_svg_tag("icons/bookmark-outline.svg", class: "") %>
-          </div>
-        <% end %>
-      <% end %>
-    <% end %>
+    <%= render partial: "sessions/bookmark", locals: { session: session, user_is_an_attendee: } %>
   </div>
 
   <% if session.speakers.present? %>
@@ -58,7 +37,7 @@
             :div,
             class: [
               "flex flex-col ml-2",
-              "max-w-[200px]": session.speakers.count > 1
+              "max-w-[200px]": session.speakers.length > 1
             ]
           ) do %>
             <h2 class="text-sm italic font-black group-hover:text-red group-focus:text-red"><%= speaker.name %></h2>
@@ -71,7 +50,7 @@
   <% end %>
 
   <div class="flex flex-col">
-    <% if session.tags.exists? %>
+    <% if session.tags.present? %>
       <div class="flex flex-wrap w-full gap-2 mb-3">
         <% session.tags.each do |tag| %>
           <div class="px-2 py-1 text-xs bg-transparent border rounded-lg border-bluegray-600 text-bluegray-600">
