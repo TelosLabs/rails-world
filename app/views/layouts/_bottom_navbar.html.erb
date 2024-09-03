@@ -29,34 +29,18 @@
         My Schedule
       <% end %>
 
-      <% if user_signed_in? %>
-        <%= link_to(
-          user_signed_in? ? profile_path(current_profile&.uuid) : new_user_session_path,
-          class: [
-            nav_text_class_for(["/profiles"]),
-            "flex flex-col items-center justify-center"
-          ]
-        ) do %>
-          <%= inline_svg_tag(
-            "icons/avatar_no_fill.svg",
-            class: nav_icon_class_for(["/profiles"])
+      <%= link_to(
+        user_signed_in? ? profile_path(current_profile&.uuid) : new_user_session_path,
+        class: [
+          nav_text_class_for(["/profiles"]),
+          "flex flex-col items-center justify-center"
+        ]
+          ) do %>
+        <%= inline_svg_tag(
+          "icons/avatar_no_fill.svg",
+          class: nav_icon_class_for(["/profiles"])
           ) %>
-          Profile
-        <% end %>
-      <% else %>
-        <%= link_to(
-          new_user_session_path,
-          class: [
-            nav_text_class_for(["/profiles"]),
-            "flex flex-col items-center justify-center"
-          ]
-        ) do %>
-          <%= inline_svg_tag(
-            "icons/avatar_no_fill.svg",
-            class: nav_icon_class_for(["/profiles"])
-          ) %>
-          Profile
-        <% end %>
+        Profile
       <% end %>
 
       <%= link_to(
