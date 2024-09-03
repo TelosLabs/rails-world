@@ -37,6 +37,6 @@ module SessionHelper
   end
 
   def current_schedule_session
-    @current_schedule_session ||= current_user.sessions.live_or_upcoming_today.first
+    @current_schedule_session ||= current_user&.sessions&.live_or_upcoming_today&.first
   end
 end
