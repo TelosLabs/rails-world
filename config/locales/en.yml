@@ -32,7 +32,8 @@ en:
   mailers:
     session_mailer:
       reminder:
-        subject:
+        subject: "%{title} is starting soon"
+        title:
           with_time: "Your bookmarked session is starting in %{time_before_session}."
           without_time: "Your bookmarked session is starting soon."
     password_mailer:
