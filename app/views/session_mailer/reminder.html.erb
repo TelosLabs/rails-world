@@ -40,7 +40,7 @@
 
       <div class="c-event-card__time">
         <div class="c-event-card__time-icon">
-          <%= image_tag url_for("icons/calendar.png") %>
+          <%= image_tag url_for("icons/calendar.png"), class: "c-event-card__time-icon-img" %>
         </div>
         <div class="c-event-card__time-item">
           <%= @session.starts_at&.strftime("%b %d") %> -
@@ -51,7 +51,7 @@
       <% if @session.location.present? %>
         <div class="c-event-card__time">
           <div class="c-event-card__time-icon">
-            <%= image_tag url_for("icons/location.png") %>
+            <%= image_tag url_for("icons/location.png"), class: "c-event-card__time-icon-img" %>
           </div>
           <div class="c-event-card__time-item">
             <%= @session.location.name %>
