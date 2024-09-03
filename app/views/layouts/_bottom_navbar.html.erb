@@ -18,7 +18,7 @@
       <%= link_to(
         schedule_path(
           starts_at: current_starts_at_filter,
-          anchor: session_anchor(current_user&.sessions&.live_or_upcoming_today&.first)
+          anchor: session_anchor(current_schedule_session)
         ),
         class: [
           nav_text_class_for([schedule_path]),
