@@ -10,8 +10,11 @@ class SessionsController < ApplicationController
   end
 
   def show
-    @session = sessions.friendly.find(params[:id])
-    raise ActiveRecord::RecordNotFound if @session.private? && !user_signed_in?
+    if user_signed_in?
+      @session = sessions.friendly.find(params[:id])
+    else
+      @session = sessions.publics.friendly.find(params[:id])
+    end
   end
 
   private
