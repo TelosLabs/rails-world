@@ -31,7 +31,7 @@
 
       <% if user_signed_in? %>
         <%= link_to(
-          profile_path(current_profile&.uuid),
+        user_signed_in? ? profile_path(current_profile&.uuid) : new_user_session_path
           class: [
             nav_text_class_for(["/profiles"]),
             "flex flex-col items-center justify-center"
