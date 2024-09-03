@@ -6,14 +6,15 @@ class SessionsController < ApplicationController
     @sessions = SessionQuery.new(
       relation: sessions.joins(:location).distinct,
       params: filter_params
-    ).call.includes(:attendees, :tags).order(:starts_at)
+    ).call.includes(:location, :tags, speakers: [profile: :image_attachment]).order(:starts_at)
   end
 
   def show
-    if user_signed_in?
-      @session = sessions.friendly.find(params[:id])
+    @user_session_ids = current_user.sessions.pluck(:id)
+    @session = if user_signed_in?
+      sessions.friendly.includes(:location, :tags, speakers: [profile: :image_attachment]).find(params[:id])
     else
-      @session = sessions.publics.friendly.find(params[:id])
+      sessions.publics.friendly.includes(:location, :tags, speakers: [profile: :image_attachment]).find(params[:id])
     end
   end
 

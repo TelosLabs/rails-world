@@ -119,8 +119,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_08_29_165208) do
     t.string "slug"
     t.boolean "public", default: true, null: false
     t.index ["conference_id"], name: "index_sessions_on_conference_id"
+    t.index ["ends_at"], name: "index_sessions_on_ends_at"
     t.index ["location_id"], name: "index_sessions_on_location_id"
     t.index ["slug"], name: "index_sessions_on_slug", unique: true
+    t.index ["starts_at"], name: "index_sessions_on_starts_at"
   end
 
   create_table "sessions_speakers", force: :cascade do |t|

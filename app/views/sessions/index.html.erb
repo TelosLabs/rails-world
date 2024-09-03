@@ -32,7 +32,7 @@
               </a>
             </div>
             <div class="w-full mx-2 mb-1 border-b"></div>
-            <div class="mb-1 text-gray-400 text-nowrap"><%= pluralize(sessions.count, "Session") %></div>
+            <div class="mb-1 text-gray-400 text-nowrap"><%= pluralize(sessions.length, "Session") %></div>
           <% end %>
           <% sessions.each do |session| %>
             <%= render(

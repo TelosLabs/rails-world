@@ -39,7 +39,33 @@ module NavigationHelper
     ]
   end
 
+  def show_back_button?
+    current_page?(notification_settings_path) ||
+      resource_show_page?("speakers") ||
+      resource_show_page?("sessions")
+  end
+
+  def show_bookmark_button?(session)
+    return true if controller_name == "schedules"
+
+    !session.past?
+  end
+
+  def back_title
+    if controller_name.include?("_")
+      controller_name.humanize
+    else
+      "#{controller_name.singularize.capitalize} detail"
+    end
+  end
+
   def title(title)
     content_for :title, title
+  end
+
+  private
+
+  def resource_show_page?(resource)
+    controller_name == resource && action_name == "show"
   end
 end
