@@ -15,10 +15,13 @@
           </div>
 
           <div class="flex flex-col">
-            <%= form.label :password, class: "text-white italic font-bold mb-2" %>
+            <div class="flex flex-row justify-between">
+              <%= form.label :password, class: "text-white italic font-bold mb-2" %>
+              <%= link_to "Forgot password?", new_password_reset_path, class: "font-black italic underline text-white" %>
+            </div>
             <div class="relative" data-controller="password-visibility">
               <%= form.password_field :password, required: true, class: "peer w-full", placeholder: "Password", data: { test_id: "password_field", "password-visibility-target": "input" } %>
-              <button class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-300 hover:text-white peer-focus:text-gray-400 peer-focus:hover:text-gray-600" type="button" data-action="password-visibility#toggle">
+              <button class="absolute text-gray-300 -translate-y-1/2 right-3 top-1/2 hover:text-white peer-focus:text-gray-400 peer-focus:hover:text-gray-600" type="button" data-action="password-visibility#toggle">
                 <%= inline_svg_tag("icons/eye-empty.svg", size: "22", data: { "password-visibility-target": "icon" }) %>
                 <%= inline_svg_tag("icons/eye-off.svg", size: "22", class: "hidden", data: { "password-visibility-target": "icon" }) %>
               </button>
@@ -27,8 +30,8 @@
         </div>
 
         <div class="flex flex-col items-center mb-10">
-          <%= link_to "Forgot password?", new_password_reset_path, class: "font-black italic underline text-white mb-10" %>
-          <%= link_to "Sign up", new_registration_path, class: "font-black italic underline text-white" %>
+          <%= link_to "View as guest", sessions_path, class: "font-black italic underline text-white mb-10" %>
+          <%= link_to "Sign up", new_registration_path, class: "font-black italic underline text-white mb-10" %>
         </div>
       </div>
     </div>

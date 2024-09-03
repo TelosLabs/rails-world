@@ -68,7 +68,7 @@
           partial: "sessions/card",
           locals: {
             session: session,
-            user_is_an_attendee: Current.user.sessions.include?(session)
+            user_is_an_attendee: Current.user&.sessions&.include?(session)
           }
         ) %>
       <% end %>

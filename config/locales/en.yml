@@ -45,6 +45,8 @@ en:
       live: "Live"
       starting_soon: "Starting soon"
       submit: "Apply"
+  authentication:
+    unauthenticated: "You need to sign in or sign up before continuing."
   authorization:
     unauthorized: "You are not authorized to access this page."
     invalid_auth_token: "Your request has expired. Please try again."

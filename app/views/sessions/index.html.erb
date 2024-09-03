@@ -39,7 +39,7 @@
                   partial: 'sessions/card',
                   locals: {
                     session: session,
-                    user_is_an_attendee: @user_session_ids.include?(session.id)
+                    user_is_an_attendee: @user_session_ids&.include?(session.id)
                   }
                 ) %>
           <% end %>
