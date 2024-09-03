@@ -28,11 +28,15 @@ class SessionReminderNotifier < ApplicationNotifier
       end
     end
 
-    def mail_title
+    def subject
+      t("mailers.session_mailer.reminder.subject", title: record.title)
+    end
+
+    def email_title
       if params[:time_before_session].match?(/^0\s/)
-        t("mailers.session_mailer.reminder.subject.without_time")
+        t("mailers.session_mailer.reminder.title.without_time")
       else
-        t("mailers.session_mailer.reminder.subject.with_time", time_before_session: params[:time_before_session])
+        t("mailers.session_mailer.reminder.title.with_time", time_before_session: params[:time_before_session])
       end
     end
 
