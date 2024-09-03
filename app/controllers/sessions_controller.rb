@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_action :authenticate_user!
+  allow_unauthenticated_access
 
   def index
     @user_session_ids = current_user&.sessions&.pluck(:id)
