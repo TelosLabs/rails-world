@@ -20,11 +20,11 @@ class SessionQuery
   def filter_by_date
     return if starts_at.blank?
 
-    self.relation = relation&.starts_at(starts_at)
+    self.relation = relation.starts_at(starts_at)
   end
 
   def filter_by_status
-    self.relation = relation&.send_chain_or(status_scopes)
+    self.relation = relation.send_chain_or(status_scopes)
   end
 
   def starts_at
