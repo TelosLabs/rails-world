@@ -39,12 +39,12 @@
   top: calc(env(safe-area-inset-top) + 79px);
 }
 
-.top-safe-area-\[273px\] {
-  top: calc(env(safe-area-inset-top) + 273px);
+.top-safe-area-\[253px\] {
+  top: calc(env(safe-area-inset-top) + 253px);
 }
 
-.top-safe-area-\[240px\] {
-  top: calc(env(safe-area-inset-top) + 240px);
+.top-safe-area-\[220px\] {
+  top: calc(env(safe-area-inset-top) + 220px);
 }
 
 /* Form errors */
