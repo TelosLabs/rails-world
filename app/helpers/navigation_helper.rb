@@ -15,28 +15,8 @@ module NavigationHelper
     request.path.starts_with?(path)
   end
 
-  def show_header?
-    !current_page?(new_user_session_path) &&
-      !current_page?(about_path) &&
-      !current_page?(coming_soon_path)
-  end
-
-  def show_bottom_navbar?
-    current_page?(sessions_path) ||
-      (user_signed_in? || !current_page?(unauthenticated_root_path)) &&
-        !excluded_paths.any? { |path| current_page?(path) }
-  end
-
-  private
-
-  def excluded_paths
-    [
-      new_user_session_path,
-      new_registration_path,
-      new_password_reset_path,
-      edit_password_reset_path,
-      post_submit_password_reset_path
-    ]
+  def title(title)
+    content_for :title, title
   end
 
   def show_back_button?
@@ -45,22 +25,40 @@ module NavigationHelper
       resource_show_page?("sessions")
   end
 
+  def show_header?
+    !header_excluded_paths.any? { |path| current_page?(path) }
+  end
+
+  def show_bottom_navbar?
+    current_page?(sessions_path) ||
+      (user_signed_in? || !current_page?(unauthenticated_root_path)) &&
+        !bottom_navbar_excluded_paths.any? { |path| current_page?(path) }
+  end
+
   def show_bookmark_button?(session)
     return true if controller_name == "schedules"
 
     !session.past?
   end
 
-  def back_title
-    if controller_name.include?("_")
-      controller_name.humanize
-    else
-      "#{controller_name.singularize.capitalize} detail"
-    end
+  private
+
+  def header_excluded_paths
+    [
+      new_user_session_path,
+      about_path,
+      coming_soon_path
+    ]
   end
 
-  def title(title)
-    content_for :title, title
+  def bottom_navbar_excluded_paths
+    [
+      new_user_session_path,
+      new_registration_path,
+      new_password_reset_path,
+      edit_password_reset_path,
+      post_submit_password_reset_path
+    ]
   end
 
   def resource_show_page?(resource)
