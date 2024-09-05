@@ -25,6 +25,14 @@ module NavigationHelper
       resource_show_page?("sessions")
   end
 
+  def back_title
+    if controller_name.include?("_")
+      controller_name.humanize
+    else
+      "#{controller_name.singularize.capitalize} detail"
+    end
+  end
+
   def show_header?
     !header_excluded_paths.any? { |path| current_page?(path) }
   end
