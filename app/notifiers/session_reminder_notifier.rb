@@ -1,5 +1,5 @@
 class SessionReminderNotifier < ApplicationNotifier
-  deliver_by :email do |config|
+  deliver_by :custom_email, class: "DeliveryMethods::CustomEmail" do |config|
     config.mailer = "SessionMailer"
     config.method = "reminder"
     config.if = -> { recipient.profile&.mail_notifications }
