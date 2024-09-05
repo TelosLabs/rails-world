@@ -1,8 +1,8 @@
 <%= title "My Schedule - Rails World 2024" %>
 
-<div class="flex flex-col items-center h-full bg-grey-50">
+<div class="flex flex-col items-center h-full bg-grey-50 pt-safe-area-[79px]">
   <div class="flex flex-col items-center w-full h-full max-w-screen-md px-5">
-    <div class="sticky top-[79px] z-30 flex flex-col items-center w-full pt-10 bg-grey-50">
+    <div class="sticky top-safe-area-[79px] z-30 flex flex-col items-center w-full pt-10 bg-grey-50">
       <div class="flex w-full mb-4">
         <h1 class="text-4xl italic font-black text-gray-800">My Schedule</h1>
       </div>
@@ -18,8 +18,8 @@
                 :div,
                 class: [
                   "sticky z-20 flex items-center mb-5 bg-grey-50",
-                  "top-[273px]": session_filter_params.present?,
-                  "top-[240px]": session_filter_params.blank?
+                  "top-safe-area-[273px]": session_filter_params.present?,
+                  "top-safe-area-[240px]": session_filter_params.blank?
                 ]
               ) do %>
             <div class="pt-2 pb-4 text-2xl font-bold text-grey-800 text-nowrap">
