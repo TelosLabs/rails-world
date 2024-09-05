@@ -10,10 +10,12 @@
       <%= render partial: 'sessions/filters', locals: { resource: :schedule } %>
     </div>
 
-    <div class="flex flex-col w-full h-full mb-[12rem]">
+    <div class="flex flex-col w-full h-full">
       <% if @sessions.present? %>
         <% previous_date = nil %>
-        <% @sessions.group_by(&:starts_at).each do |starts_at, sessions| %>
+        <% grouped_sessions = @sessions.group_by(&:starts_at) %>
+
+        <% grouped_sessions.each do |starts_at, sessions| %>
           <%= content_tag(
                 :div,
                 class: [
@@ -41,11 +43,13 @@
                     session: session,
                     user_is_an_attendee: true,
                     id_prefix: "schedule",
+                    last_session: grouped_sessions.keys.last == starts_at && sessions.last == session
                   }
                 ) %>
           <% end %>
           <% previous_date = starts_at.to_date %>
         <% end %>
+      <div class="mb-[17rem]"></div>
       <% elsif params[:starts_at].present? || session_filter_params.present? %>
         <div class="flex flex-col items-center justify-center w-full h-full">
           <p class="max-w-xs mb-4 font-bold text-center">No sessions match your current filters</p>
