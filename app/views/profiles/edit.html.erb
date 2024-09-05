@@ -6,9 +6,9 @@
   <meta name="turbo-refresh-scroll" content="reset">
 <% end %>
 
-<div class="flex flex-col items-center justify-center w-full bg-purple-dark">
+<div class="flex flex-col items-center justify-center w-full bg-purple-dark pt-safe-area-[79px] pb-safe-area-[54px]">
   <div class="flex flex-col w-full max-w-screen-sm p-4 border-t b-white">
-    <h1 class="w-full mb-6 text-4xl font-black text-white">Set up your account</h1>
+    <h1 class="w-full mb-6 text-3xl font-black text-white">Set up your account</h1>
 
     <%= form_with model: @profile, url: profile_path(@profile.uuid), class: "flex flex-col items-center" do |form| %>
       <div class="relative" data-controller="image-previewer">

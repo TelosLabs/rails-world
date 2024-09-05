@@ -63,8 +63,6 @@ module NavigationHelper
     content_for :title, title
   end
 
-  private
-
   def resource_show_page?(resource)
     controller_name == resource && action_name == "show"
   end
