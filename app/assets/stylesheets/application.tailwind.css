@@ -31,6 +31,10 @@
   padding-top: calc(env(safe-area-inset-top) + 79px);
 }
 
+.pb-safe-area-\[54px\] {
+  padding-bottom: calc(env(safe-area-inset-bottom) + 54px);
+}
+
 .top-safe-area-\[79px\] {
   top: calc(env(safe-area-inset-top) + 79px);
 }
