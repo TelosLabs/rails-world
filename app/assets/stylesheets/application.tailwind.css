@@ -19,17 +19,28 @@
 }
 
 /* Adjustments for iOS PWA support */
-html {
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-top);
+.pt-safe-area-6 {
+  padding-top: calc(env(safe-area-inset-top) + 24px)
 }
 
-.pt-header-safe-area {
-  padding-top: max(env(safe-area-inset-top), 24px);
+.pb-safe-area-1 {
+  padding-bottom: calc(env(safe-area-inset-bottom) + 4px);
 }
 
-.pb-navbar-safe-area {
-  padding-bottom: max(env(safe-area-inset-bottom), 4px);
+.pt-safe-area-\[79px\] {
+  padding-top: calc(env(safe-area-inset-top) + 79px);
+}
+
+.top-safe-area-\[79px\] {
+  top: calc(env(safe-area-inset-top) + 79px);
+}
+
+.top-safe-area-\[273px\] {
+  top: calc(env(safe-area-inset-top) + 273px);
+}
+
+.top-safe-area-\[240px\] {
+  top: calc(env(safe-area-inset-top) + 240px);
 }
 
 /* Form errors */
