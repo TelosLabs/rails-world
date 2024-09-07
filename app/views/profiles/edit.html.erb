@@ -95,7 +95,7 @@
           </p>
         </div>
       </div>
-      <%= form.submit "SAVE PROFILE", class:"w-full bg-red rounded-[10px] p-4 text-lg font-black text-white cursor-pointer" %>
+      <%= form.submit "SAVE PROFILE", class:"w-full bg-red rounded-[10px] p-4 text-lg font-black text-white cursor-pointer", data: { test_id: "save_profile_button" } %>
       <%= link_to "Skip for now", root_path, class: "text-lg underline font-black italic text-white mt-10" %>
     <% end %>
   </div>

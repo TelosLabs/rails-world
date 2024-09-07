@@ -10,7 +10,8 @@
           "flex min-w-fit items-center justify-center px-4 py-2 font-medium rounded-full",
           "bg-red text-white": params[:starts_at] == session_date.to_s,
           "bg-white text-red hover:bg-[#FAE7E8] focus:bg-[#FAE7E8]": params[:starts_at] != session_date.to_s
-        ]
+        ],
+        data: { test_id: "date_filter_#{session_date.strftime('%a_%d')}" }
       ) %>
     <% end %>
     <%= link_to(
@@ -20,7 +21,8 @@
         "flex min-w-fit items-center justify-center px-4 py-2 rounded-full font-medium",
         "bg-red text-white": params[:starts_at].blank?,
         "bg-white text-red hover:bg-[#FAE7E8] focus:bg-[#FAE7E8]": params[:starts_at].present?
-      ]
+      ],
+      data: { test_id: "date_filter_all" }
     ) %>
   </div>
 
