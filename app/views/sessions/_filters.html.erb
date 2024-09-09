@@ -35,7 +35,7 @@
     ]
   ) do %>
     <div class="relative" data-controller="dropdown">
-      <button type="button" data-action="dropdown#toggle click@window->dropdown#hide" class="flex items-center justify-center p-4 rounded-full">
+      <button type="button" id="session_status_filters" data-action="dropdown#toggle click@window->dropdown#hide" class="flex items-center justify-center p-4 rounded-full">
         <%= inline_svg_tag("icons/filters.svg", size: "18") %>
       </button>
 
@@ -68,6 +68,7 @@
               <div class="text-lg italic font-black underline text-red">
                 <%= form.submit(
                   t("views.status_filters.submit"),
+                  id: "session_status_filters_submit",
                   name: "",
                   class: "text-lg text-red italic underline font-black hover:cursor-pointer"
                 ) %>

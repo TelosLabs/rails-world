@@ -52,7 +52,6 @@ RSpec.describe "Agenda", type: :system do
         visit sessions_path
 
         find_dti("date_filter_#{live_session.starts_at.strftime("%a_%d")}").click
-
         expect(page).to have_content(live_session.title)
         expect(page).to have_content(starting_soon_session.title)
         expect(page).to have_no_content(past_session.title)
@@ -67,6 +66,41 @@ RSpec.describe "Agenda", type: :system do
         expect(page).to have_content(live_session.title)
         expect(page).to have_content(starting_soon_session.title)
       end
+
+      it "allows user to filter by status" do
+        visit sessions_path
+
+        # Filter by live
+        find_by_id("session_status_filters").click
+        find_by_id("live").click
+        find_by_id("session_status_filters_submit").click
+
+        expect(page).to have_no_content(past_session.title)
+        expect(page).to have_content(live_session.title)
+        expect(page).to have_no_content(starting_soon_session.title)
+
+        visit sessions_path
+
+        # Filter by starting soon
+        find_by_id("session_status_filters").click
+        find_by_id("starting_soon").click
+        find_by_id("session_status_filters_submit").click
+
+        expect(page).to have_content(starting_soon_session.title)
+        expect(page).to have_no_content(live_session.title)
+        expect(page).to have_no_content(past_session.title)
+
+        visit sessions_path
+
+        # Filter by past
+        find_by_id("session_status_filters").click
+        find_by_id("past").click
+        find_by_id("session_status_filters_submit").click
+
+        expect(page).to have_content(past_session.title)
+        expect(page).to have_no_content(live_session.title)
+        expect(page).to have_no_content(starting_soon_session.title)
+      end
     end
   end
 
@@ -77,8 +111,6 @@ RSpec.describe "Agenda", type: :system do
       find("#bookmark_session_#{session.id}").click
       expect(page).to have_current_path(new_user_session_path)
     end
-
-    # TODO: cannot see private sessions
 
     it "allows user to navigate to session details" do
       visit sessions_path
@@ -96,6 +128,16 @@ RSpec.describe "Agenda", type: :system do
       expect(page).to have_current_path(speaker_path(speaker.friendly_id))
       expect(page).to have_content(speaker.name)
       expect(page).to have_content(speaker.bio)
+    end
+
+    context "when opening a private sessions" do
+      let!(:private_session) { create(:session, conference: conference, public: false) }
+
+      it "does not show private sessions" do
+        visit session_path(private_session.id)
+
+        expect(page.status_code).to eq(404)
+      end
     end
   end
 end
