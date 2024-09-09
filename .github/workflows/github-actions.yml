@@ -92,3 +92,9 @@ jobs:
         - name: Run tests
           run: |
             bundle exec rspec
+        - name: Upload screenshots
+          if: failure()
+          uses: actions/upload-artifact@v2
+          with:
+            name: cypress-screenshots
+            path: cypress/screenshots
