@@ -40,9 +40,11 @@ module NavigationHelper
   end
 
   def show_back_button?
-    current_page?(notification_settings_path) ||
-      resource_show_page?("speakers") ||
-      resource_show_page?("sessions")
+    request.referer.present? && (
+      current_page?(notification_settings_path) ||
+        resource_show_page?("speakers") ||
+        resource_show_page?("sessions")
+    )
   end
 
   def show_bookmark_button?(session)
