@@ -94,7 +94,7 @@ jobs:
             bundle exec rspec
         - name: Upload screenshots
           if: failure()
-          uses: actions/upload-artifact@v3
+          uses: actions/upload-artifact@v4
           with:
-            name: cypress-screenshots
-            path: cypress/screenshots
+            name: capybara-screenshots
+            path: tmp/capybara
