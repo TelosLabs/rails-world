@@ -14,6 +14,7 @@ env:
   REGISTRATION_ENABLED: true
   RSPEC_RETRY_RETRY_COUNT: 3
   RAILS_ENV: test
+  VAPID_PUBLIC_KEY: test
 
 jobs:
   linters:
