@@ -35,9 +35,15 @@
     data-web-push-notifications-notifications-enabled-value=#{current_profile.web_push_notifications}" : '' %>>
 
     <main class="flex flex-col flex-1 w-full mx-auto">
-      <% if show_header? %>
-        <%= render partial: "layouts/header" %>
-      <% end %>
+      <div class="sticky top-0 z-30">
+        <% if show_back_button? %>
+          <%= render partial: "layouts/back_button" %>
+        <% end %>
+
+        <% if show_header? %>
+          <%= render partial: "layouts/header" %>
+        <% end %>
+      </div>
 
       <div id="flash_message">
         <% flash.each do |type, message| %>
