@@ -1,14 +1,7 @@
 <%# locals: (session:, user_is_an_attendee:, id_prefix: nil, last_session: false) %>
 
-<%= content_tag(
-  :div,
-  id: dom_id(session, id_prefix),
-  class: [
-    "relative flex flex-col w-full p-5 mb-4 bg-white rounded-[20px]",
-     "sticky top-[329px]": last_session && session_filter_params.present?,
-     "sticky top-[296px]": last_session && session_filter_params.blank?
-  ]
-) do %>
+<div class="relative flex flex-col w-full p-5 mb-4 bg-white rounded-[20px]" id="<%= dom_id(session, id_prefix) %>">
+  <a href="<%= session_path(session) %>" class="absolute top-0 bottom-0 left-0 right-0 z-0"></a>
 
   <%= render partial: "sessions/status", locals: { session: session } %>
 
@@ -80,4 +73,5 @@
       <span class="font-sans text-sm text-grey-600"><%= session.location&.name %></span>
     </div>
   </div>
-<% end %>
+</div>
+
