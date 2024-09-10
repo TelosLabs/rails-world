@@ -71,9 +71,9 @@ RSpec.describe "Agenda", type: :system do
         visit sessions_path
 
         # Filter by live
-        find_by_id("session_status_filters").click
+        find_dti("session_status_filters").click
         find_by_id("live").click
-        find_by_id("session_status_filters_submit").click
+        find_dti("session_status_filters_submit").click
 
         expect(page).to have_no_content(past_session.title)
         expect(page).to have_content(live_session.title)
@@ -82,9 +82,9 @@ RSpec.describe "Agenda", type: :system do
         visit sessions_path
 
         # Filter by starting soon
-        find_by_id("session_status_filters").click
+        find_dti("session_status_filters").click
         find_by_id("starting_soon").click
-        find_by_id("session_status_filters_submit").click
+        find_dti("session_status_filters_submit").click
 
         expect(page).to have_content(starting_soon_session.title)
         expect(page).to have_no_content(live_session.title)
@@ -93,9 +93,9 @@ RSpec.describe "Agenda", type: :system do
         visit sessions_path
 
         # Filter by past
-        find_by_id("session_status_filters").click
+        find_dti("session_status_filters").click
         find_by_id("past").click
-        find_by_id("session_status_filters_submit").click
+        find_dti("session_status_filters_submit").click
 
         expect(page).to have_content(past_session.title)
         expect(page).to have_no_content(live_session.title)
