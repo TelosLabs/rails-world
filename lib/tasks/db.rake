@@ -321,7 +321,7 @@ namespace :db do
       title: "What to do tonight",
       starts_at: Time.zone.local(2024, month, registration_day, 17, 0)
     ) do |session|
-      session.description = "TODO" # TODO
+      session.description = "<div class=\"trix-content\">\n  <div>If you are looking for things to do in the city after you pick up your badge, check out <a href=\"https://docs.google.com/document/d/11aJ9HF0WW4ShArHpLl8cipgl2cOuGTFuObjOpp_1LxA/edit?usp=sharing\">this list of recommendations</a> created for you by the <strong>Toronto Ruby</strong> meetup group.<br><br>Don't stay out too late - the keynote tomorrow morning waits for no one.</div>\n</div>\n"
       session.ends_at = Time.zone.local(2024, month, registration_day, 18, 0o0)
       session.location = toronto_location
     end
@@ -331,14 +331,14 @@ namespace :db do
       title: "Doors Open",
       starts_at: Time.zone.local(2024, month, start_day, 9, 0)
     ) do |session|
-      session.description = "Rails World attendees are welcome to register, enter, and grab a coffee and light breakfast before the keynote begins."
+      session.description = "Rails World attendees are welcome to enter Evergreen Brickworks, pick up your swag bag, and grab a coffee and light breakfast before the keynote begins."
       session.ends_at = Time.zone.local(2024, month, start_day, 9, 45)
       session.location = sponsor_garden
     end
 
     Session.find_or_create_by!(
       conference: conference,
-      title: "Opening Keynote",
+      title: "Rails World Opening Keynote",
       starts_at: Time.zone.local(2024, month, start_day, 9, 45)
     ) do |session|
       session.description = "DHH will kick off the second edition of Rails World in Toronto with an Opening Keynote highlighting what is new in Rails today, and where the framework is headed tomorrow."
@@ -377,7 +377,7 @@ namespace :db do
       title: "Lunch (and other things to do in the breaks)",
       starts_at: Time.zone.local(2024, month, start_day, 11, 45)
     ) do |session|
-      session.description = "TODO" # TODO
+      session.description = "<div class=\"trix-content\">\n  <div>Lunch will be served in the <strong>Sponsor Garden</strong> and in the <strong>Pavilion</strong>.&nbsp;<br><br>During lunch and breaks between sessions on both days, attendees can also:&nbsp;<br><br></div><ul><li>Catch 5-10 min Community talks on the <strong>Lightning Track</strong> (sponsored by <strong>Shopify</strong>)&nbsp;</li><li>Chat with our sponsors in the <strong>Sponsor Garden&nbsp;</strong></li><li>Hang out in the <strong>Shopify Lounge</strong>&nbsp;</li><li>Sign up <a href=\"https://docs.google.com/forms/d/e/1FAIpQLSf9_jfPzw-1YvkGFhlGtnGhkDqVvX2Z-D1vpJardmQ6nVf7PQ/viewform\"><strong>here</strong></a> for pair programming or career advice in the <strong>Double Up Lab</strong> (sponsored by <strong>Test Double</strong>)</li><li>Chill out in the <strong>kilns</strong> of this historic venue</li><li>Grab an espresso or latte from the <strong>coffee carts</strong> (sponsored by <strong>Cedarcode</strong>)&nbsp;</li><li>Or grab an item from the <strong>food trucks</strong> (sponsored by <strong>Shopify</strong>) - Note that the food trucks will be open all day from 11 am to 4 pm, so drop by with your ticket for a free item whenever you like.</li><li>Go touch grass. (We are located in one of Toronto's most calming nature parks.)</li></ul>\n</div>\n"
       session.ends_at = Time.zone.local(2024, month, start_day, 13, 0)
       session.location = break_location
     end
@@ -457,7 +457,7 @@ namespace :db do
       title: "Double Up Lab (sponsored by Test Double)",
       starts_at: Time.zone.local(2024, month, start_day, 14, 15)
     ) do |session|
-      session.description = "" # TODO
+      session.description = "<div class=\"trix-content\">\n  <div>Join Test Double in the Double Up Lab to pair with one of our double agents on Rails, no-strings-attached career advice, and more. Bring something to work on, check out what we've been up to, or just recharge and chat.<br><br><a href=\"https://docs.google.com/forms/d/e/1FAIpQLSf9_jfPzw-1YvkGFhlGtnGhkDqVvX2Z-D1vpJardmQ6nVf7PQ/viewform\"><strong>Book time here</strong></a>.<br><br>You can also stop by 1:00-2:15 pm daily to say hello, score some swag, schedule a session, or get resume &amp; career advice.</div>\n</div>\n"
       session.ends_at = Time.zone.local(2024, month, start_day, 14, 45)
       session.location = double_up_location
     end
@@ -498,10 +498,10 @@ namespace :db do
 
     Session.find_or_create_by!(
       conference: conference,
-      title: "Double Up Lab (sponsored by Test Double)",
+      title: "Double Up Lab",
       starts_at: Time.zone.local(2024, month, start_day, 15, 15)
     ) do |session|
-      session.description = "" # TODO
+      session.description = "<div class=\"trix-content\">\n  <div>Join Test Double in the Double Up Lab to pair with one of our double agents on Rails, no-strings-attached career advice, and more. Bring something to work on, check out what we've been up to, or just recharge and chat.<br><br><a href=\"https://docs.google.com/forms/d/e/1FAIpQLSf9_jfPzw-1YvkGFhlGtnGhkDqVvX2Z-D1vpJardmQ6nVf7PQ/viewform\"><strong>Book time here</strong></a>.<br><br>You can also stop by 1:00-2:15 pm daily to say hello, score some swag, schedule a session, or get resume &amp; career advice.</div>\n</div>\n"
       session.ends_at = Time.zone.local(2024, month, start_day, 15, 45)
       session.location = double_up_location
     end
@@ -535,7 +535,7 @@ namespace :db do
       title: "Matz & DHH Fireside chat, hosted by Tobias Lütke",
       starts_at: Time.zone.local(2024, month, start_day, 16, 30)
     ) do |session|
-      session.description = "" # TODO
+      session.description = "<div class=\"trix-content\">\n  <div>We are pleased to welcome Ruby creator and special guest <strong>Yukihiro Matsumoto (Matz)</strong> to the Rails World stage for a fireside chat with Rails creator <strong>David Heinemeier Hansson (DHH)</strong>. Together on stage for the very first time!<br><br>Hosted by <strong>Shopify</strong> founder Tobias Lütke, this is sure to be a conversation you don’t want to miss.</div>\n</div>\n"
       session.ends_at = Time.zone.local(2024, month, start_day, 17, 30)
       session.location = track_1
       session.speakers = [matz_speaker, david_heinemeier_hansson_speaker, tobias_luetke_speaker]
@@ -592,7 +592,7 @@ namespace :db do
       title: "Lunch (and other things to do in the breaks)",
       starts_at: Time.zone.local(2024, month, second_day, 11, 45)
     ) do |session|
-      session.description = "TODO" # TODO
+      session.description = "<div class=\"trix-content\">\n  <div>Lunch will be served in the <strong>Sponsor Garden</strong> and in the <strong>Pavilion</strong>.&nbsp;<br><br>During lunch and breaks between sessions on both days, attendees can also:&nbsp;<br><br></div><ul><li>Catch 5-10 min Community talks on the <strong>Lightning Track</strong> (sponsored by <strong>Shopify</strong>)&nbsp;</li><li>Chat with our sponsors in the <strong>Sponsor Garden&nbsp;</strong></li><li>Hang out in the <strong>Shopify Lounge</strong>&nbsp;</li><li>Sign up <a href=\"https://docs.google.com/forms/d/e/1FAIpQLSf9_jfPzw-1YvkGFhlGtnGhkDqVvX2Z-D1vpJardmQ6nVf7PQ/viewform\"><strong>here</strong></a> for pair programming or career advice in the <strong>Double Up Lab</strong> (sponsored by <strong>Test Double</strong>)</li><li>Chill out in the <strong>kilns</strong> of this historic venue</li><li>Grab an espresso or latte from the <strong>coffee carts</strong> (sponsored by <strong>Cedarcode</strong>)&nbsp;</li><li>Or grab an item from the <strong>food trucks</strong> (sponsored by <strong>Shopify</strong>) - Note that the food trucks will be open all day from 11 am to 4 pm, so drop by with your ticket for a free item whenever you like.</li><li>Go touch grass. (We are located in one of Toronto's most calming nature parks.)</li></ul>\n</div>\n"
       session.ends_at = Time.zone.local(2024, month, second_day, 13, 0)
       session.location = break_location
     end
@@ -662,7 +662,7 @@ namespace :db do
       title: "Double Up Lab (sponsored by Test Double)",
       starts_at: Time.zone.local(2024, month, second_day, 14, 15)
     ) do |session|
-      session.description = "" # TODO
+      session.description = "<div class=\"trix-content\">\n  <div>Join Test Double in the Double Up Lab to pair with one of our double agents on Rails, no-strings-attached career advice, and more. Bring something to work on, check out what we've been up to, or just recharge and chat.<br><br><a href=\"https://docs.google.com/forms/d/e/1FAIpQLSf9_jfPzw-1YvkGFhlGtnGhkDqVvX2Z-D1vpJardmQ6nVf7PQ/viewform\"><strong>Book time here</strong></a>.<br><br>You can also stop by 1:00-2:15 pm daily to say hello, score some swag, schedule a session, or get resume &amp; career advice.</div>\n</div>\n"
       session.ends_at = Time.zone.local(2024, month, second_day, 14, 45)
       session.location = double_up_location
     end
@@ -693,10 +693,10 @@ namespace :db do
 
     Session.find_or_create_by!(
       conference: conference,
-      title: "Double Up Lab (sponsored by Test Double)",
+      title: "Double Up Lab",
       starts_at: Time.zone.local(2024, month, second_day, 15, 15)
     ) do |session|
-      session.description = "" # TODO
+      session.description = "<div class=\"trix-content\">\n  <div>Join Test Double in the Double Up Lab to pair with one of our double agents on Rails, no-strings-attached career advice, and more. Bring something to work on, check out what we've been up to, or just recharge and chat.<br><br><a href=\"https://docs.google.com/forms/d/e/1FAIpQLSf9_jfPzw-1YvkGFhlGtnGhkDqVvX2Z-D1vpJardmQ6nVf7PQ/viewform\"><strong>Book time here</strong></a>.<br><br>You can also stop by 1:00-2:15 pm daily to say hello, score some swag, schedule a session, or get resume &amp; career advice.</div>\n</div>\n"
       session.ends_at = Time.zone.local(2024, month, second_day, 15, 45)
       session.location = double_up_location
     end
