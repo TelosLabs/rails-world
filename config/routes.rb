@@ -17,11 +17,11 @@ Rails.application.routes.draw do
 
   resource :registration, only: [:new, :create]
   resource :user_session, only: [:new, :create, :destroy]
+  resource :user, only: [:edit, :update]
   resource :password, only: [:edit, :update]
   resource :password_reset, only: [:new, :create, :edit, :update] do
     get :post_submit
   end
-  resource :user_session_settings, only: [:edit, :update]
   resource :read_notifications, only: [:create]
   resource :notification_settings, only: [:show, :update]
   resource :coming_soon, only: [:show]
