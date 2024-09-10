@@ -1,22 +1,11 @@
-<div class="sticky top-0 z-30">
-  <% if show_back_button? %>
-    <div class="relative flex items-center justify-center w-full py-2 bg-white">
-      <%= link_to "javascript:history.back()", class: "absolute left-0 flex items-center py-2 pl-5" do %>
-        <%= inline_svg_tag("icons/chevron_left.svg", size: "24", class: "fill-red") %>
-        <span class="ml-1 text-lg italic font-black text-red">Back</span>
-      <% end %>
-      <p class="text-lg font-medium"><%= back_title %></p>
-    </div>
-  <% end %>
-
-  <div class="flex justify-center w-full py-6 mx-auto border-b border-b-white bg-purple-dark">
-    <div class="flex max-w-screen-sm px-5">
-      <%= link_to root_path(
-                    starts_at: current_starts_at_filter,
-                    anchor: session_anchor(current_agenda_session)
-                  ) do %>
-        <%= inline_svg_tag("main_logo.svg", class: "w-full") %>
-      <% end %>
-    </div>
+<div class="flex justify-center w-full py-6 mx-auto border-b border-b-white bg-purple-dark">
+  <div class="flex max-w-screen-sm px-5">
+    <%= link_to root_path(
+                  starts_at: current_starts_at_filter,
+                  anchor: session_anchor(current_agenda_session)
+                ) do %>
+      <%= inline_svg_tag("main_logo.svg", class: "w-full") %>
+    <% end %>
   </div>
 </div>
+
