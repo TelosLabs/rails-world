@@ -1,10 +1,10 @@
 <% if show_back_button? %>
   <div class="relative flex items-center justify-center w-full py-2">
-    <%= link_to :back, class: "absolute left-0 flex items-center py-2" do %>
+    <%= link_to "javascript:history.back()", class: "absolute left-0 flex items-center py-2 pl-5" do %>
       <%= inline_svg_tag("icons/chevron_left.svg", size: "24", class: "fill-red") %>
       <span class="ml-1 text-lg italic font-black text-red">Back</span>
     <% end %>
-    <p class="text-lg font-bold"><%= back_title %></p>
+    <p class="text-lg font-medium"><%= back_title %></p>
   </div>
 <% end %>
 
