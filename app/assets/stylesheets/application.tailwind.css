@@ -58,3 +58,40 @@ div.field_with_errors > input {
     @apply px-0;
   }
 }
+
+/* Utility classes for iOS PWA support */
+.pt-safe-area-6 {
+  padding-top: calc(env(safe-area-inset-top) + 24px)
+}
+
+.pt-safe-area-2 {
+  padding-top: calc(env(safe-area-inset-top) + 8px)
+}
+
+.pb-safe-area-1 {
+  padding-bottom: calc(env(safe-area-inset-bottom) + 4px);
+}
+
+.pt-safe-area-back-button {
+  padding-top: calc(env(safe-area-inset-top) + 40px);
+}
+
+.pt-safe-area-header {
+  padding-top: calc(env(safe-area-inset-top) + 79px);
+}
+
+.pb-safe-area-bottom-navbar {
+  padding-bottom: calc(env(safe-area-inset-bottom) + 54px);
+}
+
+.top-safe-area-header {
+  top: calc(env(safe-area-inset-top) + 79px);
+}
+
+.top-safe-area-with-filters {
+  top: calc(env(safe-area-inset-top) + 245px);
+}
+
+.top-safe-area-no-filters {
+  top: calc(env(safe-area-inset-top) + 212px);
+}

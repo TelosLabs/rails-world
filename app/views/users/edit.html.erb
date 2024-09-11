@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center flex-1 px-5 pb-10 bg-purple-dark">
+<div class="flex flex-col items-center flex-1 px-5 pb-10 bg-purple-dark pt-safe-area-header pb-safe-area-bottom-navbar">
   <%= form_with model: Current.user, url: user_path, class: "flex flex-col h-full w-full max-w-screen-sm" do |form| %>
     <div class="flex flex-col w-full h-full">
       <div class="flex flex-col">
@@ -43,6 +43,6 @@
       </div>
     </div>
 
-    <%= form.button "Update", type: "submit", class: "w-full bg-red py-4 text-white font-black italic rounded-[10px] uppercase" %>
+    <%= form.button "Update", type: "submit", class: "w-full bg-red py-4 text-white font-black italic rounded-[10px] uppercase mb-4" %>
   <% end %>
 </div>
