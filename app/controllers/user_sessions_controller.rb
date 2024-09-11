@@ -12,7 +12,7 @@ class UserSessionsController < ApplicationController
 
     if @user
       login @user
-      redirect_to session[:original_request_path] || root_path
+      redirect_to root_path
     else
       redirect_to new_user_session_path, alert: t("controllers.user_sessions.create.alert")
     end

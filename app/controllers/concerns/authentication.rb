@@ -28,38 +28,14 @@ module Authentication
 
     if !user_signed_in?
       flash[:notice] = I18n.t("authentication.unauthenticated")
-      store_user_location
       redirect_to new_user_session_path
     end
   end
 
-  def storable_location?
-    request.get? &&
-      !request.xhr? &&
-      !turbo_frame_request? &&
-      !excluded_path?
-  end
-
-  def excluded_path?
-    [
-      new_user_session_path,
-      new_registration_path,
-      user_session_path
-    ].include?(request.path)
-  end
-
-  def store_user_location
-    return unless storable_location?
-
-    session[:original_request_path] = request.fullpath
-  end
-
   def login(user)
     Current.user = user
-    original_request_path = session[:original_request_path]
     reset_session
     session[:user_id] = user.id
-    session[:original_request_path] = original_request_path
   end
 
   def logout
