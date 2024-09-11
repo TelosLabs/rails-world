@@ -1,41 +1,45 @@
 <div class="flex flex-col items-center flex-1 px-5 pb-10 bg-purple-dark">
-  <%= form_with model: Current.user, url: user_path, class: "flex flex-col h-full justify-between w-full max-w-screen-sm" do |form| %>
-    <h1 class="mt-5 text-3xl italic font-semibold text-white">User settings</h1>
-    <p class="mb-10 text-white">Update your email, password or both.</p>
-
-    <div class="flex flex-col w-full mb-5">
-      <%= render partial: "shared/form_errors", locals: { errors: form.object.errors.full_messages } %>
-
-      <%= form.label :email, class: "text-white italic font-bold mb-2" %>
-      <%= form.email_field :email, required: true, placeholder: "email@example.com" %>
-      <p class="mt-1 mb-6 text-xs text-white">Fill this with a new email you want to use.</p>
-
-      <%= form.label :password_challenge, "Current Password", class: "text-white italic font-bold mb-2" %>
-      <div class="relative" data-controller="password-visibility">
-        <%= form.password_field :password_challenge, class: "peer w-full", placeholder: "Password", data: { "password-visibility-target": "input" } %>
-        <button class="absolute text-gray-300 -translate-y-1/2 right-3 top-1/2 hover:text-white peer-focus:text-gray-400 peer-focus:hover:text-gray-600" type="button" data-action="password-visibility#toggle">
-          <%= inline_svg_tag("icons/eye-empty.svg", size: "22", data: { "password-visibility-target": "icon" }) %>
-          <%= inline_svg_tag("icons/eye-off.svg", size: "22", class: "hidden", data: { "password-visibility-target": "icon" }) %>
-        </button>
-      </div>
-      <p class="mt-1 mb-6 text-xs text-white">Enter your current password if you want to create a new one.</p>
-
-      <%= form.label :password, "New Password", class: "text-white italic font-bold mb-2" %>
-      <div class="relative mb-6" data-controller="password-visibility">
-        <%= form.password_field :password, class: "peer w-full", placeholder: "Password", data: { "password-visibility-target": "input" } %>
-        <button class="absolute text-gray-300 -translate-y-1/2 right-3 top-1/2 hover:text-white peer-focus:text-gray-400 peer-focus:hover:text-gray-600" type="button" data-action="password-visibility#toggle">
-          <%= inline_svg_tag("icons/eye-empty.svg", size: "22", data: { "password-visibility-target": "icon" }) %>
-          <%= inline_svg_tag("icons/eye-off.svg", size: "22", class: "hidden", data: { "password-visibility-target": "icon" }) %>
-        </button>
+  <%= form_with model: Current.user, url: user_path, class: "flex flex-col h-full w-full max-w-screen-sm" do |form| %>
+    <div class="flex flex-col w-full h-full">
+      <div class="flex flex-col">
+        <h1 class="mt-5 text-3xl italic font-semibold text-white">User settings</h1>
+        <p class="mb-8 text-white">Update your email, password or both.</p>
       </div>
 
-      <%= form.label :password_confirmation, "New Password Confirmation", class: "text-white italic font-bold" %>
-      <div class="relative mb-6" data-controller="password-visibility">
-        <%= form.password_field :password_confirmation, class: "peer w-full", placeholder: "Password", data: { "password-visibility-target": "input" } %>
-        <button class="absolute text-gray-300 -translate-y-1/2 right-3 top-1/2 hover:text-white peer-focus:text-gray-400 peer-focus:hover:text-gray-600" type="button" data-action="password-visibility#toggle">
-          <%= inline_svg_tag("icons/eye-empty.svg", size: "22", data: { "password-visibility-target": "icon" }) %>
-          <%= inline_svg_tag("icons/eye-off.svg", size: "22", class: "hidden", data: { "password-visibility-target": "icon" }) %>
-        </button>
+      <div class="flex flex-col w-full mb-5">
+        <%= render partial: "shared/form_errors", locals: { errors: form.object.errors.full_messages } %>
+
+        <%= form.label :email, class: "text-white italic font-bold mb-2" %>
+        <%= form.email_field :email, required: true, placeholder: "email@example.com" %>
+        <p class="mt-1 mb-6 text-xs text-white">Fill this with a new email you want to use.</p>
+
+        <%= form.label :password_challenge, "Current Password", class: "text-white italic font-bold mb-2" %>
+        <div class="relative" data-controller="password-visibility">
+          <%= form.password_field :password_challenge, class: "peer w-full", placeholder: "Password", data: { "password-visibility-target": "input" } %>
+          <button class="absolute text-gray-300 -translate-y-1/2 right-3 top-1/2 hover:text-white peer-focus:text-gray-400 peer-focus:hover:text-gray-600" type="button" data-action="password-visibility#toggle">
+            <%= inline_svg_tag("icons/eye-empty.svg", size: "22", data: { "password-visibility-target": "icon" }) %>
+            <%= inline_svg_tag("icons/eye-off.svg", size: "22", class: "hidden", data: { "password-visibility-target": "icon" }) %>
+          </button>
+        </div>
+        <p class="mt-1 mb-6 text-xs text-white">Enter your current password if you want to create a new one.</p>
+
+        <%= form.label :password, "New Password", class: "text-white italic font-bold mb-2" %>
+        <div class="relative mb-6" data-controller="password-visibility">
+          <%= form.password_field :password, class: "peer w-full", placeholder: "Password", data: { "password-visibility-target": "input" } %>
+          <button class="absolute text-gray-300 -translate-y-1/2 right-3 top-1/2 hover:text-white peer-focus:text-gray-400 peer-focus:hover:text-gray-600" type="button" data-action="password-visibility#toggle">
+            <%= inline_svg_tag("icons/eye-empty.svg", size: "22", data: { "password-visibility-target": "icon" }) %>
+            <%= inline_svg_tag("icons/eye-off.svg", size: "22", class: "hidden", data: { "password-visibility-target": "icon" }) %>
+          </button>
+        </div>
+
+        <%= form.label :password_confirmation, "New Password Confirmation", class: "text-white italic font-bold" %>
+        <div class="relative mb-6" data-controller="password-visibility">
+          <%= form.password_field :password_confirmation, class: "peer w-full", placeholder: "Password", data: { "password-visibility-target": "input" } %>
+          <button class="absolute text-gray-300 -translate-y-1/2 right-3 top-1/2 hover:text-white peer-focus:text-gray-400 peer-focus:hover:text-gray-600" type="button" data-action="password-visibility#toggle">
+            <%= inline_svg_tag("icons/eye-empty.svg", size: "22", data: { "password-visibility-target": "icon" }) %>
+            <%= inline_svg_tag("icons/eye-off.svg", size: "22", class: "hidden", data: { "password-visibility-target": "icon" }) %>
+          </button>
+        </div>
       </div>
     </div>
 
