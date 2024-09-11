@@ -34,8 +34,7 @@
     data-web-push-notifications-vapid-key-value=#{vapid_public_key}
     data-web-push-notifications-notifications-enabled-value=#{current_profile.web_push_notifications}" : '' %>>
 
-
-    <div class="fixed top-0 z-40 pt-safe-area-6">
+    <div class="fixed top-0 z-40 w-full">
       <% if show_back_button? %>
         <%= render partial: "layouts/back_button" %>
       <% end %>

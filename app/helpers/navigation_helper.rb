@@ -20,11 +20,9 @@ module NavigationHelper
   end
 
   def show_back_button?
-    request.referer.present? && (
-      current_page?(notification_settings_path) ||
-        resource_show_page?("speakers") ||
-        resource_show_page?("sessions")
-    )
+    current_page?(notification_settings_path) ||
+      resource_show_page?("speakers") ||
+      resource_show_page?("sessions")
   end
 
   def back_title
@@ -36,7 +34,10 @@ module NavigationHelper
   end
 
   def show_header?
-    !header_excluded_paths.any? { |path| current_page?(path) }
+    !current_page?(new_user_session_path) &&
+      !current_page?(about_path) &&
+      !current_page?(coming_soon_path) &&
+      !show_back_button?
   end
 
   def show_bottom_navbar?
@@ -52,14 +53,6 @@ module NavigationHelper
   end
 
   private
-
-  def header_excluded_paths
-    [
-      new_user_session_path,
-      about_path,
-      coming_soon_path
-    ]
-  end
 
   def bottom_navbar_excluded_paths
     [

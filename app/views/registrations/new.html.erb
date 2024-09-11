@@ -1,5 +1,5 @@
-<div class="flex flex-col items-center flex-1 px-5 py-10 bg-purple-dark">
-  <%= form_with model: @user, url: registration_path, class: "flex flex-col h-full justify-between w-full max-w-screen-sm" do |form| %>
+<div class="flex flex-col items-center flex-1 px-5 pb-10 bg-purple-dark pt-safe-area-[79px]">
+  <%= form_with model: @user, url: registration_path, class: "flex flex-col h-full justify-between w-full max-w-screen-sm pt-10" do |form| %>
     <div class="flex flex-col">
       <div class="flex flex-col w-full mb-6">
         <h1 class="mb-4 text-4xl italic font-black text-white">Sign Up</h1>
@@ -18,7 +18,7 @@
           <div class="flex flex-col mb-6">
             <%= form.label :password, class: "text-white italic font-bold mb-2" %>
             <%= form.password_field :password, required: true, data: { test_id: "password_field" }, placeholder: "You know how a strong password goes, right?" %>
-            <p class="text-xs text-white pt-1">Password should contain at least 8 characters</p>
+            <p class="pt-1 text-xs text-white">Password should contain at least 8 characters</p>
           </div>
 
           <div class="flex flex-col">
