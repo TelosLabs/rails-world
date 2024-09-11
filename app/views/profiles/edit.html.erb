@@ -6,9 +6,9 @@
   <meta name="turbo-refresh-scroll" content="reset">
 <% end %>
 
-<div class="flex flex-col items-center justify-center w-full bg-purple-dark">
-  <div class="flex flex-col w-full max-w-screen-sm p-4 border-t b-white">
-    <h1 class="w-full mb-6 text-4xl font-black text-white">Set up your account</h1>
+<div class="flex flex-col items-center justify-center w-full bg-purple-dark pt-safe-area-header pb-safe-area-bottom-navbar">
+  <div class="flex flex-col w-full max-w-screen-sm p-4">
+    <h1 class="w-full mb-6 text-3xl font-black text-white">Set up your account</h1>
 
     <%= form_with model: @profile, url: profile_path(@profile.uuid), class: "flex flex-col items-center" do |form| %>
       <div class="relative" data-controller="image-previewer">
@@ -96,7 +96,11 @@
         </div>
       </div>
       <%= form.submit "SAVE PROFILE", class:"w-full bg-red rounded-[10px] p-4 text-lg font-black text-white cursor-pointer", data: { test_id: "save_profile_button" } %>
-      <%= link_to "Skip for now", root_path, class: "text-lg underline font-black italic text-white mt-10" %>
+      <%= link_to "Edit your email and password", edit_user_path, class: "text-lg underline font-black italic text-white mt-10" %>
+
+      <% if current_user.created_at > 1.minute.ago %>
+        <%= link_to "Skip for now", root_path, class: "text-lg underline font-black italic text-white mt-2" %>
+      <% end %>
     <% end %>
   </div>
 </div>
