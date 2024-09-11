@@ -24,6 +24,9 @@ en:
         alert: "Invalid email or password."
       destroy:
         notice: "You have been logged out."
+    users:
+      update:
+        success: "User has been updated successfully."
     attendees:
       add_user:
         notice: "Session was added to My Schedule"
