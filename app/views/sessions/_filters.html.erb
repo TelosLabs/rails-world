@@ -27,13 +27,13 @@
   <%= content_tag(
     :div,
     class: [
-      "flex items-center justify-center ml-3 rounded-full min-w-[40px] min-h-[40px]",
+      "flex items-center justify-center ml-3 rounded-full min-w-[42px] min-h-[42px]",
       "bg-red fill-white": session_filter_params.present?,
       "bg-white fill-red hover:bg-[#FAE7E8] focus:bg-[#FAE7E8]": session_filter_params.blank?
     ]
   ) do %>
     <div class="relative" data-controller="dropdown">
-      <button type="button" data-action="dropdown#toggle click@window->dropdown#hide" class="flex items-center justify-center p-4 rounded-full">
+      <button type="button" data-action="dropdown#toggle click@window->dropdown#hide" class="flex items-center justify-center p-3 rounded-full">
         <%= inline_svg_tag("icons/filters.svg", size: "18") %>
       </button>
 

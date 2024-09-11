@@ -4,10 +4,10 @@
   model: current_user.profile,
   url: notification_settings_path,
   method: :put,
-  class: "flex flex-col items-center w-full p-5",
+  class: "flex flex-col items-center h-full w-full px-5 pt-safe-area-back-button pb-safe-area-bottom-navbar",
   data: {controller: 'form', form_target: 'form'}
 ) do |form| %>
-  <div class="flex flex-col w-full max-w-screen-sm mt-6">
+  <div class="flex flex-col w-full max-w-screen-sm pt-4">
     <p class="mb-2 italic font-bold text-black">Notifications Settings</p>
     <div class="w-full mb-4 overflow-hidden rounded-md">
       <div class="flex flex-row items-center justify-between w-full p-4 bg-white border-b border-grey-300">

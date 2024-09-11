@@ -2,7 +2,7 @@
 
 <%= title "#{profile_name}'s Profile - Rails World 2024" %>
 
-<div class="relative flex flex-col items-center justify-between flex-1 bg-grey-50">
+<div class="relative flex flex-col h-full items-center justify-between flex-1 bg-grey-50 pt-safe-area-header pb-safe-area-bottom-navbar">
   <div class="flex flex-col items-center bg-cover bg-bottom bg-no-repeat max-h-[430px] w-full" style="background-image: url(<%= asset_path 'background_design.svg' %>)">
     <div class="z-10 flex flex-col items-start w-full max-w-screen-sm px-5 pt-6 pb-12">
       <div class="flex flex-row items-center">
@@ -77,7 +77,7 @@
       <%= button_to(
         "Log out", user_session_path, method: :delete,
         form_class: "w-full max-w-screen-sm px-4",
-        class: "w-full bg-white py-4 text-red font-black italic rounded-[10px] uppercase mb-6"
+        class: "w-full bg-white py-4 text-red font-black italic rounded-[10px] uppercase"
       ) %>
     </div>
   <% end %>
