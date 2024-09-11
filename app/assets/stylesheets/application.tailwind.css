@@ -89,9 +89,9 @@ div.field_with_errors > input {
 }
 
 .top-safe-area-with-filters {
-  top: calc(env(safe-area-inset-top) + 253px);
+  top: calc(env(safe-area-inset-top) + 245px);
 }
 
 .top-safe-area-no-filters {
-  top: calc(env(safe-area-inset-top) + 220px);
+  top: calc(env(safe-area-inset-top) + 212px);
 }
