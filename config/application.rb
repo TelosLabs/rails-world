@@ -26,6 +26,7 @@ module RailsWorld
     #
     # config.eager_load_paths << Rails.root.join("extras")
 
+    config.session_store :cookie_store, key: "_rails_world_session", expire_after: 1.month
     config.time_zone = "Eastern Time (US & Canada)"
   end
 end
