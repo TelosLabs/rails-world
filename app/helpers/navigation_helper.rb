@@ -34,7 +34,8 @@ module NavigationHelper
   end
 
   def show_header?
-    !current_page?(new_user_session_path) &&
+    (user_signed_in? || !current_page?(unauthenticated_root_path)) &&
+      !current_page?(new_user_session_path) &&
       !current_page?(about_path) &&
       !current_page?(coming_soon_path) &&
       !show_back_button?
