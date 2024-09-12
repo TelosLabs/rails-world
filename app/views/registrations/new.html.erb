@@ -34,6 +34,13 @@
       </div>
     </div>
 
-    <%= form.button "Sign Up", type: "submit", data: { test_id: "sign_up_button" }, class: "w-full bg-red py-4 text-white font-black italic rounded-[10px] uppercase" %>
+    <%= form.button(
+      "Sign Up",
+      data: { test_id: "sign_up_button" },
+      class: [
+        "w-full bg-red py-4 text-white font-black italic rounded-[10px] uppercase",
+        "disabled:bg-gray-400 disabled:cursor-not-allowed"
+      ]
+    ) %>
   <% end %>
 </div>

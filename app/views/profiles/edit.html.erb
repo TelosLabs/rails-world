@@ -95,8 +95,19 @@
           </p>
         </div>
       </div>
-      <%= form.submit "SAVE PROFILE", class:"w-full bg-red rounded-[10px] p-4 text-lg font-black text-white cursor-pointer" %>
-      <%= link_to "Edit your email and password", edit_user_path, class: "text-lg underline font-black italic text-white mt-10" %>
+
+      <%= form.submit(
+        "SAVE PROFILE",
+        class: [
+          "w-full bg-red rounded-[10px] p-4 text-lg font-black text-white cursor-pointer",
+          "disabled:bg-grey-400 disabled:cursor-not-allowed"
+        ]
+      ) %>
+
+      <%= link_to(
+        "Edit your email and password", edit_user_path,
+        class: "text-lg underline font-black italic text-white mt-10"
+      ) %>
 
       <% if current_user.created_at > 1.minute.ago %>
         <%= link_to "Skip for now", root_path, class: "text-lg underline font-black italic text-white mt-2" %>

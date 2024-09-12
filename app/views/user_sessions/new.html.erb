@@ -35,8 +35,16 @@
         </div>
       </div>
     </div>
+
     <div class="flex flex-col">
-      <%= form.button "Log in", type: "submit", data: { test_id: "sign_in_button" }, class: "w-full bg-red py-4 text-white font-black italic rounded-[10px] uppercase" %>
+      <%= form.button(
+        "Log in",
+        data: { test_id: "sign_in_button" },
+        class: [
+          "w-full bg-red py-4 text-white font-black italic rounded-[10px] uppercase",
+          "disabled:bg-gray-400 disabled:cursor-not-allowed"
+        ]
+      ) %>
     </div>
   <% end %>
 </div>
