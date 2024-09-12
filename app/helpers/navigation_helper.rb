@@ -1,11 +1,11 @@
 module NavigationHelper
   def nav_icon_class_for(paths)
-    return "fill-red w-6 h-6" if paths.any? { |p| active_path?(p) }
+    return "fill-secondary-500 w-6 h-6" if paths.any? { |p| active_path?(p) }
     "fill-grey-400 w-6 h-6"
   end
 
   def nav_text_class_for(paths)
-    return "text-red" if paths.any? { |p| active_path?(p) }
+    return "text-secondary-500" if paths.any? { |p| active_path?(p) }
     "text-grey-400"
   end
 
