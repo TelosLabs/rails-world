@@ -90,10 +90,22 @@ To customize the logos and images you can replace the following files located in
 - `splashscreen_icon.png` used as the splash screen icon for PWA loading screens
 - `/public/pwa_home_screen_icon.png` used as the icon for PWA notifications
 
+### PWA Configuration
+
+To customize the app name in PWA installations, update the manifest configuration file: `app/views/service_worker/manifest.json.erb`
+
+```json
+{
+  "name": "Rails World",
+  "short_name": "Rails World",
+  ...
+}
+```
+
 ### App Notifications
 
 Session reminder notifications (web-push and email) are defaulted to 10 minutes before the session begins.
-You can customize this time by updating the `REMINDER_TIME_BEFORE_EVENT` constant in `app/jobs/session_reminder_job.rb`.
+You can customize this time by updating the `REMINDER_TIME_BEFORE_EVENT` constant in: `app/jobs/session_reminder_job.rb`
 
 ### Time zone
 
