@@ -21,7 +21,7 @@ or
 
 1. Run `docker compose up`
 
-## Branding
+## Customization
 
 ### General App Colors
 
