@@ -1,4 +1,4 @@
-<%= title "Edit profile - Rails World 2024" %>
+<%= title "Edit profile - #{current_conference&.name}" %>
 
 <%= content_for(:head) do %>
   <%# Disabling morphing so that when an error occurs, the user is "redirected" to the top of the page %>

@@ -14,9 +14,7 @@ class ApplicationController < ActionController::Base
 
   def current_profile = current_user&.profile
 
-  def current_conference
-    @_current_conference ||= Conference.last
-  end
+  def current_conference = Current.conference
 
   def vapid_public_key
     @_vapid_public_key ||= Base64.urlsafe_decode64(ENV["VAPID_PUBLIC_KEY"]).bytes.to_json
