@@ -90,6 +90,11 @@ To customize the logos and images you can replace the following files located in
 - `splashscreen_icon.png` used as the splash screen icon for PWA loading screens
 - `/public/pwa_home_screen_icon.png` used as the icon for PWA notifications
 
+### App Notifications
+
+Session reminder notifications (web-push and email) are defaulted to 10 minutes before the session begins.
+You can customize this time by updating the `REMINDER_TIME_BEFORE_EVENT` constant in `app/jobs/session_reminder_job.rb`.
+
 ## Linting & Formatting
 
 #### Ruby
