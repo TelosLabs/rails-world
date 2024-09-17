@@ -7,7 +7,7 @@
     <div class="z-10 flex flex-col items-start w-full max-w-screen-sm px-5 pt-6 pb-12">
       <div class="flex flex-row items-center">
         <% if @profile.image.attached? %>
-          <div class="flex flex-col items-center justify-center relative w-[120px] bg-cover bg-no-repeat bg-center h-[120px] rounded-full" style="background-image: url(<%= url_for(@profile.image) %>)">
+          <div class="flex flex-col items-center justify-center shrink-0 relative w-[120px] bg-cover bg-no-repeat bg-center h-[120px] rounded-full" style="background-image: url(<%= url_for(@profile.image) %>)">
           </div>
         <% else %>
           <div class="w-[120px] h-[120px] rounded-full bg-slate-300 p-5 flex flex-row items-center justify-center">
