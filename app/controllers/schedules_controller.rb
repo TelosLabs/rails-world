@@ -9,6 +9,6 @@ class SchedulesController < ApplicationController
   private
 
   def filter_params
-    params.permit(:starts_at, :live, :past, :starting_soon)
+    params.permit(:starts_at, :live, :past, :starting_soon).merge(show_private: user_signed_in?)
   end
 end
