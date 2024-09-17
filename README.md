@@ -44,10 +44,6 @@ module.exports = {
 };
 ```
 
-### Logo
-
-To change the logos, replace the `main_logo.png` and `header_logo.png` files located in the `/app/assets/images` directory with your desired logo files. Ensure the new files have the same names to maintain compatibility with the existing code.
-
 ### Input Fields
 
 If you change the general app colors, you may also need to update the input fields' styles. Modify the `STYLES` hash in the form builder located at `/app/builders/application_form_builder.rb` as follows:
@@ -82,6 +78,17 @@ div.field_with_errors > input {
 }
 ```
 
+### Logos and images
+
+To customize the logos and images you can replace the following files located in the `/app/assets/images`:
+
+- `logo.svg` used in the header of the page
+- `logo.png` used in the footer of the mailers
+- `main_logo.svg` used in the login and coming soon page
+- `favicon.svg` used as the favicon
+- `home_screen_icon.png` used as the home screen icon for PWA installations
+- `splashscreen_icon.png` used as the splash screen icon for PWA loading screens
+- `/public/pwa_home_screen_icon.png` used as the icon for PWA notifications
 
 ## Linting & Formatting
 

@@ -21,29 +21,11 @@ module.exports = {
       },
       colors: {
         primary: {
-          50: '#edeaf1',
-          200: '#c8bdd4',
-          100: '#ae9dbf',
-          300: '#8870a1',
-          400: '#71558f',
           500: '#4e2a73',
-          600: '#432463',
-          700: '#371e52',
-          800: '#2b173f',
-          900: '#211230',
-          background: '#4e2a73'
+          600: '#432463'
         },
         secondary: {
-          50: '#FAE7E8',
-          100: '#EFB4B9',
-          200: '#E78F97',
-          300: '#DC5C67',
-          400: '#D53D49',
-          500: '#CB0C1C',
-          600: '#B90B19',
-          700: '#900914',
-          800: '#70070F',
-          900: '#55050C'
+          500: '#CB0C1C'
         },
         grey: {
           50: '#F3F2F8',
@@ -62,8 +44,7 @@ module.exports = {
           200: '#CDD9EC',
           600: '#829ECE'
         },
-
-        red: '#CB0C1C', // same as secondary 500
+        red: '#CB0C1C', // Same as secondary but used for error messages specifically
         'blue-marine': '#003A5D',
         'blue-teal': '#00AFAA',
         yellow: '#F4BF4F'
