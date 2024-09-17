@@ -24,6 +24,7 @@ env:
     - REGISTRATION_ENABLED
     - WEB_CONCURRENCY
     - ONLY_TESTER_REGISTRATION_ENABLED
+    - TIME_ZONE
 
 accessories:
   vector:

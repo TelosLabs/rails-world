@@ -95,6 +95,10 @@ To customize the logos and images you can replace the following files located in
 Session reminder notifications (web-push and email) are defaulted to 10 minutes before the session begins.
 You can customize this time by updating the `REMINDER_TIME_BEFORE_EVENT` constant in `app/jobs/session_reminder_job.rb`.
 
+### Time zone
+
+The default time zone is set to `UTC`. You can change this by updating the `TIME_ZONE` in the `.env` file.
+
 ## Linting & Formatting
 
 #### Ruby
