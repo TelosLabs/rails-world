@@ -21,7 +21,9 @@ Rails.application.routes.draw do
   resource :schedule, only: [:show]
 
   resources :sessions, only: [:index, :show] do
-    resource :attendee, only: [:create, :destroy]
+    resource :attendee, only: [:create, :destroy] do
+      post "undo", on: :collection
+    end
   end
   resources :speakers, only: [:show]
   resources :profiles, only: [:show, :edit, :update], param: :uuid

@@ -1,5 +1,5 @@
 class AttendeesController < ApplicationController
-  before_action :set_session
+  before_action :set_session, only: [:create, :destroy]
 
   def create
     @session.attendees.push(current_user)
