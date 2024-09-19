@@ -29,6 +29,8 @@ en:
         notice: "Session was added to My Schedule"
       remove_user:
         notice: "Session was removed from My Schedule"
+      undo:
+        expired: "The undo action has expired."
   views:
     status_filters:
       past: "Past"

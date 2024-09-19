@@ -5,7 +5,7 @@ class AttendeesController < ApplicationController
     @session.attendees.push(current_user)
     flash[:notice] = I18n.t("controllers.attendees.add_user.notice")
 
-    session[:last_action] = {action: "create", user_id: current_user.id, session_id: @session.id}
+    session[:last_action] = "create"
     flash[:undo_path] = undo_session_attendee_path(session_id: @session.id)
 
     redirect_back_or_to(sessions_path, params: params[:starts_at])
@@ -15,14 +15,27 @@ class AttendeesController < ApplicationController
     @session.attendees.delete(current_user)
     flash[:notice] = I18n.t("controllers.attendees.remove_user.notice")
 
-    session[:last_action] = {action: "destroy", user_id: current_user.id, session_id: @session.id}
+    session[:last_action] = "destroy"
     flash[:undo_path] = undo_session_attendee_path(session_id: @session.id)
 
     redirect_back_or_to(sessions_path, params: params[:starts_at])
   end
 
   def undo
-    binding.pry
+    if session[:last_action].present?
+      last_action = session[:last_action]
+
+      if last_action == "create"
+        @session.attendees.delete(current_user)
+      elsif last_action == "destroy"
+        @session.attendees.push(current_user)
+      end
+
+      session[:last_action] = nil
+    else
+      flash[:notice] = I18n.t("controllers.attendees.undo.expired")
+    end
+
     redirect_back_or_to(sessions_path, params: params[:starts_at])
   end
 
