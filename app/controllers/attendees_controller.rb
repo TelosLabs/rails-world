@@ -6,7 +6,7 @@ class AttendeesController < ApplicationController
     flash[:notice] = I18n.t("controllers.attendees.add_user.notice")
 
     session[:last_action] = "create"
-    flash[:undo_path] = undo_session_attendee_path(session_id: @session.id)
+    flash[:undo] = {path: undo_session_attendee_path(session_id: @session.id)}
 
     redirect_back_or_to(sessions_path, params: params[:starts_at])
   end
@@ -16,7 +16,7 @@ class AttendeesController < ApplicationController
     flash[:notice] = I18n.t("controllers.attendees.remove_user.notice")
 
     session[:last_action] = "destroy"
-    flash[:undo_path] = undo_session_attendee_path(session_id: @session.id)
+    flash[:undo] = {path: undo_session_attendee_path(session_id: @session.id)}
 
     redirect_back_or_to(sessions_path, params: params[:starts_at])
   end
