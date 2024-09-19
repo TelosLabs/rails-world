@@ -4,6 +4,7 @@
 #
 #  id             :integer          not null, primary key
 #  ends_at        :datetime         not null
+#  public         :boolean          default(TRUE), not null
 #  sent_reminders :json
 #  slug           :string
 #  starts_at      :datetime         not null
@@ -16,8 +17,10 @@
 # Indexes
 #
 #  index_sessions_on_conference_id  (conference_id)
+#  index_sessions_on_ends_at        (ends_at)
 #  index_sessions_on_location_id    (location_id)
 #  index_sessions_on_slug           (slug) UNIQUE
+#  index_sessions_on_starts_at      (starts_at)
 #
 class Session < ApplicationRecord
   extend FriendlyId
@@ -48,6 +51,9 @@ class Session < ApplicationRecord
   scope :live, -> { where("? BETWEEN starts_at AND ends_at", Time.current) }
   scope :starting_soon, -> { where("starts_at BETWEEN ? and ?", Time.current, 1.hour.from_now) }
   scope :upcoming_today, -> { where("date(starts_at) = ? and starts_at > ?", Date.current, Time.current) }
+  scope :live_or_upcoming_today, -> { live.or(upcoming_today) }
+  scope :publics, -> { where(public: true) }
+  scope :privates, -> { where(public: false) }
 
   def self.ransackable_attributes(_auth_object = nil)
     %w[title]
@@ -65,5 +71,9 @@ class Session < ApplicationRecord
 
   def past?
     ends_at < Time.current
+  end
+
+  def private?
+    !public?
   end
 end

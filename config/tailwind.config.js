@@ -33,15 +33,15 @@ module.exports = {
           500: '#62C554'
         },
         bluegray: {
+          50: '#F4F7FB',
+          200: '#CDD9EC',
           600: '#829ECE'
         },
         'purple-dark': '#432463',
         'purple-light': '#4E2A73',
         red: '#CB0C1C',
         'blue-marine': '#003A5D',
-        'blue-light': '#EFF6FF',
         'blue-teal': '#00AFAA',
-        'blue-teal-light': '#CDD9EC',
         yellow: '#F4BF4F'
       },
       animation: {

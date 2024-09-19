@@ -18,9 +18,10 @@ class Avo::Resources::Session < Avo::BaseResource
 
   def fields
     field :id, as: :id
-    field :title, as: :text, sortable: true
+    field :title, as: :text, sortable: true, link_to_record: true
     field :slug, as: :text, hide_on: :new
     field :description, as: :trix
+    field :public, as: :boolean
     field :starts_at, as: :date_time,
       help: "The datetime field will use your browser's current timezone.", sortable: true,
       format: "FFFF"

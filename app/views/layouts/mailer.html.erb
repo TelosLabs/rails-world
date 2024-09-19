@@ -62,6 +62,7 @@
         font-weight: 900;
         text-align: center;
         line-height: 32px;
+        object-fit: cover;
       }
 
       .c-event-card__speaker-title{
@@ -69,7 +70,6 @@
         font-style: italic;
         font-weight: 900;
         line-height: 20px;
-        color: #CB0C1C;
       }
 
       .c-event-card__speaker-subtitle{
@@ -79,7 +79,7 @@
         line-height: 14px;
       }
 
-      .c-event-card__title{
+      .c-event-card__title, a{
         font-size: 20px;
         font-style: italic;
         font-weight: 900;
@@ -123,10 +123,15 @@
         margin-bottom: 12px;
       }
 
-      .c-event-card__time-icon{
-        width: 16px;
+      .c-event-card__time-icon {
         height: 16px;
         margin-right: 4px;
+        text-align: center;
+      }
+
+      .c-event-card__time-icon-img {
+        width: 16px;
+        height: 16px;
       }
 
       .c-event-card__time-item{
@@ -147,6 +152,10 @@
         font-size: 32px;
         font-weight: 900;
         text-align: center;
+      }
+
+      .c-footer-img {
+        width: 328px;
       }
 
       .c-unsubscribe-notifications{
@@ -171,6 +180,32 @@
         text-decoration-line: underline;
       }
 
+      .c-paragraph {
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px;
+        color: #1C1C1E;
+        margin-bottom: 16px;
+      }
+
+      .c-button {
+        display: flex;
+        padding: 16px 10px;
+        margin: 0 auto;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border-radius: 10px;
+        background-color: #CB0C1C;
+        font-size: 18px;
+        line-height: 22px;
+        font-weight: 600;
+        font-style: italic;
+        color: white;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

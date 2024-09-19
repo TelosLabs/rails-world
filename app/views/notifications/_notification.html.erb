@@ -7,8 +7,9 @@
   ) do %>
     <div class="mr-4 rounded-full">
       <% if speaker&.image&.attached? %>
-        <div class="flex flex-col items-center justify-center relative w-[48px] h-[48px]">
-          <%= image_tag url_for(speaker.image), class: "rounded-full" %>
+        <div class="relative flex flex-col items-center justify-center">
+          <div class="relative flex flex-col items-center justify-center w-10 h-10 bg-center bg-no-repeat bg-cover rounded-full min-w-10 min-h-10" style="background-image: url(<%= url_for(speaker.image) %>)">
+          </div>
           <%= inline_svg_tag "icon_notification.svg", class: "absolute z-10 bottom-[-4px] right-[-4px]" %>
         </div>
       <% else %>
@@ -21,8 +22,12 @@
 
     <div class="flex flex-col items-start">
       <div class="flex flex-row items-center justify-start mb-1">
-        <p class="text-base font-bold text-black"><%= notification.title %></p>
-        <span class="text-[13px] text-gray-6">&nbsp; · <%= notification.delivered_at %></span>
+        <p class="text-base font-bold text-black">
+          <%= notification.title %>
+          <span class="text-[13px] text-gray-6">
+            &nbsp; · <%= notification.delivered_at %>
+          </span>
+        </p>
       </div>
       <p class="text-base text-gray-400 line-clamp-2"><%= notification.record.title %></p>
     </div>

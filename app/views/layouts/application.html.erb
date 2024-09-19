@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html class="h-full">
+<html class="h-screen">
   <head>
     <title><%= content_for(:title).presence || "Rails World 2024" %></title>
 
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover">
     <meta name="turbo-refresh-scroll" content="preserve">
     <meta name="turbo-refresh-method" content="morph">
     <meta name="view-transition" content="same-origin">
@@ -34,18 +34,26 @@
     data-web-push-notifications-vapid-key-value=#{vapid_public_key}
     data-web-push-notifications-notifications-enabled-value=#{current_profile.web_push_notifications}" : '' %>>
 
-    <main class="relative flex flex-col flex-1 w-full mx-auto">
+    <div class="fixed top-0 z-40 w-full">
+      <% if show_back_button? %>
+        <%= render partial: "layouts/back_button" %>
+      <% end %>
+
       <% if show_header? %>
         <%= render partial: "layouts/header" %>
       <% end %>
+    </div>
 
-      <%= render_notice_flash %>
+    <main class="flex flex-col flex-1 w-full mx-auto">
+      <div id="flash_message">
+        <%= render_notice_flash %>
+      </div>
 
       <%= yield %>
-
-      <% if show_bottom_navbar? %>
-        <%= render partial: "layouts/bottom_navbar", locals: { unread_notifications: current_user.notifications.unread } %>
-      <% end %>
     </main>
+
+    <% if show_bottom_navbar? %>
+      <%= render partial: "layouts/bottom_navbar", locals: { unread_notifications: current_user&.notifications&.unread } %>
+    <% end %>
   </body>
 </html>

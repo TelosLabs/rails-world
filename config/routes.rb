@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
-  root "sessions#index"
+  constraints AuthenticatedConstraint.new do
+    root "sessions#index"
+  end
+
+  constraints UnauthenticatedConstraint.new do
+    root "user_sessions#new", as: :unauthenticated_root
+  end
 
   get "up" => "rails/health#show", :as => :rails_health_check
   get "/service-worker.js" => "service_worker#service_worker"
+  get "/offline.html" => "service_worker#offline"
   get "/manifest.json" => "service_worker#manifest"
 
   mount MissionControl::Jobs::Engine, at: "/jobs"
@@ -10,6 +17,7 @@ Rails.application.routes.draw do
 
   resource :registration, only: [:new, :create]
   resource :user_session, only: [:new, :create, :destroy]
+  resource :user, only: [:edit, :update]
   resource :password, only: [:edit, :update]
   resource :password_reset, only: [:new, :create, :edit, :update] do
     get :post_submit

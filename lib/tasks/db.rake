@@ -1,6 +1,5 @@
 namespace :db do
   desc "Loading Rails World 2024 conference data."
-
   task :rails_world_2024_seed, [:start_date] => :environment do |t, args|
     start_date = args[:start_date].present? ? Date.parse(args[:start_date]) : Date.new(2024, 9, 26)
     month = start_date.month
@@ -13,55 +12,35 @@ namespace :db do
     conference = Conference.find_or_create_by!(name: "Rails World 2024")
 
     # Create Locations
-    track_1 = conference.locations.find_or_create_by!(name: "Track 1")
-    track_2 = conference.locations.find_or_create_by!(name: "Track 2")
-    lightning_track = conference.locations.find_or_create_by!(name: "Lightning Track")
+    track_1 = conference.locations.find_or_create_by!(name: "Track 1 (hosted by GitHub)")
+    track_2 = conference.locations.find_or_create_by!(name: "Track 2 (hosted by AppSignal)")
+    lightning_track = conference.locations.find_or_create_by!(name: "Lightning Track (hosted by Shopify)")
     sponsor_garden = conference.locations.find_or_create_by!(name: "Sponsor Garden")
     sponsor_lounge = conference.locations.find_or_create_by!(name: "Sponsor Lounge")
     break_location = conference.locations.find_or_create_by!(name: "Sponsor Garden, Shopify Lounge, Lightning Track, Kilns, Pavilions")
-    tbd_location = conference.locations.find_or_create_by!(name: "TBD")
-    tbd_attendees_location = conference.locations.find_or_create_by!(name: "TBD (will be shared with registered attendees)")
-    shopify_port = conference.locations.find_or_create_by!(name: "Shopify Port")
+    toronto_location = conference.locations.find_or_create_by!(name: "Toronto")
+    double_up_location = conference.locations.find_or_create_by!(name: "Double Up Lab")
 
     # Create Tags
     community = Tag.find_or_create_by!(name: "Community")
-
     security = Tag.find_or_create_by!(name: "Security")
-
     rails_8 = Tag.find_or_create_by!(name: "Rails 8")
-
     productivity = Tag.find_or_create_by!(name: "Productivity")
-
     tools = Tag.find_or_create_by!(name: "Tools")
-
     developer_experience = Tag.find_or_create_by!(name: "Developer Experience")
-
     deployment = Tag.find_or_create_by!(name: "Deployment")
-
     performance = Tag.find_or_create_by!(name: "Performance")
-
     storage_solutions = Tag.find_or_create_by!(name: "Storage Solutions")
-
     refactoring = Tag.find_or_create_by!(name: "Refactoring")
-
     database = Tag.find_or_create_by!(name: "Database")
-
     hotwire = Tag.find_or_create_by!(name: "Hotwire")
-
     ai = Tag.find_or_create_by!(name: "AI")
-
     integrations = Tag.find_or_create_by!(name: "Integrations")
-
     testing = Tag.find_or_create_by!(name: "Testing")
-
     best_practices = Tag.find_or_create_by!(name: "Best Practices")
-
     pwa = Tag.find_or_create_by!(name: "PWA")
-
     insights = Tag.find_or_create_by!(name: "Insights")
-
     background_jobs = Tag.find_or_create_by!(name: "Background Jobs")
-
     rails_internals = Tag.find_or_create_by!(name: "Rails Internals")
 
     # Create Speakers
@@ -336,24 +315,15 @@ namespace :db do
     end.profileable
 
     # Create Sessions
-    Session.find_or_create_by!(
-      conference: conference,
-      title: "Early registration, sponsored by Shopify",
-      starts_at: Time.zone.local(2024, month, registration_day, 16, 0)
-    ) do |session|
-      session.description = "Registration opens for those who are already in town. Avoid the Thursday morning line, get your badge, and grab a drink with other attendees. Sponsored by Shopify, Rails World City Host."
-      session.ends_at = Time.zone.local(2024, month, registration_day, 19, 0o0)
-      session.location = tbd_location
-    end
 
     Session.find_or_create_by!(
       conference: conference,
-      title: "WNB.rb pre-Rails World meetup, sponsored by Shopify",
-      starts_at: Time.zone.local(2024, month, registration_day, 16, 0)
+      title: "What to do tonight",
+      starts_at: Time.zone.local(2024, month, registration_day, 17, 0)
     ) do |session|
-      session.description = "A chance for women and non-binary Rails World attendees to meet up before Rails World. Hosted by WNB.rb and sponsored by Shopify."
-      session.ends_at = Time.zone.local(2024, month, registration_day, 19, 0o0)
-      session.location = shopify_port
+      session.description = "<div class=\"trix-content\">\n  <div>If you are looking for things to do in the city after you pick up your badge, check out <a href=\"https://docs.google.com/document/d/11aJ9HF0WW4ShArHpLl8cipgl2cOuGTFuObjOpp_1LxA/edit?usp=sharing\">this list of recommendations</a> created for you by the <strong>Toronto Ruby</strong> meetup group.<br><br>Don't stay out too late - the keynote tomorrow morning waits for no one.</div>\n</div>\n"
+      session.ends_at = Time.zone.local(2024, month, registration_day, 18, 0o0)
+      session.location = toronto_location
     end
 
     Session.find_or_create_by!(
@@ -361,14 +331,14 @@ namespace :db do
       title: "Doors Open",
       starts_at: Time.zone.local(2024, month, start_day, 9, 0)
     ) do |session|
-      session.description = "Rails World attendees are welcome to register, enter, and grab a coffee and light breakfast before the keynote begins."
+      session.description = "Rails World attendees are welcome to enter Evergreen Brickworks, pick up your swag bag, and grab a coffee and light breakfast before the keynote begins."
       session.ends_at = Time.zone.local(2024, month, start_day, 9, 45)
       session.location = sponsor_garden
     end
 
     Session.find_or_create_by!(
       conference: conference,
-      title: "Opening Keynote",
+      title: "Rails World Opening Keynote",
       starts_at: Time.zone.local(2024, month, start_day, 9, 45)
     ) do |session|
       session.description = "DHH will kick off the second edition of Rails World in Toronto with an Opening Keynote highlighting what is new in Rails today, and where the framework is headed tomorrow."
@@ -404,10 +374,10 @@ namespace :db do
 
     Session.find_or_create_by!(
       conference: conference,
-      title: "What to do in the breaks",
+      title: "Lunch (and other things to do in the breaks)",
       starts_at: Time.zone.local(2024, month, start_day, 11, 45)
     ) do |session|
-      session.description = "During lunch and breaks between sessions on both days, attendees can: <ul> <li> Catch 10-15 min Community talks on the Lightning Track (sponsored by Shopify) </li> <li> Chat with our sponsors in the Sponsor Garden </li> <li> Hang out in the Shopify Lounge </li> <li> Follow a workshop (sponsored by Coder) </li> <li> Drop by the Test Double Office Hours for pair programming and career advice </li> <li> Explore the historic venue </li> <li> Take a walk in the nature park located behind the venue </li> <li> Grab an espresso or latte from the coffee carts (sponsored by Cedarcode) </li> <li> Or grab an item from the Food Trucks (sponsored by Shopify) </li> </ul>"
+      session.description = "<div class=\"trix-content\">\n  <div>Lunch will be served in the <strong>Sponsor Garden</strong> and in the <strong>Pavilion</strong>.&nbsp;<br><br>During lunch and breaks between sessions on both days, attendees can also:&nbsp;<br><br></div><ul><li>Catch 5-10 min Community talks on the <strong>Lightning Track</strong> (sponsored by <strong>Shopify</strong>)&nbsp;</li><li>Chat with our sponsors in the <strong>Sponsor Garden&nbsp;</strong></li><li>Hang out in the <strong>Shopify Lounge</strong>&nbsp;</li><li>Sign up <a href=\"https://docs.google.com/forms/d/e/1FAIpQLSf9_jfPzw-1YvkGFhlGtnGhkDqVvX2Z-D1vpJardmQ6nVf7PQ/viewform\"><strong>here</strong></a> for pair programming or career advice in the <strong>Double Up Lab</strong> (sponsored by <strong>Test Double</strong>)</li><li>Chill out in the <strong>kilns</strong> of this historic venue</li><li>Grab an espresso or latte from the <strong>coffee carts</strong> (sponsored by <strong>Cedarcode</strong>)&nbsp;</li><li>Or grab an item from the <strong>food trucks</strong> (sponsored by <strong>Shopify</strong>) - Note that the food trucks will be open all day from 11 am to 4 pm, so drop by with your ticket for a free item whenever you like.</li><li>Go touch grass. (We are located in one of Toronto's most calming nature parks.)</li></ul>\n</div>\n"
       session.ends_at = Time.zone.local(2024, month, start_day, 13, 0)
       session.location = break_location
     end
@@ -474,6 +444,26 @@ namespace :db do
 
     Session.find_or_create_by!(
       conference: conference,
+      title: "Lightning Track",
+      starts_at: Time.zone.local(2024, month, start_day, 14, 15)
+    ) do |session|
+      session.description = "Coming soon: Community Talks taking place during this break will be listed here."
+      session.ends_at = Time.zone.local(2024, month, start_day, 14, 45)
+      session.location = lightning_track
+    end
+
+    Session.find_or_create_by!(
+      conference: conference,
+      title: "Double Up Lab (sponsored by Test Double)",
+      starts_at: Time.zone.local(2024, month, start_day, 14, 15)
+    ) do |session|
+      session.description = "<div class=\"trix-content\">\n  <div>Join Test Double in the Double Up Lab to pair with one of our double agents on Rails, no-strings-attached career advice, and more. Bring something to work on, check out what we've been up to, or just recharge and chat.<br><br><a href=\"https://docs.google.com/forms/d/e/1FAIpQLSf9_jfPzw-1YvkGFhlGtnGhkDqVvX2Z-D1vpJardmQ6nVf7PQ/viewform\"><strong>Book time here</strong></a>.<br><br>You can also stop by 1:00-2:15 pm daily to say hello, score some swag, schedule a session, or get resume &amp; career advice.</div>\n</div>\n"
+      session.ends_at = Time.zone.local(2024, month, start_day, 14, 45)
+      session.location = double_up_location
+    end
+
+    Session.find_or_create_by!(
+      conference: conference,
       title: "An upgrade handbook to Rails 8",
       starts_at: Time.zone.local(2024, month, start_day, 14, 45)
     ) do |session|
@@ -494,6 +484,26 @@ namespace :db do
       session.location = track_2
       session.speakers = [justin_searls_speaker]
       session.tags = [productivity, developer_experience]
+    end
+
+    Session.find_or_create_by!(
+      conference: conference,
+      title: "Lightning Track",
+      starts_at: Time.zone.local(2024, month, start_day, 15, 15)
+    ) do |session|
+      session.description = "Coming soon: Community Talks taking place during this break will be listed here."
+      session.ends_at = Time.zone.local(2024, month, start_day, 15, 45)
+      session.location = lightning_track
+    end
+
+    Session.find_or_create_by!(
+      conference: conference,
+      title: "Double Up Lab",
+      starts_at: Time.zone.local(2024, month, start_day, 15, 15)
+    ) do |session|
+      session.description = "<div class=\"trix-content\">\n  <div>Join Test Double in the Double Up Lab to pair with one of our double agents on Rails, no-strings-attached career advice, and more. Bring something to work on, check out what we've been up to, or just recharge and chat.<br><br><a href=\"https://docs.google.com/forms/d/e/1FAIpQLSf9_jfPzw-1YvkGFhlGtnGhkDqVvX2Z-D1vpJardmQ6nVf7PQ/viewform\"><strong>Book time here</strong></a>.<br><br>You can also stop by 1:00-2:15 pm daily to say hello, score some swag, schedule a session, or get resume &amp; career advice.</div>\n</div>\n"
+      session.ends_at = Time.zone.local(2024, month, start_day, 15, 45)
+      session.location = double_up_location
     end
 
     Session.find_or_create_by!(
@@ -525,7 +535,7 @@ namespace :db do
       title: "Matz & DHH Fireside chat, hosted by Tobias Lütke",
       starts_at: Time.zone.local(2024, month, start_day, 16, 30)
     ) do |session|
-      session.description = "We are pleased to welcome Ruby creator and special guest Yukihiro Matsumoto (Matz) to the Rails World stage for a fireside chat with Rails creator David Heinemeier Hansson (DHH). Together on stage for the very first time! Hosted by Shopify founder Tobias Lütke, this is sure to be a conversation you don’t want to miss."
+      session.description = "<div class=\"trix-content\">\n  <div>We are pleased to welcome Ruby creator and special guest <strong>Yukihiro Matsumoto (Matz)</strong> to the Rails World stage for a fireside chat with Rails creator <strong>David Heinemeier Hansson (DHH)</strong>. Together on stage for the very first time!<br><br>Hosted by <strong>Shopify</strong> founder Tobias Lütke, this is sure to be a conversation you don’t want to miss.</div>\n</div>\n"
       session.ends_at = Time.zone.local(2024, month, start_day, 17, 30)
       session.location = track_1
       session.speakers = [matz_speaker, david_heinemeier_hansson_speaker, tobias_luetke_speaker]
@@ -534,30 +544,20 @@ namespace :db do
 
     Session.find_or_create_by!(
       conference: conference,
-      title: "Toronto Ruby drinks sponsored by Clio",
-      starts_at: Time.zone.local(2024, month, start_day, 19, 0)
-    ) do |session|
-      session.description = "Come hang out with the local Toronto Ruby meetup group. Grab a beer and have a bite, and recharge for Day 2. <br/><br/> This evening event wouldn’t be possible without the generous support and sponsorship of our Gold sponsor, Clio. Stop by their booth for a ticket to the event. Badges still required."
-      session.ends_at = Time.zone.local(2024, month, start_day, 22, 30)
-      session.location = tbd_attendees_location
-    end
-
-    Session.find_or_create_by!(
-      conference: conference,
       title: "Doors Open",
       starts_at: Time.zone.local(2024, month, second_day, 9, 0)
     ) do |session|
-      session.description = "Rails World attendees are welcome to register, enter, and grab a coffee before the keynote begins."
+      session.description = "Rails World attendees are welcome to enter Evergreen Brickworks, pick up your swag bag, and grab a coffee and light breakfast before the keynote begins."
       session.ends_at = Time.zone.local(2024, month, second_day, 10, 0)
       session.location = sponsor_lounge
     end
 
     Session.find_or_create_by!(
       conference: conference,
-      title: "Opening Keynote",
+      title: "Keynote: The Myth of the Modular Monolith",
       starts_at: Time.zone.local(2024, month, second_day, 10, 0)
     ) do |session|
-      session.description = "More information coming soon."
+      session.description = "As Rails applications grow over time and turn into a so-called \"ball of mud\", organizations ask themselves what's next? Should we stay the course with a monolith or migrate to microservices? At Shopify we went down the path of modularizing our monolith and since then GitHub, Gusto, and others have followed our lead. But after 6 years it's time to ask ourselves: \"Did we fix what we set out to fix? Is this better than before?\""
       session.ends_at = Time.zone.local(2024, month, second_day, 11, 0)
       session.location = track_1
       session.speakers = [eileen_uchitelle_speaker]
@@ -589,10 +589,10 @@ namespace :db do
 
     Session.find_or_create_by!(
       conference: conference,
-      title: "What to do in the breaks",
+      title: "Lunch (and other things to do in the breaks)",
       starts_at: Time.zone.local(2024, month, second_day, 11, 45)
     ) do |session|
-      session.description = "During lunch and breaks between sessions on both days, attendees can: <br/> <ul> <li> Catch 10-15 min Community talks on the Lightning Track (sponsored by Shopify) </li> <li> Chat with our sponsors in the Sponsor Garden </li> <li> Hang out in the Shopify Lounge </li> <li> Follow a workshop (sponsored by Coder) </li> <li> Drop by the Test Double Office Hours for pair programming and career advice </li> <li> Explore the historic venue </li> <li> Take a walk in the nature park located behind the venue </li> <li> Grab an espresso or latte from the coffee carts (sponsored by Cedarcode) </li> <li> Or grab an item from the Food Trucks (sponsored by Shopify) </li> </ul>"
+      session.description = "<div class=\"trix-content\">\n  <div>Lunch will be served in the <strong>Sponsor Garden</strong> and in the <strong>Pavilion</strong>.&nbsp;<br><br>During lunch and breaks between sessions on both days, attendees can also:&nbsp;<br><br></div><ul><li>Catch 5-10 min Community talks on the <strong>Lightning Track</strong> (sponsored by <strong>Shopify</strong>)&nbsp;</li><li>Chat with our sponsors in the <strong>Sponsor Garden&nbsp;</strong></li><li>Hang out in the <strong>Shopify Lounge</strong>&nbsp;</li><li>Sign up <a href=\"https://docs.google.com/forms/d/e/1FAIpQLSf9_jfPzw-1YvkGFhlGtnGhkDqVvX2Z-D1vpJardmQ6nVf7PQ/viewform\"><strong>here</strong></a> for pair programming or career advice in the <strong>Double Up Lab</strong> (sponsored by <strong>Test Double</strong>)</li><li>Chill out in the <strong>kilns</strong> of this historic venue</li><li>Grab an espresso or latte from the <strong>coffee carts</strong> (sponsored by <strong>Cedarcode</strong>)&nbsp;</li><li>Or grab an item from the <strong>food trucks</strong> (sponsored by <strong>Shopify</strong>) - Note that the food trucks will be open all day from 11 am to 4 pm, so drop by with your ticket for a free item whenever you like.</li><li>Go touch grass. (We are located in one of Toronto's most calming nature parks.)</li></ul>\n</div>\n"
       session.ends_at = Time.zone.local(2024, month, second_day, 13, 0)
       session.location = break_location
     end
@@ -623,18 +623,6 @@ namespace :db do
 
     Session.find_or_create_by!(
       conference: conference,
-      title: "Making accessible web apps with Rails and Hotwire",
-      starts_at: Time.zone.local(2024, month, second_day, 13, 45)
-    ) do |session|
-      session.description = "Nowadays, there is a lot of talk about accessibility, but is your web app accessible? In this session, I will share my perspective as a blind developer on how to build accessible web apps with real-world examples, beyond saying it’s important and the need to use ARIA. I will start by demonstrating how a blind person uses a screen reader to navigate the web, so that you can understand the most common challenges faced by blind people every day. This will help clarify several requirements that people currently spend too much time on. Instead, we can focus on the most relevant errors and aspects to bear in mind when developing and designing interfaces. We will cover the most common patterns with code examples, taking advantage of tools provided by Rails, Hotwire, and the browser."
-      session.ends_at = Time.zone.local(2024, month, second_day, 14, 15)
-      session.location = track_1
-      session.speakers = [bruno_prieto_speaker]
-      session.tags = [hotwire]
-    end
-
-    Session.find_or_create_by!(
-      conference: conference,
       title: "The Modern Programmer’s Guide to Neovim and Zellij",
       starts_at: Time.zone.local(2024, month, second_day, 13, 0)
     ) do |session|
@@ -643,6 +631,18 @@ namespace :db do
       session.location = lightning_track
       session.speakers = [chris_power_speaker, robert_beene_speaker]
       session.tags = [productivity, tools, developer_experience]
+    end
+
+    Session.find_or_create_by!(
+      conference: conference,
+      title: "Making accessible web apps with Rails and Hotwire",
+      starts_at: Time.zone.local(2024, month, second_day, 13, 45)
+    ) do |session|
+      session.description = "Nowadays, there is a lot of talk about accessibility, but is your web app accessible? In this session, I will share my perspective as a blind developer on how to build accessible web apps with real-world examples, beyond saying it’s important and the need to use ARIA. I will start by demonstrating how a blind person uses a screen reader to navigate the web, so that you can understand the most common challenges faced by blind people every day. This will help clarify several requirements that people currently spend too much time on. Instead, we can focus on the most relevant errors and aspects to bear in mind when developing and designing interfaces. We will cover the most common patterns with code examples, taking advantage of tools provided by Rails, Hotwire, and the browser."
+      session.ends_at = Time.zone.local(2024, month, second_day, 14, 15)
+      session.location = track_1
+      session.speakers = [bruno_prieto_speaker]
+      session.tags = [hotwire]
     end
 
     Session.find_or_create_by(
@@ -655,6 +655,16 @@ namespace :db do
       session.location = track_2
       session.speakers = [robby_russell_speaker]
       session.tags = [performance, refactoring]
+    end
+
+    Session.find_or_create_by!(
+      conference: conference,
+      title: "Double Up Lab (sponsored by Test Double)",
+      starts_at: Time.zone.local(2024, month, second_day, 14, 15)
+    ) do |session|
+      session.description = "<div class=\"trix-content\">\n  <div>Join Test Double in the Double Up Lab to pair with one of our double agents on Rails, no-strings-attached career advice, and more. Bring something to work on, check out what we've been up to, or just recharge and chat.<br><br><a href=\"https://docs.google.com/forms/d/e/1FAIpQLSf9_jfPzw-1YvkGFhlGtnGhkDqVvX2Z-D1vpJardmQ6nVf7PQ/viewform\"><strong>Book time here</strong></a>.<br><br>You can also stop by 1:00-2:15 pm daily to say hello, score some swag, schedule a session, or get resume &amp; career advice.</div>\n</div>\n"
+      session.ends_at = Time.zone.local(2024, month, second_day, 14, 45)
+      session.location = double_up_location
     end
 
     Session.find_or_create_by(
@@ -679,6 +689,16 @@ namespace :db do
       session.location = track_2
       session.speakers = [julia_lopez_speaker]
       session.tags = [integrations, testing, best_practices]
+    end
+
+    Session.find_or_create_by!(
+      conference: conference,
+      title: "Double Up Lab",
+      starts_at: Time.zone.local(2024, month, second_day, 15, 15)
+    ) do |session|
+      session.description = "<div class=\"trix-content\">\n  <div>Join Test Double in the Double Up Lab to pair with one of our double agents on Rails, no-strings-attached career advice, and more. Bring something to work on, check out what we've been up to, or just recharge and chat.<br><br><a href=\"https://docs.google.com/forms/d/e/1FAIpQLSf9_jfPzw-1YvkGFhlGtnGhkDqVvX2Z-D1vpJardmQ6nVf7PQ/viewform\"><strong>Book time here</strong></a>.<br><br>You can also stop by 1:00-2:15 pm daily to say hello, score some swag, schedule a session, or get resume &amp; career advice.</div>\n</div>\n"
+      session.ends_at = Time.zone.local(2024, month, second_day, 15, 45)
+      session.location = double_up_location
     end
 
     Session.find_or_create_by(
@@ -715,16 +735,6 @@ namespace :db do
       session.location = track_1
       session.speakers = [aaron_patterson_speaker]
       session.tags = [community]
-    end
-
-    Session.find_or_create_by!(
-      conference: conference,
-      title: "Shopify Closing Party",
-      starts_at: Time.zone.local(2024, month, second_day, 19, 0)
-    ) do |session|
-      session.description = "Join us as we close out Rails World with a takeover at the Shopify Port. Three floors of music, games, food, drink, and fun, with plenty of space for pair programming if you have any code you need to tackle. Pre-registration will be required (attendees will be sent more details). Don’t forget your badge!"
-      session.ends_at = Time.zone.local(2024, month, second_day, 22, 0)
-      session.location = shopify_port
     end
   end
 end
