@@ -87,6 +87,94 @@ Run tests by using `bundle exec rspec`.
 - Use `data-test-id` to find elements instead of classes/ids, e.g. `data-test-id="decline_modal"`
 - Use the methods in the `DataTestId` module to select HTML elements, e.g., `find_dti("decline_modal")`
 
+## Deployment
+
+#### Configuration
+
+The main deployment configuration is managed in the `config/deploy.yml` file. Other than modifying the following values, you can leave it largely untouched:
+
+```
+#/config/deploy.yml
+
+# Name of your application. Used to uniquely configure containers.
+service: [APP_NAME]
+
+# Name of the container image.
+image: [CONTAINER_IMAGE_NAME]
+
+...
+
+# Credentials for your image host.
+registry:
+  username: [USERNAME]
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+...
+
+```
+
+There's also a configuration file for each environment: `config/deploy.staging.yml` and `config/deploy.production.yml`. You should be able to use those as is, but **make sure to change the `servers` value to your hosting's IP**
+
+```
+# /config/deploy.production.yml
+
+# Deploy to these servers.
+servers:
+  - [YOUR_IP]
+
+...
+
+```
+
+#### `.env` files
+
+You will also need an `.env` file for each environment you wish to deploy to (i.e `.env.staging` and `.env.production`) with all the credentials and env variables necessary for the app to run. Here's a template you can use
+
+```
+APP_HOST=[YOUR_DOMAIN]
+
+APPSIGNAL_PUSH_API_KEY=[YOUR_KEY]
+APPSIGNAL_APP_PUSH_API_KEY=[YOUR_KEY]
+
+RAILS_MASTER_KEY=[YOUR_KEY]
+
+KAMAL_REGISTRY_PASSWORD=[YOUR_PASSWORD]
+
+MAILPACE_API_TOKEN=[YOUR_TOKEN]
+
+AWS_ACCESS_KEY_ID=[YOUR_KEY_ID]
+AWS_SECRET_ACCESS_KEY=[YOUR_KEY]
+
+LITESTREAM_BUCKET=[YOUR_BUCKET_NAME]
+
+VAPID_PUBLIC_KEY=[YOUR_KEY]
+VAPID_PRIVATE_KEY=[YOUR_KEY]
+
+SECRET_KEY_BASE=[YOUR_KEY]
+
+MAILER_SENDER='Rails World <hello@railsworld.com>' # Change this to your email address
+LITESTREAM_BACKUP_ENABLED=true
+SESSION_REMINDERS_ENABLED=true
+REGISTRATION_ENABLED=true
+ONLY_TESTER_REGISTRATION_ENABLED=false
+```
+
+#### Kamal
+We use Kamal to deploy the application. Here are some common commands:
+
+- You need to append `-d staging` or `-d production` to the command to specify the environment.
+- Run `kamal deploy` to deploy the application.
+- Run `kamal app exec -i 'bin/rails console'` to open a Rails console.
+- Run `kamal env push` to push the environment variables to the application.
+
+#### Monitoring
+We use AppSignal to monitor the application. Configuration is managed at the `config/appsignal.yml` file. Set your credentials in your environment's `.env` file at `APPSIGNAL_PUSH_API_KEY` and `APPSIGNAL_APP_PUSH_API_KEY`.
+
+#### Backups
+We use Litestream to backup the database. Changes are automatically pushed to the S3 bucket. Set your credentials in your environment's `.env` file at `LITESTREAM_BUCKET`
+
+
 ## Feature Flags
 
 Use ENV variables to enable features, the name should follow the convention `"#{feature_name}_ENABLED"`. For example, to enable the `payment` feature, use `ENV["PAYMENT_ENABLED"]="true"`.
