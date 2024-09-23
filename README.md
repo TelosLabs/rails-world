@@ -25,7 +25,7 @@ or
 
 ### General App Colors
 
-To customize the general app colors, modify the `tailwind.config.js` file. Specifically, update the `primary` and `secondary` colors under the `theme.extend.colors` section. Note that we are only using the 500 variant for now.
+To customize the general app colors, modify the `tailwind.config.js` file. Specifically, update the `primary` and `secondary` colors under the `theme.extend.colors` section.
 
 ```javascript
 module.exports = {
@@ -43,6 +43,8 @@ module.exports = {
   },
 };
 ```
+
+> 404, 406, 422 and 500 error pages need to be updated manually. You can find them in the `/public` folder.
 
 ### Input Fields
 
@@ -89,6 +91,7 @@ To customize the logos and images you can replace the following files located in
 - `home_screen_icon.png` used as the home screen icon for PWA installations
 - `splashscreen_icon.png` used as the splash screen icon for PWA loading screens
 - `/public/pwa_home_screen_icon.png` used as the icon for PWA notifications
+> iOS splashsreens are located here: `/app/assets/images/splashscreens`
 
 ### PWA Configuration
 

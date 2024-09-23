@@ -26,7 +26,7 @@
           <% if @profile.image.present? %>
             <%= image_tag @profile.image, data: {image_previewer_target: "hideOnLoad"}, class: "absolute object-cover h-full w-full" %>
           <% else %>
-            <%= image_tag url_for("camera.svg"), data: {image_previewer_target: "hideOnLoad"} %>
+            <%= inline_svg_tag("camera.svg", size: "32", class: "fill-secondary-500", data: {image_previewer_target: "hideOnLoad"}) %>
           <% end %>
           <div class="absolute" data-image-previewer-target="onRemoveImagePlaceholderContainer"></div>
           <%= image_tag "", data: {image_previewer_target: "image"}, class: "hidden absolute object-cover h-full w-full" %>
