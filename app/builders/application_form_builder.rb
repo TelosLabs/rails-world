@@ -9,7 +9,7 @@ class ApplicationFormBuilder < ActionView::Helpers::FormBuilder
     peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full
     peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px]
     after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5
-    after:transition-all peer-checked:bg-red cursor-pointer",
+    after:transition-all peer-checked:bg-secondary-500 cursor-pointer",
     error_message: "text-red text-sm",
     label: "font-bold text-base"
   }.freeze

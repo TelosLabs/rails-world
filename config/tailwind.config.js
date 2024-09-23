@@ -20,6 +20,13 @@ module.exports = {
         'screen-sm': '425px'
       },
       colors: {
+        primary: {
+          500: '#4e2a73',
+          600: '#432463'
+        },
+        secondary: {
+          500: '#CB0C1C'
+        },
         grey: {
           50: '#F3F2F8',
           200: '#D7D7D8',
@@ -37,9 +44,7 @@ module.exports = {
           200: '#CDD9EC',
           600: '#829ECE'
         },
-        'purple-dark': '#432463',
-        'purple-light': '#4E2A73',
-        red: '#CB0C1C',
+        red: '#CB0C1C', // Same as secondary but used for error messages specifically
         'blue-marine': '#003A5D',
         'blue-teal': '#00AFAA',
         yellow: '#F4BF4F'

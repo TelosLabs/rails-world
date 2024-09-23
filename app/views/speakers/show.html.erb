@@ -14,7 +14,7 @@
         <% end %>
 
         <div class="flex flex-col items-start ml-5">
-          <div class="text-2xl italic font-black text-red"><%= @profile.name %></div>
+          <div class="text-2xl italic font-black text-secondary-500"><%= @profile.name %></div>
           <div class="text-lg text-gray-400"><%= @profile.job_title %></div>
         </div>
       </div>
@@ -26,7 +26,7 @@
           target: "_blank",
           class: [
             "flex flex-row grow items-center justify-center w-28 h-14 rounded-lg",
-            "bg-red": @profile.github_url.present?,
+            "bg-secondary-500": @profile.github_url.present?,
             "bg-grey-300 cursor-not-allowed": @profile.github_url.blank?
           ]
         ) do %>
@@ -38,7 +38,7 @@
           target: "_blank",
           class: [
             "flex flex-row grow items-center justify-center w-28 h-14 rounded-lg",
-            "bg-red": @profile.twitter_url.present?,
+            "bg-secondary-500": @profile.twitter_url.present?,
             "bg-grey-300 cursor-not-allowed": @profile.twitter_url.blank?
           ]
         ) do %>
@@ -50,7 +50,7 @@
           target: "_blank",
           class: [
             "flex flex-row grow items-center justify-center w-28 h-14 rounded-lg",
-            "bg-red": @profile.linkedin_url.present?,
+            "bg-secondary-500": @profile.linkedin_url.present?,
             "bg-grey-300 cursor-not-allowed": @profile.linkedin_url.blank?
           ]
         ) do %>

@@ -215,4 +215,14 @@
   <body class="body">
     <%= yield %>
   </body>
+  <div class="c-footer">
+    <span class="u-text-center">
+      <%= image_tag url_for("logo.png"), class: "c-footer-img" %>
+    </span>
+  </div>
+  <% if @notifications.present? %>
+    <p class="c-unsubscribe-notifications">
+      You are receiving this email because your notification settings are configured to receive communications. If you wish to stop receiving these emails, you can <a href="<%= notification_settings_url %>" class="c-unsubscribe-notifications__link" style="color: #CB0C1C">edit your settings</a>.
+    </p>
+  <% end %>
 </html>
