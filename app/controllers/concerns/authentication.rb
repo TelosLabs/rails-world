@@ -26,9 +26,9 @@ module Authentication
   def authenticate_user!
     authenticate_user
 
-    if !user_signed_in?
+    unless user_signed_in?
       flash[:notice] = I18n.t("authentication.unauthenticated")
-      redirect_to new_user_session_path
+      redirect_to Rails.application.routes.url_helpers.new_user_session_path
     end
   end
 

@@ -23,7 +23,7 @@
             accept:"image/*,image/apng,image/avif,image/gif,image/gif,image/jpeg,image/png,image/svg+xml",
             class: "text-white border-2 border-white bg-transparent rounded-sm hidden mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white"
           ) %>
-          <% if @profile.image.present? %>
+          <% if @profile.image.present? && @profile.image.persisted? %>
             <%= image_tag @profile.image, data: {image_previewer_target: "hideOnLoad"}, class: "absolute object-cover h-full w-full" %>
           <% else %>
             <%= inline_svg_tag("camera.svg", size: "32", class: "fill-secondary-500", data: {image_previewer_target: "hideOnLoad"}) %>
@@ -35,7 +35,7 @@
           "icon_delete_photo.svg",
           data: {action: "click->image-previewer#removeImage", image_previewer_target: "deleteIcon" },
           class: "cursor-pointer absolute top-[5px] right-[5px] w-6 h-6",
-          style: @profile.image.present? ? "display:block;" : "display:none;"
+          style: @profile.image.present? && @profile.image.persisted? ? "display:block;" : "display:none;"
         ) %>
         <div class="hidden" data-image-previewer-target="onRemoveImageContainer"></div>
         <template data-image-previewer-target="onRemoveImagePlaceholderTemplate">
