@@ -108,13 +108,16 @@
         ]
       ) %>
 
-      <%= link_to(
-        "Edit your email and password", edit_user_path,
-        class: "text-lg underline font-black italic text-white mt-10"
-      ) %>
-
-      <% if current_user.created_at > 1.minute.ago %>
-        <%= link_to "Skip for now", root_path, class: "text-lg underline font-black italic text-white mt-2" %>
+      <% if params[:onboarding].present? %>
+        <%= link_to(
+          "Skip for now", root_path,
+          class: "text-lg underline font-black italic text-white mt-10"
+        ) %>
+      <% else %>
+        <%= link_to(
+          "Edit your email and password", edit_user_path,
+          class: "text-lg underline font-black italic text-white mt-10"
+        ) %>
       <% end %>
     <% end %>
   </div>
