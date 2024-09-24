@@ -1,12 +1,18 @@
 module NavigationHelper
   def nav_icon_class_for(paths)
-    return "fill-red w-6 h-6" if paths.any? { |p| active_path?(p) }
-    "fill-grey-400 w-6 h-6"
+    if paths.any? { |p| active_path?(p) }
+      "fill-red w-6 h-6"
+    else
+      "fill-grey-400 w-6 h-6"
+    end
   end
 
   def nav_text_class_for(paths)
-    return "text-red" if paths.any? { |p| active_path?(p) }
-    "text-grey-400"
+    if paths.any? { |p| active_path?(p) }
+      "text-red"
+    else
+      "text-grey-400"
+    end
   end
 
   def active_path?(path)
@@ -19,12 +25,6 @@ module NavigationHelper
     content_for :title, title
   end
 
-  def show_back_button?
-    current_page?(notification_settings_path) ||
-      resource_show_page?("speakers") ||
-      resource_show_page?("sessions")
-  end
-
   def back_title
     if controller_name.include?("_")
       controller_name.humanize
@@ -33,39 +33,7 @@ module NavigationHelper
     end
   end
 
-  def show_header?
-    (user_signed_in? || !current_page?(unauthenticated_root_path)) &&
-      !current_page?(new_user_session_path) &&
-      !current_page?(about_path) &&
-      !current_page?(coming_soon_path) &&
-      !show_back_button?
-  end
-
-  def show_bottom_navbar?
-    current_page?(sessions_path) ||
-      (user_signed_in? || !current_page?(unauthenticated_root_path)) &&
-        !bottom_navbar_excluded_paths.any? { |path| current_page?(path) }
-  end
-
   def show_bookmark_button?(session)
-    return true if controller_name == "schedules"
-
-    !session.past?
-  end
-
-  private
-
-  def bottom_navbar_excluded_paths
-    [
-      new_user_session_path,
-      new_registration_path,
-      new_password_reset_path,
-      edit_password_reset_path,
-      post_submit_password_reset_path
-    ]
-  end
-
-  def resource_show_page?(resource)
-    controller_name == resource && action_name == "show"
+    controller_name == "schedules" || !session.past?
   end
 end
