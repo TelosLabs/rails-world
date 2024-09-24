@@ -25,6 +25,7 @@
               :password, required: true,
               data: { test_id: "password_field" },
               pattern: ".{8,}",
+              title:"8 characters minimum",
               placeholder: "Enter your password"
             ) %>
             <p class="pt-1 text-xs text-white">Password should contain at least 8 characters</p>
@@ -36,6 +37,7 @@
               :password_confirmation, required: true,
               data: { test_id: "password_confirmation_field" },
               pattern: ".{8,}",
+              title:"8 characters minimum",
               placeholder: "Confirm password"
             ) %>
             <%= form.error_message :password_confirmation %>
