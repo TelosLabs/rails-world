@@ -1,7 +1,24 @@
+@import 'actiontext.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  ul, ol {
+    @apply block ml-4
+  }
+
+  ul {
+    @apply list-disc
+  }
+
+  ol {
+    @apply list-decimal
+  }
+}
+
+/* Form errors */
 div.field_with_errors > label {
   @apply mb-2 italic font-bold text-red;
 }
@@ -9,6 +26,72 @@ div.field_with_errors > label {
 div.field_with_errors > input {
   @apply w-full bg-transparent border-2 border-red
   rounded-md text-white placeholder:text-white/50
-  focus:bg-white focus:text-black focus:placeholder-gray
+  focus:bg-white focus:text-black focus:placeholder-grey-300
   focus:border-white focus:ring-white mb-2
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Pagy */
+.pagy {
+  @apply inline-flex gap-x-2;
+
+  a,
+  .current {
+    @apply inline-flex items-center px-2.5 py-1 text-lg font-medium rounded-md;
+  }
+
+  .current {
+    @apply text-white bg-red;
+  }
+
+  .gap {
+    @apply px-0;
+  }
+}
+
+/* Utility classes for iOS PWA support */
+.pt-safe-area-6 {
+  padding-top: calc(env(safe-area-inset-top) + 24px)
+}
+
+.pt-safe-area-2 {
+  padding-top: calc(env(safe-area-inset-top) + 8px)
+}
+
+.pb-safe-area-1 {
+  padding-bottom: calc(env(safe-area-inset-bottom) + 4px);
+}
+
+.pt-safe-area-back-button {
+  padding-top: calc(env(safe-area-inset-top) + 40px);
+}
+
+.pt-safe-area-header {
+  padding-top: calc(env(safe-area-inset-top) + 79px);
+}
+
+.pb-safe-area-bottom-navbar {
+  padding-bottom: calc(env(safe-area-inset-bottom) + 54px);
+}
+
+.top-safe-area-header {
+  top: calc(env(safe-area-inset-top) + 79px);
+}
+
+.top-safe-area-with-filters {
+  top: calc(env(safe-area-inset-top) + 245px);
+}
+
+.top-safe-area-no-filters {
+  top: calc(env(safe-area-inset-top) + 212px);
 }

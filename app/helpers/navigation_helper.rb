@@ -1,20 +1,71 @@
 module NavigationHelper
-  def nav_icon_class_for(path)
-    return "fill-red stroke-red w-6 h-6" if path.any? { |p| current_page?(p) }
-    "fill-gray-5 stroke-gray-5 w-6 h-6"
+  def nav_icon_class_for(paths)
+    return "fill-red w-6 h-6" if paths.any? { |p| active_path?(p) }
+    "fill-grey-400 w-6 h-6"
   end
 
-  def nav_text_class_for(path)
-    return "text-red" if path.any? { |p| current_page?(p) }
-    "text-gray-5"
+  def nav_text_class_for(paths)
+    return "text-red" if paths.any? { |p| active_path?(p) }
+    "text-grey-400"
+  end
+
+  def active_path?(path)
+    return request.path == path if root_path == path
+
+    request.path.starts_with?(path)
+  end
+
+  def title(title)
+    content_for :title, title
+  end
+
+  def show_back_button?
+    current_page?(notification_settings_path) ||
+      resource_show_page?("speakers") ||
+      resource_show_page?("sessions")
+  end
+
+  def back_title
+    if controller_name.include?("_")
+      controller_name.humanize
+    else
+      "#{controller_name.singularize.capitalize} detail"
+    end
   end
 
   def show_header?
-    !current_page?(new_session_path) && !current_page?(about_path)
+    (user_signed_in? || !current_page?(unauthenticated_root_path)) &&
+      !current_page?(new_user_session_path) &&
+      !current_page?(about_path) &&
+      !current_page?(coming_soon_path) &&
+      !show_back_button?
   end
 
-  # Todo: A better approach would be to support authenticated root and unauthenticated root in routes.rb
-  def homepage_link
-    user_signed_in? ? root_path : new_session_path
+  def show_bottom_navbar?
+    current_page?(sessions_path) ||
+      (user_signed_in? || !current_page?(unauthenticated_root_path)) &&
+        !bottom_navbar_excluded_paths.any? { |path| current_page?(path) }
+  end
+
+  def show_bookmark_button?(session)
+    return true if controller_name == "schedules"
+
+    !session.past?
+  end
+
+  private
+
+  def bottom_navbar_excluded_paths
+    [
+      new_user_session_path,
+      new_registration_path,
+      new_password_reset_path,
+      edit_password_reset_path,
+      post_submit_password_reset_path
+    ]
+  end
+
+  def resource_show_page?(resource)
+    controller_name == resource && action_name == "show"
   end
 end

@@ -2,12 +2,217 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <style>
       /* Email styles need to be inline */
+
+      *{
+        font-family: "Roboto", sans-serif;
+      }
+
+      .u-w-full{
+        width: 100%;
+        overflow-x: hidden;
+      }
+
+      .u-text-center{
+        text-align: center;
+        display: table-cell;
+        vertical-align: middle;
+      }
+
+      .body{
+        display: flex;
+        flex-direction: column;
+      }
+      .container{
+        max-width: 382px;
+        margin: 0 auto;
+        flex-grow: 1;
+      }
+
+      .title{
+        color: black;
+        font-size: 23px;
+        font-weight: 700;
+        margin-bottom: 24px;
+      }
+
+      .c-event-card{
+        background-color: white;
+      }
+
+      .c-event-card__speaker{
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 16px;
+        align-items: center;
+      }
+
+      .c-event-card__speaker-img{
+        width: 32px;
+        height: 32px;
+        border-radius: 100%;
+        margin-right: 8px;
+        background-color: #8870A1;
+        color: white;
+        font-size: 16px;
+        font-weight: 900;
+        text-align: center;
+        line-height: 32px;
+        object-fit: cover;
+      }
+
+      .c-event-card__speaker-title{
+        font-size: 16px;
+        font-style: italic;
+        font-weight: 900;
+        line-height: 20px;
+      }
+
+      .c-event-card__speaker-subtitle{
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 14px;
+      }
+
+      .c-event-card__title, a{
+        font-size: 20px;
+        font-style: italic;
+        font-weight: 900;
+        line-height: 24px;
+        margin-bottom: 16px;
+      }
+
+      .c-event-card__tags{
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 16px;
+      }
+
+      .c-event-card__tags-tag{
+        display: flex;
+        padding: 6px 12px;
+        justify-content: center;
+        align-items: center;
+        margin-right: 8px;
+        border-radius: 8px;
+        border: 1px solid #829ECE;
+        color: #829ECE;
+      }
+      .c-event-card__tags-tag > *{
+        color: #829ECE;
+        font-size: 13px;
+      }
+
+      .c-event-card__description{
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px;
+        color: #1C1C1E;
+        margin-bottom: 16px;
+      }
+
+      .c-event-card__time{
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 12px;
+      }
+
+      .c-event-card__time-icon {
+        height: 16px;
+        margin-right: 4px;
+        text-align: center;
+      }
+
+      .c-event-card__time-icon-img {
+        width: 16px;
+        height: 16px;
+      }
+
+      .c-event-card__time-item{
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 14px;
+      }
+
+      .c-footer{
+        background-color: #432463;
+        boxsizing: border-box;
+        width: 100%;
+        display: table;
+        color: white;
+        padding: 24px;
+        margin-top: 12px;
+        font-size: 32px;
+        font-weight: 900;
+        text-align: center;
+      }
+
+      .c-footer-img {
+        width: 328px;
+      }
+
+      .c-unsubscribe-notifications{
+        display: block;
+        text-align: center;
+        font-family: Roboto;
+        font-size: 13px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        max-width: 382px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+
+      .c-unsubscribe-notifications__link{
+        font-family: Roboto;
+        font-size: 13px;
+        font-style: italic;
+        font-weight: 900;
+        line-height: normal;
+        text-decoration-line: underline;
+      }
+
+      .c-paragraph {
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 20px;
+        color: #1C1C1E;
+        margin-bottom: 16px;
+      }
+
+      .c-button {
+        display: flex;
+        padding: 16px 10px;
+        margin: 0 auto;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border-radius: 10px;
+        background-color: #CB0C1C;
+        font-size: 18px;
+        line-height: 22px;
+        font-weight: 600;
+        font-style: italic;
+        color: white;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
     </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
   </head>
 
-  <body>
+  <body class="body">
     <%= yield %>
   </body>
 </html>

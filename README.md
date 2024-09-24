@@ -39,7 +39,7 @@ To deploy the application, you can use Heroku. You can deploy the application to
 
 ## The stack
 
-- Ruby on Rails 7.1.x
+- Ruby on Rails 7.2.x
 - Ruby 3.3.x
 - SQLite3
 - SolidQueue
@@ -49,7 +49,14 @@ To deploy the application, you can use Heroku. You can deploy the application to
 
 ## Contributing
 
-### Linting & Formatting
+1. Run `bin/setup` (needs to be run only once)
+2. Run `bin/dev`
+
+or
+
+1. Run `docker compose up`
+
+## Linting & Formatting
 
 #### Ruby
 
@@ -114,3 +121,7 @@ Run tests by using `bundle exec rspec`.
 - If you want to see the logs you can use `:log`, e.g. `it "xxx", :log do`
 - Use `data-test-id` to find elements instead of classes/ids, e.g. `data-test-id="decline_modal"`
 - Use the methods in the `DataTestId` module to select HTML elements, e.g., `find_dti("decline_modal")`
+
+## Feature Flags
+
+Use ENV variables to enable features, the name should follow the convention `"#{feature_name}_ENABLED"`. For example, to enable the `payment` feature, use `ENV["PAYMENT_ENABLED"]="true"`.

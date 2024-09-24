@@ -1,35 +1,30 @@
 class SessionsController < ApplicationController
-  allow_unauthenticated_access only: [:new, :create]
+  allow_unauthenticated_access
 
-  before_action :redirect_if_signed_in, only: [:new, :create]
-
-  def new
-    @user = User.new
+  def index
+    @user_session_ids = current_user&.sessions&.pluck(:id)
+    @sessions = SessionQuery.new(
+      relation: sessions.joins(:location).distinct,
+      params: filter_params
+    ).call.includes(:location, :tags, speakers: [profile: :image_attachment]).order(:starts_at)
   end
 
-  def create
-    @user = User.authenticate_by(email: session_params[:email], password: session_params[:password])
-
-    if @user
-      login @user
-      redirect_to root_path, notice: t("controllers.sessions.create.notice")
+  def show
+    @user_session_ids = current_user&.sessions&.pluck(:id) || []
+    @session = if user_signed_in?
+      sessions.friendly.includes(:location, :tags, speakers: [profile: :image_attachment]).find(params[:id])
     else
-      redirect_to new_session_path, alert: t("controllers.sessions.create.alert")
+      sessions.publics.friendly.includes(:location, :tags, speakers: [profile: :image_attachment]).find(params[:id])
     end
-  end
-
-  def destroy
-    logout
-    redirect_to root_path, notice: t("controllers.sessions.destroy.notice")
   end
 
   private
 
-  def session_params
-    params.require(:user).permit(:email, :password)
+  def sessions
+    Session.where(conference: current_conference)
   end
 
-  def redirect_if_signed_in
-    redirect_to root_path if user_signed_in?
+  def filter_params
+    params.permit(:starts_at, :live, :past, :starting_soon).merge(show_private: user_signed_in?)
   end
 end

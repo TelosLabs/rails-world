@@ -1,20 +1,42 @@
-<div class="flex flex-col items-center justify-center w-full bg-purple-dark">
-  <div class="flex flex-col w-full max-w-screen-sm p-4 border-t b-white">
-    <h1 class="w-full mb-6 text-4xl font-black text-white">Set up your account</h1>
+<%= title "Edit profile - Rails World 2024" %>
 
-    <%= form_with model: @profile, class: "flex flex-col items-center" do |form| %>
+<%= content_for(:head) do %>
+  <%# Disabling morphing so that when an error occurs, the user is "redirected" to the top of the page %>
+  <meta name="turbo-refresh-method" content="replace">
+  <meta name="turbo-refresh-scroll" content="reset">
+<% end %>
+
+<div class="flex flex-col items-center justify-center w-full bg-purple-dark pt-safe-area-header pb-safe-area-bottom-navbar">
+  <div class="flex flex-col w-full max-w-screen-sm p-4">
+    <h1 class="w-full mb-6 text-3xl font-black text-white">Set up your account</h1>
+
+    <%= form_with model: @profile, url: profile_path(@profile.uuid), class: "flex flex-col items-center" do |form| %>
       <div class="relative" data-controller="image-previewer">
-        <%= form.label :image, class: "overflow-hidden relative font-bold text-white text-base w-32 h-32 bg-white cursor-pointer rounded-full flex flex-col items-center justify-center" do %>
-          <%= form.file_field :image, data: {image_previewer_target: "input"}, accept:"image/*,image/apng,image/avif,image/gif,image/gif,image/jpeg,image/png,image/svg+xml", class: "text-white border-2 border-white bg-transparent rounded-sm hidden mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white" %>
-          <% if @profile.image.present? %>
-            <%= image_tag @profile.image, data: {image_previewer_target: "hideOnLoad"}, class: "absolute" %>
+        <%= form.label(
+          :image,
+          class: "overflow-hidden relative font-bold text-white text-base w-32 h-32 bg-white
+            cursor-pointer rounded-full flex flex-col items-center justify-center"
+        ) do %>
+          <%= form.file_field(
+            :image,
+            data: {image_previewer_target: "input"},
+            accept:"image/*,image/apng,image/avif,image/gif,image/gif,image/jpeg,image/png,image/svg+xml",
+            class: "text-white border-2 border-white bg-transparent rounded-sm hidden mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white"
+          ) %>
+          <% if @profile.image.present? && @profile.image.persisted? %>
+            <%= image_tag @profile.image, data: {image_previewer_target: "hideOnLoad"}, class: "absolute object-cover h-full w-full" %>
           <% else %>
             <%= image_tag url_for("camera.svg"), data: {image_previewer_target: "hideOnLoad"} %>
           <% end %>
           <div class="absolute" data-image-previewer-target="onRemoveImagePlaceholderContainer"></div>
-          <%= image_tag "", data: {image_previewer_target: "image"}, class: "hidden absolute" %>
+          <%= image_tag "", data: {image_previewer_target: "image"}, class: "hidden absolute object-cover h-full w-full" %>
         <% end %>
-        <%= inline_svg_tag "icon_delete_photo.svg", data: {action: "click->image-previewer#removeImage", image_previewer_target: "deleteIcon" }, class: "cursor-pointer absolute top-[5px] right-[5px] w-6 h-6", style: @profile.image.present? ? "display:block;" : "display:none;" %>
+        <%= inline_svg_tag(
+          "icon_delete_photo.svg",
+          data: {action: "click->image-previewer#removeImage", image_previewer_target: "deleteIcon" },
+          class: "cursor-pointer absolute top-[5px] right-[5px] w-6 h-6",
+          style: @profile.image.present? && @profile.image.persisted? ? "display:block;" : "display:none;"
+        ) %>
         <div class="hidden" data-image-previewer-target="onRemoveImageContainer"></div>
         <template data-image-previewer-target="onRemoveImagePlaceholderTemplate">
           <%= image_tag url_for("camera.svg") %>
@@ -30,7 +52,7 @@
         <%= form.text_field :name, class: "w-full mb-6", placeholder: "John P. Doe" %>
 
         <%= form.label :bio, class: "font-bold text-white text-base mb-2" %>
-        <%= form.text_area :bio, class: "w-full mb-6", placeholder: "I'm a Ruby on Rails developer with six years of experience. Outside of work, I enjoy hiking and using dating apps." %>
+        <%= form.text_area :bio, class: "w-full mb-6", placeholder: "I'm a Ruby on Rails developer with six years of experience. Outside of work, I enjoy hiking and using dating apps.", rows: 3 %>
 
         <%= form.label :job_title, class: "font-bold text-white  text-base mb-2" %>
         <%= form.text_field :job_title, class: "w-full mb-6", placeholder: "Senior Developer at Telos Labs" %>
@@ -52,20 +74,33 @@
         <p class="mt-1 mb-6 text-xs text-white">Allow other persons to view your profile through a QR code.</p>
 
         <p class="mb-2 font-bold text-white">Notifications</p>
-        <div class="w-full mb-10 overflow-hidden rounded-md">
-          <div class="flex flex-row items-center justify-between w-full p-4 bg-white border-b border-gray-6">
-            <%= form.label :mail_notifications, "Mail notifications", class: "grow font-medium text-slate-900 text-base cursor-pointer mr-2" %>
-            <%= form.toggle_field :mail_notifications %>
+        <div class="w-full mb-10">
+          <div class="w-full overflow-hidden rounded-md">
+            <div class="flex flex-row items-center justify-between w-full p-4 bg-white border-b border-grey-300">
+              <%= form.label :mail_notifications, "Mail notifications", class: "grow font-medium text-slate-900 text-base cursor-pointer mr-2" %>
+              <%= form.toggle_field :mail_notifications %>
+            </div>
+            <div class="flex flex-row items-center justify-between w-full p-4 bg-white">
+              <%= form.label :web_push_notifications, "Web-push notifications", class: "grow font-medium text-slate-900 text-base cursor-pointer mr-2" %>
+              <label>
+                <%= form.check_box :web_push_notifications, class: "sr-only peer",
+                  data: {web_push_notifications_target: "enableNotifications"} %>
+                <div class="relative w-11 h-6 bg-grey-300 rounded-full peer dark:bg-grey-300 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red"></div>
+              </label>
+            </div>
           </div>
-          <div class="flex flex-row items-center justify-between w-full p-4 bg-white">
-            <%= form.label :in_app_notifications, "In-app notifications", class: "grow font-medium text-slate-900 text-base cursor-pointer mr-2" %>
-            <%= form.toggle_field :in_app_notifications %>
-          </div>
+          <p class="hidden p-2 mt-6 text-sm font-medium bg-white rounded-md notification-blocking-message">
+            It looks like you've blocked notifications. To stay updated,
+            please enable notifications in your browser settings.
+          </p>
         </div>
       </div>
-
       <%= form.submit "SAVE PROFILE", class:"w-full bg-red rounded-[10px] p-4 text-lg font-black text-white cursor-pointer" %>
-      <%= link_to "Skip for now", root_path, class: "text-lg underline font-black italic text-white mt-10" %>
+      <%= link_to "Edit your email and password", edit_user_path, class: "text-lg underline font-black italic text-white mt-10" %>
+
+      <% if current_user.created_at > 1.minute.ago %>
+        <%= link_to "Skip for now", root_path, class: "text-lg underline font-black italic text-white mt-2" %>
+      <% end %>
     <% end %>
   </div>
 </div>

@@ -1,30 +1,63 @@
 <!DOCTYPE html>
-<html class="h-full">
+<html class="h-screen">
   <head>
-    <title>RailsWorld</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title><%= content_for(:title).presence || "Rails World 2024" %></title>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover">
+    <meta name="turbo-refresh-scroll" content="preserve">
+    <meta name="turbo-refresh-method" content="morph">
+    <meta name="view-transition" content="same-origin">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="apple-touch-icon" href="<%= image_path "homescreen_icon.png" %>">
+    <link rel="manifest" crossorigin="use-credentials" href="/manifest.json">
+
+    <%= render 'layouts/apple_splash_screen' %>
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
 
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
+    <script async src="https://ga.jspm.io/npm:es-module-shims@1.8.2/dist/es-module-shims.js" data-turbo-track="reload"></script>
+
     <%= javascript_importmap_tags %>
+    <%= favicon_link_tag asset_path('icons/favicon.svg') %>
+
+    <%= yield :head %>
   </head>
 
-  <body class="flex flex-col h-full bg-gray-8">
-    <main class="relative flex flex-col flex-1 w-full mx-auto overflow-auto">
+  <body class="flex flex-col h-full bg-grey-50"
+    <%= user_signed_in? ? "data-controller=web-push-notifications
+    data-web-push-notifications-vapid-key-value=#{vapid_public_key}
+    data-web-push-notifications-notifications-enabled-value=#{current_profile.web_push_notifications}" : '' %>>
+
+    <div class="fixed top-0 z-40 w-full">
+      <% if show_back_button? %>
+        <%= render partial: "layouts/back_button" %>
+      <% end %>
+
       <% if show_header? %>
         <%= render partial: "layouts/header" %>
       <% end %>
+    </div>
 
-      <% flash.each do |type, message| %>
-        <% if message.present? && message.is_a?(String) %>
-          <%= render partial: "layouts/flash_message", locals: { message: message } %>
+    <main class="flex flex-col flex-1 w-full mx-auto">
+      <div id="flash_message">
+        <% flash.each do |type, message| %>
+          <% if message.present? && message.is_a?(String) %>
+            <%= render partial: "layouts/flash_message", locals: { message: message } %>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
 
       <%= yield %>
     </main>
-    <%= render partial: "layouts/bottom_navbar" if user_signed_in? %>
+
+    <% if show_bottom_navbar? %>
+      <%= render partial: "layouts/bottom_navbar", locals: { unread_notifications: current_user&.notifications&.unread } %>
+    <% end %>
   </body>
 </html>

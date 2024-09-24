@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 ruby "3.3.3"
 
-gem "rails", "~> 7.1.3", ">= 7.1.3.4"
+gem "rails", "~> 7.2"
 
 # Database
 gem "activerecord-enhancedsqlite3-adapter", "~> 0.8.0"
@@ -24,21 +24,30 @@ gem "turbo-rails"
 # Authentication
 gem "bcrypt", "~> 3.1.20"
 
+# Authorization
+gem "action_policy"
+
 # Admin
+gem "activestorage"
 gem "avo", ">= 3.2.1"
+gem "image_processing"
+gem "ransack"
 
 # Other
 gem "bootsnap", require: false
 gem "draper"
+gem "friendly_id", "~> 5.5.0"
 gem "inline_svg"
+gem "net-pop", github: "ruby/net-pop"
+gem "noticed"
 gem "puma", ">= 5.0"
-gem "ransack"
 gem "rqrcode", "~> 2.0"
 gem "tzinfo-data", platforms: %i[windows jruby]
 gem "validates_timeliness", "~> 7.0.0.beta1"
+gem "validate_url"
+gem "web-push"
 
 group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "better_errors"
   gem "binding_of_caller"
   gem "brakeman"
@@ -74,4 +83,13 @@ group :test do
   gem "rails-controller-testing"
   gem "rspec-instafail", require: false
   gem "rspec-retry"
+  gem "timecop"
+end
+
+group :staging, :production do
+  gem "appsignal"
+  gem "aws-sdk-s3", require: false
+  gem "litestream", "~> 0.10.4"
+  gem "lograge"
+  gem "mailpace-rails"
 end
