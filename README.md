@@ -4,7 +4,7 @@
 
 ## About
 
-- Ruby on Rails 7.1.x
+- Ruby on Rails 7.2.x
 - Ruby 3.3.x
 - SQLite3
 - SolidQueue
