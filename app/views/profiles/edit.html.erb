@@ -1,5 +1,9 @@
 <%= title "Edit profile - Rails World 2024" %>
 
+<% content_for :top_nav do %>
+  <%= render partial: "layouts/primary_top_nav" %>
+<% end %>
+
 <%= content_for(:head) do %>
   <%# Disabling morphing so that when an error occurs, the user is "redirected" to the top of the page %>
   <meta name="turbo-refresh-method" content="replace">
@@ -95,12 +99,30 @@
           </p>
         </div>
       </div>
-      <%= form.submit "SAVE PROFILE", class:"w-full bg-red rounded-[10px] p-4 text-lg font-black text-white cursor-pointer" %>
-      <%= link_to "Edit your email and password", edit_user_path, class: "text-lg underline font-black italic text-white mt-10" %>
 
-      <% if current_user.created_at > 1.minute.ago %>
-        <%= link_to "Skip for now", root_path, class: "text-lg underline font-black italic text-white mt-2" %>
+      <%= form.submit(
+        "SAVE PROFILE",
+        class: [
+          "w-full bg-red rounded-[10px] p-4 text-lg font-black text-white cursor-pointer",
+          "disabled:bg-grey-400 disabled:cursor-not-allowed"
+        ]
+      ) %>
+
+      <% if params[:onboarding].present? %>
+        <%= link_to(
+          "Skip for now", root_path,
+          class: "text-lg underline font-black italic text-white mt-10"
+        ) %>
+      <% else %>
+        <%= link_to(
+          "Edit your email and password", edit_user_path,
+          class: "text-lg underline font-black italic text-white mt-10"
+        ) %>
       <% end %>
     <% end %>
   </div>
 </div>
+
+<% content_for :bottom_nav do %>
+  <%= render partial: "layouts/bottom_navbar", locals: { unread_notifications: current_user&.notifications&.unread } %>
+<% end %>

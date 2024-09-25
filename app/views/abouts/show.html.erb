@@ -28,3 +28,7 @@
     </div>
   </div>
 </div>
+
+<% content_for :bottom_nav do %>
+  <%= render partial: "layouts/bottom_navbar", locals: { unread_notifications: current_user&.notifications&.unread } %>
+<% end %>

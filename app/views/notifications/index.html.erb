@@ -1,5 +1,9 @@
 <%= title "Notifications - Rails World 2024" %>
 
+<% content_for :top_nav do %>
+  <%= render partial: "layouts/primary_top_nav" %>
+<% end %>
+
 <div class="flex flex-col items-center flex-1 px-5 pt-safe-area-header pb-safe-area-bottom-navbar">
   <div class="flex flex-col items-start w-full h-full max-w-screen-sm pt-6">
     <h1 class="text-3xl italic font-bold">Notifications</h1>
@@ -43,3 +47,7 @@
     <% end %>
   </div>
 </div>
+
+<% content_for :bottom_nav do %>
+  <%= render partial: "layouts/bottom_navbar", locals: { unread_notifications: current_user&.notifications&.unread } %>
+<% end %>
