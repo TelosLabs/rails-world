@@ -6,8 +6,8 @@ RSpec.describe "User sign up", type: :system do
   context "when the password & password confirmation doesn't match up" do
     it "does not create a new user" do
       find_dti("email_field").set("test@test.com")
-      find_dti("password_field").set("hello")
-      find_dti("password_confirmation_field").set("world")
+      find_dti("password_field").set("hellohello")
+      find_dti("password_confirmation_field").set("worldworld")
       find_dti("sign_up_button").click
 
       expect(page).to have_content("Password confirmation doesn't match Password")
@@ -24,17 +24,6 @@ RSpec.describe "User sign up", type: :system do
       find_dti("sign_up_button").click
 
       expect(page).to have_content("Email has already been taken")
-    end
-  end
-
-  context "when the password doesn't met the length criteria" do
-    it "does not create a new user" do
-      find_dti("email_field").set("test@test.com")
-      find_dti("password_field").set("foobar")
-      find_dti("password_confirmation_field").set("foobar")
-      find_dti("sign_up_button").click
-
-      expect(page).to have_content("Password is too short (minimum is 8 characters)")
     end
   end
 

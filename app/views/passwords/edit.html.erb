@@ -1,3 +1,7 @@
+<% content_for :top_nav do %>
+  <%= render partial: "layouts/primary_top_nav" %>
+<% end %>
+
 <h1>Update Password</h1>
 
 <%= form_with model: Current.user, url: password_path do |form| %>

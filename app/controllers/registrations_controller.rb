@@ -12,7 +12,7 @@ class RegistrationsController < ApplicationController
 
     if @user.save
       login @user
-      redirect_to edit_profile_path(@user.profile.uuid)
+      redirect_to edit_profile_path(@user.profile.uuid, onboarding: true)
     else
       render :new, status: :unprocessable_entity
     end

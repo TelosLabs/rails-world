@@ -1,3 +1,7 @@
+<% content_for :top_nav do %>
+  <%= render partial: "layouts/primary_top_nav" %>
+<% end %>
+
 <div class="flex flex-col items-center flex-1 px-5 pb-10 bg-purple-dark pt-safe-area-header pb-safe-area-bottom-navbar">
   <%= form_with model: Current.user, url: user_path, class: "flex flex-col h-full w-full max-w-screen-sm" do |form| %>
     <div class="flex flex-col w-full h-full">
@@ -15,13 +19,16 @@
 
         <%= form.label :password_challenge, "Current Password", class: "text-white italic font-bold mb-2" %>
         <div class="relative" data-controller="password-visibility">
-          <%= form.password_field :password_challenge, class: "peer w-full", placeholder: "Password", data: { "password-visibility-target": "input" } %>
+          <%= form.password_field(
+            :password_challenge, class: "peer w-full", placeholder: "Password",
+            required: true, data: { "password-visibility-target": "input" }
+          ) %>
           <button class="absolute text-gray-300 -translate-y-1/2 right-3 top-1/2 hover:text-white peer-focus:text-gray-400 peer-focus:hover:text-gray-600" type="button" data-action="password-visibility#toggle">
             <%= inline_svg_tag("icons/eye-empty.svg", size: "22", data: { "password-visibility-target": "icon" }) %>
             <%= inline_svg_tag("icons/eye-off.svg", size: "22", class: "hidden", data: { "password-visibility-target": "icon" }) %>
           </button>
         </div>
-        <p class="mt-1 mb-6 text-xs text-white">Enter your current password if you want to create a new one.</p>
+        <p class="mt-1 mb-6 text-xs text-white">Enter your current password.</p>
 
         <%= form.label :password, "New Password", class: "text-white italic font-bold mb-2" %>
         <div class="relative mb-6" data-controller="password-visibility">
@@ -43,6 +50,16 @@
       </div>
     </div>
 
-    <%= form.button "Update", type: "submit", class: "w-full bg-red py-4 text-white font-black italic rounded-[10px] uppercase mb-4" %>
+    <%= form.button(
+      "Update",
+      class: [
+        "w-full bg-red py-4 text-white font-black italic rounded-[10px] uppercase mb-4",
+        "disabled:bg-grey-400 disabled:cursor-not-allowed"
+      ]
+    ) %>
   <% end %>
 </div>
+
+<% content_for :bottom_nav do %>
+  <%= render partial: "layouts/bottom_navbar", locals: { unread_notifications: current_user&.notifications&.unread } %>
+<% end %>

@@ -1,10 +1,14 @@
 <% if local_assigns[:errors].any? %>
-  <div class="w-full p-3 my-5 text-white rounded-md bg-red">
+  <template
+    data-controller="scroll-to"
+    data-scroll-to-location-value="shared-errors">
+  </template>
+  <div id="shared-errors" class="w-full p-3 my-5 text-white rounded-md bg-red">
     <h2 class="font-bold">The following errors were found:</h2>
-    <ol>
+    <ul>
       <% local_assigns[:errors].each do |message| %>
         <li><%= message %></li>
       <% end %>
-    </ol>
+    </ul>
   </div>
 <% end %>
