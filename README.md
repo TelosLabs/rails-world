@@ -1,6 +1,6 @@
-# Kleo
+# Rails World Conference App
 
-Kleo is a Rails application that allows you to create and manage conferences. You can use it to create a conference, add speakers and sessions. Attendees can register for the conference, view the schedule, receive notifications and more.
+Rails application that allows you to create and manage conferences. You can use it to create a conference, add speakers and sessions. Attendees can register for the conference, view the schedule, receive notifications and more.
 
 ## Installation
 
@@ -12,31 +12,6 @@ Kleo is a Rails application that allows you to create and manage conferences. Yo
 4. Run `bin/dev`
 5. Visit `http://localhost:3000` in your browser
 
-## Usage
-
-#### Creating a conference
-
-1. Visit `http://localhost:3000/`
-2. Log in as an admin (see `config/seeds.rb` for the default admin credentials)
-3. Visit `http://localhost:3000/avo`
-4. In avo, you can create a new conference, add speakers, locations and sessions
-
-## Customization
-
-#### Setting a logo
-
-To set a logo for the conference, you can replace the `app/assets/images/logo.png` file with your own logo.
-
-#### Setting a theme
-
-To set a theme for the conference, you can customize the `app/assets/stylesheets/application.scss` file.
-
-## Deployment
-
-To deploy the application, you can use Heroku. You can deploy the application to Heroku by clicking the button below:
-
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
 ## The stack
 
 - Ruby on Rails 7.2.x
@@ -47,16 +22,30 @@ To deploy the application, you can use Heroku. You can deploy the application to
 - Import maps
 - Tailwind CSS
 
+## Usage
+
+1. Visit `http://localhost:3000/avo`
+2. Log in as an admin (see `config/seeds.rb` for the default admin credentials)
+3. In avo, you can create a new conference, add speakers, locations and sessions
+4. Visit `http://localhost:3000` to see the conference schedule
+
+#### Feature Flags
+
+You can enable features by using ENV variables. The ENV var key should follow the convention "#{feature_name}_ENABLED". For example, to enable the `litestream_backups` feature, add `ENV["LITESTREAM_BACKUP_ENABLED"]="true"` to your .env file. You can view all the available features in `app/models/feature.rb`.
+
+## Deployment
+
+The application is configured to be deployed using [Kamal](https://kamal-deploy.org/). Each env has its own deploy.yml file, which should be updated with the correct values for your environment. Also, remember to create a .env file per environment (e.g. .env.production) with the correct values.
+
+#### Dependencies
+
+- AppSignal for monitoring
+- AWS S3 for file storage & backups
+- MailPace for sending emails
+
 ## Contributing
 
-1. Run `bin/setup` (needs to be run only once)
-2. Run `bin/dev`
-
-or
-
-1. Run `docker compose up`
-
-## Linting & Formatting
+### Linting & Formatting
 
 #### Ruby
 
@@ -121,7 +110,3 @@ Run tests by using `bundle exec rspec`.
 - If you want to see the logs you can use `:log`, e.g. `it "xxx", :log do`
 - Use `data-test-id` to find elements instead of classes/ids, e.g. `data-test-id="decline_modal"`
 - Use the methods in the `DataTestId` module to select HTML elements, e.g., `find_dti("decline_modal")`
-
-## Feature Flags
-
-Use ENV variables to enable features, the name should follow the convention `"#{feature_name}_ENABLED"`. For example, to enable the `payment` feature, use `ENV["PAYMENT_ENABLED"]="true"`.
