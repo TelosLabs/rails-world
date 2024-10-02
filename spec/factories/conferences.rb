@@ -12,7 +12,9 @@ FactoryBot.define do
     name { "RailsWorld 2024" }
 
     trait :with_location do
-      location
+      after(:create) do |conference|
+        create(:location, conference: conference)
+      end
     end
   end
 end

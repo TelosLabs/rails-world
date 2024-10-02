@@ -1,4 +1,4 @@
-<%= title "Edit profile - Rails World 2024" %>
+<%= title "Edit profile - #{Current.conference&.name}" %>
 
 <% content_for :top_nav do %>
   <%= render partial: "layouts/primary_top_nav" %>
@@ -105,7 +105,8 @@
         class: [
           "w-full bg-red rounded-[10px] p-4 text-lg font-black text-white cursor-pointer",
           "disabled:bg-grey-400 disabled:cursor-not-allowed"
-        ]
+        ],
+        data: { test_id: "save_profile_button" }
       ) %>
 
       <% if params[:onboarding].present? %>

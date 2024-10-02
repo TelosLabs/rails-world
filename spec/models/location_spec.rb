@@ -16,7 +16,7 @@
 require "rails_helper"
 
 RSpec.describe Location, type: :model do
-  let(:location) { build_stubbed(:location) }
+  let(:location) { build(:location) }
 
   it "has a valid factory" do
     expect(location).to be_valid
