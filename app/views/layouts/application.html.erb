@@ -35,13 +35,7 @@
     data-web-push-notifications-notifications-enabled-value=#{current_profile.web_push_notifications}" : '' %>>
 
     <div class="fixed top-0 z-40 w-full">
-      <% if show_back_button? %>
-        <%= render partial: "layouts/back_button" %>
-      <% end %>
-
-      <% if show_header? %>
-        <%= render partial: "layouts/header" %>
-      <% end %>
+      <%= yield :top_nav %>
     </div>
 
     <main class="flex flex-col flex-1 w-full mx-auto">
@@ -56,8 +50,6 @@
       <%= yield %>
     </main>
 
-    <% if show_bottom_navbar? %>
-      <%= render partial: "layouts/bottom_navbar", locals: { unread_notifications: current_user&.notifications&.unread } %>
-    <% end %>
+    <%= yield :bottom_nav %>
   </body>
 </html>
