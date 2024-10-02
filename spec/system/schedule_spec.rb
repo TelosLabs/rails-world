@@ -15,7 +15,7 @@ RSpec.describe "Schedule", type: :system do
       visit schedule_path
       expect(page).to have_content(session.title)
 
-      find("#bookmark_session_#{session.id}").click
+      find_dti("bookmark_session_#{session.id}").click
       expect(user.sessions).not_to include(session)
       expect(page).to have_no_content(session.title)
     end
@@ -23,7 +23,7 @@ RSpec.describe "Schedule", type: :system do
     it "allows user to navigate to session details" do
       visit schedule_path
 
-      find("#schedule_session_#{session.id}").click
+      find_dti("schedule_session_#{session.id}").click
       expect(page).to have_current_path(session_path(session))
       expect(page).to have_content(session.title)
       expect(page).to have_content(session.description.to_plain_text)

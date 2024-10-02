@@ -1,7 +1,7 @@
 <%# locals: (session:, user_is_an_attendee:, id_prefix: nil) %>
 
-<div class="relative flex flex-col w-full p-5 mb-4 bg-white rounded-[20px]" id="<%= dom_id(session, id_prefix) %>">
-  <a href="<%= session_path(session) %>" class="absolute top-0 bottom-0 left-0 right-0 z-0"></a>
+<div class="relative flex flex-col w-full p-5 mb-4 bg-white rounded-[20px]">
+  <a href="<%= session_path(session) %>" class="absolute top-0 bottom-0 left-0 right-0 z-0" data-test-id="<%= dom_id(session, id_prefix) %>"></a>
 
   <%= render partial: "sessions/status", locals: { session: session } %>
 
