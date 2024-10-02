@@ -27,13 +27,13 @@ module SessionHelper
   end
 
   def current_starts_at_filter
-    return unless current_conference
+    return unless Current.conference
 
-    current_conference.sessions.starts_at(Date.current).first&.starts_at&.to_date
+    Current.conference.sessions.starts_at(Date.current).first&.starts_at&.to_date
   end
 
   def current_agenda_session
-    @current_agenda_session ||= current_conference&.sessions&.live_or_upcoming_today&.first
+    @current_agenda_session ||= Current.conference&.sessions&.live_or_upcoming_today&.first
   end
 
   def current_schedule_session

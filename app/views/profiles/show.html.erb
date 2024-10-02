@@ -1,5 +1,5 @@
 <% profile_name = @profile.name.presence || "Anonymous" %>
-<%= title "#{profile_name}'s Profile - Rails World 2024" %>
+<%= title "#{profile_name}'s Profile - #{Current.conference&.name}" %>
 
 <% content_for :top_nav do %>
   <%= render partial: "layouts/primary_top_nav" %>

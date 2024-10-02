@@ -1,4 +1,4 @@
-<%= title "#{@session.title} - Rails World 2024" %>
+<%= title "#{@session.title} - #{Current.conference&.name}" %>
 
 <% content_for :top_nav do %>
   <%= render partial: "layouts/secondary_top_nav" %>

@@ -1,7 +1,7 @@
 class SchedulesController < ApplicationController
   def show
     @sessions = SessionQuery.new(
-      relation: current_user.sessions.where(conference: current_conference),
+      relation: current_user.sessions.where(conference: Current.conference),
       params: filter_params
     ).call.includes(:location, :tags, speakers: [profile: :image_attachment]).order(:starts_at)
   end

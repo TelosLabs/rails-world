@@ -25,7 +25,7 @@ class SessionsController < ApplicationController
   private
 
   def sessions
-    Session.where(conference: current_conference)
+    Session.where(conference: Current.conference)
   end
 
   def filter_params
