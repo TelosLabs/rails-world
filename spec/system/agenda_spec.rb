@@ -136,7 +136,7 @@ RSpec.describe "Agenda", type: :system do
       it "does not show private sessions" do
         visit session_path(private_session.id)
 
-        expect(page.status_code).to eq(404)
+        expect(page).to have_current_path(new_user_session_path, ignore_query: true)
       end
     end
   end

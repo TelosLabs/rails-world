@@ -1,5 +1,9 @@
 <%= title "Edit profile - Rails World 2024" %>
 
+<% content_for :top_nav do %>
+  <%= render partial: "layouts/primary_top_nav" %>
+<% end %>
+
 <%= content_for(:head) do %>
   <%# Disabling morphing so that when an error occurs, the user is "redirected" to the top of the page %>
   <meta name="turbo-refresh-method" content="replace">
@@ -23,7 +27,7 @@
             accept:"image/*,image/apng,image/avif,image/gif,image/gif,image/jpeg,image/png,image/svg+xml",
             class: "text-white border-2 border-white bg-transparent rounded-sm hidden mb-6 focus:outline-none focus:outline-0 focus:ring-0 focus:border-2 focus:border-white active:border-2 active:border-white"
           ) %>
-          <% if @profile.image.present? %>
+          <% if @profile.image.present? && @profile.image.persisted? %>
             <%= image_tag @profile.image, data: {image_previewer_target: "hideOnLoad"}, class: "absolute object-cover h-full w-full" %>
           <% else %>
             <%= image_tag url_for("camera.svg"), data: {image_previewer_target: "hideOnLoad"} %>
@@ -35,7 +39,7 @@
           "icon_delete_photo.svg",
           data: {action: "click->image-previewer#removeImage", image_previewer_target: "deleteIcon" },
           class: "cursor-pointer absolute top-[5px] right-[5px] w-6 h-6",
-          style: @profile.image.present? ? "display:block;" : "display:none;"
+          style: @profile.image.present? && @profile.image.persisted? ? "display:block;" : "display:none;"
         ) %>
         <div class="hidden" data-image-previewer-target="onRemoveImageContainer"></div>
         <template data-image-previewer-target="onRemoveImagePlaceholderTemplate">
@@ -95,12 +99,31 @@
           </p>
         </div>
       </div>
-      <%= form.submit "SAVE PROFILE", class:"w-full bg-red rounded-[10px] p-4 text-lg font-black text-white cursor-pointer", data: { test_id: "save_profile_button" } %>
-      <%= link_to "Edit your email and password", edit_user_path, class: "text-lg underline font-black italic text-white mt-10" %>
 
-      <% if current_user.created_at > 1.minute.ago %>
-        <%= link_to "Skip for now", root_path, class: "text-lg underline font-black italic text-white mt-2" %>
+      <%= form.submit(
+        "SAVE PROFILE",
+        class: [
+          "w-full bg-red rounded-[10px] p-4 text-lg font-black text-white cursor-pointer",
+          "disabled:bg-grey-400 disabled:cursor-not-allowed"
+        ],
+        data: { test_id: "save_profile_button" }
+      ) %>
+
+      <% if params[:onboarding].present? %>
+        <%= link_to(
+          "Skip for now", root_path,
+          class: "text-lg underline font-black italic text-white mt-10"
+        ) %>
+      <% else %>
+        <%= link_to(
+          "Edit your email and password", edit_user_path,
+          class: "text-lg underline font-black italic text-white mt-10"
+        ) %>
       <% end %>
     <% end %>
   </div>
 </div>
+
+<% content_for :bottom_nav do %>
+  <%= render partial: "layouts/bottom_navbar", locals: { unread_notifications: current_user&.notifications&.unread } %>
+<% end %>
