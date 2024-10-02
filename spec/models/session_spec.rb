@@ -25,7 +25,7 @@
 require "rails_helper"
 
 RSpec.describe Session, type: :model do
-  let(:session) { build_stubbed(:session) }
+  let(:session) { build(:session) }
   let(:live_session) { create(:session, :live) }
   let(:starting_soon_session) { create(:session, :starting_soon) }
   let(:past_session) { create(:session, :past) }

@@ -29,7 +29,7 @@ module SessionHelper
   def current_starts_at_filter
     return unless current_conference
 
-    (current_conference.sessions.starts_at(Date.current).first || current_conference.sessions.order(:starts_at).first)&.starts_at&.to_date
+    current_conference.sessions.starts_at(Date.current).first&.starts_at&.to_date
   end
 
   def current_agenda_session

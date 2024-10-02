@@ -24,12 +24,15 @@
 #
 FactoryBot.define do
   factory :session do
-    title { "Keynote" }
-    description { "The opening keynote" }
+    title { Faker::Lorem.sentence }
+    description { Faker::Lorem.paragraph }
     starts_at { 1.day.from_now }
     ends_at { starts_at + 1.hour }
-    location
-    conference
+
+    after(:build) do |session|
+      session.conference = Conference.first || create(:conference)
+      session.location = session.conference.locations&.first || create(:location, conference: session.conference)
+    end
 
     trait :past do
       starts_at { 1.day.ago }
@@ -41,6 +44,12 @@ FactoryBot.define do
 
     trait :starting_soon do
       starts_at { 1.hour.from_now }
+    end
+
+    trait :with_speakers do
+      after(:create) do |session|
+        create_list(:speaker, 2, sessions: [session])
+      end
     end
   end
 end
