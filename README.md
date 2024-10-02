@@ -1,10 +1,20 @@
-# Rails World
+# Rails World Conference App
 
-[![Ruby Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://github.com/testdouble/standard)
+Rails application that allows you to create and manage conferences. You can use it to create a conference, add speakers and sessions. Attendees can register for the conference, view the schedule, receive notifications and more.
 
-## About
+## Installation
 
-- Ruby on Rails 7.1.x
+1. Requirements
+  - Ruby 3.3.x (https://www.ruby-lang.org/en/documentation/installation/)
+  - Bundler (`gem install bundler`)
+2. Clone the repository (`git clone xxx`)
+3. Run `bin/setup` (needs to be run only once)
+4. Run `bin/dev`
+5. Visit `http://localhost:3000` in your browser
+
+## The stack
+
+- Ruby on Rails 7.2.x
 - Ruby 3.3.x
 - SQLite3
 - SolidQueue
@@ -12,16 +22,30 @@
 - Import maps
 - Tailwind CSS
 
-## Running the application
+## Usage
 
-1. Run `bin/setup` (needs to be run only once)
-2. Run `bin/dev`
+1. Visit `http://localhost:3000/avo`
+2. Log in as an admin (see `config/seeds.rb` for the default admin credentials)
+3. In avo, you can create a new conference, add speakers, locations and sessions
+4. Visit `http://localhost:3000` to see the conference schedule
 
-or
+#### Feature Flags
 
-1. Run `docker compose up`
+You can enable features by using ENV variables. The ENV var key should follow the convention "#{feature_name}_ENABLED". For example, to enable the `litestream_backups` feature, add `ENV["LITESTREAM_BACKUP_ENABLED"]="true"` to your .env file. You can view all the available features in `app/models/feature.rb`.
 
-## Linting & Formatting
+## Deployment
+
+The application is configured to be deployed using [Kamal](https://kamal-deploy.org/). Each env has its own deploy.yml file, which should be updated with the correct values for your environment. Also, remember to create a .env file per environment (e.g. .env.production) with the correct values.
+
+#### Dependencies
+
+- AppSignal for monitoring
+- AWS S3 for file storage & backups
+- MailPace for sending emails
+
+## Contributing
+
+### Linting & Formatting
 
 #### Ruby
 
@@ -63,7 +87,7 @@ gem install lefthook
 lefthook install
 ```
 
-## Code Quality
+### Code Quality
 
 #### Rubycritic
 
@@ -75,7 +99,7 @@ Besides code reviews, we use [rubycritic](https://github.com/whitesmith/rubycrit
 We use [DatabaseConsistency](https://github.com/djezzzl/database_consistency) to check for inconsistencies between the database schema and the application models.
 - You can run it with `bundle exec database_consistency`.
 
-## Testing
+### Testing
 
 Run tests by using `bundle exec rspec`.
 
@@ -86,7 +110,3 @@ Run tests by using `bundle exec rspec`.
 - If you want to see the logs you can use `:log`, e.g. `it "xxx", :log do`
 - Use `data-test-id` to find elements instead of classes/ids, e.g. `data-test-id="decline_modal"`
 - Use the methods in the `DataTestId` module to select HTML elements, e.g., `find_dti("decline_modal")`
-
-## Feature Flags
-
-Use ENV variables to enable features, the name should follow the convention `"#{feature_name}_ENABLED"`. For example, to enable the `payment` feature, use `ENV["PAYMENT_ENABLED"]="true"`.
