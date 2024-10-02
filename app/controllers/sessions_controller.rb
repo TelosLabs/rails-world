@@ -3,25 +3,29 @@ class SessionsController < ApplicationController
 
   def index
     @user_session_ids = current_user&.sessions&.pluck(:id)
-    @sessions = SessionQuery.new(
-      relation: sessions.joins(:location).distinct,
-      params: filter_params
-    ).call.includes(:location, :tags, speakers: [profile: :image_attachment]).order(:starts_at)
+    @sessions = SessionQuery
+      .new(relation: sessions.joins(:location).distinct, params: filter_params).call
+      .includes(:location, :tags, speakers: [profile: :image_attachment])
+      .order(:starts_at)
   end
 
   def show
     @user_session_ids = current_user&.sessions&.pluck(:id) || []
-    @session = if user_signed_in?
-      sessions.friendly.includes(:location, :tags, speakers: [profile: :image_attachment]).find(params[:id])
-    else
-      sessions.publics.friendly.includes(:location, :tags, speakers: [profile: :image_attachment]).find(params[:id])
+
+    @session = sessions.friendly
+      .includes(:location, :tags, speakers: [profile: :image_attachment])
+      .find(params[:id])
+
+    if @session.private? && !user_signed_in?
+      session[:after_sign_in_path] = session_path(@session)
+      redirect_to new_user_session_path
     end
   end
 
   private
 
   def sessions
-    Session.where(conference: current_conference)
+    Session.where(conference: Current.conference)
   end
 
   def filter_params

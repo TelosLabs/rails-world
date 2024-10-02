@@ -49,8 +49,8 @@ class Session < ApplicationRecord
   scope :starts_at, ->(date) { where("date(starts_at) = ?", date) }
   scope :past, -> { where(ends_at: ...Time.current) }
   scope :live, -> { where("? BETWEEN starts_at AND ends_at", Time.current) }
-  scope :starting_soon, -> { where("starts_at BETWEEN ? and ?", Time.current, 1.hour.from_now) }
-  scope :upcoming_today, -> { where("date(starts_at) = ? and starts_at > ?", Date.current, Time.current) }
+  scope :starting_soon, -> { where("starts_at BETWEEN ? AND ?", Time.current, 1.hour.from_now) }
+  scope :upcoming_today, -> { where("date(starts_at) = ? AND starts_at > ?", Date.current, Time.current) }
   scope :live_or_upcoming_today, -> { live.or(upcoming_today) }
   scope :publics, -> { where(public: true) }
   scope :privates, -> { where(public: false) }
@@ -66,7 +66,7 @@ class Session < ApplicationRecord
   def starting_soon?
     return false if starts_at < Time.current
 
-    (starts_at - Time.current) < 1.hour
+    (starts_at - Time.current) <= 1.hour
   end
 
   def past?

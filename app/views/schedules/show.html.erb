@@ -1,4 +1,8 @@
-<%= title "My Schedule - #{current_conference&.name}" %>
+<%= title "My Schedule - #{Current.conference&.name}" %>
+
+<% content_for :top_nav do %>
+  <%= render partial: "layouts/primary_top_nav" %>
+<% end %>
 
 <div class="flex flex-col items-center h-full bg-grey-50 pt-safe-area-header">
   <div class="flex flex-col items-center w-full h-full max-w-screen-md px-5">
@@ -63,3 +67,7 @@
     </div>
   </div>
 </div>
+
+<% content_for :bottom_nav do %>
+  <%= render partial: "layouts/bottom_navbar", locals: { unread_notifications: current_user&.notifications&.unread } %>
+<% end %>

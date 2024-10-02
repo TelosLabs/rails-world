@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   default_form_builder ApplicationFormBuilder
 
-  helper_method :current_profile, :current_conference, :vapid_public_key
+  helper_method :current_profile, :vapid_public_key
 
   rescue_from ActionController::InvalidAuthenticityToken,
     with: :after_invalid_authenticity_token
@@ -13,8 +13,6 @@ class ApplicationController < ActionController::Base
   private
 
   def current_profile = current_user&.profile
-
-  def current_conference = Current.conference
 
   def vapid_public_key
     @_vapid_public_key ||= Base64.urlsafe_decode64(ENV["VAPID_PUBLIC_KEY"]).bytes.to_json

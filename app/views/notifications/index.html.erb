@@ -1,4 +1,8 @@
-<%= title "Notifications - #{current_conference&.name}" %>
+<%= title "Notifications - #{Current.conference&.name}" %>
+
+<% content_for :top_nav do %>
+  <%= render partial: "layouts/primary_top_nav" %>
+<% end %>
 
 <div class="flex flex-col items-center flex-1 px-5 pt-safe-area-header pb-safe-area-bottom-navbar">
   <div class="flex flex-col items-start w-full h-full max-w-screen-sm pt-6">
@@ -16,18 +20,13 @@
         <% end %>
       </div>
 
-      <div class="flex flex-col items-start w-full">
+      <div class="flex flex-col items-start w-full p-4">
         <div class="flex flex-col items-center w-full mt-10 mb-10">
           <%= link_to(
             'Notification settings', notification_settings_path,
             class: "text-red font-bold  text-center rounded-sm underline italic text-lg"
           ) %>
         </div>
-        <%= button_to(
-          "CLEAR ALL", read_notifications_path,
-          class: "w-full bg-white rounded-[10px] p-4 text-lg font-black text-red cursor-pointer italic items-center text-center",
-          form_class: "w-full"
-        ) %>
       </div>
     <% else %>
       <div class="flex flex-col items-center justify-center w-full h-full gap-6">
@@ -43,3 +42,7 @@
     <% end %>
   </div>
 </div>
+
+<% content_for :bottom_nav do %>
+  <%= render partial: "layouts/bottom_navbar", locals: { unread_notifications: current_user&.notifications&.unread } %>
+<% end %>
