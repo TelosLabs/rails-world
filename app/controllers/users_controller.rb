@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    if Current.user.update(user_params)
+    if Current.user.update(update_params)
       redirect_to edit_user_path, notice: t("controllers.users.update.success")
     else
       render :edit, status: :unprocessable_entity
@@ -11,6 +11,14 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def update_params
+    if attempting_to_change_password?
+      permitted_params
+    else
+      email_params
+    end
+  end
 
   def permitted_params
     params.require(:user).permit(
@@ -21,19 +29,15 @@ class UsersController < ApplicationController
     ).with_defaults(password_challenge: "")
   end
 
-  def user_params
-    if password_params_blank?
-      {email: permitted_params[:email]}
-    else
-      permitted_params
-    end
+  def email_params
+    permitted_params
+      .slice(:email, :password_challenge)
+      .with_defaults(password_challenge: "")
   end
 
-  def password_params_blank?
-    permitted_params.values_at(
-      :password,
-      :password_confirmation,
-      :password_challenge
-    ).all?(&:blank?)
+  def attempting_to_change_password?
+    permitted_params
+      .values_at(:password, :password_confirmation)
+      .any?(&:present?)
   end
 end

@@ -1,3 +1,9 @@
+<%= title "Sign up - #{Current.conference&.name}" %>
+
+<% content_for :top_nav do %>
+  <%= render partial: "layouts/primary_top_nav" %>
+<% end %>
+
 <div class="flex flex-col items-center flex-1 px-5 pb-10 bg-purple-dark pt-safe-area-header">
   <%= form_with model: @user, url: registration_path, class: "flex flex-col h-full justify-between w-full max-w-screen-sm pt-10" do |form| %>
     <div class="flex flex-col">
@@ -17,13 +23,25 @@
 
           <div class="flex flex-col mb-6">
             <%= form.label :password, class: "text-white italic font-bold mb-2" %>
-            <%= form.password_field :password, required: true, data: { test_id: "password_field" }, placeholder: "You know how a strong password goes, right?" %>
+            <%= form.password_field(
+              :password, required: true,
+              data: { test_id: "password_field" },
+              pattern: ".{8,}",
+              title:"8 characters minimum",
+              placeholder: "Enter your password"
+            ) %>
             <p class="pt-1 text-xs text-white">Password should contain at least 8 characters</p>
           </div>
 
           <div class="flex flex-col">
             <%= form.label :password_confirmation, class: "text-white italic font-bold mb-2" %>
-            <%= form.password_field :password_confirmation, required: true, data: { test_id: "password_confirmation_field" }, placeholder: "Confirm strong password" %>
+            <%= form.password_field(
+              :password_confirmation, required: true,
+              data: { test_id: "password_confirmation_field" },
+              pattern: ".{8,}",
+              title:"8 characters minimum",
+              placeholder: "Confirm password"
+            ) %>
             <%= form.error_message :password_confirmation %>
           </div>
         </div>
@@ -34,6 +52,13 @@
       </div>
     </div>
 
-    <%= form.button "Sign Up", type: "submit", data: { test_id: "sign_up_button" }, class: "w-full bg-red py-4 text-white font-black italic rounded-[10px] uppercase" %>
+    <%= form.button(
+      "Sign Up",
+      data: { test_id: "sign_up_button" },
+      class: [
+        "w-full bg-red py-4 text-white font-black italic rounded-[10px] uppercase",
+        "disabled:bg-gray-400 disabled:cursor-not-allowed"
+      ]
+    ) %>
   <% end %>
 </div>

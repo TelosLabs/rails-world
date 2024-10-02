@@ -8,7 +8,8 @@
       class: [
         nav_text_class_for([sessions_path, root_path, "/speakers"]),
         "flex flex-col items-center justify-center"
-      ]
+      ],
+      data: { test_id: "sessions_nav" }
     ) do %>
       <%= inline_svg_tag "icons/calendar.svg", class: nav_icon_class_for([sessions_path, root_path, "/speakers"]) %>
       Agenda
@@ -22,7 +23,8 @@
       class: [
         nav_text_class_for([schedule_path]),
         "flex flex-col items-center justify-center"
-      ]
+      ],
+      data: { test_id: "schedule_nav" }
     ) do %>
       <%= inline_svg_tag "icons/clock.svg", class: nav_icon_class_for([schedule_path]) %>
       My Schedule

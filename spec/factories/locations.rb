@@ -16,6 +16,9 @@
 FactoryBot.define do
   factory :location do
     name { "Main Hall" }
-    conference
+
+    after(:build) do |location|
+      location.conference ||= Conference.first || create(:conference)
+    end
   end
 end

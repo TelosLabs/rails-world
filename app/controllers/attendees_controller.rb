@@ -42,6 +42,6 @@ class AttendeesController < ApplicationController
   private
 
   def set_session
-    @session = current_conference.sessions.find(params[:session_id])
+    @session = Current.conference.sessions.find(params[:session_id])
   end
 end

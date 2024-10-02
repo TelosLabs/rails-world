@@ -1,4 +1,8 @@
-<%= title "Notifications settings - Rails World 2024" %>
+<%= title "Notifications settings - #{Current.conference&.name}" %>
+
+<% content_for :top_nav do %>
+  <%= render partial: "layouts/secondary_top_nav" %>
+<% end %>
 
 <%= form_with(
   model: current_user.profile,
@@ -31,4 +35,8 @@
       please enable notifications in your browser settings.
     </p>
   </div>
+<% end %>
+
+<% content_for :bottom_nav do %>
+  <%= render partial: "layouts/bottom_navbar", locals: { unread_notifications: current_user&.notifications&.unread } %>
 <% end %>

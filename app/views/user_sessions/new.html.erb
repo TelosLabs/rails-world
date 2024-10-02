@@ -1,3 +1,5 @@
+<%= title "Login - #{Current.conference&.name}" %>
+
 <div class="flex flex-col items-center flex-1 px-5 pb-10 pt-safe-area-2 bg-purple-dark">
   <%= form_with model: @user, url: user_session_path, class: "flex flex-col h-full justify-between w-full max-w-screen-sm" do |form| %>
     <div class="flex flex-col items-center">
@@ -30,13 +32,21 @@
         </div>
 
         <div class="flex flex-col items-center mb-10">
-          <%= link_to "View as guest", sessions_path, class: "font-black italic underline text-white mb-10" %>
-          <%= link_to "Sign up", new_registration_path, class: "font-black italic underline text-white mb-10" %>
+          <%= link_to "Sign up", new_registration_path, class: "font-black italic underline text-white mb-5" %>
+          <%= link_to "View as guest", sessions_path, class: "font-black italic underline text-white mb-5", data: { test_id: "view_as_guest_btn" } %>
         </div>
       </div>
     </div>
+
     <div class="flex flex-col">
-      <%= form.button "Log in", type: "submit", data: { test_id: "sign_in_button" }, class: "w-full bg-red py-4 text-white font-black italic rounded-[10px] uppercase" %>
+      <%= form.button(
+        "Log in",
+        data: { test_id: "sign_in_button" },
+        class: [
+          "w-full bg-red py-4 text-white font-black italic rounded-[10px] uppercase",
+          "disabled:bg-gray-400 disabled:cursor-not-allowed"
+        ]
+      ) %>
     </div>
   <% end %>
 </div>
