@@ -351,7 +351,7 @@ GEM
     msgpack (1.7.2)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
-    net-imap (0.4.16)
+    net-imap (0.4.17)
       date
       net-protocol
     net-protocol (0.2.2)
