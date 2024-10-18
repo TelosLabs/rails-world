@@ -31,7 +31,7 @@ Rails application that allows you to create and manage conferences. You can use 
 
 #### Feature Flags
 
-You can enable features by using ENV variables. The ENV var key should follow the convention "#{feature_name}_ENABLED". For example, to enable the `litestream_backups` feature, add `ENV["LITESTREAM_BACKUP_ENABLED"]="true"` to your .env file. You can view all the available features in `app/models/feature.rb`.
+You can enable features by using ENV variables. The ENV var key should follow the convention "#{feature_name}_ENABLED". For example, to enable the `litestream_backups` feature, add `LITESTREAM_BACKUP_ENABLED=true` to your .env file. You can view all the available features in `app/models/feature.rb`.
 
 ## Deployment
 
