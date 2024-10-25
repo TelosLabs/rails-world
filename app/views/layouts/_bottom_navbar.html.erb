@@ -11,7 +11,7 @@
       ],
       data: { test_id: "sessions_nav" }
     ) do %>
-      <%= inline_svg_tag "icons/calendar.svg", class: nav_icon_class_for([sessions_path, root_path, "/speakers"]) %>
+      <%= image_tag "icons/calendar.svg", class: nav_icon_class_for([sessions_path, root_path, "/speakers"]) %>
       Agenda
     <% end %>
 
@@ -26,7 +26,7 @@
       ],
       data: { test_id: "schedule_nav" }
     ) do %>
-      <%= inline_svg_tag "icons/clock.svg", class: nav_icon_class_for([schedule_path]) %>
+      <%= image_tag "icons/clock.svg", class: nav_icon_class_for([schedule_path]) %>
       My Schedule
     <% end %>
 
@@ -37,7 +37,7 @@
         "flex flex-col items-center justify-center"
       ]
         ) do %>
-      <%= inline_svg_tag(
+      <%= image_tag(
         "icons/avatar_no_fill.svg",
         class: nav_icon_class_for(["/profiles"])
         ) %>
@@ -51,7 +51,7 @@
         "relative flex flex-col items-center justify-center"
       ]
     ) do %>
-      <%= inline_svg_tag "icons/bell.svg", class: nav_icon_class_for([notifications_path, notification_settings_path]) %>
+      <%= image_tag "icons/bell.svg", class: nav_icon_class_for([notifications_path, notification_settings_path]) %>
       <% if unread_notifications.present? %>
         <div class="absolute -top-0.5 right-0 w-[18px] h-[18px] rounded-full bg-red flex justify-center items-center">
           <span class="text-[11px] text-white font-bold px-1">
@@ -69,7 +69,7 @@
         "flex flex-col items-center justify-center"
       ]
     ) do %>
-      <%= inline_svg_tag "icons/info_circle.svg", class: nav_icon_class_for([about_path]) %>
+      <%= image_tag "icons/info_circle.svg", class: nav_icon_class_for([about_path]) %>
       About
     <% end %>
   </div>

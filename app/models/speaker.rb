@@ -22,7 +22,7 @@ class Speaker < ApplicationRecord
 
   validates :slug, uniqueness: true
 
-  [:name, :bio, :job_title, :github_url, :twitter_url, :linkedin_url, :image, :uuid].each do |attr|
+  [:name, :bio, :job_title, :github_url, :twitter_url, :linkedin_url, :uuid].each do |attr|
     delegate attr, "#{attr}=", to: :profile, allow_nil: true
   end
 
@@ -30,5 +30,9 @@ class Speaker < ApplicationRecord
 
   def profile
     super || build_profile
+  end
+
+  def image
+    nil
   end
 end

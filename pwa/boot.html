@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="og:title" content="Rails on Wasm" />
+        <meta name="og:description" content="Rails on Wasm launcher" />
+        <title>Rails on Wasm | Launch</title>
+        <script type="module" src="/boot.js"></script>
+        <style>
+            #boot-console-output {
+                background-color: #0c0c0c;
+                color: #f8f8f2;
+                font-family: monospace;
+                font-size: 0.8em;
+                padding: 1em;
+                white-space: pre-wrap;
+                min-height: 200px;
+                overflow-y: scroll;
+            }
+            #launch-button {
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                padding: 0.5em 1em;
+                font-size: 1em;
+                cursor: pointer;
+                border: 1px solid #ccc;
+            }
+            #launch-button:disabled {
+                background-color: #ccc;
+                color: #666;
+            }
+            #reboot-button {
+                background-color: #dc3545;
+                color: #fff;
+                border: none;
+                padding: 0.5em 1em;
+                font-size: 1em;
+                cursor: pointer;
+                border: 1px solid #ccc;
+            }
+            #reboot-button:disabled {
+                background-color: #ccc;
+                color: #666;
+            }
+            #reload-button {
+                background-color: #eeeeee;
+                color: #333;
+                border: none;
+                padding: 0.5em 1em;
+                font-size: 1em;
+                cursor: pointer;
+                border: 1px solid #333;
+            }
+            #reload-button:disabled {
+                background-color: #ccc;
+                color: #666;
+            }
+            #reload-debug-button {
+                background-color: rgb(159, 166, 40);
+                color: #000;
+                border: none;
+                padding: 0.5em 1em;
+                font-size: 1em;
+                cursor: pointer;
+                border: 1px solid #000;
+            }
+            #reload-debug-button:disabled {
+                background-color: #ccc;
+                color: #666;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Rails on Wasm 🚀</h1>
+        <p>
+            Wait for the Service Worker to install and boot the app. This may
+            take a while.
+        </p>
+
+        <p>
+            <button id="launch-button" disabled>Launch</button>
+            <button id="reload-button" disabled>Reload Rails</button>
+            <button id="reload-debug-button" disabled>
+                Reload Rails (debug mode)
+            </button>
+            <button id="reboot-button" disabled>Hard Reset*</button>
+        </p>
+
+        <div id="boot-message"></div>
+        <progress id="boot-progress" max="100" value="0"></progress>
+        <pre id="boot-console-output"></pre>
+        <hr />
+        <p>
+            <small>
+                * Please ensure you close all tabs of this app before rebooting
+                to unregister the old Service Worker.
+            </small>
+        </p>
+    </body>
+</html>

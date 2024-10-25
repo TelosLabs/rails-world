@@ -27,7 +27,7 @@ class Session < ApplicationRecord
 
   friendly_id :title, use: :slugged
 
-  has_rich_text :description
+  # has_rich_text :description
 
   belongs_to :location
   belongs_to :conference
@@ -75,5 +75,9 @@ class Session < ApplicationRecord
 
   def private?
     !public?
+  end
+
+  def description
+    "No description in PWA"
   end
 end

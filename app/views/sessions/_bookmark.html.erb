@@ -5,7 +5,7 @@
       method: :delete, form: { class: "z-10 flex items-center" }, data: { test_id: dom_id(session, "bookmark") }
     ) do %>
       <div class="p-2">
-        <%= inline_svg_tag("icons/bookmark-full.svg") %>
+        <%= image_tag("icons/bookmark-full.svg") %>
       </div>
     <% end %>
   <% else %>
@@ -14,7 +14,7 @@
       form: { class: "z-10 flex items-center" }, data: { test_id: dom_id(session, "bookmark") }
     ) do %>
       <div class="p-2">
-        <%= inline_svg_tag("icons/bookmark-outline.svg", class: "") %>
+        <%= image_tag("icons/bookmark-outline.svg", class: "") %>
       </div>
     <% end %>
   <% end %>

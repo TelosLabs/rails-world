@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
     @user_session_ids = current_user&.sessions&.pluck(:id)
     @sessions = SessionQuery
       .new(relation: sessions.joins(:location).distinct, params: filter_params).call
-      .includes(:location, :tags, speakers: [profile: :image_attachment])
+      .includes(:location, :tags)
       .order(:starts_at)
   end
 
@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
     @user_session_ids = current_user&.sessions&.pluck(:id) || []
 
     @session = sessions.friendly
-      .includes(:location, :tags, speakers: [profile: :image_attachment])
+      .includes(:location, :tags)
       .find(params[:id])
 
     if @session.private? && !user_signed_in?

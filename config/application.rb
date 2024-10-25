@@ -1,5 +1,7 @@
 require_relative "boot"
 
+require "wasmify/rails/shim"
+
 require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems
@@ -16,7 +18,7 @@ module RailsWorld
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
 
-    config.solid_queue.connects_to = {database: {writing: :queue}}
+    # config.solid_queue.connects_to = {database: {writing: :queue}}
     config.mission_control.jobs.base_controller_class = "MissionControlBaseController"
 
     # Configuration for the application, engines, and railties goes here.

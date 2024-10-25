@@ -10,12 +10,12 @@
         <div class="relative flex flex-col items-center justify-center">
           <div class="relative flex flex-col items-center justify-center w-10 h-10 bg-center bg-no-repeat bg-cover rounded-full min-w-10 min-h-10" style="background-image: url(<%= url_for(speaker.image) %>)">
           </div>
-          <%= inline_svg_tag "icon_notification.svg", class: "absolute z-10 bottom-[-4px] right-[-4px]" %>
+          <%= image_tag "icon_notification.svg", class: "absolute z-10 bottom-[-4px] right-[-4px]" %>
         </div>
       <% else %>
         <div class="relative w-[48px] h-[48px] rounded-full bg-slate-300 p-3 flex flex-row items-center justify-center">
           <%= image_tag url_for("icons/user_avatar.svg") %>
-          <%= inline_svg_tag "icon_notification.svg", class: "absolute z-10 bottom-[-4px] right-[-4px]" %>
+          <%= image_tag "icon_notification.svg", class: "absolute z-10 bottom-[-4px] right-[-4px]" %>
         </div>
       <% end %>
     </div>

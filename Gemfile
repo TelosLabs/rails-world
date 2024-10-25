@@ -1,51 +1,52 @@
 source "https://rubygems.org"
 
-ruby "3.3.3"
+ruby "3.3.3" unless RUBY_PLATFORM =~ /wasm/
 
-gem "rails", "~> 7.2"
+gem "rails", "~> 7.2", group: [:default, :wasm]
 
 # Database
 gem "activerecord-enhancedsqlite3-adapter", "~> 0.8.0"
-gem "sqlite3", "~> 1.4"
+gem "sqlite3", "~> 1.4", group: [:default, :wasm]
 
 # Jobs
-gem "mission_control-jobs"
-gem "solid_queue"
+gem "mission_control-jobs", group: [:default, :wasm]
+gem "solid_queue", group: [:default, :wasm]
 
 # Assets
-gem "importmap-rails"
-gem "propshaft"
-gem "tailwindcss-rails", "~> 2.6"
+gem "importmap-rails", group: [:default, :wasm]
+gem "propshaft", group: [:default, :wasm]
+gem "tailwindcss-rails", "~> 2.6", group: [:default, :wasm]
 
 # Hotwire
-gem "stimulus-rails"
-gem "turbo-rails"
+gem "stimulus-rails", group: [:default, :wasm]
+gem "turbo-rails", group: [:default, :wasm]
 
 # Authentication
-gem "bcrypt", "~> 3.1.20"
+gem "bcrypt", "~> 3.1.20", group: [:default, :wasm]
 
 # Authorization
-gem "action_policy"
+gem "action_policy", group: [:default, :wasm]
 
 # Admin
-gem "activestorage"
-gem "avo", ">= 3.2.1"
-gem "image_processing"
-gem "ransack"
+gem "activestorage", group: [:default, :wasm]
+gem "avo", ">= 3.2.1", group: [:default, :wasm]
+gem "image_processing", group: [:default, :wasm]
+gem "ransack", group: [:default, :wasm]
 
 # Other
 gem "bootsnap", require: false
-gem "draper"
-gem "friendly_id", "~> 5.5.0"
-gem "inline_svg"
-gem "net-pop", github: "ruby/net-pop"
-gem "noticed"
+gem "draper", group: [:default, :wasm]
+gem "friendly_id", "~> 5.5.0", group: [:default, :wasm]
+gem "inline_svg", group: [:default, :wasm]
+gem "net-pop", github: "ruby/net-pop", group: [:default, :wasm]
+gem "noticed", group: [:default, :wasm]
 gem "puma", ">= 5.0"
-gem "rqrcode", "~> 2.0"
-gem "tzinfo-data", platforms: %i[windows jruby]
-gem "validates_timeliness", "~> 7.0.0.beta1"
-gem "validate_url"
-gem "web-push"
+gem "rqrcode", "~> 2.0", group: [:default, :wasm]
+# gem "tzinfo-data", platforms: %i[windows jruby]
+gem "validates_timeliness", "~> 7.0.0.beta1", group: [:default, :wasm]
+gem "validate_url", group: [:default, :wasm]
+# gem "web-push", group: [:default, :wasm]
+gem "wasmify-rails", group: [:default, :wasm]
 
 group :development, :test do
   gem "better_errors"
@@ -90,6 +91,10 @@ group :staging, :production do
   gem "appsignal"
   gem "aws-sdk-s3", require: false
   gem "litestream", "~> 0.10.4"
-  gem "lograge"
+  gem "lograge", group: [:default, :wasm]
   gem "mailpace-rails"
+end
+
+group :wasm do
+  gem "tzinfo-data"
 end

@@ -30,7 +30,7 @@
             </div>
           <% else %>
             <a class="flex flex-row items-center justify-center w-8 h-8 p-2 rounded-full min-w-8 min-h-8 bg-slate-300">
-              <%= inline_svg_tag "icons/user_avatar.svg" %>
+              <%= image_tag "icons/user_avatar.svg" %>
             </a>
           <% end %>
 
@@ -62,7 +62,7 @@
     <% end %>
 
     <div class="flex items-center mb-2">
-      <%= inline_svg_tag("icons/calendar.svg", class: "w-[16px] h-[16px] mr-1 fill-grey-600") %>
+      <%= image_tag("icons/calendar.svg", class: "w-[16px] h-[16px] mr-1 fill-grey-600") %>
       <span class="font-sans text-sm text-grey-600">
         <%= session.starts_at&.strftime("%b %d") %> -
         <%= session.starts_at&.strftime("%H:%M") %> to <%= session.ends_at&.strftime("%H:%M") %>
@@ -70,7 +70,7 @@
     </div>
 
     <div class="flex items-center">
-      <%= inline_svg_tag("icons/location.svg", class: "w-[16px] h-[16px] mr-1 fill-grey-600") %>
+      <%= image_tag("icons/location.svg", class: "w-[16px] h-[16px] mr-1 fill-grey-600") %>
       <span class="font-sans text-sm text-grey-600"><%= session.location&.name %></span>
     </div>
   </div>

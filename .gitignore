@@ -48,3 +48,10 @@
 
 # Ignore asdf version files
 /.tool-versions
+# Ignore the compiled WebAssembly modules
+*.wasm
+# Ignore ruby.wasm build artefacts
+build/
+rubies/
+dist/
+pwa/node_modules

@@ -35,7 +35,7 @@
           <div class="absolute" data-image-previewer-target="onRemoveImagePlaceholderContainer"></div>
           <%= image_tag "", data: {image_previewer_target: "image"}, class: "hidden absolute object-cover h-full w-full" %>
         <% end %>
-        <%= inline_svg_tag(
+        <%= image_tag(
           "icon_delete_photo.svg",
           data: {action: "click->image-previewer#removeImage", image_previewer_target: "deleteIcon" },
           class: "cursor-pointer absolute top-[5px] right-[5px] w-6 h-6",

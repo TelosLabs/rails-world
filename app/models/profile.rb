@@ -24,7 +24,7 @@
 #  index_profiles_on_uuid         (uuid) UNIQUE
 #
 class Profile < ApplicationRecord
-  has_one_attached :image
+  # has_one_attached :image
 
   belongs_to :profileable, polymorphic: true
 
@@ -60,5 +60,9 @@ class Profile < ApplicationRecord
     rescue URI::InvalidURIError
       next
     end
+  end
+
+  def image
+    nil
   end
 end

@@ -29,3 +29,5 @@ staging:
 production:
   primary: *primary
   queue: *queue
+wasm:
+  adapter: <%= ENV.fetch("ACTIVE_RECORD_ADAPTER") { "nulldb" } %>

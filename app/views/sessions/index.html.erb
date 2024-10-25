@@ -57,7 +57,7 @@
       <% else %>
         <div class="flex flex-col items-center justify-center w-full h-full">
           <div class="p-8 mb-6 bg-white rounded-full w-fit h-fit">
-            <%= inline_svg_tag("icons/calendar.svg", size: "56", class: "fill-gray-400") %>
+            <%= image_tag("icons/calendar.svg", size: "56", class: "fill-gray-400") %>
           </div>
           <p class="mb-4 font-bold text-center max-w-44">There are no sessions planned yet</p>
           <%= link_to 'Refresh', url_for, class: "text-red underline font-bold italic text-lg" %>
