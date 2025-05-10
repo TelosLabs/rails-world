@@ -2,11 +2,11 @@ source "https://rubygems.org"
 
 ruby "3.3.3"
 
-gem "rails", "~> 7.2"
+gem "rails", "~> 8.0"
 
 # Database
 gem "activerecord-enhancedsqlite3-adapter", "~> 0.8.0"
-gem "sqlite3", "~> 1.4"
+gem "sqlite3", "~> 2.1"
 
 # Jobs
 gem "mission_control-jobs"
@@ -43,7 +43,7 @@ gem "noticed"
 gem "puma", ">= 5.0"
 gem "rqrcode", "~> 2.0"
 gem "tzinfo-data", platforms: %i[windows jruby]
-gem "validates_timeliness", "~> 7.0.0.beta1"
+gem "validates_timeliness", "~> 8.0"
 gem "validate_url"
 gem "web-push"
 
