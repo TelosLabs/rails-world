@@ -33,6 +33,14 @@ gem "avo", ">= 3.2.1"
 gem "image_processing"
 gem "ransack"
 
+# Security Updates
+gem "net-imap", "~> 0.4.20"
+gem "nokogiri", ">= 1.18.8"
+gem "rack", ">= 3.1.14"
+gem "rack-session", ">= 2.1.1"
+gem "rails-html-sanitizer", ">= 1.6.1"
+gem "rexml", ">= 3.3.9"
+
 # Other
 gem "bootsnap", require: false
 gem "draper"

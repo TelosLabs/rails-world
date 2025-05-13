@@ -187,7 +187,7 @@ GEM
       ferrum (~> 0.15.0)
     database_consistency (1.7.24)
       activerecord (>= 3.2)
-    date (3.3.4)
+    date (3.4.1)
     debug (1.9.2)
       irb (~> 1.10)
       reline (>= 0.3.8)
@@ -325,7 +325,7 @@ GEM
       activesupport (>= 4)
       railties (>= 4)
       request_store (~> 1.0)
-    loofah (2.22.0)
+    loofah (2.24.1)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     mail (2.8.1)
@@ -353,7 +353,7 @@ GEM
     msgpack (1.7.2)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
-    net-imap (0.4.17)
+    net-imap (0.4.22)
       date
       net-protocol
     net-protocol (0.2.2)
@@ -361,11 +361,11 @@ GEM
     net-smtp (0.5.0)
       net-protocol
     nio4r (2.7.3)
-    nokogiri (1.16.7-aarch64-linux)
+    nokogiri (1.18.8-aarch64-linux-gnu)
       racc (~> 1.4)
-    nokogiri (1.16.7-arm64-darwin)
+    nokogiri (1.18.8-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.16.7-x86_64-linux)
+    nokogiri (1.18.8-x86_64-linux-gnu)
       racc (~> 1.4)
     noticed (2.4.1)
       rails (>= 6.1.0)
@@ -394,10 +394,11 @@ GEM
       nio4r (~> 2.0)
     raabro (1.4.0)
     racc (1.8.1)
-    rack (3.1.8)
+    rack (3.1.14)
     rack-mini-profiler (3.3.1)
       rack (>= 1.2.0)
-    rack-session (2.0.0)
+    rack-session (2.1.1)
+      base64 (>= 0.1.0)
       rack (>= 3.0.0)
     rack-test (2.1.0)
       rack (>= 1.3)
@@ -426,9 +427,9 @@ GEM
       activesupport (>= 5.0.0)
       minitest
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.6.0)
+    rails-html-sanitizer (1.6.2)
       loofah (~> 2.21)
-      nokogiri (~> 1.14)
+      nokogiri (>= 1.15.7, != 1.16.7, != 1.16.6, != 1.16.5, != 1.16.4, != 1.16.3, != 1.16.2, != 1.16.1, != 1.16.0.rc1, != 1.16.0)
     railties (8.0.2)
       actionpack (= 8.0.2)
       activesupport (= 8.0.2)
@@ -455,8 +456,7 @@ GEM
       io-console (~> 0.5)
     request_store (1.7.0)
       rack (>= 1.4)
-    rexml (3.3.6)
-      strscan
+    rexml (3.4.1)
     rouge (4.3.0)
     rqrcode (2.2.0)
       chunky_png (~> 1.0)
@@ -569,7 +569,6 @@ GEM
     stimulus-rails (1.3.4)
       railties (>= 6.0.0)
     stringio (3.1.1)
-    strscan (3.1.0)
     tailwindcss-rails (2.7.3-aarch64-linux)
       railties (>= 7.0.0)
     tailwindcss-rails (2.7.3-arm64-darwin)
@@ -664,15 +663,21 @@ DEPENDENCIES
   lograge
   mailpace-rails
   mission_control-jobs
+  net-imap (~> 0.4.20)
   net-pop!
+  nokogiri (>= 1.18.8)
   noticed
   propshaft
   pry-byebug
   puma (>= 5.0)
+  rack (>= 3.1.14)
   rack-mini-profiler
+  rack-session (>= 2.1.1)
   rails (~> 8.0)
   rails-controller-testing
+  rails-html-sanitizer (>= 1.6.1)
   ransack
+  rexml (>= 3.3.9)
   rqrcode (~> 2.0)
   rspec-instafail
   rspec-rails
