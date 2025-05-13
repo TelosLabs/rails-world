@@ -14,7 +14,7 @@ Rails application that allows you to create and manage conferences. You can use 
 
 ## The stack
 
-- Ruby on Rails 7.2.x
+- Ruby on Rails 8.0
 - Ruby 3.3.x
 - SQLite3
 - SolidQueue
