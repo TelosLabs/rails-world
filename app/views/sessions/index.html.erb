@@ -14,7 +14,7 @@
       <%= render partial: 'sessions/filters', locals: { resource: :sessions } %>
     </div>
 
-    <div class="flex flex-col w-full h-full mb-[50vh]">
+    <div class="flex flex-col w-full h-full mb-[12rem]">
       <% if @sessions.present? %>
         <% previous_date = nil %>
         <% @sessions.group_by(&:starts_at).each do |starts_at, sessions| %>
