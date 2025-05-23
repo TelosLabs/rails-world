@@ -20,7 +20,7 @@ class User < ApplicationRecord
 
   normalizes :email, with: ->(email) { email.strip.downcase }
 
-  enum role: {user: "user", admin: "admin"}
+  enum :role, {user: "user", admin: "admin"}
 
   has_one :profile, as: :profileable, dependent: :destroy
 

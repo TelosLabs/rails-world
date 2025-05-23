@@ -21,7 +21,7 @@ class SessionQuery
   def filter_by_date
     return if starts_at.blank?
 
-    self.relation = relation.starts_at(starts_at)
+    self.relation = relation.where(starts_at: starts_at.all_day)
   end
 
   def filter_by_status
@@ -35,7 +35,7 @@ class SessionQuery
   end
 
   def starts_at
-    @_starts_at ||= params[:starts_at]&.to_date
+    @_starts_at ||= params[:starts_at]&.in_time_zone
   rescue Date::Error
     nil
   end

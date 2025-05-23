@@ -46,7 +46,7 @@ class Session < ApplicationRecord
 
   validates_datetime :ends_at, after: :starts_at
 
-  scope :starts_at, ->(date) { where("date(starts_at) = ?", date) }
+  scope :starts_at, ->(date) { where(starts_at: date.all_day) }
   scope :past, -> { where(ends_at: ...Time.current) }
   scope :live, -> { where("? BETWEEN starts_at AND ends_at", Time.current) }
   scope :starting_soon, -> { where("starts_at BETWEEN ? AND ?", Time.current, 1.hour.from_now) }

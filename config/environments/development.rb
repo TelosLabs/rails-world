@@ -14,6 +14,9 @@ Rails.application.configure do
   # Show full error reports.
   config.consider_all_requests_local = true
 
+  # Tag Query's
+  config.active_record.query_log_tags_enabled = true
+
   # Enable server timing
   config.server_timing = true
 
