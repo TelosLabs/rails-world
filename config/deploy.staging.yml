@@ -1,35 +1,31 @@
 # Deploy to these servers.
 servers:
-  - 134.122.34.75
+  web:
+    - 95.216.184.222
 
-# Inject ENV variables into containers (secrets come from .env).
-# Remember to run `kamal env push` after making changes!
+# Enable SSL auto certification via Let's Encrypt and allow for multiple apps on a single web server.
+proxy:
+  ssl: true
+  host: railsworld.nl
+  app_port: 3000
+
+# Inject ENV variables into containers (secrets come from .kamal/secrets).
 env:
-  clear:
-    RAILS_ENV: staging
   secret:
     - APP_HOST
-    - RAILS_MASTER_KEY
-    - MAILPACE_API_TOKEN
+    - PORT
+    - MAILER_SENDER
     - APPSIGNAL_PUSH_API_KEY
-    - AWS_ACCESS_KEY_ID
-    - AWS_SECRET_ACCESS_KEY
-    - LITESTREAM_BUCKET
+    - MAILPACE_API_TOKEN
+    - AVO_LICENSE_KEY
+    - RAILS_MASTER_KEY
     - SECRET_KEY_BASE
     - VAPID_PUBLIC_KEY
     - VAPID_PRIVATE_KEY
-    - MAILER_SENDER
-    - LITESTREAM_BACKUP_ENABLED
-    - SESSION_REMINDERS_ENABLED
+    - KAMAL_REGISTRY_PASSWORD
+    - RAILS_ENV
     - REGISTRATION_ENABLED
+    - SESSION_REMINDERS_ENABLED
     - ONLY_TESTER_REGISTRATION_ENABLED
+    - LITESTREAM_BACKUP_ENABLED
 
-accessories:
-  vector:
-    image: timberio/vector:0.39.0-debian
-    roles:
-      - web
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    files:
-      - "./config/vector/vector_staging.yaml:/etc/vector/vector.yaml"

@@ -35,7 +35,33 @@ You can enable features by using ENV variables. The ENV var key should follow th
 
 ## Deployment
 
-The application is configured to be deployed using [Kamal](https://kamal-deploy.org/). Each env has its own deploy.yml file, which should be updated with the correct values for your environment. Also, remember to create a .env file per environment (e.g. .env.production) with the correct values.
+This application is set up for deployment using [Kamal 2](https://kamal-deploy.org/).
+
+Each environment has its own deploy.yml file. Before you deploy, check that these files have the correct values for your environment. If you have already run `bin/setup`, there should be a .env file for each environment. Just fill in the required variables!
+
+### Staging Deployment
+
+The staging environment can be used for QA before deploying a new version to production.
+
+<details>
+<summary>Your First Staging Deployment</summary>
+Currently, the staging environment is set up to use AppSignal, MailPace, Avo, and local storage for files.
+
+Make sure all your environment variables are present in the `.env.staging` file. Kamal only loads variables from your shell environment (ENV), not from dotenv `.env` files [as discussed here](https://github.com/basecamp/kamal/discussions/977).
+
+You can use the `dotenv` command before Kamal commands to load variables from your `.env.staging` file. Check if all variables are present with:
+
+```bash
+dotenv -f ".env.staging" kamal secrets print -d staging
+```
+
+When all variables are present, you can deploy. **Important!**: You must commit your changes before Kamal picks them up.
+
+```bash
+dotenv -f ".env.staging" kamal deploy -d staging
+```
+</details>
+
 
 #### Dependencies
 
