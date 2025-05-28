@@ -2,11 +2,11 @@ source "https://rubygems.org"
 
 ruby "3.3.3"
 
-gem "rails", "~> 7.2"
+gem "rails", "~> 8.0"
 
 # Database
 gem "activerecord-enhancedsqlite3-adapter", "~> 0.8.0"
-gem "sqlite3", "~> 1.4"
+gem "sqlite3", "~> 2.1"
 
 # Jobs
 gem "mission_control-jobs"
@@ -33,6 +33,14 @@ gem "avo", ">= 3.2.1"
 gem "image_processing"
 gem "ransack"
 
+# Security Updates
+gem "net-imap", "~> 0.4.20"
+gem "nokogiri", ">= 1.18.8"
+gem "rack", ">= 3.1.14"
+gem "rack-session", ">= 2.1.1"
+gem "rails-html-sanitizer", ">= 1.6.1"
+gem "rexml", ">= 3.3.9"
+
 # Other
 gem "bootsnap", require: false
 gem "draper"
@@ -43,7 +51,7 @@ gem "noticed"
 gem "puma", ">= 5.0"
 gem "rqrcode", "~> 2.0"
 gem "tzinfo-data", platforms: %i[windows jruby]
-gem "validates_timeliness", "~> 7.0.0.beta1"
+gem "validates_timeliness", "~> 8.0"
 gem "validate_url"
 gem "web-push"
 
