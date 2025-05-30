@@ -1,19 +1,3 @@
-# == Schema Information
-#
-# Table name: web_push_subscriptions
-#
-#  id         :integer          not null, primary key
-#  auth       :string           not null
-#  endpoint   :string           not null
-#  p256dh     :string           not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  user_id    :integer          not null
-#
-# Indexes
-#
-#  index_web_push_subscriptions_on_user_id  (user_id)
-#
 class WebPushSubscription < ApplicationRecord
   belongs_to :user
 
