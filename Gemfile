@@ -10,7 +10,7 @@ gem "sqlite3", "~> 2.1"
 
 # Jobs
 gem "mission_control-jobs"
-gem "solid_queue"
+gem "solid_queue", "~> 1.1"
 
 # Assets
 gem "importmap-rails"

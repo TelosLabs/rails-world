@@ -7,12 +7,10 @@ primary: &primary
   <<: *default
   database: storage/<%= Rails.env %>.sqlite3
 
-# Because Solid Queue is constantly polling the database and making frequent updates,
-# it is recommended to use a separate database for the queue when using Solid Queue with SQLite.
 queue: &queue
   <<: *default
-  migrations_paths: db/queue_migrate
   database: storage/<%= Rails.env %>-queue.sqlite3
+  migrations_paths: db/queue_migrate
 
 development:
   primary: *primary
