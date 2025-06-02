@@ -1,11 +1,10 @@
-<% profile_name = @profile.name.presence || "Anonymous" %>
-<%= title "#{profile_name}'s Profile - #{Current.conference&.name}" %>
+<%= title "Profile" %>
 
 <% content_for :top_nav do %>
   <%= render partial: "layouts/primary_top_nav" %>
 <% end %>
 
-<div class="relative flex flex-col h-full items-center justify-between flex-1 bg-grey-50 pt-safe-area-header pb-safe-area-bottom-navbar">
+<div class="relative flex flex-col items-center justify-between flex-1 h-full bg-grey-50 pt-safe-area-header pb-safe-area-bottom-navbar">
   <div class="flex flex-col items-center bg-cover bg-bottom bg-no-repeat max-h-[430px] w-full" style="background-image: url(<%= asset_path 'background_design.svg' %>)">
     <div class="z-10 flex flex-col items-start w-full max-w-screen-sm px-5 pt-6 pb-12">
       <div class="flex flex-row items-center">
@@ -18,7 +17,7 @@
           </div>
         <% end %>
         <div class="flex flex-col items-start ml-5">
-          <div class="text-xl italic font-black text-red"> <%= profile_name %> </div>
+          <div class="text-xl italic font-black text-red"> <%= @profile.name.presence || "Anonymous" %> </div>
           <% if @profile.job_title.present? %>
             <div class="text-lg text-gray-400"><%= @profile.job_title %></div>
           <% end %>
@@ -83,7 +82,16 @@
       <%= button_to(
         "Log out", user_session_path, method: :delete,
         form_class: "w-full max-w-screen-sm px-4",
-        class: "w-full bg-white py-4 text-red font-black italic rounded-[10px] uppercase"
+        class: "w-full bg-white py-4 text-red font-black italic rounded-[10px] uppercase",
+        data: { turbo_action: "clear_all" }
+      ) %>
+      <%= button_to(
+        "Delete Account", profile_path(@profile.uuid), method: :delete,
+        class: "text-red font-bold rounded-sm underline italic text-lg d-hotwire-native-inline hidden",
+        data: {
+          turbo_action: "clear_all",
+          turbo_confirm: "Are you sure you want to delete your account? This action cannot be undone."
+        }
       ) %>
     </div>
   <% end %>
