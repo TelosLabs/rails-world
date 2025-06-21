@@ -1,12 +1,12 @@
 # Deploy to these servers.
 servers:
   web:
-    - 0000.0000.0000.0000
+    - 95.216.184.222
 
 # Enable SSL auto certification via Let's Encrypt and allow for multiple apps on a single web server.
 proxy:
   ssl: true
-  host: example.com
+  host: railsworld.nl
   app_port: 3000
 
 # Inject ENV variables into containers (secrets come from .kamal/secrets).
@@ -15,13 +15,8 @@ env:
     - APP_HOST
     - APPSIGNAL_PUSH_API_KEY
     - AVO_LICENSE_KEY
-    - AWS_ACCESS_KEY_ID
-    - AWS_BUCKET
-    - AWS_REGION
-    - AWS_SECRET_ACCESS_KEY
     - KAMAL_REGISTRY_PASSWORD
     - LITESTREAM_BACKUP_ENABLED
-    - LITESTREAM_BUCKET
     - MAILER_SENDER
     - MAILPACE_API_TOKEN
     - ONLY_TESTER_REGISTRATION_ENABLED
@@ -33,4 +28,3 @@ env:
     - SESSION_REMINDERS_ENABLED
     - VAPID_PRIVATE_KEY
     - VAPID_PUBLIC_KEY
-    - WEB_CONCURRENCY
