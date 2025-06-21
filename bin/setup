@@ -24,6 +24,7 @@ FileUtils.chdir APP_ROOT do
   else
     FileUtils.cp ".env.template", ".env"
     FileUtils.cp ".env.template", ".env.staging"
+    FileUtils.cp ".env.template", ".env.developmement"
     FileUtils.cp ".env.template", ".env.production"
   end
 
