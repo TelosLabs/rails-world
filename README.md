@@ -45,7 +45,7 @@ The staging environment can be used for QA before deploying a new version to pro
 
 <details>
 <summary>Your First Staging Deployment</summary>
-Currently, the staging environment is set up to use AppSignal, MailPace, Avo, and local storage for files.
+Currently, the staging environment is set up to use AppSignal, MailPace, Avo, and Amazon for storage.
 
 Make sure all your environment variables are present in the `.env.staging` file. Kamal only loads variables from your shell environment (ENV), not from dotenv `.env` files [as discussed here](https://github.com/basecamp/kamal/discussions/977).
 
