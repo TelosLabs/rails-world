@@ -15,6 +15,9 @@ en:
     profiles:
       update:
         success: "Your profile has been updated successfully."
+      destroy:
+        success: "Your account has been deleted successfully."
+        error: "Failed to delete account."
     notification_settings:
       update:
         success: "Your notification settings have been updated successfully."

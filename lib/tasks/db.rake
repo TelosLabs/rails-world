@@ -2,6 +2,7 @@ namespace :db do
   desc "Loading Rails World 2024 conference data."
   task :rails_world_2024_seed, [:start_date] => :environment do |t, args|
     start_date = args[:start_date].present? ? Date.parse(args[:start_date]) : Date.new(2024, 9, 26)
+    year = start_date.year
     month = start_date.month
     start_day = start_date.day
     registration_day = start_day - 1
@@ -319,30 +320,30 @@ namespace :db do
     Session.find_or_create_by!(
       conference: conference,
       title: "What to do tonight",
-      starts_at: Time.zone.local(2024, month, registration_day, 17, 0)
+      starts_at: Time.zone.local(year, month, registration_day, 17, 0)
     ) do |session|
       session.description = "<div class=\"trix-content\">\n  <div>If you are looking for things to do in the city after you pick up your badge, check out <a href=\"https://docs.google.com/document/d/11aJ9HF0WW4ShArHpLl8cipgl2cOuGTFuObjOpp_1LxA/edit?usp=sharing\">this list of recommendations</a> created for you by the <strong>Toronto Ruby</strong> meetup group.<br><br>Don't stay out too late - the keynote tomorrow morning waits for no one.</div>\n</div>\n"
-      session.ends_at = Time.zone.local(2024, month, registration_day, 18, 0o0)
+      session.ends_at = Time.zone.local(year, month, registration_day, 18, 0o0)
       session.location = toronto_location
     end
 
     Session.find_or_create_by!(
       conference: conference,
       title: "Doors Open",
-      starts_at: Time.zone.local(2024, month, start_day, 9, 0)
+      starts_at: Time.zone.local(year, month, start_day, 9, 0)
     ) do |session|
       session.description = "Rails World attendees are welcome to enter Evergreen Brickworks, pick up your swag bag, and grab a coffee and light breakfast before the keynote begins."
-      session.ends_at = Time.zone.local(2024, month, start_day, 9, 45)
+      session.ends_at = Time.zone.local(year, month, start_day, 9, 45)
       session.location = sponsor_garden
     end
 
     Session.find_or_create_by!(
       conference: conference,
       title: "Rails World Opening Keynote",
-      starts_at: Time.zone.local(2024, month, start_day, 9, 45)
+      starts_at: Time.zone.local(year, month, start_day, 9, 45)
     ) do |session|
       session.description = "DHH will kick off the second edition of Rails World in Toronto with an Opening Keynote highlighting what is new in Rails today, and where the framework is headed tomorrow."
-      session.ends_at = Time.zone.local(2024, month, start_day, 11, 0)
+      session.ends_at = Time.zone.local(year, month, start_day, 11, 0)
       session.location = track_1
       session.speakers = [david_heinemeier_hansson_speaker]
       session.tags = [community]
@@ -351,10 +352,10 @@ namespace :db do
     Session.find_or_create_by!(
       conference: conference,
       title: "Solid Queue internals, externals and all the things in between",
-      starts_at: Time.zone.local(2024, month, start_day, 11, 15)
+      starts_at: Time.zone.local(year, month, start_day, 11, 15)
     ) do |session|
       session.description = "We’ve used Resque and Redis to run background jobs in multiple apps for many years at 37signals. However, performance, reliability, and our own apps’ idiosyncrasies led us to use a lot of different gems, some developed by us, some forked or patched to address our struggles. After multiple war stories with background jobs, looking at our increasingly complex setup, we wanted something we could use out-of-the-box without having to port our collection of hacks to every new app and with fewer moving pieces. After exploring existing alternatives, we decided to build our own and aim to make it the default for Rails 8. In this talk, I’ll present Solid Queue, explain some of the problems we had over the years, how we designed Solid Queue to address them, and all the Fun™ we had doing that."
-      session.ends_at = Time.zone.local(2024, month, start_day, 11, 45)
+      session.ends_at = Time.zone.local(year, month, start_day, 11, 45)
       session.location = track_1
       session.speakers = [rosa_gutierrez_speaker]
       session.tags = [background_jobs, performance, rails_8]
@@ -363,10 +364,10 @@ namespace :db do
     Session.find_or_create_by!(
       conference: conference,
       title: "Going beyond a Single Postgres Instance with Rails",
-      starts_at: Time.zone.local(2024, month, start_day, 11, 15)
+      starts_at: Time.zone.local(year, month, start_day, 11, 15)
     ) do |session|
       session.description = "We’ll look at the journey of evolving Instacart’s Rails application beyond a single Postgres instance, how we managed the added complexity from adding read replicas, and later vertically and horizontally sharding. We’ll touch on some topics around query routing, connection pooling and load balancing."
-      session.ends_at = Time.zone.local(2024, month, start_day, 11, 45)
+      session.ends_at = Time.zone.local(year, month, start_day, 11, 45)
       session.location = track_2
       session.speakers = [mostafa_abdelraouf_speaker]
       session.tags = [database]
@@ -375,20 +376,20 @@ namespace :db do
     Session.find_or_create_by!(
       conference: conference,
       title: "Lunch (and other things to do in the breaks)",
-      starts_at: Time.zone.local(2024, month, start_day, 11, 45)
+      starts_at: Time.zone.local(year, month, start_day, 11, 45)
     ) do |session|
       session.description = "<div class=\"trix-content\">\n  <div>Lunch will be served in the <strong>Sponsor Garden</strong> and in the <strong>Pavilion</strong>.&nbsp;<br><br>During lunch and breaks between sessions on both days, attendees can also:&nbsp;<br><br></div><ul><li>Catch 5-10 min Community talks on the <strong>Lightning Track</strong> (sponsored by <strong>Shopify</strong>)&nbsp;</li><li>Chat with our sponsors in the <strong>Sponsor Garden&nbsp;</strong></li><li>Hang out in the <strong>Shopify Lounge</strong>&nbsp;</li><li>Sign up <a href=\"https://docs.google.com/forms/d/e/1FAIpQLSf9_jfPzw-1YvkGFhlGtnGhkDqVvX2Z-D1vpJardmQ6nVf7PQ/viewform\"><strong>here</strong></a> for pair programming or career advice in the <strong>Double Up Lab</strong> (sponsored by <strong>Test Double</strong>)</li><li>Chill out in the <strong>kilns</strong> of this historic venue</li><li>Grab an espresso or latte from the <strong>coffee carts</strong> (sponsored by <strong>Cedarcode</strong>)&nbsp;</li><li>Or grab an item from the <strong>food trucks</strong> (sponsored by <strong>Shopify</strong>) - Note that the food trucks will be open all day from 11 am to 4 pm, so drop by with your ticket for a free item whenever you like.</li><li>Go touch grass. (We are located in one of Toronto's most calming nature parks.)</li></ul>\n</div>\n"
-      session.ends_at = Time.zone.local(2024, month, start_day, 13, 0)
+      session.ends_at = Time.zone.local(year, month, start_day, 13, 0)
       session.location = break_location
     end
 
     Session.find_or_create_by!(
       conference: conference,
       title: "The Modern Programmer’s Guide to Neovim and Zellij",
-      starts_at: Time.zone.local(2024, month, start_day, 13, 0)
+      starts_at: Time.zone.local(year, month, start_day, 13, 0)
     ) do |session|
       session.description = "Are you ready to revolutionize your coding environment? In a world dominated by VS Code and other Electron-based editors, there's a hidden gem that developers are rediscovering: Vim. Or rather, Neovim. Just as Rails transformed web development, Neovim is redefining how we write code, blending decades-old technology with modern tooling for an unparalleled experience. <br/><br/> <strong>Workshop overview </strong>In this hands-on workshop, we dive into the world of Neovim and Zellij —showing you how to streamline your development process and achieve a true flow state. <br/><br/> <strong>Here's what you can expect</strong> </p> <ul> <li> Introduction to Neovim: Understand the core principles that make Neovim a game-changer in the modern programming landscape. </li> <li> Learn how to effortlessly manage and customize plugins to suit your unique work-flow, shedding the bloat of heavier editors. </li> <li> Combine the power of Neovim and Zellij to increase developer productivity by achieving your optimal flow state. </li> </ul> <br/> <strong>Key takeaways</strong> By the end of this 75-minute workshop, you will: <ul> <li> Have a solid understanding of Neovim's capabilities and how it can enhance your productivity. </li> <li> Manage workspaces using Zellij to jump in and out of projects with ease. </li> <li> Walk away with a Neovim setup that empowers you to code with minimal distractions, maximizing your efficiency and creativity. </li> </ul> <br/> <strong>Why Attend?</strong> This workshop is perfect for developers of all levels (with some familiarity with Vim) who are looking to optimize their workflow and embrace a lightweight, powerful, and highly customizable editor. Whether you're new to Neovim or looking to deepen your understanding, this session will provide you with practical skills and insights that you can apply immediately. <br/><br/> <strong>Thank you Coder!</strong> This workshop is brought to you by <a class='underline' href='https://coder.com/'>Coder</a>, and will be repeated on both days. It will be first-come, first-served."
-      session.ends_at = Time.zone.local(2024, month, start_day, 14, 15)
+      session.ends_at = Time.zone.local(year, month, start_day, 14, 15)
       session.location = lightning_track
       session.speakers = [chris_power_speaker, robert_beene_speaker]
       session.tags = [productivity, tools, developer_experience]
@@ -397,10 +398,10 @@ namespace :db do
     Session.find_or_create_by!(
       conference: conference,
       title: "Kamal 2.0 - Deploy web apps anywhere",
-      starts_at: Time.zone.local(2024, month, start_day, 13, 0)
+      starts_at: Time.zone.local(year, month, start_day, 13, 0)
     ) do |session|
       session.description = "Kamal is an imperative deployment tool from 37signals for running your apps with Docker. We’ll run through how it works, what we’ve learned from v1.0, and the changes we’ve made for v2.0."
-      session.ends_at = Time.zone.local(2024, month, start_day, 13, 30)
+      session.ends_at = Time.zone.local(year, month, start_day, 13, 30)
       session.location = track_1
       session.speakers = [donal_mcbreen_speaker]
       session.tags = [tools, deployment, performance]
@@ -409,10 +410,10 @@ namespace :db do
     Session.find_or_create_by!(
       conference: conference,
       title: "Repurposing the Rails CLI",
-      starts_at: Time.zone.local(2024, month, start_day, 13, 0)
+      starts_at: Time.zone.local(year, month, start_day, 13, 0)
     ) do |session|
       session.description = "The Rails CLI works great for the vast majority of us, but what do you do when it doesn’t? At MongoDB, we recently wanted to add a tighter integration between Rails and Mongoid (our ODM), and were able to create our own CLI tool that extends the Rails CLI, overriding the pieces that weren’t compatible or relevant and extending it with the functionality we wanted. I’ll show you how we did it, and how you can do it yourself."
-      session.ends_at = Time.zone.local(2024, month, start_day, 13, 30)
+      session.ends_at = Time.zone.local(year, month, start_day, 13, 30)
       session.location = track_2
       session.speakers = [jamis_buck_speaker]
       session.tags = [tools, developer_experience]
@@ -421,10 +422,10 @@ namespace :db do
     Session.find_or_create_by!(
       conference: conference,
       title: "Introducing Kamal Proxy",
-      starts_at: Time.zone.local(2024, month, start_day, 13, 45)
+      starts_at: Time.zone.local(year, month, start_day, 13, 45)
     ) do |session|
       session.description = "Kamal Proxy is a new, purpose-built HTTP proxy service that powers Kamal 2.0. It’s designed to make zero-downtime deployments simpler, and comes with additional features to make your Rails applications faster and easier to operate. In this talk, we’ll look at what Kamal Proxy does, why we built it, and how it works."
-      session.ends_at = Time.zone.local(2024, month, start_day, 14, 15)
+      session.ends_at = Time.zone.local(year, month, start_day, 14, 15)
       session.location = track_1
       session.speakers = [kevin_mcconnell_speaker]
       session.tags = [tools, deployment, performance]
@@ -433,10 +434,10 @@ namespace :db do
     Session.find_or_create_by!(
       conference: conference,
       title: "The state of security in Rails 8",
-      starts_at: Time.zone.local(2024, month, start_day, 13, 45)
+      starts_at: Time.zone.local(year, month, start_day, 13, 45)
     ) do |session|
       session.description = "Security is a crucial aspect of any web application and Rails is one of the best options for an application with high security standards. In this talk, I will highlight the recent security related improvements in Rails."
-      session.ends_at = Time.zone.local(2024, month, start_day, 14, 15)
+      session.ends_at = Time.zone.local(year, month, start_day, 14, 15)
       session.location = track_2
       session.speakers = [greg_molnar_speaker]
       session.tags = [security, rails_8]
@@ -445,30 +446,30 @@ namespace :db do
     Session.find_or_create_by!(
       conference: conference,
       title: "Lightning Track",
-      starts_at: Time.zone.local(2024, month, start_day, 14, 15)
+      starts_at: Time.zone.local(year, month, start_day, 14, 15)
     ) do |session|
       session.description = "Coming soon: Community Talks taking place during this break will be listed here."
-      session.ends_at = Time.zone.local(2024, month, start_day, 14, 45)
+      session.ends_at = Time.zone.local(year, month, start_day, 14, 45)
       session.location = lightning_track
     end
 
     Session.find_or_create_by!(
       conference: conference,
       title: "Double Up Lab (sponsored by Test Double)",
-      starts_at: Time.zone.local(2024, month, start_day, 14, 15)
+      starts_at: Time.zone.local(year, month, start_day, 14, 15)
     ) do |session|
       session.description = "<div class=\"trix-content\">\n  <div>Join Test Double in the Double Up Lab to pair with one of our double agents on Rails, no-strings-attached career advice, and more. Bring something to work on, check out what we've been up to, or just recharge and chat.<br><br><a href=\"https://docs.google.com/forms/d/e/1FAIpQLSf9_jfPzw-1YvkGFhlGtnGhkDqVvX2Z-D1vpJardmQ6nVf7PQ/viewform\"><strong>Book time here</strong></a>.<br><br>You can also stop by 1:00-2:15 pm daily to say hello, score some swag, schedule a session, or get resume &amp; career advice.</div>\n</div>\n"
-      session.ends_at = Time.zone.local(2024, month, start_day, 14, 45)
+      session.ends_at = Time.zone.local(year, month, start_day, 14, 45)
       session.location = double_up_location
     end
 
     Session.find_or_create_by!(
       conference: conference,
       title: "An upgrade handbook to Rails 8",
-      starts_at: Time.zone.local(2024, month, start_day, 14, 45)
+      starts_at: Time.zone.local(year, month, start_day, 14, 45)
     ) do |session|
       session.description = "Each new major version of Rails unlocks so many great features, and Rails 8 is no exception. However, upgrading a Rails application can be difficult. This talk will look at ways to address the major changes for Rails 8 to get your Rails app prepared to run on the latest version in no time! We’ll also explore how Shopify was able to automate the Rails upgrade process for hundreds of their applications."
-      session.ends_at = Time.zone.local(2024, month, start_day, 15, 15)
+      session.ends_at = Time.zone.local(year, month, start_day, 15, 15)
       session.location = track_1
       session.speakers = [jenny_shen_speaker]
       session.tags = [rails_8]
@@ -477,10 +478,10 @@ namespace :db do
     Session.find_or_create_by!(
       conference: conference,
       title: "The Empowered Programmer",
-      starts_at: Time.zone.local(2024, month, start_day, 14, 45)
+      starts_at: Time.zone.local(year, month, start_day, 14, 45)
     ) do |session|
       session.description = "In 2021, DHH dubbed Rails, 'The One Person Framework.' Is it? This talk will explore how Rails 7 equips solo developers more than ever before. Drawing from personal experience, I'll share how building a new app with Rails 7 felt like half the work of my previous Rails 5 project. You'll learn about the benefits of sticking with omakase, how Rails includes more batteries than ever, and why scaling back a team doesn't have to mean slowing down."
-      session.ends_at = Time.zone.local(2024, month, start_day, 15, 15)
+      session.ends_at = Time.zone.local(year, month, start_day, 15, 15)
       session.location = track_2
       session.speakers = [justin_searls_speaker]
       session.tags = [productivity, developer_experience]
@@ -489,30 +490,30 @@ namespace :db do
     Session.find_or_create_by!(
       conference: conference,
       title: "Lightning Track",
-      starts_at: Time.zone.local(2024, month, start_day, 15, 15)
+      starts_at: Time.zone.local(year, month, start_day, 15, 15)
     ) do |session|
       session.description = "Coming soon: Community Talks taking place during this break will be listed here."
-      session.ends_at = Time.zone.local(2024, month, start_day, 15, 45)
+      session.ends_at = Time.zone.local(year, month, start_day, 15, 45)
       session.location = lightning_track
     end
 
     Session.find_or_create_by!(
       conference: conference,
       title: "Double Up Lab",
-      starts_at: Time.zone.local(2024, month, start_day, 15, 15)
+      starts_at: Time.zone.local(year, month, start_day, 15, 15)
     ) do |session|
       session.description = "<div class=\"trix-content\">\n  <div>Join Test Double in the Double Up Lab to pair with one of our double agents on Rails, no-strings-attached career advice, and more. Bring something to work on, check out what we've been up to, or just recharge and chat.<br><br><a href=\"https://docs.google.com/forms/d/e/1FAIpQLSf9_jfPzw-1YvkGFhlGtnGhkDqVvX2Z-D1vpJardmQ6nVf7PQ/viewform\"><strong>Book time here</strong></a>.<br><br>You can also stop by 1:00-2:15 pm daily to say hello, score some swag, schedule a session, or get resume &amp; career advice.</div>\n</div>\n"
-      session.ends_at = Time.zone.local(2024, month, start_day, 15, 45)
+      session.ends_at = Time.zone.local(year, month, start_day, 15, 45)
       session.location = double_up_location
     end
 
     Session.find_or_create_by!(
       conference: conference,
       title: "Frontiers of development productivity in Rails",
-      starts_at: Time.zone.local(2024, month, start_day, 15, 45)
+      starts_at: Time.zone.local(year, month, start_day, 15, 45)
     ) do |session|
       session.description = "Rails is known to be one of the best frameworks in terms of empowering developers to build great products, and has kept this place for 20 years. Can we do better? In this talk, we will see how we are pushing Rails to continue making developers lives easier in new frontiers."
-      session.ends_at = Time.zone.local(2024, month, start_day, 16, 15)
+      session.ends_at = Time.zone.local(year, month, start_day, 16, 15)
       session.location = track_1
       session.speakers = [rafael_franca_speaker]
       session.tags = [productivity, developer_experience]
@@ -521,10 +522,10 @@ namespace :db do
     Session.find_or_create_by!(
       conference: conference,
       title: "Progressive Web Apps for Rails developers",
-      starts_at: Time.zone.local(2024, month, start_day, 15, 45)
+      starts_at: Time.zone.local(year, month, start_day, 15, 45)
     ) do |session|
       session.description = "Explore the evolving world of Progressive Web Apps (PWAs), built with familiar Rails technologies and designed for seamless use in all compatible browsers. Rails 8 promises to simplify PWA development, offering innovative methods to swiftly generate essential PWA scaffolding. This talk covers PWA basics, their inner workings, and Rails 8’s crucial development role. We’ll examine service worker lifecycle, offline strategies via background sync, and the CacheStorage API for cross-device performance. Additionally, we’ll investigate local data storage via IndexDB and exploiting Push Notifications to elevate the user experience to that of native applications."
-      session.ends_at = Time.zone.local(2024, month, start_day, 16, 15)
+      session.ends_at = Time.zone.local(year, month, start_day, 16, 15)
       session.location = track_2
       session.speakers = [emmanuel_hayford_speaker]
       session.tags = [pwa, rails_8]
@@ -533,10 +534,10 @@ namespace :db do
     Session.find_or_create_by!(
       conference: conference,
       title: "Matz & DHH Fireside chat, hosted by Tobias Lütke",
-      starts_at: Time.zone.local(2024, month, start_day, 16, 30)
+      starts_at: Time.zone.local(year, month, start_day, 16, 30)
     ) do |session|
       session.description = "<div class=\"trix-content\">\n  <div>We are pleased to welcome Ruby creator and special guest <strong>Yukihiro Matsumoto (Matz)</strong> to the Rails World stage for a fireside chat with Rails creator <strong>David Heinemeier Hansson (DHH)</strong>. Together on stage for the very first time!<br><br>Hosted by <strong>Shopify</strong> founder Tobias Lütke, this is sure to be a conversation you don’t want to miss.</div>\n</div>\n"
-      session.ends_at = Time.zone.local(2024, month, start_day, 17, 30)
+      session.ends_at = Time.zone.local(year, month, start_day, 17, 30)
       session.location = track_1
       session.speakers = [matz_speaker, david_heinemeier_hansson_speaker, tobias_luetke_speaker]
       session.tags = [community, insights]
@@ -545,20 +546,20 @@ namespace :db do
     Session.find_or_create_by!(
       conference: conference,
       title: "Doors Open",
-      starts_at: Time.zone.local(2024, month, second_day, 9, 0)
+      starts_at: Time.zone.local(year, month, second_day, 9, 0)
     ) do |session|
       session.description = "Rails World attendees are welcome to enter Evergreen Brickworks, pick up your swag bag, and grab a coffee and light breakfast before the keynote begins."
-      session.ends_at = Time.zone.local(2024, month, second_day, 10, 0)
+      session.ends_at = Time.zone.local(year, month, second_day, 10, 0)
       session.location = sponsor_lounge
     end
 
     Session.find_or_create_by!(
       conference: conference,
       title: "Keynote: The Myth of the Modular Monolith",
-      starts_at: Time.zone.local(2024, month, second_day, 10, 0)
+      starts_at: Time.zone.local(year, month, second_day, 10, 0)
     ) do |session|
       session.description = "As Rails applications grow over time and turn into a so-called \"ball of mud\", organizations ask themselves what's next? Should we stay the course with a monolith or migrate to microservices? At Shopify we went down the path of modularizing our monolith and since then GitHub, Gusto, and others have followed our lead. But after 6 years it's time to ask ourselves: \"Did we fix what we set out to fix? Is this better than before?\""
-      session.ends_at = Time.zone.local(2024, month, second_day, 11, 0)
+      session.ends_at = Time.zone.local(year, month, second_day, 11, 0)
       session.location = track_1
       session.speakers = [eileen_uchitelle_speaker]
     end
@@ -566,10 +567,10 @@ namespace :db do
     Session.find_or_create_by!(
       conference: conference,
       title: "SQLite on Rails - Busting myths and supercharging the One-Person Framework",
-      starts_at: Time.zone.local(2024, month, second_day, 11, 15)
+      starts_at: Time.zone.local(year, month, second_day, 11, 15)
     ) do |session|
       session.description = "Rails 8 takes the 'one-person framework' to new heights. Enhancements to the SQLite adapter and the suite of Solid libraries now cement its standing as the top choice for solo developers and small teams. This talk will bust myths with benchmarks, showcase scalability with case studies, and sidestep pitfalls with practical tips. Concrete, real-world examples will illustrate how the Rails 8 feature set perfectly complements SQLite’s power in creating resilient, high-performance production apps. You’ll leave with a solid understanding of when SQLite does and doesn’t make sense for your application and how to leverage Rails and SQLite’s full potential in your next production venture."
-      session.ends_at = Time.zone.local(2024, month, second_day, 11, 45)
+      session.ends_at = Time.zone.local(year, month, second_day, 11, 45)
       session.location = track_1
       session.speakers = [stephen_margheim_speaker]
       session.tags = [database, rails_8]
@@ -578,10 +579,10 @@ namespace :db do
     Session.find_or_create_by!(
       conference: conference,
       title: "Demystifying some of the magic behind Rails",
-      starts_at: Time.zone.local(2024, month, second_day, 11, 15)
+      starts_at: Time.zone.local(year, month, second_day, 11, 15)
     ) do |session|
       session.description = "Rails is renowned for its elegance, productivity, and 'magic' that simplifies web development. As a recent technical writer for the official Ruby on Rails guides, I’ve had the opportunity to dive into the 'magic' of Rails to enhance my understanding of the source code and provide clear explanations in the guides. In this talk, I’ll share my journey of inspecting modules, exploring concepts, and sharing insights gained from my experience to help attendees better understand how some Rails components work internally. Whether you are a beginner eager to understand the framework’s foundations or an experienced developer looking to deepen your knowledge, this dive into the source code will enhance your proficiency and demystify the framework’s inner workings."
-      session.ends_at = Time.zone.local(2024, month, second_day, 11, 45)
+      session.ends_at = Time.zone.local(year, month, second_day, 11, 45)
       session.location = track_2
       session.speakers = [ridhwana_khan_speaker]
       session.tags = [rails_internals, developer_experience]
@@ -590,20 +591,20 @@ namespace :db do
     Session.find_or_create_by!(
       conference: conference,
       title: "Lunch (and other things to do in the breaks)",
-      starts_at: Time.zone.local(2024, month, second_day, 11, 45)
+      starts_at: Time.zone.local(year, month, second_day, 11, 45)
     ) do |session|
       session.description = "<div class=\"trix-content\">\n  <div>Lunch will be served in the <strong>Sponsor Garden</strong> and in the <strong>Pavilion</strong>.&nbsp;<br><br>During lunch and breaks between sessions on both days, attendees can also:&nbsp;<br><br></div><ul><li>Catch 5-10 min Community talks on the <strong>Lightning Track</strong> (sponsored by <strong>Shopify</strong>)&nbsp;</li><li>Chat with our sponsors in the <strong>Sponsor Garden&nbsp;</strong></li><li>Hang out in the <strong>Shopify Lounge</strong>&nbsp;</li><li>Sign up <a href=\"https://docs.google.com/forms/d/e/1FAIpQLSf9_jfPzw-1YvkGFhlGtnGhkDqVvX2Z-D1vpJardmQ6nVf7PQ/viewform\"><strong>here</strong></a> for pair programming or career advice in the <strong>Double Up Lab</strong> (sponsored by <strong>Test Double</strong>)</li><li>Chill out in the <strong>kilns</strong> of this historic venue</li><li>Grab an espresso or latte from the <strong>coffee carts</strong> (sponsored by <strong>Cedarcode</strong>)&nbsp;</li><li>Or grab an item from the <strong>food trucks</strong> (sponsored by <strong>Shopify</strong>) - Note that the food trucks will be open all day from 11 am to 4 pm, so drop by with your ticket for a free item whenever you like.</li><li>Go touch grass. (We are located in one of Toronto's most calming nature parks.)</li></ul>\n</div>\n"
-      session.ends_at = Time.zone.local(2024, month, second_day, 13, 0)
+      session.ends_at = Time.zone.local(year, month, second_day, 13, 0)
       session.location = break_location
     end
 
     Session.find_or_create_by!(
       conference: conference,
       title: "Making the best of a bad situation - Lessons from one of Intercom’s most painful outages",
-      starts_at: Time.zone.local(2024, month, second_day, 13, 0)
+      starts_at: Time.zone.local(year, month, second_day, 13, 0)
     ) do |session|
       session.description = "On 22 Feb 2024 Intercom had one of its most painful outages in recent memory. The root cause? A 32-bit foreign key referencing a 64-bit primary key. We’ll take a look at what happened, why it happened, and what we did to ensure it didn’t happen again, including some changes you can make to your own Rails apps to help make sure you don’t make the same mistakes."
-      session.ends_at = Time.zone.local(2024, month, second_day, 13, 30)
+      session.ends_at = Time.zone.local(year, month, second_day, 13, 30)
       session.location = track_1
       session.speakers = [miles_mcguire_speaker]
       session.tags = [database, best_practices]
@@ -612,10 +613,10 @@ namespace :db do
     Session.find_or_create_by!(
       conference: conference,
       title: "Pushing the boundaries with ActiveStorage",
-      starts_at: Time.zone.local(2024, month, second_day, 13, 0)
+      starts_at: Time.zone.local(year, month, second_day, 13, 0)
     ) do |session|
       session.description = "In this talk you’ll learn how to push the boundaries with ActiveStorage and leverage it to build feature rich user experiences. You’ll learn how to build custom services to integrate with external providers that go above and beyond the built in services to allow users to select images from a third party API that hosts images for you, and a rich media library that allows users to see, modify and upload files they’ve uploaded that can be selected from in forms in place of uploading a new file."
-      session.ends_at = Time.zone.local(2024, month, second_day, 13, 30)
+      session.ends_at = Time.zone.local(year, month, second_day, 13, 30)
       session.location = track_2
       session.speakers = [andrea_fomera_speaker]
       session.tags = [performance, storage_solutions]
@@ -624,10 +625,10 @@ namespace :db do
     Session.find_or_create_by!(
       conference: conference,
       title: "The Modern Programmer’s Guide to Neovim and Zellij",
-      starts_at: Time.zone.local(2024, month, second_day, 13, 0)
+      starts_at: Time.zone.local(year, month, second_day, 13, 0)
     ) do |session|
       session.description = "Are you ready to revolutionize your coding environment? In a world dominated by VS Code and other Electron-based editors, there's a hidden gem that developers are rediscovering: Vim. Or rather, Neovim. Just as Rails transformed web development, Neovim is redefining how we write code, blending decades-old technology with modern tooling for an unparalleled experience. <br/><br/> <strong>Workshop overview </strong>In this hands-on workshop, we dive into the world of Neovim and Zellij —showing you how to streamline your development process and achieve a true flow state. <br/><br/> <strong>Here's what you can expect</strong> </p> <ul> <li> Introduction to Neovim: Understand the core principles that make Neovim a game-changer in the modern programming landscape. </li> <li> Learn how to effortlessly manage and customize plugins to suit your unique work-flow, shedding the bloat of heavier editors. </li> <li> Combine the power of Neovim and Zellij to increase developer productivity by achieving your optimal flow state. </li> </ul> <br/> <strong>Key takeaways</strong> By the end of this 75-minute workshop, you will: <ul> <li> Have a solid understanding of Neovim's capabilities and how it can enhance your productivity. </li> <li> Manage workspaces using Zellij to jump in and out of projects with ease. </li> <li> Walk away with a Neovim setup that empowers you to code with minimal distractions, maximizing your efficiency and creativity. </li> </ul> <br/> <strong>Why Attend?</strong> This workshop is perfect for developers of all levels (with some familiarity with Vim) who are looking to optimize their workflow and embrace a lightweight, powerful, and highly customizable editor. Whether you're new to Neovim or looking to deepen your understanding, this session will provide you with practical skills and insights that you can apply immediately. <br/><br/> <strong>Thank you Coder!</strong> This workshop is brought to you by <a class='underline' href='https://coder.com/'>Coder</a>, and will be repeated on both days. It will be first-come, first-served."
-      session.ends_at = Time.zone.local(2024, month, second_day, 14, 15)
+      session.ends_at = Time.zone.local(year, month, second_day, 14, 15)
       session.location = lightning_track
       session.speakers = [chris_power_speaker, robert_beene_speaker]
       session.tags = [productivity, tools, developer_experience]
@@ -636,10 +637,10 @@ namespace :db do
     Session.find_or_create_by!(
       conference: conference,
       title: "Making accessible web apps with Rails and Hotwire",
-      starts_at: Time.zone.local(2024, month, second_day, 13, 45)
+      starts_at: Time.zone.local(year, month, second_day, 13, 45)
     ) do |session|
       session.description = "Nowadays, there is a lot of talk about accessibility, but is your web app accessible? In this session, I will share my perspective as a blind developer on how to build accessible web apps with real-world examples, beyond saying it’s important and the need to use ARIA. I will start by demonstrating how a blind person uses a screen reader to navigate the web, so that you can understand the most common challenges faced by blind people every day. This will help clarify several requirements that people currently spend too much time on. Instead, we can focus on the most relevant errors and aspects to bear in mind when developing and designing interfaces. We will cover the most common patterns with code examples, taking advantage of tools provided by Rails, Hotwire, and the browser."
-      session.ends_at = Time.zone.local(2024, month, second_day, 14, 15)
+      session.ends_at = Time.zone.local(year, month, second_day, 14, 15)
       session.location = track_1
       session.speakers = [bruno_prieto_speaker]
       session.tags = [hotwire]
@@ -648,10 +649,10 @@ namespace :db do
     Session.find_or_create_by(
       conference: conference,
       title: "Prepare to tack - Steering Rails apps out of technical debt",
-      starts_at: Time.zone.local(2024, month, second_day, 13, 45)
+      starts_at: Time.zone.local(year, month, second_day, 13, 45)
     ) do |session|
       session.description = "Spoiler alert: we’ve been wrong about tech debt. Our Rails apps are drowning in a sea of compromises and quick fixes, making it difficult to update and slowing us down. It’s high time we redefine “technical debt” — perhaps even time to ditch the term altogether. In this talk, we’re not only exploring the common issues facing our Rails apps; we’re going deeper. We’ll uncover roadblocks, blind spots, and comfort zones that lead us to rationalize away the need for necessary changes. By confronting these excuses head-on, we’re not just aiming to fix immediate problems; we’re working towards a more maintainable, efficient codebase. Whether you’re part of a duo or sailing with a crew of several dozen, this session charts a course for tackling what truly matters. It’s time to grab the wheel."
-      session.ends_at = Time.zone.local(2024, month, second_day, 14, 15)
+      session.ends_at = Time.zone.local(year, month, second_day, 14, 15)
       session.location = track_2
       session.speakers = [robby_russell_speaker]
       session.tags = [performance, refactoring]
@@ -660,20 +661,20 @@ namespace :db do
     Session.find_or_create_by!(
       conference: conference,
       title: "Double Up Lab (sponsored by Test Double)",
-      starts_at: Time.zone.local(2024, month, second_day, 14, 15)
+      starts_at: Time.zone.local(year, month, second_day, 14, 15)
     ) do |session|
       session.description = "<div class=\"trix-content\">\n  <div>Join Test Double in the Double Up Lab to pair with one of our double agents on Rails, no-strings-attached career advice, and more. Bring something to work on, check out what we've been up to, or just recharge and chat.<br><br><a href=\"https://docs.google.com/forms/d/e/1FAIpQLSf9_jfPzw-1YvkGFhlGtnGhkDqVvX2Z-D1vpJardmQ6nVf7PQ/viewform\"><strong>Book time here</strong></a>.<br><br>You can also stop by 1:00-2:15 pm daily to say hello, score some swag, schedule a session, or get resume &amp; career advice.</div>\n</div>\n"
-      session.ends_at = Time.zone.local(2024, month, second_day, 14, 45)
+      session.ends_at = Time.zone.local(year, month, second_day, 14, 45)
       session.location = double_up_location
     end
 
     Session.find_or_create_by(
       conference: conference,
       title: "The Rails Boot Process",
-      starts_at: Time.zone.local(2024, month, second_day, 14, 45)
+      starts_at: Time.zone.local(year, month, second_day, 14, 45)
     ) do |session|
       session.description = "In this talk we’ll cover what happens when a Rails application boots. When is the logger ready? When is $LOAD_PATH set? When do initializers run or when are the autoloaders set up? Basically, we’ll understand what runs when. Also, we’ll understand railties and engines initializers, which are key to this process."
-      session.ends_at = Time.zone.local(2024, month, second_day, 15, 15)
+      session.ends_at = Time.zone.local(year, month, second_day, 15, 15)
       session.location = track_1
       session.speakers = [xavier_noria_speaker]
       session.tags = [rails_internals, performance]
@@ -682,10 +683,10 @@ namespace :db do
     Session.find_or_create_by(
       conference: conference,
       title: "Testing Integrations - The Good, the Bad, and the Ugly",
-      starts_at: Time.zone.local(2024, month, second_day, 14, 45)
+      starts_at: Time.zone.local(year, month, second_day, 14, 45)
     ) do |session|
       session.description = "Does your Rails app have integrations with third-party APIs? Perhaps your billing system relies on a subscription management tool, or you utilize email marketing applications to engage customers? Enhancing your features through external tools can be powerful, but testing these integrations could pose challenges or be cumbersome. Join me as we explore practical strategies for testing integrations, drawing from real-life experiences at Harvest, where we implemented several integrations – Braintree, Stripe, CustomerIO, Hubspot, Xero, QuickBooks, and more – and gain confidence in safeguarding your codebase during refactorings or API version changes."
-      session.ends_at = Time.zone.local(2024, month, second_day, 15, 15)
+      session.ends_at = Time.zone.local(year, month, second_day, 15, 15)
       session.location = track_2
       session.speakers = [julia_lopez_speaker]
       session.tags = [integrations, testing, best_practices]
@@ -694,20 +695,20 @@ namespace :db do
     Session.find_or_create_by!(
       conference: conference,
       title: "Double Up Lab",
-      starts_at: Time.zone.local(2024, month, second_day, 15, 15)
+      starts_at: Time.zone.local(year, month, second_day, 15, 15)
     ) do |session|
       session.description = "<div class=\"trix-content\">\n  <div>Join Test Double in the Double Up Lab to pair with one of our double agents on Rails, no-strings-attached career advice, and more. Bring something to work on, check out what we've been up to, or just recharge and chat.<br><br><a href=\"https://docs.google.com/forms/d/e/1FAIpQLSf9_jfPzw-1YvkGFhlGtnGhkDqVvX2Z-D1vpJardmQ6nVf7PQ/viewform\"><strong>Book time here</strong></a>.<br><br>You can also stop by 1:00-2:15 pm daily to say hello, score some swag, schedule a session, or get resume &amp; career advice.</div>\n</div>\n"
-      session.ends_at = Time.zone.local(2024, month, second_day, 15, 45)
+      session.ends_at = Time.zone.local(year, month, second_day, 15, 45)
       session.location = double_up_location
     end
 
     Session.find_or_create_by(
       conference: conference,
       title: "Empowering the Individual - Rails on AI",
-      starts_at: Time.zone.local(2024, month, second_day, 15, 45)
+      starts_at: Time.zone.local(year, month, second_day, 15, 45)
     ) do |session|
       session.description = "The dream of the “One Person Framework” is more tangible than ever. Integrating AI with Ruby on Rails can transform a solo developer’s workflow into an incredibly potent force, capable of competing at an unprecedented scale. This presentation draws on practical real-world experience. We will explore practical approaches ranging from code generation to real-time data analysis and automated customer support. The emphasis is on new tools that let developers focus more than ever on innovation and creativity. Attendees will leave with a roadmap for integrating AI tools and techniques into their Rails projects, insights into the potential pitfalls and best practices, and inspiration to explore the boundaries of what a single developer or a small team can achieve with the right tools."
-      session.ends_at = Time.zone.local(2024, month, second_day, 16, 15)
+      session.ends_at = Time.zone.local(year, month, second_day, 16, 15)
       session.location = track_1
       session.speakers = [obie_fernandez_speaker]
       session.tags = [ai]
@@ -716,10 +717,10 @@ namespace :db do
     Session.find_or_create_by(
       conference: conference,
       title: "Level up performance with simple coding changes",
-      starts_at: Time.zone.local(2024, month, second_day, 15, 45)
+      starts_at: Time.zone.local(year, month, second_day, 15, 45)
     ) do |session|
       session.description = "This presentation will first highlight some of the major improvements Zendesk has achieved using straightforward Ruby techniques. Data will illustrate the saving of thousands of years of processing time annually, leading to increased customer satisfaction and cost-effectiveness, as reflected in our AWS bills. Fortunately, many of these enhancements are straightforward to implement from day one. My goal is to show folks how to incorporate these types of improvements early in their development process and share my learnings with the broader community."
-      session.ends_at = Time.zone.local(2024, month, second_day, 16, 15)
+      session.ends_at = Time.zone.local(year, month, second_day, 16, 15)
       session.location = track_2
       session.speakers = [david_henner_speaker]
       session.tags = [performance]
@@ -728,10 +729,10 @@ namespace :db do
     Session.find_or_create_by(
       conference: conference,
       title: "Closing Keynote",
-      starts_at: Time.zone.local(2024, month, second_day, 16, 30)
+      starts_at: Time.zone.local(year, month, second_day, 16, 30)
     ) do |session|
       session.description = "More information coming soon."
-      session.ends_at = Time.zone.local(2024, month, second_day, 17, 30)
+      session.ends_at = Time.zone.local(year, month, second_day, 17, 30)
       session.location = track_1
       session.speakers = [aaron_patterson_speaker]
       session.tags = [community]
