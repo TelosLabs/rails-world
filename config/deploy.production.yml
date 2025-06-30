@@ -1,36 +1,36 @@
 # Deploy to these servers.
 servers:
-  - 159.203.62.190
+  web:
+    - 0000.0000.0000.0000
 
-# Inject ENV variables into containers (secrets come from .env).
-# Remember to run `kamal env push` after making changes!
+# Enable SSL auto certification via Let's Encrypt and allow for multiple apps on a single web server.
+proxy:
+  ssl: true
+  host: example.com
+  app_port: 3000
+
+# Inject ENV variables into containers (secrets come from .kamal/secrets).
 env:
-  clear:
-    RAILS_ENV: production
   secret:
     - APP_HOST
-    - RAILS_MASTER_KEY
-    - MAILPACE_API_TOKEN
     - APPSIGNAL_PUSH_API_KEY
+    - AVO_LICENSE_KEY
     - AWS_ACCESS_KEY_ID
+    - AWS_BUCKET
+    - AWS_REGION
     - AWS_SECRET_ACCESS_KEY
-    - LITESTREAM_BUCKET
-    - SECRET_KEY_BASE
-    - VAPID_PUBLIC_KEY
-    - VAPID_PRIVATE_KEY
-    - MAILER_SENDER
+    - KAMAL_REGISTRY_PASSWORD
     - LITESTREAM_BACKUP_ENABLED
-    - SESSION_REMINDERS_ENABLED
-    - REGISTRATION_ENABLED
-    - WEB_CONCURRENCY
+    - LITESTREAM_BUCKET
+    - MAILER_SENDER
+    - MAILPACE_API_TOKEN
     - ONLY_TESTER_REGISTRATION_ENABLED
-
-accessories:
-  vector:
-    image: timberio/vector:0.39.0-debian
-    roles:
-      - web
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    files:
-      - "./config/vector/vector_production.yaml:/etc/vector/vector.yaml"
+    - PORT
+    - RAILS_ENV
+    - RAILS_MASTER_KEY
+    - REGISTRATION_ENABLED
+    - SECRET_KEY_BASE
+    - SESSION_REMINDERS_ENABLED
+    - VAPID_PRIVATE_KEY
+    - VAPID_PUBLIC_KEY
+    - WEB_CONCURRENCY
