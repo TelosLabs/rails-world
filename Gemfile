@@ -10,7 +10,7 @@ gem "sqlite3", "~> 2.1"
 
 # Jobs
 gem "mission_control-jobs"
-gem "solid_queue"
+gem "solid_queue", "~> 1.1"
 
 # Assets
 gem "importmap-rails"
@@ -21,6 +21,9 @@ gem "tailwindcss-rails", "~> 2.6"
 gem "stimulus-rails"
 gem "turbo-rails"
 
+# Deployment
+gem "kamal", require: false
+
 # Authentication
 gem "bcrypt", "~> 3.1.20"
 
@@ -29,7 +32,7 @@ gem "action_policy"
 
 # Admin
 gem "activestorage"
-gem "avo", ">= 3.2.1"
+gem "avo", ">= 3.17"
 gem "image_processing"
 gem "ransack"
 

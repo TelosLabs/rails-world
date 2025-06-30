@@ -23,13 +23,8 @@ FileUtils.chdir APP_ROOT do
     puts ".env file already exists"
   else
     FileUtils.cp ".env.template", ".env"
-
-    require "web-push"
-    vapid_key = WebPush.generate_key
-    File.open(".env", "a") do |file|
-      file.puts "VAPID_PUBLIC_KEY=#{vapid_key.public_key}"
-      file.puts "VAPID_PRIVATE_KEY=#{vapid_key.private_key}"
-    end
+    FileUtils.cp ".env.template", ".env.staging"
+    FileUtils.cp ".env.template", ".env.production"
   end
 
   puts "\n== Preparing database =="

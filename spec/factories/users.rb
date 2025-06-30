@@ -23,5 +23,9 @@ FactoryBot.define do
         create(:profile, profileable: user)
       end
     end
+
+    trait :admin do
+      role { "admin" }
+    end
   end
 end

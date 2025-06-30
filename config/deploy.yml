@@ -1,77 +1,27 @@
-# Name of your application. Used to uniquely configure containers.
 service: rails-world
+image: ibramsterdam/rails-world
 
-# Name of the container image.
-image: sergeaf/rails-world
-
-# To persist sqlite data, we need to mount a volume.
+# Use a persistent storage volume for sqlite.
 volumes:
   - storage:/rails/storage
 
-# Credentials for your image host.
+# Credentials for your image host, we recommend Docker Hub.
 registry:
-  username: sergeaf
+  username: ibramsterdam
+  # Always use an access token rather than real password (pulled from .kamal/secrets).
   password:
     - KAMAL_REGISTRY_PASSWORD
 
-# When running commands, you can specify a destination with the -d flag, e.g. kamal deploy -d staging
+# Configure builder setup.
+builder:
+  arch: amd64
+  # Pass in additional build args needed for your Dockerfile.
+  # args:
+  #   RUBY_VERSION: <%= ENV["RBENV_VERSION"] || ENV["rvm_ruby_string"] || "#{RUBY_ENGINE}-#{RUBY_ENGINE_VERSION}" %>
+
+aliases:
+  console: app exec -i --reuse "bin/rails console"
+
+# Force specification of staging or production deployment
 require_destination: true
 
-# Configure custom arguments for Traefik
-# traefik:
-#   options:
-#     publish:
-#       - "443:443"
-#     volume:
-#       - "/traefik/certs-conf.yaml:/traefik/certs-conf.yaml" # To save the configuration file.
-#       - "/traefik/certs:/traefik/certs" # To save the certificates.
-#   args:
-#     entryPoints.web.address: ":80"
-#     entryPoints.websecure.address: ":443"
-#     entrypoints.websecure.http.tls: true
-#     entryPoints.web.http.redirections.entryPoint.to: websecure
-#     entryPoints.web.http.redirections.entryPoint.scheme: https
-#     entryPoints.web.http.redirections.entrypoint.permanent: true
-#     providers.file.filename: "/traefik/certs-conf.yaml"
-
-# Configure builder setup.
-# builder:
-#   args:
-#     RUBY_VERSION: 3.2.0
-#   secrets:
-#     - GITHUB_TOKEN
-#   remote:
-#     arch: amd64
-#     host: ssh://app@192.168.0.1
-
-# Configure custom arguments for Traefik. Be sure to reboot traefik when you modify it.
-# traefik:
-#   args:
-#     accesslog: true
-#     accesslog.format: json
-
-# Bridge fingerprinted assets, like JS and CSS, between versions to avoid
-# hitting 404 on in-flight requests. Combines all files from new and old
-# version inside the asset_path.
-#
-# If your app is using the Sprockets gem, ensure it sets `config.assets.manifest`.
-# See https://github.com/basecamp/kamal/issues/626 for details
-#
-# asset_path: /rails/public/assets
-
-# Configure rolling deploys by setting a wait time between batches of restarts.
-# boot:
-#   limit: 10 # Can also specify as a percentage of total hosts, such as "25%"
-#   wait: 2
-
-# Configure the role used to determine the primary_host. This host takes
-# deploy locks, runs health checks during the deploy, and follow logs, etc.
-#
-# Caution: there's no support for role renaming yet, so be careful to cleanup
-#          the previous role on the deployed hosts.
-# primary_role: web
-
-# Controls if we abort when see a role with no hosts. Disabling this may be
-# useful for more complex deploy configurations.
-#
-# allow_empty_roles: false
