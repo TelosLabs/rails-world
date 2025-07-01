@@ -1,0 +1,19 @@
+.d-hotwire-native-none {
+  display: none !important;
+}
+
+.d-hotwire-native-inline {
+  display: inline !important;
+}
+
+.top-safe-area-no-filters {
+  top: calc(env(safe-area-inset-top) + 177px) !important;
+}
+
+.top-safe-area-with-filters {
+  top: calc(env(safe-area-inset-top) + 209px) !important;
+}
+
+.pt-safe-area-back-button {
+  padding-top: calc(env(safe-area-inset-top)) !important;
+}

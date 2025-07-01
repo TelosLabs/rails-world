@@ -13,6 +13,10 @@ class ProfilePolicy < ApplicationPolicy
     edit?
   end
 
+  def destroy?
+    owner?
+  end
+
   private
 
   def owner?

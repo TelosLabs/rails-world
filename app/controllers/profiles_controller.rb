@@ -20,6 +20,14 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def destroy
+    if @profile.profileable.destroy
+      redirect_to new_user_session_path, notice: t("controllers.profiles.destroy.success")
+    else
+      redirect_to profile_path(@profile.uuid), alert: t("controllers.profiles.destroy.error")
+    end
+  end
+
   private
 
   def set_profile

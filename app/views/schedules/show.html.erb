@@ -1,4 +1,4 @@
-<%= title "My Schedule - #{Current.conference&.name}" %>
+<%= title "My Schedule" %>
 
 <% content_for :top_nav do %>
   <%= render partial: "layouts/primary_top_nav" %>
@@ -6,9 +6,9 @@
 
 <div class="flex flex-col items-center h-full bg-grey-50 pt-safe-area-header">
   <div class="flex flex-col items-center w-full h-full max-w-screen-md px-5">
-    <div class="sticky top-safe-area-header z-30 flex flex-col items-center w-full pt-6 bg-grey-50">
+    <div class="sticky z-30 flex flex-col items-center w-full pt-6 top-safe-area-header bg-grey-50">
       <div class="flex w-full mb-4">
-        <h1 class="text-3xl italic font-black text-gray-800">My Schedule</h1>
+        <h1 class="text-3xl italic font-black text-gray-800 d-hotwire-native-none">My Schedule</h1>
       </div>
 
       <%= render partial: 'sessions/filters', locals: { resource: :schedule } %>

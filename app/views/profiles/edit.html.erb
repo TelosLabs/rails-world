@@ -1,4 +1,4 @@
-<%= title "Edit profile - #{Current.conference&.name}" %>
+<%= title "Edit profile" %>
 
 <% content_for :top_nav do %>
   <%= render partial: "layouts/primary_top_nav" %>
@@ -84,7 +84,7 @@
               <%= form.label :mail_notifications, "Mail notifications", class: "grow font-medium text-slate-900 text-base cursor-pointer mr-2" %>
               <%= form.toggle_field :mail_notifications %>
             </div>
-            <div class="flex flex-row items-center justify-between w-full p-4 bg-white">
+            <div class="flex flex-row items-center justify-between w-full p-4 bg-white d-hotwire-native-none">
               <%= form.label :web_push_notifications, "Web-push notifications", class: "grow font-medium text-slate-900 text-base cursor-pointer mr-2" %>
               <label>
                 <%= form.toggle_field :web_push_notifications, class: "sr-only peer",
