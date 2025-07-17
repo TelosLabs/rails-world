@@ -4,9 +4,9 @@
   <%= render partial: "layouts/primary_top_nav" %>
 <% end %>
 
-<div class="relative flex flex-col items-center justify-between flex-1 h-full bg-grey-50 pt-safe-area-header pb-safe-area-bottom-navbar">
+<div class="flex relative flex-col flex-1 justify-between items-center h-full bg-grey-50 pt-safe-area-header pb-safe-area-bottom-navbar">
   <div class="flex flex-col items-center bg-cover bg-bottom bg-no-repeat max-h-[430px] w-full" style="background-image: url(<%= asset_path 'background_design.svg' %>)">
-    <div class="z-10 flex flex-col items-start w-full max-w-screen-sm px-5 pt-6 pb-12">
+    <div class="flex z-10 flex-col items-start px-5 pt-6 pb-12 w-full max-w-screen-sm">
       <div class="flex flex-row items-center">
         <% if @profile.image.attached? %>
           <div class="flex flex-col items-center justify-center shrink-0 relative w-[120px] bg-cover bg-no-repeat bg-center h-[120px] rounded-full" style="background-image: url(<%= url_for(@profile.image) %>)">
@@ -26,7 +26,7 @@
       <% if @profile.bio.present? %>
         <p class="mt-6 text-base"><%= @profile.bio %></p>
       <% end %>
-      <div class="flex flex-row items-center justify-between w-full gap-4">
+      <div class="flex flex-row gap-4 justify-between items-center w-full">
         <%= link_to(
           @profile.github_url,
           target: "_blank",
@@ -68,7 +68,7 @@
   </div>
 
   <% if allowed_to?(:edit?, @profile, with: ProfilePolicy) %>
-    <div class="flex flex-col items-center w-full gap-6 p-4">
+    <div class="flex flex-col gap-6 items-center p-4 w-full">
       <% if @profile.is_public? %>
         <div class="p-6 bg-white rounded-2xl">
           <%= render inline: @profile.svg_qr_code(module_size: 4, svg_attributes: { "data-test-id": "qr_code" }) %>
@@ -87,7 +87,7 @@
       ) %>
       <%= button_to(
         "Delete Account", profile_path(@profile.uuid), method: :delete,
-        class: "text-red font-bold rounded-sm underline italic text-lg d-hotwire-native-inline hidden",
+        class: "text-red font-bold rounded-sm underline italic text-lg",
         data: {
           turbo_action: "clear_all",
           turbo_confirm: "Are you sure you want to delete your account? This action cannot be undone."
