@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   resource :coming_soon, only: [:show]
   resource :about, only: [:show]
   resource :schedule, only: [:show]
+  resource :account_deletion, only: [:show]
 
   resources :sessions, only: [:index, :show] do
     resource :attendee, only: [:create, :destroy]
