@@ -6,7 +6,7 @@ class AbuseReportsController < ApplicationController
   def create
     reporter_email = current_user&.email || "anonymous"
 
-    ProfileReportNotifier.with(record: @profile, reporter_email: reporter_email).deliver(User.admin)
+    ProfileReportNotifier.with(record: @profile, reporter_email: reporter_email).deliver_later(User.admin)
 
     render turbo_stream: turbo_stream.replace(
       "flash_message",
