@@ -6,6 +6,10 @@
   display: inline !important;
 }
 
+.d-hotwire-native-block {
+  display: block !important;
+}
+
 .top-safe-area-no-filters {
   top: calc(env(safe-area-inset-top) + 177px) !important;
 }
@@ -16,4 +20,12 @@
 
 .pt-safe-area-back-button {
   padding-top: calc(env(safe-area-inset-top)) !important;
+}
+
+.native-safe-area-2 {
+  padding-top: calc(env(safe-area-inset-top)) !important;
+}
+
+.native-mt-0 {
+  margin-top: 0 !important;
 }
