@@ -18,6 +18,9 @@ en:
       destroy:
         success: "Your account has been deleted successfully."
         error: "Failed to delete account."
+    abuse_reports:
+      create:
+        success: "Profile has been reported successfully. Administrators have been notified."
     notification_settings:
       update:
         success: "Your notification settings have been updated successfully."

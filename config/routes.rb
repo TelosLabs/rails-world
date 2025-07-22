@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   end
   resources :speakers, only: [:show]
   resources :profiles, only: [:show, :edit, :update, :destroy], param: :uuid
+  resources :abuse_reports, only: [:create], param: :profile_uuid
   resources :notifications, only: [:index]
   resources :web_push_subscriptions, only: [:create]
 

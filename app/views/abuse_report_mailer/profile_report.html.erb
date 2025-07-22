@@ -1,0 +1,27 @@
+<h2>Profile Abuse Report</h2>
+
+<p>A profile has been reported for abuse:</p>
+
+<ul>
+  <li><strong>Profile Name:</strong> <%= @profile.name.presence || "Anonymous" %></li>
+  <li><strong>Profile UUID:</strong> <%= @profile.uuid %></li>
+  <li><strong>Job Title:</strong> <%= @profile.job_title.presence || "Not specified" %></li>
+  <li><strong>Profile Bio:</strong> <%= @profile.bio.presence || "No bio provided" %></li>
+  <li><strong>Is Public:</strong> <%= @profile.is_public? ? "Yes" : "No" %></li>
+  <li><strong>Reported by:</strong> <%= @reporter_email %></li>
+</ul>
+
+<p><strong>Profile Links:</strong></p>
+<ul>
+  <% if @profile.github_url.present? %>
+    <li>GitHub: <%= @profile.github_url %></li>
+  <% end %>
+  <% if @profile.twitter_url.present? %>
+    <li>Twitter: <%= @profile.twitter_url %></li>
+  <% end %>
+  <% if @profile.linkedin_url.present? %>
+    <li>LinkedIn: <%= @profile.linkedin_url %></li>
+  <% end %>
+</ul>
+
+<p>Please review this profile and take appropriate action if necessary.</p>
