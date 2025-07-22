@@ -18,6 +18,6 @@ class AbuseReportsController < ApplicationController
   private
 
   def set_profile
-    @profile = Profile.find_by!(uuid: params[:profile_uuid]).decorate
+    @profile = Profile.find_by!(uuid: params[:uuid]).decorate
   end
 end

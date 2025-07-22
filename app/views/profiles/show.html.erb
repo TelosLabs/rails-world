@@ -96,7 +96,7 @@
     </div>
     <% else %>
     <div class="">
-      <%= button_to "Report Abuse", abuse_reports_path(profile_uuid: @profile.uuid),
+      <%= button_to "Report Abuse", abuse_reports_path(uuid: @profile.uuid),
           method: :post,
           class: "text-red rounded-sm underline italic text-sm bg-transparent border-none cursor-pointer p-0",
           data: {
