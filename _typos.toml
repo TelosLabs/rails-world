@@ -2,6 +2,7 @@
 
 [default.extend-words]
 # Don't correct the following words
+CSAE = "CSAE"
 
 [files]
 extend-exclude = [

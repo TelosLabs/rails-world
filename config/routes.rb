@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   get "/service-worker.js" => "service_worker#service_worker"
   get "/offline.html" => "service_worker#offline"
   get "/manifest.json" => "service_worker#manifest"
+  get "/privacy_policy", to: "static_pages#privacy_policy"
+  get "/account_deletion", to: "static_pages#account_deletion"
+  get "/about", to: "static_pages#about"
 
   mount MissionControl::Jobs::Engine, at: "/jobs"
   mount Avo::Engine, at: Avo.configuration.root_path
@@ -24,15 +27,14 @@ Rails.application.routes.draw do
   end
   resource :notification_settings, only: [:show, :update]
   resource :coming_soon, only: [:show]
-  resource :about, only: [:show]
   resource :schedule, only: [:show]
-  resource :account_deletion, only: [:show]
 
   resources :sessions, only: [:index, :show] do
     resource :attendee, only: [:create, :destroy]
   end
   resources :speakers, only: [:show]
   resources :profiles, only: [:show, :edit, :update, :destroy], param: :uuid
+  resources :abuse_reports, only: [:create], param: :uuid
   resources :notifications, only: [:index]
   resources :web_push_subscriptions, only: [:create]
 
