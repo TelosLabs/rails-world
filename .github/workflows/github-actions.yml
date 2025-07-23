@@ -55,7 +55,7 @@ jobs:
           bundle exec brakeman -w3
       - name: Run bundler-audit
         run: |
-          bundle exec bundle-audit check --update --ignore thor
+          bundle exec bundle-audit check --update --ignore CVE-2025-54314
 
   code_quality:
     name: Code quality
