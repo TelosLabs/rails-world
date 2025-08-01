@@ -94,6 +94,16 @@
         }
       ) %>
     </div>
+    <% else %>
+    <div class="">
+      <%= button_to "Report Abuse", abuse_reports_path(uuid: @profile.uuid),
+          method: :post,
+          class: "text-red rounded-sm underline italic text-sm bg-transparent border-none cursor-pointer p-0",
+          data: {
+            turbo_confirm: "Are you sure you want to report this profile for abuse? This action will notify administrators.",
+            turbo_method: "post"
+          } %>
+    </div>
   <% end %>
 </div>
 
