@@ -8,8 +8,8 @@
         url_for([resource, session_filter_params.to_h.merge(starts_at: session_date)]) + current_day_anchor(session_date),
         class: [
           "flex min-w-fit items-center justify-center px-4 py-2 font-medium rounded-full",
-          "bg-red text-white": params[:starts_at] == session_date.to_s,
-          "bg-white text-red hover:bg-[#FAE7E8] focus:bg-[#FAE7E8]": params[:starts_at] != session_date.to_s
+          "bg-red dark:bg-[#D53D49] text-white": params[:starts_at] == session_date.to_s,
+          "bg-white text-red hover:bg-[#FAE7E8] focus:bg-[#FAE7E8] dark:bg-[#3A3A3C] dark:text-white dark:hover:bg-gray-800": params[:starts_at] != session_date.to_s
         ],
         data: { test_id: "date_filter_#{session_date.strftime('%a_%d')}" }
       ) %>
@@ -19,8 +19,8 @@
       url_for([resource, session_filter_params.to_h]),
       class: [
         "flex min-w-fit items-center justify-center px-4 py-2 rounded-full font-medium",
-        "bg-red text-white": params[:starts_at].blank?,
-        "bg-white text-red hover:bg-[#FAE7E8] focus:bg-[#FAE7E8]": params[:starts_at].present?
+        "bg-red text-white dark:bg-[#D53D49]": params[:starts_at].blank?,
+        "bg-white text-red hover:bg-[#FAE7E8] focus:bg-[#FAE7E8] dark:bg-[#3A3A3C] dark:text-white dark:hover:bg-gray-800": params[:starts_at].present?
       ],
       data: { test_id: "date_filter_all" }
     ) %>
@@ -31,7 +31,7 @@
     class: [
       "flex items-center justify-center ml-3 rounded-full min-w-[42px] min-h-[42px]",
       "bg-red fill-white": session_filter_params.present?,
-      "bg-white fill-red hover:bg-[#FAE7E8] focus:bg-[#FAE7E8]": session_filter_params.blank?
+      "bg-white fill-red hover:bg-[#FAE7E8] focus:bg-[#FAE7E8] dark:bg-[#3A3A3C] dark:hover:bg-gray-800 dark:fill-[#D53D49]": session_filter_params.blank?
     ]
   ) do %>
     <div class="relative" data-controller="dropdown">
