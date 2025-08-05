@@ -28,6 +28,13 @@
     <%= favicon_link_tag asset_path('icons/favicon.svg') %>
 
     <%= yield :head %>
+    <script>
+      if ( localStorage.theme === "dark" || (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
   </head>
 
   <body class="flex flex-col h-full bg-grey-50"
