@@ -4,13 +4,13 @@
   <%= render partial: "layouts/secondary_top_nav" %>
 <% end %>
 
-<div class="relative flex flex-col items-center justify-between flex-1 pb-5 bg-grey-50 pt-safe-area-back-button pb-safe-area-bottom-navbar">
+<div class="relative flex flex-col items-center justify-between flex-1 pb-5 bg-grey-50 dark:bg-black pt-safe-area-back-button pb-safe-area-bottom-navbar">
   <div class="w-full px-5 pt-3 pb-12 bg-bottom bg-no-repeat bg-cover" style="background-image: url(<%= asset_path 'background_design.svg' %>)">
     <div class="flex flex-col max-w-screen-sm mx-auto">
       <%= render partial: "sessions/status", locals: { session: @session } %>
 
       <div class="flex flex-row justify-between w-full mb-2 grow">
-        <h1 class="text-2xl italic font-bold text-red"><%= @session.title %></h1>
+        <h1 class="text-2xl italic font-bold text-red dark:text-[#D53D49]"><%= @session.title %></h1>
         <%= render partial: "bookmark", locals: { session: @session, user_is_an_attendee: @user_session_ids.include?(@session.id)} %>
       </div>
 
@@ -38,7 +38,7 @@
                   "flex flex-col ml-2",
                   "max-w-[200px]": @session.speakers.length > 1
               ] ) do %>
-                <h2 class="text-sm italic font-black group-hover:text-red group-focus:text-red"><%= speaker.name %></h2>
+                <h2 class="text-sm italic font-black group-hover:text-red group-focus:text-red dark:text-white"><%= speaker.name %></h2>
                 <p class="text-sm font-normal text-gray-400"><%= speaker.job_title %></p>
               <% end %>
             <% end %>
@@ -58,22 +58,22 @@
       <% end %>
 
       <% if @session.description.present? %>
-        <div class="mb-4">
+        <div class="mb-4 dark:text-white">
           <%= @session.description %>
         </div>
       <% end %>
 
       <div class="flex flex-row items-center mb-2">
-        <%= inline_svg_tag("icons/calendar.svg", class: "w-[16px] h-[16px] mr-1 fill-grey-600") %>
-        <p class="font-sans text-sm text-grey-600">
+        <%= inline_svg_tag("icons/calendar.svg", class: "w-[16px] h-[16px] mr-1 fill-grey-600 dark:fill-white") %>
+        <p class="font-sans text-sm text-grey-600 dark:text-white">
           <%= @session.starts_at&.strftime("%b %d") %> -
           <%= @session.starts_at&.strftime("%H:%M") %> to <%= @session.ends_at&.strftime("%H:%M") %>
         </p>
       </div>
 
       <div class="flex flex-row items-center mb-3">
-        <%= inline_svg_tag("icons/location.svg", class: "w-[16px] h-[16px] mr-1 fill-grey-600") %>
-        <p class="text-sm text-grey-600"><%= @session.location.name %></p>
+        <%= inline_svg_tag("icons/location.svg", class: "w-[16px] h-[16px] mr-1 fill-grey-600 dark:fill-white") %>
+        <p class="text-sm text-grey-600 dark:text-white"><%= @session.location.name %></p>
       </div>
     </div>
   </div>
@@ -81,12 +81,12 @@
   <% if @session.speakers.present? %>
     <div class="flex flex-col items-center w-full p-5 mt-6">
       <div class="flex flex-col items-start w-full max-w-screen-sm">
-        <p class="mb-4 text-2xl italic font-bold text-black">
+        <p class="mb-4 text-2xl italic font-bold text-black dark:text-white">
           <%= "About the #{'speaker'.pluralize(@session.speakers.length)}" %>
         </p>
         <div class="flex flex-col w-full gap-4">
           <% @session.speakers.each do |speaker| %>
-            <div class="w-full px-5 pt-2 pb-5 bg-white rounded-lg">
+            <div class="w-full px-5 pt-2 pb-5 bg-white dark:bg-[#1C1C1E] rounded-lg">
               <%= link_to(
                 speaker_path(speaker),
                 class: [
@@ -108,7 +108,7 @@
                 </div>
               <% end %>
 
-              <p class="mt-2 text-base leading-5">
+              <p class="mt-2 text-base leading-5 dark:text-white">
                 <%= speaker.bio %>
               </p>
             </div>
