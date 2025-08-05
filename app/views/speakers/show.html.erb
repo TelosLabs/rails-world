@@ -54,7 +54,7 @@
           target: "_blank",
           class: [
             "flex flex-row grow items-center justify-center w-28 h-14 rounded-lg",
-            "bg-red dark:bg-[#D53D49]z": @profile.linkedin_url.present?,
+            "bg-red dark:bg-[#D53D49]": @profile.linkedin_url.present?,
             "bg-grey-300 cursor-not-allowed": @profile.linkedin_url.blank?
           ]
         ) do %>
