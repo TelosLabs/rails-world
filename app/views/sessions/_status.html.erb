@@ -20,12 +20,12 @@
     </div>
   </div>
 <% elsif session.past? %>
-  <div class="inline-flex items-center justify-center h-8 px-4 py-2 mb-2 rounded-lg bg-bluegray-50">
+  <div class="inline-flex items-center justify-center h-8 px-4 py-2 mb-2 rounded-lg bg-bluegray-50 dark:bg-gray-800">
     <div class="flex items-center justify-center h-4 gap-2 grow basis-0">
       <span class="relative flex w-4 h-4">
         <span class="w-4 h-4 rounded-full bg-bluegray-200"></span>
       </span>
-      <span class="w-full text-xs">Session is over.</span>
+      <span class="w-full text-xs dark:text-white">Session is over.</span>
     </div>
   </div>
 <% end %>
