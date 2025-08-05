@@ -23,7 +23,7 @@
         </div>
       </div>
 
-      <p class="mt-6 text-base text-lg font-medium"><%= @profile.bio %></p>
+      <p class="mt-6 text-base text-lg font-medium dark:text-white"><%= @profile.bio %></p>
       <div class="flex flex-row items-center justify-center w-full gap-4 mt-6">
         <%= link_to(
           @profile.github_url,
@@ -66,7 +66,7 @@
 
   <div class="flex flex-col items-center w-full p-5">
     <div class="flex flex-col items-start w-full max-w-screen-sm gap-4">
-      <h2 class="text-2xl italic font-bold">Sessions by this speaker</h2>
+      <h2 class="text-2xl italic font-bold dark:text-white">Sessions by this speaker</h2>
       <% @sessions.each do |session| %>
         <%= render(
           partial: "sessions/card",
