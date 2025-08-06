@@ -4,7 +4,7 @@
   <%= render partial: "layouts/primary_top_nav" %>
 <% end %>
 
-<div class="flex flex-col items-center flex-1 px-5 pt-safe-area-header pb-safe-area-bottom-navbar bg-grey-50 dark:bg-black">
+<div class="flex flex-col items-center flex-1 px-5 pt-safe-area-header pb-safe-area-bottom-navbar bg-grey-50 dark:bg-[#0f171b]">
   <div class="flex flex-col items-start w-full h-full max-w-screen-sm pt-6 dark:text-white">
     <h1 class="text-3xl italic font-bold text-gray-800 d-hotwire-native-none dark:text-white">Notifications</h1>
     <% if @notifications.present? %>
@@ -30,7 +30,7 @@
       </div>
     <% else %>
       <div class="flex flex-col items-center justify-center w-full h-full gap-6">
-        <div class="flex items-center justify-center w-32 h-32 bg-white rounded-full dark:bg-[#1C1C1E]">
+        <div class="flex items-center justify-center w-32 h-32 bg-white rounded-full dark:bg-[#182027]">
           <%= inline_svg_tag "icons/bell.svg", size: "56", class: "fill-gray-400" %>
         </div>
         <p class="text-base font-bold text-center">You don’t have <br> any notifications</p>
