@@ -28,16 +28,9 @@
     <%= favicon_link_tag asset_path('icons/favicon.svg') %>
 
     <%= yield :head %>
-    <script>
-      if ( localStorage.theme === "dark" || (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
-    </script>
   </head>
 
-  <body class="flex flex-col h-full bg-grey-50"
+  <body class="flex flex-col h-full bg-grey-50" data-controller="dark-mode"
     <%= user_signed_in? ? "data-controller=web-push-notifications
     data-web-push-notifications-vapid-key-value=#{vapid_public_key}
     data-web-push-notifications-notifications-enabled-value=#{current_profile.web_push_notifications}" : '' %>>
