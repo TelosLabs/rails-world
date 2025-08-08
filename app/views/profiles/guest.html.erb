@@ -1,0 +1,25 @@
+<%= title "Profile" %>
+
+<% content_for :top_nav do %>
+  <%= render partial: "layouts/primary_top_nav" %>
+<% end %>
+
+<div class="min-h-screen bg-[#f3f2f9] dark:bg-[#0f171b] h-full pt-safe-area-header pb-safe-area-bottom-navbar">
+  <div class="w-full h-full max-w-screen-sm px-4 py-8 mx-auto space-y-6 bg-bottom bg-no-repeat bg-cover">
+    <div data-controller="dark-mode">
+      <button type="button" data-action="dark-mode#toggle" aria-pressed="false" role="switch" class="w-full flex items-center justify-between bg-white dark:bg-[#182027] py-4 px-6 rounded-[10px] font-black italic uppercase text-red dark:text-[#798691]">
+        Toggle Dark Mode
+        <span data-dark-mode-target="switch" class="relative inline-flex items-center h-6 w-11">
+          <span class="absolute inset-0 transition-colors bg-gray-300 rounded-full dark:bg-red-500"></span>
+          <span class="relative inline-block w-4 h-4 transition-transform transform translate-x-1 bg-white rounded-full dark:translate-x-6"></span>
+        </span>
+      </button>
+    </div>
+
+    <%= link_to "Log in", new_user_session_path, class: "block w-full text-center bg-white dark:bg-[#182027] py-4 text-red dark:text-[#798691] font-black italic rounded-[10px] uppercase" %>
+  </div>
+</div>
+
+<% content_for :bottom_nav do %>
+  <%= render partial: "layouts/bottom_navbar", locals: { unread_notifications: current_user&.notifications&.unread } %>
+<% end %>

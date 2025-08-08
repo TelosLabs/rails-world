@@ -31,12 +31,12 @@
     <% end %>
 
     <%= link_to(
-      user_signed_in? ? profile_path(current_profile&.uuid) : new_user_session_path,
+      user_signed_in? ? profile_path(current_profile&.uuid) : profile_root_path,
       class: [
         nav_text_class_for(["/profiles"]),
         "flex flex-col items-center justify-center"
       ]
-        ) do %>
+    ) do %>
       <%= inline_svg_tag(
         "icons/avatar_no_fill.svg",
         class: nav_icon_class_for(["/profiles"])

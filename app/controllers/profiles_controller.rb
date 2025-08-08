@@ -1,9 +1,15 @@
 class ProfilesController < ApplicationController
   allow_unauthenticated_access only: :show
 
-  before_action :set_profile
+  before_action :set_profile, except: :show
 
   def show
+    if user_signed_in?
+      @profile = Profile.find_by!(uuid: params[:uuid]).decorate
+      authorize! @profile, with: ProfilePolicy, to: :show?
+    else
+      render :guest, status: :ok
+    end
   end
 
   def edit
