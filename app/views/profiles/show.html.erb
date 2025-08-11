@@ -84,13 +84,12 @@
         <label for="theme-select" class="block mb-2 font-black italic uppercase text-red dark:text-[#798691]">
           Theme
         </label>
-        <select id="theme-select" data-dark-mode-target="select" data-action="dark-mode#change"  class="w-full bg-white dark:bg-[#182027] py-2 px-3 rounded-[10px] font-black italic uppercase text-red dark:text-[#798691]">
+        <select id="theme-select" data-dark-mode-target="select" data-action="dark-mode#change" class="w-full bg-white dark:bg-[#182027] py-2 px-3 rounded-[10px] font-black italic uppercase text-red dark:text-[#798691]">
           <option value="light">Light</option>
           <option value="dark">Dark</option>
           <option value="system">System</option>
         </select>
       </div>
-
 
       <%= button_to(
         "Log out", user_session_path, method: :delete,
