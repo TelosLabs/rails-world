@@ -46,7 +46,7 @@
         data-transition-enter-to="opacity-100 scale-100"
         data-transition-leave-from="opacity-100 scale-100"
         data-transition-leave-to="opacity-0 scale-95">
-        <div class="pt-2 pb-2 bg-white rounded-lg shadow-[0_10px_50px_0_rgba(0,0,0,0.40)] flex-col inline-flex absolute top-4 right-[-8px] right-0 w-40 max-w-40">
+        <div class="pt-2 pb-2 bg-white dark:bg-[#131b21] rounded-lg shadow-[0_10px_50px_0_rgba(0,0,0,0.40)] flex-col inline-flex absolute top-4 right-[-8px] right-0 w-40 max-w-40">
           <%= form_with url: resource, class: "grid", method: :get do |form| %>
             <%= form.hidden_field :starts_at, value: params[:starts_at] %>
 
@@ -58,7 +58,7 @@
                   skip_base_styling: true, include_hidden: false
                 ) %>
                 <div class="text-gray-800">
-                  <%= form.label name, class: "text-base font-medium" do %>
+                  <%= form.label name, class: "text-base font-medium dark:text-white" do %>
                     <%= t("views.status_filters.#{name}") %>
                   <% end %>
                 </div>
