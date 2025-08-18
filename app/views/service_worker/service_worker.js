@@ -1,4 +1,4 @@
-/* global self */ 
+/* global self, caches */ 
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/6.4.1/workbox-sw.js')
 
 const { registerRoute, setCatchHandler } = workbox.routing
@@ -87,33 +87,33 @@ async function warmAllPagesAndAPIs () {
     const { pages, images } = await fetch('/service-worker/precache.json', {
       credentials: 'same-origin',
       headers: { 'Accept': 'application/json' }
-    }).then(r => r.ok ? r.json() : ({ pages: [], images: [] })).catch(() => ({ pages: [], images: [] }));
+    }).then(r => r.ok ? r.json() : ({ pages: [], images: [] })).catch(() => ({ pages: [], images: [] }))
 
     const pagesCache = await caches.open('pages-v1');
 
     try {
-      const offReq = new Request('/offline.html', { credentials: 'same-origin' });
-      const offRes = await fetch(offReq);
-      if (offRes.ok) await pagesCache.put(offReq, offRes.clone());
+      const offReq = new Request('/offline.html', { credentials: 'same-origin' })
+      const offRes = await fetch(offReq)
+      if (offRes.ok) await pagesCache.put(offReq, offRes.clone())
     } catch (_) {}
 
     for (const batch of chunk(pages, 40)) {
       await Promise.all(batch.map(async (url) => {
         try {
-          const req = new Request(url, { credentials: 'same-origin' });
-          const res = await fetch(req);
-          const samePath = new URL(res.url).pathname === url;
-          if (res.ok && samePath) await pagesCache.put(req, res.clone());
+          const req = new Request(url, { credentials: 'same-origin' })
+          const res = await fetch(req)
+          const samePath = new URL(res.url).pathname === url
+          if (res.ok && samePath) await pagesCache.put(req, res.clone())
         } catch (e) { }
       }));
     }
 
-    const imgCache = await caches.open('img-v1');
+    const imgCache = await caches.open('img-v1')
     for (const batch of chunk(images, 50)) {
       await Promise.all(batch.map(async (u) => {
         try {
-          const sameOrigin = new URL(u, self.location.origin).origin === self.location.origin;
-          const req = sameOrigin ? new Request(u, { credentials: 'same-origin' }) : new Request(u, { mode: 'no-cors' });
+          const sameOrigin = new URL(u, self.location.origin).origin === self.location.origin
+          const req = sameOrigin ? new Request(u, { credentials: 'same-origin' }) : new Request(u, { mode: 'no-cors' })
           const res = await fetch(req)
           await imgCache.put(req, res.clone())
         } catch (e) { }
