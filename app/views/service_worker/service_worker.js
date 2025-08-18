@@ -82,14 +82,14 @@ let warming = null
 async function warmAllPagesAndAPIs () {
   if (await alreadyWarmed()) return
   if (warming) return warming
-  warming = (async () => {
 
+  warming = (async () => {
     const { pages, images } = await fetch('/service-worker/precache.json', {
       credentials: 'same-origin',
-      headers: { 'Accept': 'application/json' }
+      headers: { Accept: 'application/json' }
     }).then(r => r.ok ? r.json() : ({ pages: [], images: [] })).catch(() => ({ pages: [], images: [] }))
 
-    const pagesCache = await caches.open('pages-v1');
+    const pagesCache = await caches.open('pages-v1')
 
     try {
       const offReq = new Request('/offline.html', { credentials: 'same-origin' })
@@ -105,7 +105,7 @@ async function warmAllPagesAndAPIs () {
           const samePath = new URL(res.url).pathname === url
           if (res.ok && samePath) await pagesCache.put(req, res.clone())
         } catch (e) { }
-      }));
+      }))
     }
 
     const imgCache = await caches.open('img-v1')
