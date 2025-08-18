@@ -22,7 +22,7 @@ const ignoreSearchPlugin = {
   }
 }
 
-registerRoute (
+registerRoute(
   ({ request }) =>
     request.mode === 'navigate' ||
     request.destination === 'document' ||
@@ -30,12 +30,12 @@ registerRoute (
   new StaleWhileRevalidate({ cacheName: 'pages-v1', plugins: [ignoreSearchPlugin] })
 )
 
-registerRoute (
+registerRoute(
   ({ request }) => request.destination === 'style' || request.destination === 'script',
   new StaleWhileRevalidate({ cacheName: 'assets-v1' })
 )
 
-registerRoute (
+registerRoute(
   ({ request }) => request.destination === 'image',
   new CacheFirst({
     cacheName: 'img-v1',
@@ -43,7 +43,7 @@ registerRoute (
   })
 )
 
-setCatchHandler (async ({ event }) => {
+setCatchHandler(async ({ event }) => {
   if (event.request.mode === 'navigate') return caches.match('/offline.html')
   return Response.error()
 })
@@ -80,7 +80,7 @@ async function markWarmed () {
 let warming = null
 
 async function warmAllPagesAndAPIs () {
-  if (await alreadyWarmed ()) return
+  if (await alreadyWarmed()) return
   if (warming) return warming
 
   warming = (async () => {
@@ -119,7 +119,7 @@ async function warmAllPagesAndAPIs () {
         } catch (e) { }
       }))
     }
-    await markWarmed ()
+    await markWarmed()
   })()
   return warming
 }
