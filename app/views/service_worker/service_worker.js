@@ -1,3 +1,4 @@
+/* global self */ 
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/6.4.1/workbox-sw.js')
 
 const { registerRoute, setCatchHandler } = workbox.routing
@@ -113,10 +114,10 @@ async function warmAllPagesAndAPIs () {
         try {
           const sameOrigin = new URL(u, self.location.origin).origin === self.location.origin;
           const req = sameOrigin ? new Request(u, { credentials: 'same-origin' }) : new Request(u, { mode: 'no-cors' });
-          const res = await fetch(req);
-          await imgCache.put(req, res.clone());
+          const res = await fetch(req)
+          await imgCache.put(req, res.clone())
         } catch (e) { }
-      }));
+      }))
     }
     await markWarmed()
   })()
