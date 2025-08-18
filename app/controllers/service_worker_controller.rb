@@ -17,8 +17,8 @@ class ServiceWorkerController < ApplicationController
   end
 
   def precache
-    session_ids  = Session.order(:id).pluck(:id)
-    speaker_ids  = Speaker.order(:id).pluck(:id) 
+    session_ids = Session.order(:id).pluck(:id)
+    speaker_ids = Speaker.order(:id).pluck(:id)
 
     pages = [
       root_path,
