@@ -22,7 +22,7 @@ const ignoreSearchPlugin = {
   }
 }
 
-registerRoute(
+registerRoute (
   ({ request }) =>
     request.mode === 'navigate' ||
     request.destination === 'document' ||
@@ -30,12 +30,12 @@ registerRoute(
   new StaleWhileRevalidate({ cacheName: 'pages-v1', plugins: [ignoreSearchPlugin] })
 )
 
-registerRoute(
+registerRoute (
   ({ request }) => request.destination === 'style' || request.destination === 'script',
   new StaleWhileRevalidate({ cacheName: 'assets-v1' })
 )
 
-registerRoute(
+registerRoute (
   ({ request }) => request.destination === 'image',
   new CacheFirst({
     cacheName: 'img-v1',
@@ -43,12 +43,12 @@ registerRoute(
   })
 )
 
-setCatchHandler(async ({ event }) => {
+setCatchHandler (async ({ event }) => {
   if (event.request.mode === 'navigate') return caches.match('/offline.html')
   return Response.error()
 })
 
-const chunk = (arr, n = 50) => Array.from({ length: Math.ceil(arr.length / n) }, (_, i) => arr.slice(i*n, i*n+n))
+const chunk = (arr, n = 50) => Array.from({ length: Math.ceil(arr.length / n) }, (_, i) => arr.slice(i * n, i * n + n))
 
 self.addEventListener('activate', (event) => {
   event.waitUntil((async () => {
@@ -66,13 +66,13 @@ self.addEventListener('message', (e) => {
 })
 
 const META_CACHE = 'meta-v1'
-const WARM_MARK  = '/__warm__/pages-v1'
+const WARM_MARK = '/__warm__/pages-v1'
 
-async function alreadyWarmed() {
+async function alreadyWarmed () {
   const c = await caches.open(META_CACHE)
   return !!(await c.match(WARM_MARK))
 }
-async function markWarmed() {
+async function markWarmed () {
   const c = await caches.open(META_CACHE)
   await c.put(WARM_MARK, new Response('ok'))
 }
@@ -80,7 +80,7 @@ async function markWarmed() {
 let warming = null
 
 async function warmAllPagesAndAPIs () {
-  if (await alreadyWarmed()) return
+  if (await alreadyWarmed ()) return
   if (warming) return warming
 
   warming = (async () => {
@@ -119,7 +119,7 @@ async function warmAllPagesAndAPIs () {
         } catch (e) { }
       }))
     }
-    await markWarmed()
+    await markWarmed ()
   })()
   return warming
 }
