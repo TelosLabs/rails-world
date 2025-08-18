@@ -1,4 +1,6 @@
-/* global self, caches */ 
+/* global self, caches, workbox */
+/* eslint-env serviceworker */
+
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/6.4.1/workbox-sw.js')
 
 const { registerRoute, setCatchHandler } = workbox.routing
@@ -26,7 +28,7 @@ registerRoute(
   ({ request }) =>
     request.mode === 'navigate' ||
     request.destination === 'document' ||
-    (request.destination === '' && isHTML(request)), 
+    (request.destination === '' && isHTML(request)),
   new StaleWhileRevalidate({ cacheName: 'pages-v1', plugins: [ignoreSearchPlugin] })
 )
 
