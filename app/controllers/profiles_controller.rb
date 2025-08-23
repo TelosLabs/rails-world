@@ -44,7 +44,7 @@ class ProfilesController < ApplicationController
   def profile_params
     params.require(:profile).permit(
       :name, :job_title, :bio, :is_public, :image,
-      :twitter_url, :linkedin_url, :github_url,
+      :twitter_url, :linkedin_url, :github_url, :bluesky_url,
       :web_push_notifications, :mail_notifications
     )
   end

@@ -43,7 +43,7 @@ RSpec.describe Profile, type: :model do
 
   describe "validations" do
     it "validates socials urls" do
-      %i[github_url linkedin_url twitter_url].each do |url|
+      %i[github_url linkedin_url twitter_url bluesky_url].each do |url|
         profile[url] = "http://foo bar.com"
         expect(profile).not_to be_valid
 

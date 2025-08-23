@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_08_29_165208) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_23_000001) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -103,6 +103,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_08_29_165208) do
     t.integer "profileable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "bluesky_url"
     t.index ["profileable_type", "profileable_id"], name: "index_profiles_on_profileable"
     t.index ["uuid"], name: "index_profiles_on_uuid", unique: true
   end

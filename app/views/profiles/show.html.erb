@@ -1,9 +1,7 @@
 <%= title "Profile" %>
-
 <% content_for :top_nav do %>
   <%= render partial: "layouts/primary_top_nav" %>
 <% end %>
-
 <div class="relative flex flex-col items-center justify-between flex-1 h-full bg-grey-50 dark:bg-[#0f171b] pt-safe-area-header pb-safe-area-bottom-navbar">
   <div class="flex flex-col items-center w-full h-full bg-bottom bg-no-repeat bg-cover">
     <div class="z-10 flex flex-col items-start w-full px-5 pt-6 pb-12 max-w-screen-sm">
@@ -57,10 +55,19 @@
             <img src="<%= asset_path 'linkedin.svg' %>" alt="linkedin" class="w-6 h-6">
           <% end %>
         <% end %>
+        <% if @profile.bluesky_url.present? %>
+          <%= link_to(
+            @profile.bluesky_url,
+            target: "_blank",
+            class: "flex flex-row grow items-center justify-center w-28 h-14 rounded-lg mt-6 bg-red dark:bg-[#182027]",
+            data: { test_id: "bluesky_link" }
+          ) do %>
+            <img src="<%= asset_path 'bluesky.svg' %>" alt="bluesky" class="w-6 h-6">
+          <% end %>
+        <% end %>
       </div>
     </div>
   </div>
-
   <% if allowed_to?(:edit?, @profile, with: ProfilePolicy) %>
     <div class="flex flex-col items-center w-full p-4 gap-6">
       <% if @profile.is_public? %>
@@ -68,12 +75,10 @@
           <%= render inline: @profile.svg_qr_code(module_size: 4, svg_attributes: { "data-test-id": "qr_code" }) %>
         </div>
       <% end %>
-
       <%= link_to(
         'Edit Profile', edit_profile_path(@profile.uuid),
         class: "text-red dark:text-dark-theme-red font-bold rounded-sm underline italic text-lg"
       ) %>
-
       <div data-controller="dark-mode" class="w-full px-4 pb-8 max-w-screen-sm">
         <label for="theme-select" class="block mb-2 font-black italic uppercase text-red dark:text-[#798691]">
           Theme
@@ -84,7 +89,6 @@
           <option value="system">System</option>
         </select>
       </div>
-
       <%= button_to(
         "Log out", user_session_path, method: :delete,
         form_class: "w-full max-w-screen-sm px-4",
@@ -100,7 +104,7 @@
         }
       ) %>
     </div>
-    <% else %>
+  <% else %>
     <div class="">
       <%= button_to "Report Abuse", abuse_reports_path(uuid: @profile.uuid),
           method: :post,
@@ -112,7 +116,6 @@
     </div>
   <% end %>
 </div>
-
 <% content_for :bottom_nav do %>
   <%= render partial: "layouts/bottom_navbar", locals: { unread_notifications: current_user&.notifications&.unread } %>
 <% end %>

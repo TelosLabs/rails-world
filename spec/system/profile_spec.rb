@@ -15,6 +15,7 @@ RSpec.describe "Schedule", type: :system do
       expect(page).to have_no_css(dti("github_link"))
       expect(page).to have_no_css(dti("twitter_link"))
       expect(page).to have_no_css(dti("linkedin_link"))
+      expect(page).to have_no_css(dti("bluesky_link"))
 
       visit edit_profile_path(profile.uuid)
 
@@ -23,6 +24,7 @@ RSpec.describe "Schedule", type: :system do
       find_by_id("profile_github_url").set("github.com/johndoe")
       find_by_id("profile_linkedin_url").set("linkedin.com/johndoe")
       find_by_id("profile_twitter_url").set("twitter.com/johndoe")
+      find_by_id("profile_bluesky_url").set("bsky.app/johndoe")
       find('[for="profile_is_public"]').click
 
       find_dti("save_profile_button").click
@@ -32,6 +34,7 @@ RSpec.describe "Schedule", type: :system do
       expect(page).to have_css(dti("github_link"))
       expect(page).to have_css(dti("twitter_link"))
       expect(page).to have_css(dti("linkedin_link"))
+      expect(page).to have_css(dti("bluesky_link"))
       expect(find_dti("qr_code")).to be_present
     end
   end

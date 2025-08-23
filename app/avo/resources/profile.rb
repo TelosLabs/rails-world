@@ -20,6 +20,7 @@ class Avo::Resources::Profile < Avo::BaseResource
     field :github_url, as: :text
     field :linkedin_url, as: :text
     field :twitter_url, as: :text
+    field :bsky_url, as: :text
     field :is_public, as: :boolean, default: true
   end
 end
