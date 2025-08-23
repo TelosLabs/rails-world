@@ -32,6 +32,7 @@ FactoryBot.define do
     github_url { "https://github.com" }
     linkedin_url { "https://linkedin.com" }
     twitter_url { "https://twitter.com" }
+    bluesky_url { "https://bsky.app" }
     uuid { SecureRandom.uuid }
 
     trait :with_user do
