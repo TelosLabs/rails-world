@@ -15,6 +15,7 @@ RSpec.describe "Schedule", type: :system do
       expect(find_dti("github_link")[:class]).to include("cursor-not-allowed")
       expect(find_dti("twitter_link")[:class]).to include("cursor-not-allowed")
       expect(find_dti("linkedin_link")[:class]).to include("cursor-not-allowed")
+      expect(find_dti("bluesky_link")[:class]).to include("cursor-not-allowed")
 
       visit edit_profile_path(profile.uuid)
 
@@ -23,6 +24,7 @@ RSpec.describe "Schedule", type: :system do
       find_by_id("profile_github_url").set("github.com/johndoe")
       find_by_id("profile_linkedin_url").set("linkedin.com/johndoe")
       find_by_id("profile_twitter_url").set("twitter.com/johndoe")
+      find_by_id("profile_bluesky_url").set("bsky.app/johndoe")
       find('[for="profile_is_public"]').click
 
       find_dti("save_profile_button").click
@@ -32,6 +34,7 @@ RSpec.describe "Schedule", type: :system do
       expect(find_dti("github_link")[:class]).not_to include("cursor-not-allowed")
       expect(find_dti("twitter_link")[:class]).not_to include("cursor-not-allowed")
       expect(find_dti("linkedin_link")[:class]).not_to include("cursor-not-allowed")
+      expect(find_dti("bluesky_link")[:class]).not_to include("cursor-not-allowed")
       expect(find_dti("qr_code")).to be_present
     end
   end
