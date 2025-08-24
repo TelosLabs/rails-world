@@ -15,4 +15,8 @@ FactoryBot.define do
   factory :speaker do
     profile { create(:profile, :with_user) }
   end
+
+  trait :with_no_social_links do
+    profile { create(:profile, :with_user, :with_no_social_links) }
+  end
 end

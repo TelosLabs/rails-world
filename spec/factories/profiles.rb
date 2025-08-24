@@ -41,5 +41,11 @@ FactoryBot.define do
     trait :public do
       is_public { true }
     end
+
+    trait :with_no_social_links do
+      github_url { nil }
+      twitter_url { nil }
+      linkedin_url { nil }
+    end
   end
 end
