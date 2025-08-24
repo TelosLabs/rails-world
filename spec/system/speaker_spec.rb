@@ -31,9 +31,9 @@ RSpec.describe "Speaker", type: :system do
     it "does not display social links" do
       visit speaker_path(speaker)
 
-      expect(page).not_to have_link(href: "https://github.com")
-      expect(page).not_to have_link(href: "https://twitter.com")
-      expect(page).not_to have_link(href: "https://linkedin.com")
+      expect(page).to have_no_link(href: "https://github.com")
+      expect(page).to have_no_link(href: "https://twitter.com")
+      expect(page).to have_no_link(href: "https://linkedin.com")
     end
   end
 end
