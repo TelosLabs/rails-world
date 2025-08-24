@@ -1,15 +1,15 @@
 require "rails_helper"
 
 RSpec.describe "Speaker", type: :system do
-  let!(:user) { create(:user) }
+  let(:user) { create(:user) }
 
   before do
     sign_in(user)
   end
 
   context "when speaker has social links" do
-    let!(:session) { create(:session, :with_speakers) }
-    let!(:speaker) { session.speakers.first }
+    let(:session) { create(:session, :with_speakers) }
+    let(:speaker) { session.speakers.first }
 
     it "displays social links" do
       visit speaker_path(speaker)
@@ -21,12 +21,8 @@ RSpec.describe "Speaker", type: :system do
   end
 
   context "when speaker does not have social links" do
-    let!(:session) { create(:session, :with_speakers) }
-    let!(:speaker) { session.speakers.first }
-
-    before do
-      speaker.profile.update(github_url: nil, twitter_url: nil, linkedin_url: nil)
-    end
+    let(:session) { create(:session) }
+    let(:speaker) { create(:speaker, :with_no_social_links, sessions: [session]) }
 
     it "does not display social links" do
       visit speaker_path(speaker)
