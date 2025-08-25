@@ -4,7 +4,7 @@
   <header class="hidden pt-safe-area-2 bg-purple-dark d-hotwire-native-block"></header>
 <% end %>
 
-<div class="flex flex-col flex-1 items-center px-5 pb-10 pt-safe-area-2 bg-purple-dark native-safe-area-2">
+<div class="flex flex-col items-center flex-1 px-5 pb-10 pt-safe-area-2 bg-purple-dark native-safe-area-2">
   <%= form_with model: @user, url: user_session_path, class: "flex flex-col h-full justify-between w-full max-w-screen-sm" do |form| %>
     <div class="flex flex-col items-center">
       <%= image_tag("main_logo_with_date.png", class: "w-full mt-14 mb-10 native-mt-0") %>
@@ -16,7 +16,7 @@
 
       <div class="w-full">
         <div class="mb-10">
-          <div class="flex flex-col mb-6 w-full">
+          <div class="flex flex-col w-full mb-6">
             <%= form.label :email, class: "text-white italic font-bold mb-2" %>
             <%= form.email_field :email, required: true, placeholder: "email@example.com", data: { test_id: "email_field" } %>
           </div>
@@ -28,7 +28,7 @@
             </div>
             <div class="relative" data-controller="password-visibility">
               <%= form.password_field :password, required: true, class: "peer w-full", placeholder: "Password", data: { test_id: "password_field", "password-visibility-target": "input" } %>
-              <button class="absolute right-3 top-1/2 text-gray-300 -translate-y-1/2 hover:text-white peer-focus:text-gray-400 peer-focus:hover:text-gray-600" type="button" data-action="password-visibility#toggle">
+              <button class="absolute text-gray-300 right-3 top-1/2 -translate-y-1/2 hover:text-white peer-focus:text-gray-400 peer-focus:hover:text-gray-600" type="button" data-action="password-visibility#toggle">
                 <%= inline_svg_tag("icons/eye-empty.svg", size: "22", data: { "password-visibility-target": "icon" }) %>
                 <%= inline_svg_tag("icons/eye-off.svg", size: "22", class: "hidden", data: { "password-visibility-target": "icon" }) %>
               </button>

@@ -140,6 +140,7 @@ GEM
     bcrypt (3.1.20)
     bcrypt_pbkdf (1.1.1)
     bcrypt_pbkdf (1.1.1-arm64-darwin)
+    bcrypt_pbkdf (1.1.1-x86_64-darwin)
     benchmark (0.4.1)
     better_errors (2.10.1)
       erubi (>= 1.0.0)
@@ -261,6 +262,7 @@ GEM
       websocket-driver (~> 0.7)
     ffi (1.17.0-aarch64-linux-gnu)
     ffi (1.17.0-arm64-darwin)
+    ffi (1.17.0-x86_64-darwin)
     ffi (1.17.0-x86_64-linux-gnu)
     flay (2.13.3)
       erubi (~> 1.10)
@@ -330,6 +332,9 @@ GEM
     litestream (0.10.5-arm64-darwin)
       logfmt (>= 0.0.10)
       sqlite3
+    litestream (0.10.5-x86_64-darwin)
+      logfmt (>= 0.0.10)
+      sqlite3
     litestream (0.10.5-x86_64-linux)
       logfmt (>= 0.0.10)
       sqlite3
@@ -384,6 +389,8 @@ GEM
     nokogiri (1.18.9-aarch64-linux-gnu)
       racc (~> 1.4)
     nokogiri (1.18.9-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.18.9-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.18.9-x86_64-linux-gnu)
       racc (~> 1.4)
@@ -577,6 +584,7 @@ GEM
       thor (~> 1.3.1)
     sqlite3 (2.6.0-aarch64-linux-gnu)
     sqlite3 (2.6.0-arm64-darwin)
+    sqlite3 (2.6.0-x86_64-darwin)
     sqlite3 (2.6.0-x86_64-linux-gnu)
     sshkit (1.24.0)
       base64
@@ -603,6 +611,8 @@ GEM
     tailwindcss-rails (2.7.3-aarch64-linux)
       railties (>= 7.0.0)
     tailwindcss-rails (2.7.3-arm64-darwin)
+      railties (>= 7.0.0)
+    tailwindcss-rails (2.7.3-x86_64-darwin)
       railties (>= 7.0.0)
     tailwindcss-rails (2.7.3-x86_64-linux)
       railties (>= 7.0.0)
@@ -659,6 +669,7 @@ PLATFORMS
   arm64-darwin-22
   arm64-darwin-23
   arm64-darwin-24
+  x86_64-darwin-24
   x86_64-linux
 
 DEPENDENCIES

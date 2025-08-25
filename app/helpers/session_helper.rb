@@ -2,6 +2,17 @@ module SessionHelper
   def session_filter_color(scope)
     case scope
     when "live"
+      "bg-green-500 dark:bg-opacity-20"
+    when "past"
+      "bg-bluegray-200 dark:bg-[#182027]"
+    when "starting_soon"
+      "bg-yellow dark:bg-[#e2943a33]"
+    end
+  end
+
+  def session_filter_icon_color(scope)
+    case scope
+    when "live"
       "bg-green-500"
     when "past"
       "bg-bluegray-200"

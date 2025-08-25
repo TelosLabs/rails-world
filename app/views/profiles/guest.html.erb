@@ -1,0 +1,26 @@
+<%= title "Profile" %>
+
+<% content_for :top_nav do %>
+  <%= render partial: "layouts/primary_top_nav" %>
+<% end %>
+
+<div class="min-h-screen bg-[#f3f2f9] dark:bg-[#0f171b] h-full pt-safe-area-header pb-safe-area-bottom-navbar">
+  <div class="w-full h-full px-4 py-8 mx-auto bg-bottom bg-no-repeat bg-cover max-w-screen-sm space-y-6">
+    <div data-controller="dark-mode" class="w-full px-4 pb-8 max-w-screen-sm">
+      <label for="theme-select" class="block mb-2 font-black italic uppercase text-red dark:text-[#798691]">
+        Theme
+      </label>
+      <select id="theme-select" data-dark-mode-target="select" data-action="dark-mode#change" class="w-full bg-white dark:bg-[#182027] py-2 px-3 rounded-[10px] font-black italic uppercase text-red dark:text-[#798691]">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+        <option value="system">System</option>
+      </select>
+    </div>
+
+    <%= link_to "Log in", new_user_session_path, class: "block w-full text-center bg-white dark:bg-[#182027] py-4 text-red dark:text-[#798691] font-black italic rounded-[10px] uppercase" %>
+  </div>
+</div>
+
+<% content_for :bottom_nav do %>
+  <%= render partial: "layouts/bottom_navbar", locals: { unread_notifications: current_user&.notifications&.unread } %>
+<% end %>
