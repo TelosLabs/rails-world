@@ -118,7 +118,6 @@ async function warmAllPagesAndAPIs () {
 
           const samePath = finalPath === url
           if (!samePath) console.log('[SW] Redirected', { from: url, to: finalPath })
-
         } catch (e) { }
       }))
     }
