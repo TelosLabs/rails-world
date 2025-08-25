@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   get "up" => "rails/health#show", :as => :rails_health_check
   get "/service-worker.js" => "service_worker#service_worker"
+  get "/service-worker/precache.json", to: "service_worker#precache"
   get "/offline.html" => "service_worker#offline"
   get "/manifest.json" => "service_worker#manifest"
   get "/privacy_policy", to: "static_pages#privacy_policy"
