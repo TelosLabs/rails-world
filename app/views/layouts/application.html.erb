@@ -30,10 +30,12 @@
     <%= yield :head %>
   </head>
 
-  <body class="flex flex-col h-full bg-grey-50"
-    <%= user_signed_in? ? "data-controller=web-push-notifications
-    data-web-push-notifications-vapid-key-value=#{vapid_public_key}
-    data-web-push-notifications-notifications-enabled-value=#{current_profile.web_push_notifications}" : '' %>>
+  <body
+    class="flex flex-col h-full bg-grey-50"
+    data-controller="dark-mode<%= ' web-push-notifications' if user_signed_in? %>"
+    <%= "data-web-push-notifications-vapid-key-value=#{vapid_public_key} data-web-push-notifications-notifications-enabled-value=#{current_profile.web_push_notifications}" if user_signed_in? %>
+  >
+
 
     <div class="fixed top-0 z-40 w-full">
       <%= yield :top_nav %>

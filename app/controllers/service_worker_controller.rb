@@ -13,20 +13,34 @@ class ServiceWorkerController < ApplicationController
   end
 
   def offline
-    render "offline", layout: false
+    render "offline"
   end
 
   def precache
-    session_ids = Session.order(:id).pluck(:id)
-    speaker_ids = Speaker.order(:id).pluck(:id)
+    # Sessions
+    session_rows = Session.order(:id).pluck(:id, :slug) # ajusta :slug si tu columna se llama distinto
+    session_pages = session_rows.map do |id, slug|
+      session_path(slug.presence || id) # usa slug si existe; si no, id
+    end
+
+    # Speakers
+    speaker_rows = Speaker.order(:id).pluck(:id, :slug)
+    speaker_pages = speaker_rows.map do |id, slug|
+      speaker_path(slug.presence || id)
+    end
 
     pages = [
       root_path,
-      schedule_path,
-      sessions_path
-    ] +
-      session_ids.map { |id| session_path(id) } +
-      speaker_ids.map { |id| speaker_path(id) }
+      schedule_path, #//
+      sessions_path,
+      profile_root_path,
+      notifications_path, #//
+      about_path,
+      privacy_policy_path,
+      account_deletion_path,
+      coming_soon_path,
+      notification_settings_path
+    ] + session_pages + speaker_pages
 
     avatars = []
     if Speaker.method_defined?(:avatar)
@@ -40,9 +54,6 @@ class ServiceWorkerController < ApplicationController
       end.uniq
     end
 
-    render json: {
-      pages: pages.uniq,
-      images: avatars
-    }
+    render json: { pages: pages.uniq, images: avatars }
   end
 end

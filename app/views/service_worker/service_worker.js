@@ -104,8 +104,23 @@ async function warmAllPagesAndAPIs () {
         try {
           const req = new Request(url, { credentials: 'same-origin' })
           const res = await fetch(req)
-          const samePath = new URL(res.url).pathname === url
-          if (res.ok && samePath) await pagesCache.put(req, res.clone())
+
+          if (!res.ok) {
+            console.error('[SW] Page NOT cached (status)', { url, status: res.status })
+            return
+          }
+
+          // Cachea usando la URL FINAL (canónica) tras redirect
+          let finalPath
+          try { finalPath = new URL(res.url).pathname } catch (_) { finalPath = url }
+
+          const finalReq = new Request(finalPath, { credentials: 'same-origin' })
+          await pagesCache.put(finalReq, res.clone())
+
+          // (Opcional) Loguea si hubo redirect
+          const samePath = finalPath === url
+          if (!samePath) console.log('[SW] Redirected', { from: url, to: finalPath })
+
         } catch (e) { }
       }))
     }
