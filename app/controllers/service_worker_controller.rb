@@ -17,13 +17,11 @@ class ServiceWorkerController < ApplicationController
   end
 
   def precache
-    # Sessions
-    session_rows = Session.order(:id).pluck(:id, :slug) # ajusta :slug si tu columna se llama distinto
+    session_rows = Session.order(:id).pluck(:id, :slug)
     session_pages = session_rows.map do |id, slug|
-      session_path(slug.presence || id) # usa slug si existe; si no, id
+      session_path(slug.presence || id)
     end
 
-    # Speakers
     speaker_rows = Speaker.order(:id).pluck(:id, :slug)
     speaker_pages = speaker_rows.map do |id, slug|
       speaker_path(slug.presence || id)
@@ -31,10 +29,10 @@ class ServiceWorkerController < ApplicationController
 
     pages = [
       root_path,
-      schedule_path, #//
+      schedule_path,
       sessions_path,
       profile_root_path,
-      notifications_path, #//
+      notifications_path,
       about_path,
       privacy_policy_path,
       account_deletion_path,
@@ -54,6 +52,6 @@ class ServiceWorkerController < ApplicationController
       end.uniq
     end
 
-    render json: { pages: pages.uniq, images: avatars }
+    render json: {pages: pages.uniq, images: avatars}
   end
 end
