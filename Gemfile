@@ -37,6 +37,8 @@ gem "image_processing"
 gem "ransack"
 
 # Security Updates
+gem "activerecord", ">= 8.0.2.1"
+gem "activestorage", ">= 8.0.2.1"
 gem "net-imap", "~> 0.4.20"
 gem "nokogiri", ">= 1.18.9"
 gem "rack", ">= 3.1.14"
