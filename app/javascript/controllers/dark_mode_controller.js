@@ -5,13 +5,18 @@ export default class extends Controller {
   static targets = ['select']
 
   connect () {
-    this.mql = window.matchMedia('(prefers-color-scheme: dark)')
-    this.mql.addEventListener('change', (this.onSystemChange = () => this.current === 'system' && this.applyTheme('system')))
+    this.mediaQueryList = window.matchMedia('(prefers-color-scheme: dark)')
+
+    this.mediaQueryList.addEventListener('change', this.onSystemChange.bind(this))
     this.applyTheme(localStorage.getItem('theme') ?? 'system')
   }
 
   disconnect () {
-    this.mql?.removeEventListener('change', this.onSystemChange)
+    this.mediaQueryList?.removeEventListener('change', this.onSystemChange.bind(this))
+  }
+
+  onSystemChange () {
+    this.currentMode === 'system' && this.applyTheme('system')
   }
 
   change () {
@@ -19,10 +24,11 @@ export default class extends Controller {
   }
 
   applyTheme (mode) {
-    this.current = mode
-    const isDark = mode === 'dark' || (mode === 'system' && this.mql.matches)
+    this.currentMode = mode
+    const isDark = mode === 'dark' || (mode === 'system' && this.mediaQueryList.matches)
+
     document.documentElement.classList.toggle('dark', isDark)
     mode === 'system' ? localStorage.removeItem('theme') : localStorage.setItem('theme', mode)
-    if (this.hasSelectTarget) this.selectTarget.value = this.current
+    if (this.hasSelectTarget) this.selectTarget.value = this.currentMode
   }
 }
