@@ -14,7 +14,6 @@
       </a>
       <%= render partial: "sessions/bookmark", locals: { session: session, user_is_an_attendee: } %>
     </div>
-
     <% if session.speakers.present? %>
       <div class="flex w-full mb-2 overflow-x-auto overflow-y-hidden no-scrollbar">
         <% session.speakers.each do |speaker| %>

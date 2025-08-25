@@ -275,23 +275,13 @@ namespace :db do
       Speaker.find_or_create_by!(profile: profile)
     end.profileable
 
-    xavier_noria = Profile.find_or_create_by!(name: "Xavier Noria") do |profile|
-      profile.job_title = "Independent Consultant"
-      profile.bio = "Everlasting student · Rails Core · Zeitwerk · Freelance · Life lover"
-      profile.github_url = "https://github.com/fxn"
-      profile.linkedin_url = "https://www.linkedin.com/in/xaviernoria/"
-      profile.twitter_url = "https://twitter.com/fxn"
-      profile.image = Rails.root.join("#{image_path}/RW-Xavier_Noria.jpg").open
-      Speaker.find_or_create_by!(profile: profile)
-    end.profileable
-
     andrew_mcnamara = Profile.find_or_create_by!(name: "Andrew McNamara") do |profile|
       profile.job_title = "Director Applied ML"
       profile.bio = ""
       profile.github_url = ""
       profile.linkedin_url = ""
       profile.twitter_url = ""
-      # No image
+      profile.image = Rails.root.join("#{image_path}/RW-A_Mcnamara.jpg").open
       Speaker.find_or_create_by!(profile: profile)
     end.profileable
 
@@ -302,6 +292,36 @@ namespace :db do
       profile.linkedin_url = "https://www.linkedin.com/in/hiroshi-shibata-04264122/"
       profile.twitter_url = ""
       profile.image = Rails.root.join("#{image_path}/RW-Hiroshi_Shibata.jpeg").open
+      Speaker.find_or_create_by!(profile: profile)
+    end.profileable
+
+    charles_lee = Profile.find_or_create_by!(name: "Charlie Lee") do |profile|
+      profile.job_title = "Staff Engineer"
+      profile.bio = "Charlie is a Staff Software Engineer on the Assistants team at Shopify. He's been working on empowering merchants with chat including Shopify Inbox and other chatbots (before LLMs!). Outside of work, he's tinkering with his homelab and playing tennis."
+      profile.github_url = ""
+      profile.linkedin_url = "https://www.linkedin.com/in/charleschanlee/"
+      profile.twitter_url = ""
+      profile.image = Rails.root.join("#{image_path}/RW-C-Lee.jpeg").open
+      Speaker.find_or_create_by!(profile: profile)
+    end.profileable
+
+    marco_roth = Profile.find_or_create_by!(name: "Marco Roth") do |profile|
+      profile.job_title = "Independent Consultant & OS Contributor"
+      profile.bio = "Marco is a passionate full-stack Ruby on Rails developer and a dedicated open-source contributor. As a member of the Hotwire and StimulusReflex contributors teams he has been pushing the limits of real-time server-rendered applications using the HTML-over-the-wire (Hotwire) approach. He has actively open-sourced, maintained, and contributed to several key libraries within the Hotwire and Ruby on Rails ecosystem."
+      profile.github_url = "https://github.com/marcoroth"
+      profile.linkedin_url = "https://www.linkedin.com/in/marco-roth/"
+      profile.twitter_url = "https://twitter.com/marcoroth_"
+      profile.image = Rails.root.join("#{image_path}/RW-M-Roth.jpeg").open
+      Speaker.find_or_create_by!(profile: profile)
+    end.profileable
+
+    jean_boussier = Profile.find_or_create_by!(name: "Jean Boussier") do |profile|
+      profile.job_title = "Senior Staff Engineer"
+      profile.bio = "Rails core, Ruby committer, Senior Staff Engineer on Shopify's Ruby and Rails infrastructure team."
+      profile.github_url = "https://github.com/byroot"
+      profile.linkedin_url = ""
+      profile.twitter_url = "https://x.com/_byroot"
+      profile.image = Rails.root.join("#{image_path}/RW-J_Boussier.jpeg").open
       Speaker.find_or_create_by!(profile: profile)
     end.profileable
 
@@ -387,20 +407,20 @@ This talk breaks down how Rails gave us a competitive edge, the technical and hi
 
     Session.find_or_create_by!(
       conference: conference,
-      title: "Day 1 Closing Keyote",
+      title: "Hotwire Native: A Rails Developer’s Secret Tool to Building Mobile Apps",
       starts_at: Time.zone.local(year, month, start_day, 16, 30)
     ) do |session|
-      session.description = "We realized our legacy code didn’t need a rewrite, it needed a performance plan.
+      session.description = "Building native mobile apps is time-consuming and expensive. Each screen must be built three times: once for web, again for iOS, and a third time for Android.
 
-This talk shares how we tackled real production issues like memory bloat, slow queries, and Sidekiq queues piling up under load, where simple fixes like batching jobs or tweaking retries didn’t help much.
+But with Hotwire Native, you only need to build your screens once, in HTML and CSS, and then reuse them across all three platforms. If you already have a Hotwire-enabled Rails app, you can use the screens you've already built!
 
-We thought Active Record was the bottleneck, but fixing it only scratched the surface. We optimised query access patterns, chose more efficient data structures, restructured background jobs, and introduced smarter database caching and indexing strategies.
+And you don't need to be an expert in Swift or Kotlin. A thin wrapper for each platform enables continuous updates by only making changes to your Rails codebase. Deploy your code, and all three platforms get your changes immediately.
 
-I’ll share how we analysed query plans, fine-tuned database performance, and replaced slow, fragile logic with leaner, more explicit code paths that scaled better and failed less while Rails stayed right at the center of it all."
+Join me as I build iOS and Android apps from scratch, live. Learn the essentials, practical tips, and common pitfalls I’ve picked up since working with Hotwire Native since 2016."
       session.ends_at = Time.zone.local(year, month, start_day, 17, 30)
       session.location = track_1
-      session.speakers = [xavier_noria]
-      session.tags = [rails_internals, performance]
+      session.speakers = [joe_masilotti]
+      session.tags = [hotwire, ios, android, mobile_development]
     end
 
     # Day 1 - Track 2
@@ -483,7 +503,7 @@ Whether you're running a massive production app or building a new side project, 
 Aaron Patterson and Jean Boussier from the Rails Core team will be joined by special guest Hiroshi Shibata (hsbt), Ruby committer, and a maintainer of RubyGems, Rake, ruby-build, and an administrator of ruby-lang.org."
       session.ends_at = Time.zone.local(year, month, second_day, 11, 0)
       session.location = track_1
-      session.speakers = [hiroshi_shibata]
+      session.speakers = [hiroshi_shibata, jean_boussier, aaron_patterson]
       session.tags = [rails, ruby]
     end
 
@@ -545,37 +565,29 @@ Ultimately, this talk shows Rails’ competitive advantage for the AI era."
 
     Session.find_or_create_by!(
       conference: conference,
-      title: "Hotwire Native: A Rails Developer’s Secret Tool to Building Mobile Apps",
+      title: "Introducing ReActionView: An ActionView-Compatible ERB Engine",
       starts_at: Time.zone.local(year, month, second_day, 14, 45)
     ) do |session|
-      session.description = "Building native mobile apps is time-consuming and expensive. Each screen must be built three times: once for web, again for iOS, and a third time for Android.
+      session.description = "This talk is the conclusion of a journey I’ve been sharing throughout 2025. At RubyKaigi, I introduced Herb: a new HTML-aware ERB parser and tooling ecosystem. At RailsConf, I released developer tools built on Herb, including a formatter, linter, and language server, alongside a vision for modernizing and improving the Rails view layer.
 
-But with Hotwire Native, you only need to build your screens once, in HTML and CSS, and then reuse them across all three platforms. If you already have a Hotwire-enabled Rails app, you can use the screens you've already built!
+At Rails World, I’ll debut ReActionView: a new ERB engine built on Herb, fully compatible with .html.erb but with HTML validation, better error feedback, reactive updates, and built-in tooling.
 
-And you don't need to be an expert in Swift or Kotlin. A thin wrapper for each platform enables continuous updates by only making changes to your Rails codebase. Deploy your code, and all three platforms get your changes immediately.
-
-Join me as I build iOS and Android apps from scratch, live. Learn the essentials, practical tips, and common pitfalls I’ve picked up since working with Hotwire Native since 2016."
+This will be the first public release, exclusive to Rails World, tying together everything from the past talks and even bringing exclusive updates to tools I first showed at Rails World 2023."
       session.ends_at = Time.zone.local(year, month, second_day, 15, 15)
       session.location = track_1
-      session.speakers = [joe_masilotti]
-      session.tags = [hotwire, ios, android, mobile_development]
+      session.speakers = [marco_roth]
+      session.tags = [rails]
     end
 
     Session.find_or_create_by!(
       conference: conference,
-      title: "AI Agents at Scale",
+      title: "LLM Evaluations & Reinforcement Learning for Shopify Sidekick on Rails",
       starts_at: Time.zone.local(year, month, second_day, 15, 45)
     ) do |session|
-      session.description = "Discover how to build flexible, scalable AI agents in Rails through modular components
-that adapt to the evolving AI landscape. Learn practical patterns for abstracting model
-providers, implementing flow-based architectures, building flexible tools, and managing
-prompts. We'll explore how to handle divergent LLM provider features, plus key AI
-learnings: evaluation strategies for large applications, deciding between agents vs tools
-(A2A/MCP), and choosing between fine-tuning vs prompt engineering. Perfect for
-developers integrating AI or scaling existing implementations."
+      session.description = "This talk explores building production LLM systems through Shopify Sidekick's Rails architecture, covering orchestration patterns and tool integration strategies. We'll establish statistically rigorous LLM-based evaluation frameworks that move beyond subjective \"vibe testing.\" Finally, we'll demonstrate how robust evaluation systems become critical infrastructure for reinforcement learning pipelines, while exploring how RL can learn to hack evaluations and strategies to mitigate this."
       session.ends_at = Time.zone.local(year, month, second_day, 16, 15)
       session.location = track_1
-      session.speakers = [andrew_mcnamara]
+      session.speakers = [andrew_mcnamara, charles_lee]
       session.tags = [ai_agents, machine_learning, llm, ai]
     end
 
