@@ -4,7 +4,7 @@
   <%= render partial: "layouts/primary_top_nav" %>
 <% end %>
 
-<div class="flex flex-col items-center h-full bg-grey-50 dark:bg-[#0f171b] pt-safe-area-header">
+<%= turbo_frame_tag "sessions_content", class: "flex flex-col items-center h-full bg-grey-50 dark:bg-[#0f171b] pt-safe-area-header" do %>
   <div class="flex flex-col items-center w-full h-full px-5 max-w-screen-md">
     <div class="sticky z-30 flex flex-col items-center w-full pt-6 top-safe-area-header bg-grey-50 dark:bg-[#0f171b]">
       <div class="flex w-full mb-4">
@@ -53,7 +53,7 @@
       <% elsif params[:starts_at].present? || session_filter_params.present? %>
         <div class="flex flex-col items-center justify-center w-full h-full">
           <p class="max-w-xs mb-4 font-bold text-center dark:text-white">No sessions match your current filters</p>
-          <%= link_to 'Clear filters', schedule_path, class: "text-red dark:text-[#D53D49] underline font-bold italic text-lg", data: { turbo_action: "replace" } %>
+          <%= link_to 'Clear filters', schedule_path, class: "text-red dark:text-[#D53D49] underline font-bold italic text-lg", data: { turbo_frame: "sessions_content" } %>
         </div>
       <% else %>
         <div class="flex flex-col items-center justify-center w-full h-full">
@@ -61,12 +61,12 @@
             <%= inline_svg_tag("icons/clock.svg", size: "56", class: "fill-gray-400") %>
           </div>
           <p class="mb-4 font-bold text-center max-w-52">You don't have any sessions in your schedule yet</p>
-          <%= link_to 'Explore the Agenda', sessions_path, class: "text-red dark:text-[#D53D49] underline font-bold italic text-lg" %>
+          <%= link_to 'Explore the Agenda', sessions_path, class: "text-red dark:text-[#D53D49] underline font-bold italic text-lg", data: { turbo_frame: "_top" } %>
         </div>
       <% end %>
     </div>
   </div>
-</div>
+<% end %>
 
 <% content_for :bottom_nav do %>
   <%= render partial: "layouts/bottom_navbar", locals: { unread_notifications: current_user&.notifications&.unread } %>

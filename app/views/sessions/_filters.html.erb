@@ -13,7 +13,7 @@
         ],
         data: {
           test_id: "date_filter_#{session_date.strftime('%a_%d')}",
-          turbo_action: "replace"
+          turbo_frame: "sessions_content"
         }
       ) %>
     <% end %>
@@ -25,10 +25,10 @@
         "bg-red text-white dark:bg-[#D53D49]": params[:starts_at].blank?,
         "bg-white text-red hover:bg-[#FAE7E8] focus:bg-[#FAE7E8] dark:bg-[#182027] dark:text-white dark:hover:bg-gray-800": params[:starts_at].present?
       ],
-      data: {
-        test_id: "date_filter_all",
-        turbo_action: "replace"
-      }
+             data: {
+         test_id: "date_filter_all",
+         turbo_frame: "sessions_content"
+       }
     ) %>
   </div>
 
@@ -53,7 +53,7 @@
         data-transition-leave-from="opacity-100 scale-100"
         data-transition-leave-to="opacity-0 scale-95">
         <div class="pt-2 pb-2 bg-white dark:bg-[#131b21] rounded-lg shadow-[0_10px_50px_0_rgba(0,0,0,0.40)] flex-col inline-flex absolute top-4 right-[-8px] right-0 w-40 max-w-40">
-          <%= form_with url: resource, class: "grid", method: :get, data: { turbo_action: "replace" } do |form| %>
+                     <%= form_with url: resource, class: "grid", method: :get, data: { turbo_frame: "sessions_content" } do |form| %>
             <%= form.hidden_field :starts_at, value: params[:starts_at] %>
 
             <% SessionQuery::STATUS_SCOPES.each do |name| %>
@@ -107,7 +107,7 @@
             <%= link_to(
               inline_svg_tag("icons/close.svg", class: "fill-black dark:fill-white"),
               url_for([resource, modified_params]),
-              data: { turbo_action: "replace" }
+              data: { turbo_frame: "sessions_content" }
             ) %>
           </div>
         </div>
