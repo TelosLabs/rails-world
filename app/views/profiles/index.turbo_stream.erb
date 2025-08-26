@@ -1,0 +1,17 @@
+<%= turbo_stream.append "profiles" do %>
+  <%= render @profiles %>
+<% end %>
+
+<%= turbo_stream.replace "loader" do %>
+  <% unless @profiles.last_page? %>
+    <%= turbo_frame_tag "loader",
+      src: profiles_path(page: @profiles.next_page),
+      loading: :lazy,
+      class: "w-full max-w-screen-sm mt-4" do
+    %>
+      <div class="flex justify-center py-4">
+        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-red"></div>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

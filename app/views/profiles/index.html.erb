@@ -1,0 +1,28 @@
+<%= title "Attendees" %>
+
+<% content_for :top_nav do %>
+  <%= render partial: "layouts/primary_top_nav", locals: { title: "Attendees" } %>
+<% end %>
+
+<div class="flex flex-col flex-1 bg-grey-50 pt-safe-area-header pb-safe-area-bottom-navbar">
+  <div class="flex flex-col items-center w-full px-5 py-6">
+    <%= turbo_frame_tag "profiles", class: "grid gap-4 w-full max-w-screen-sm" do %>
+      <%= render @profiles %>
+    <% end %>
+
+    <% unless @profiles.last_page? %>
+      <%= turbo_frame_tag "loader",
+          src: profiles_path(page: @profiles.next_page),
+          loading: :lazy,
+          class: "w-full max-w-screen-sm mt-4" do %>
+        <div class="flex justify-center py-4">
+          <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-red"></div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<% content_for :bottom_nav do %>
+  <%= render partial: "layouts/bottom_navbar", locals: { unread_notifications: current_user&.notifications&.unread } %>
+<% end %>
