@@ -1,7 +1,22 @@
 class ProfilesController < ApplicationController
-  allow_unauthenticated_access only: :show
+  allow_unauthenticated_access only: [:index, :show]
 
-  before_action :set_profile, except: :show
+  before_action :set_profile, except: [:index, :show]
+
+  def index
+    @profiles = Profile.includes(:profileable)
+      .where(is_public: true)
+      .order(created_at: :desc)
+      .page(params[:page])
+      .per(10)
+
+    request.format = :turbo_stream if turbo_frame_request? && params[:page].present?
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
+  end
 
   def show
     if user_signed_in?
