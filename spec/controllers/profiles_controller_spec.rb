@@ -16,6 +16,10 @@ RSpec.describe ProfilesController, type: :controller do
       let!(:public_profiles) { create_list(:profile, 15, :public, :with_user) }
       let!(:private_profiles) { create_list(:profile, 5, :with_user) }
 
+      before do
+        profile.update!(is_public: true)
+      end
+
       it "returns a success response" do
         get :index
         expect(response).to have_http_status(:success)
@@ -24,6 +28,11 @@ RSpec.describe ProfilesController, type: :controller do
       it "assigns only public profiles" do
         get :index
         expect(assigns(:profiles).map(&:id)).not_to include(*private_profiles.map(&:id))
+      end
+
+      it "excludes the current user's profile when signed in" do
+        get :index
+        expect(assigns(:profiles).map(&:id)).not_to include(profile.id)
       end
 
       it "paginates results with 10 profiles per page" do
@@ -58,10 +67,17 @@ RSpec.describe ProfilesController, type: :controller do
         session[:user_id] = nil
       end
 
+      let!(:public_profiles) { create_list(:profile, 3, :public, :with_user) }
+
       it "still allows access to index page" do
-        create(:profile, :public, :with_user)
         get :index
         expect(response).to have_http_status(:success)
+      end
+
+      it "includes all public profiles when not signed in" do
+        get :index
+        expect(assigns(:profiles).count).to eq(3)
+        expect(assigns(:profiles).map(&:id)).to match_array(public_profiles.map(&:id))
       end
     end
   end
