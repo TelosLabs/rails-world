@@ -1,11 +1,12 @@
 <%# locals: (resource:) %>
 
 <div class="flex justify-between w-full mb-4" data-controller="preserve-scroll">
-  <div id="<%= resource %>_filters" class="flex items-center overflow-x-scroll gap-2 no-scrollbar" data-preserve-scroll>
+  <div id="<%= resource %>_filters" class="flex items-center gap-2 overflow-x-scroll no-scrollbar" data-preserve-scroll>
     <% Current.conference&.dates&.each do |session_date| %>
+      <% params_for_date = session_filter_params.to_h.merge(starts_at: session_date).compact_blank %>
       <%= link_to(
         session_date.strftime("%a, %d"),
-        url_for([resource, session_filter_params.to_h.merge(starts_at: session_date)]) + current_day_anchor(session_date),
+        send("#{resource}_path", params_for_date) + current_day_anchor(session_date),
         class: [
           "flex min-w-fit items-center justify-center px-4 py-2 font-medium rounded-full",
           "bg-red dark:bg-[#D53D49] text-white": params[:starts_at] == session_date.to_s,
@@ -14,9 +15,10 @@
         data: { test_id: "date_filter_#{session_date.strftime('%a_%d')}" }
       ) %>
     <% end %>
+    <% params_for_all = session_filter_params.to_h.except(:starts_at).compact_blank %>
     <%= link_to(
       'All dates',
-      url_for([resource, session_filter_params.to_h]),
+      send("#{resource}_path", params_for_all),
       class: [
         "flex min-w-fit items-center justify-center px-4 py-2 rounded-full font-medium",
         "bg-red text-white dark:bg-[#D53D49]": params[:starts_at].blank?,
@@ -47,11 +49,11 @@
         data-transition-leave-from="opacity-100 scale-100"
         data-transition-leave-to="opacity-0 scale-95">
         <div class="pt-2 pb-2 bg-white dark:bg-[#131b21] rounded-lg shadow-[0_10px_50px_0_rgba(0,0,0,0.40)] flex-col inline-flex absolute top-4 right-[-8px] right-0 w-40 max-w-40">
-          <%= form_with url: resource, class: "grid", method: :get do |form| %>
+          <%= form_with url: send("#{resource}_path"), class: "grid", method: :get do |form| %>
             <%= form.hidden_field :starts_at, value: params[:starts_at] %>
 
             <% SessionQuery::STATUS_SCOPES.each do |name| %>
-              <div class="inline-flex items-center self-stretch px-4 py-2 gap-2">
+              <div class="inline-flex items-center self-stretch gap-2 px-4 py-2">
                 <%= form.check_box(
                   name, checked: params[name] == "1",
                   class: "w-4 h-4 rounded text-red",
@@ -97,11 +99,11 @@
           <div class="w-4 h-4">
             <% modified_params = request.query_parameters.deep_dup %>
             <% modified_params.delete(name) %>
-
             <%= link_to(
               inline_svg_tag("icons/close.svg", class: "fill-black dark:fill-white"),
-              url_for([resource, modified_params])
+              send("#{resource}_path", modified_params.compact_blank)
             ) %>
+
           </div>
         </div>
       <% end %>

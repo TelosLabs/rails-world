@@ -27,6 +27,11 @@ class ServiceWorkerController < ApplicationController
       speaker_path(slug.presence || id)
     end
 
+    date_pages =
+    Array(Current.conference&.dates).map do |date|
+      sessions_path(starts_at: date)
+    end
+
     pages = [
       root_path,
       schedule_path,
@@ -38,7 +43,7 @@ class ServiceWorkerController < ApplicationController
       account_deletion_path,
       coming_soon_path,
       notification_settings_path
-    ] + session_pages + speaker_pages
+    ] + session_pages + speaker_pages + date_pages.uniq
 
     avatars = []
     if Speaker.method_defined?(:avatar)
@@ -51,6 +56,12 @@ class ServiceWorkerController < ApplicationController
         )
       end.uniq
     end
+
+
+    Rails.logger.info "[SW precache] Dates: #{Current.conference&.dates.inspect}"
+    Rails.logger.info "[SW precache] Pages count=#{pages.size}"
+    pages.each { |p| Rails.logger.info "[SW precache] #{p}" }
+
 
     render json: {pages: pages.uniq, images: avatars}
   end

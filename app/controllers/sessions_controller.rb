@@ -29,6 +29,20 @@ class SessionsController < ApplicationController
   end
 
   def filter_params
-    params.permit(:starts_at, :live, :past, :starting_soon).merge(show_private: user_signed_in?)
+    raw = params.permit(:starts_at, :live, :past, :starting_soon).to_h
+
+    if raw['starts_at'].present?
+      begin
+        raw['starts_at'] = Date.parse(raw['starts_at']).to_s
+      rescue ArgumentError
+        raw.delete('starts_at')
+      end
+    end
+
+    final = raw.compact_blank.merge(show_private: user_signed_in?)
+
+    Rails.logger.info("[Sessions#index] filter_params=#{final.inspect}")
+
+    final
   end
 end
