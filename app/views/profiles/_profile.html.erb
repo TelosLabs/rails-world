@@ -1,4 +1,4 @@
-<%= link_to profile_path(profile.uuid), class: "flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow", data: { test_id: "profile-#{profile.uuid}", turbo_frame: "_top" } do %>
+<div class="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
   <% if profile.image.attached? %>
     <div class="w-16 h-16 mr-4 bg-cover bg-center rounded-full shrink-0" style="background-image: url(<%= url_for(profile.image) %>)"></div>
   <% else %>
@@ -8,13 +8,14 @@
   <% end %>
 
   <div class="flex flex-col flex-1 min-w-0">
-    <div class="text-lg font-bold text-red italic truncate">
+    <%= link_to profile_path(profile.uuid), class: "text-lg font-bold text-red italic truncate underline hover:text-red/80", data: { turbo_frame: "_top" } do %>
       <%= profile.name.presence || "Anonymous" %>
-    </div>
+    <% end %>
+    
     <% if profile.job_title.present? %>
       <div class="text-sm text-gray-500 truncate">
         <%= profile.job_title %>
       </div>
     <% end %>
   </div>
-<% end %>
+</div>
