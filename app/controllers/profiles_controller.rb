@@ -14,6 +14,8 @@ class ProfilesController < ApplicationController
       .page(params[:page])
       .per(10)
 
+    # The lazy_loading turbo frame defaults to HTML format, but we need turbo_stream
+    # format to handle pagination requests
     request.format = :turbo_stream if turbo_frame_request? && params[:page].present?
 
     respond_to do |format|
