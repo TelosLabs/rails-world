@@ -11,7 +11,7 @@
     <%= link_to profile_path(profile.uuid), class: "text-lg font-bold text-red italic truncate underline hover:text-red/80", data: { turbo_frame: "_top" } do %>
       <%= profile.name.presence || "Anonymous" %>
     <% end %>
-    
+
     <% if profile.job_title.present? %>
       <div class="text-sm text-gray-500 truncate">
         <%= profile.job_title %>

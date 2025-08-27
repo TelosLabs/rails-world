@@ -27,7 +27,7 @@ RSpec.describe "Profiles Index", type: :system do
         visit profiles_path
 
         expect(page).to have_content("Attendees")
-        expect(page).to have_selector('[data-test-id="profile-card"]', count: 10)
+        expect(page).to have_css('[data-test-id="profile-card"]', count: 10)
 
         # Profiles are ordered by created_at DESC, so newest first (Public User 1)
         # The first 10 profiles (User 1-10) should be visible
@@ -36,18 +36,18 @@ RSpec.describe "Profiles Index", type: :system do
           expect(page).to have_content(profile.name)
         end
 
-        expect(page).not_to have_content(private_profile.name)
+        expect(page).to have_no_content(private_profile.name)
       end
 
       it "supports infinite scroll pagination" do
         visit profiles_path
 
-        expect(page).to have_selector('[data-test-id="profile-card"]', count: 10)
+        expect(page).to have_css('[data-test-id="profile-card"]', count: 10)
 
         loader = find('[data-test-id="loader"]')
         page.execute_script("arguments[0].scrollIntoView(true);", loader)
-        
-        expect(page).to have_selector('[data-test-id="profile-card"]', minimum: 11)
+
+        expect(page).to have_css('[data-test-id="profile-card"]', minimum: 11)
       end
 
       it "navigates to profile when clicking on name" do
@@ -55,8 +55,8 @@ RSpec.describe "Profiles Index", type: :system do
 
         # The most recently created profile (Public User 1) will be first on the page
         profile = public_profiles.first
-        within(find('[data-test-id="profile-card"]', match: :first)) do
-          click_link profile.name
+        within('[data-test-id="profile-card"]', match: :first) do
+          click_on profile.name
         end
 
         expect(page).to have_current_path(profile_path(profile.uuid))
@@ -65,8 +65,8 @@ RSpec.describe "Profiles Index", type: :system do
       it "displays profile images and job titles" do
         visit profiles_path
 
-        within(find('[data-test-id="profile-card"]', match: :first)) do
-          expect(page).to have_selector('img')
+        within('[data-test-id="profile-card"]', match: :first) do
+          expect(page).to have_css("img")
           # The most recently created profile (Public User 1) will be first
           expect(page).to have_content(public_profiles.first.job_title)
         end
@@ -80,7 +80,7 @@ RSpec.describe "Profiles Index", type: :system do
         visit profiles_path
 
         expect(page).to have_content("Attendees")
-        expect(page).not_to have_selector('[data-test-id="profile-card"]')
+        expect(page).to have_no_css('[data-test-id="profile-card"]')
       end
     end
 
@@ -91,7 +91,7 @@ RSpec.describe "Profiles Index", type: :system do
 
       it "allows access to profiles index" do
         create(:profile, :public, :with_user, name: "Test Attendee")
-        
+
         visit profiles_path
 
         expect(page).to have_content("Attendees")
@@ -103,7 +103,7 @@ RSpec.describe "Profiles Index", type: :system do
     context "when user is not authenticated" do
       it "allows access to profiles index without login" do
         create(:profile, :public, :with_user, name: "Public Attendee")
-        
+
         visit profiles_path
 
         expect(page).to have_content("Attendees")
@@ -133,12 +133,11 @@ RSpec.describe "Profiles Index", type: :system do
         expect(page).to have_content("Alice Public")
         expect(page).to have_content("Bob Public")
         expect(page).to have_content("Charlie Public")
-        expect(page).not_to have_content("David Private")
-        expect(page).not_to have_content("Eve Private")
+        expect(page).to have_no_content("David Private")
+        expect(page).to have_no_content("Eve Private")
 
-        expect(page).to have_selector('[data-test-id="profile-card"]', count: 3)
+        expect(page).to have_css('[data-test-id="profile-card"]', count: 3)
       end
     end
   end
-
 end
