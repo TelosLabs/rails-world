@@ -4,8 +4,12 @@ class ProfilesController < ApplicationController
   before_action :set_profile, except: [:index, :show]
 
   def index
-    @profiles = Profile.includes(:profileable)
+    profiles_scope = Profile.includes(:profileable)
       .where(is_public: true)
+
+    profiles_scope = profiles_scope.where.not(id: current_profile.id) if user_signed_in?
+
+    @profiles = profiles_scope
       .order(created_at: :desc)
       .page(params[:page])
       .per(10)
