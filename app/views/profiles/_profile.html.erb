@@ -1,4 +1,4 @@
-<div class="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center p-4 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow" data-test-id="profile-card">
   <% if profile.image.attached? %>
     <div class="w-16 h-16 mr-4 bg-cover bg-center rounded-full shrink-0" style="background-image: url(<%= url_for(profile.image) %>)"></div>
   <% else %>

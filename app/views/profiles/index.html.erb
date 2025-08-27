@@ -18,7 +18,7 @@
       <% end %>
 
       <% unless @profiles.last_page? %>
-        <%= turbo_frame_tag "loader",
+        <%= turbo_frame_tag "loader", data: { test_id: "loader" },
             src: profiles_path(page: @profiles.next_page),
             loading: :lazy,
             class: "w-full max-w-screen-sm mt-4" do %>
