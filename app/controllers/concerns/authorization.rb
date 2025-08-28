@@ -8,6 +8,6 @@ module Authorization
   private
 
   def redirect_after_unauthorized(exception)
-    redirect_to main_app.root_path, alert: t("authorization.unauthorized")
+    redirect_to main_app.root_path, alert: t("authorization.unauthorized"), data: {turbo_action: "replace"}
   end
 end

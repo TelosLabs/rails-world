@@ -15,7 +15,7 @@ class UserSessionsController < ApplicationController
 
     if @user
       login @user
-      redirect_to after_sign_in_path
+      redirect_to after_sign_in_path, data: {turbo_action: "replace"}
     else
       redirect_to new_user_session_path, alert: t("controllers.user_sessions.create.alert")
     end
@@ -23,7 +23,7 @@ class UserSessionsController < ApplicationController
 
   def destroy
     logout
-    redirect_to root_path
+    redirect_to root_path, data: {turbo_action: "replace"}
   end
 
   private
@@ -33,6 +33,6 @@ class UserSessionsController < ApplicationController
   end
 
   def redirect_if_signed_in
-    redirect_to root_path if user_signed_in?
+    redirect_to root_path, data: {turbo_action: "replace"} if user_signed_in?
   end
 end
