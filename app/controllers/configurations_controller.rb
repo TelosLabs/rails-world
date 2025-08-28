@@ -1,7 +1,7 @@
 class ConfigurationsController < ApplicationController
   skip_before_action :authenticate_user!
 
-  def ios_v1
+  def ios
     render json: {
       settings: {},
       rules: [
@@ -41,7 +41,7 @@ class ConfigurationsController < ApplicationController
     }
   end
 
-  def android_v1
+  def android
     render json: {
       settings: {},
       rules: [
@@ -52,6 +52,18 @@ class ConfigurationsController < ApplicationController
           properties: {
             uri: "hotwire://fragment/web",
             pull_to_refresh_enabled: true
+          }
+        },
+        {
+          patterns: [
+            "/edit$",
+            "/registration/new$",
+            "/password_reset/new$"
+          ],
+          properties: {
+            context: "modal",
+            uri: "hotwire://fragment/web/modal/sheet",
+            pull_to_refresh_enabled: false
           }
         }
       ]
