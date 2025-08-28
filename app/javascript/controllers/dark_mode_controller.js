@@ -1,34 +1,28 @@
-/* global localStorage */
 import { Controller } from '@hotwired/stimulus'
 
 export default class extends Controller {
   static targets = ['select']
 
   connect () {
-    this.mediaQueryList = window.matchMedia('(prefers-color-scheme: dark)')
-
-    this.mediaQueryList.addEventListener('change', this.onSystemChange.bind(this))
-    this.applyTheme(localStorage.getItem('theme') ?? 'system')
-  }
-
-  disconnect () {
-    this.mediaQueryList?.removeEventListener('change', this.onSystemChange.bind(this))
-  }
-
-  onSystemChange () {
-    this.currentMode === 'system' && this.applyTheme('system')
+    if (this.hasSelectTarget) {
+      this.selectTarget.value = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+    }
   }
 
   change () {
-    this.applyTheme(this.selectTarget.value)
+    const theme = this.selectTarget.value
+    this.applyTheme(theme)
+    this.setCookie('theme', theme)
   }
 
   applyTheme (mode) {
-    this.currentMode = mode
-    const isDark = mode === 'dark' || (mode === 'system' && this.mediaQueryList.matches)
-
+    const isDark = mode === 'dark'
     document.documentElement.classList.toggle('dark', isDark)
-    mode === 'system' ? localStorage.removeItem('theme') : localStorage.setItem('theme', mode)
-    if (this.hasSelectTarget) this.selectTarget.value = this.currentMode
+  }
+
+  setCookie (name, value) {
+    const date = new Date()
+    date.setTime(date.getTime() + (365 * 24 * 60 * 60 * 1000))
+    document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/; SameSite=Lax`
   }
 }
