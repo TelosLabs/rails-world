@@ -1,14 +1,14 @@
 <%# locals: (session:, user_is_an_attendee:, id_prefix: nil) %>
 
-<div class="relative flex flex-col w-full mb-4 bg-white dark:bg-[#131b21] rounded-[20px]">
+<div class="relative flex flex-col w-full mb-4 bg-white dark:bg-[#131b21] rounded-lg">
   <a href="<%= session_path(session) %>" class="absolute top-0 bottom-0 left-0 right-0 z-0" data-test-id="<%= dom_id(session, id_prefix) %>"></a>
 
   <%= render partial: "sessions/status", locals: { session: session } %>
 
-  <div class="px-4 pb-2">
+  <div class="p-5">
     <div class="flex flex-row justify-between w-full mb-2 grow">
       <a href="<%= session_path(session) %>" class="z-10 group">
-        <h3 class="inline-block text-xl italic font-bold text-red dark:text-white group-hover:underline group-focus:underline">
+        <h3 class="inline-block text-xl italic font-bold text-red dark:text-off-red group-hover:underline group-focus:underline">
           <%= session.title %>
         </h3>
       </a>
@@ -21,7 +21,7 @@
             speaker_path(speaker),
             class: [
               "z-10 inline-flex items-center py-2 px-4 rounded-lg min-w-fit",
-              "group hover:bg-[#FAE7E8]/[0.5] focus:bg-[#FAE7E8]/[0.5] dark:hover:bg-[#182027] dark:focus:bg-[#182027]/[0.5]",
+              "group hover:bg-[#FAE7E8]/[0.5] focus:bg-[#FAE7E8]/[0.5] dark:hover:bg-[#182027] dark:focus:bg-[#182027]/[0.5] transition-all",
             ],
             data: { test_id: "speaker_#{speaker.id}" }
           ) do %>
@@ -41,7 +41,7 @@
                 "max-w-[200px]": session.speakers.length > 1
               ]
             ) do %>
-              <h2 class="text-sm font-medium group-hover:text-red group-focus:text-red dark:text-[#798691] dark:group-hover:text-white dark:group-focus:text-white"><%= speaker.name %></h2>
+              <h2 class="text-sm font-medium group-hover:text-red group-focus:text-red dark:text-[#798691] dark:group-hover:text-white dark:group-focus:text-white transition-all"><%= speaker.name %></h2>
               <p class="text-sm font-light text-gray-400 dark:text-[#798691]"><%= speaker.job_title %></p>
             <% end %>
           <% end %>
