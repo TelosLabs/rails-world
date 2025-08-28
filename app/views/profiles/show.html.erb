@@ -95,7 +95,7 @@
         "Log out", user_session_path, method: :delete,
         form_class: "w-full max-w-screen-sm px-4",
         class: "w-full bg-white dark:bg-[#182027] py-4 text-red dark:text-[#798691] font-black italic rounded-[10px] uppercase",
-        data: { turbo_action: "clear_all" }
+        data: { turbo_action: "replace" }
       ) %>
       <%= button_to(
         "Delete Account", profile_path(@profile.uuid), method: :delete,

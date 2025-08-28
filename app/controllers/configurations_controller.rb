@@ -26,6 +26,15 @@ class ConfigurationsController < ApplicationController
           }
         },
         {
+          patterns: [
+            "/user_session/new$"
+          ],
+          properties: {
+            context: "default",
+            pull_to_refresh_enabled: false
+          }
+        },
+        {
           patterns: [turbo_recede_historical_location_url],
           properties: {presentation: "pop"}
         },
@@ -63,6 +72,15 @@ class ConfigurationsController < ApplicationController
           properties: {
             context: "modal",
             uri: "hotwire://fragment/web/modal/sheet",
+            pull_to_refresh_enabled: false
+          }
+        },
+        {
+          patterns: [
+            "/user_session/new$"
+          ],
+          properties: {
+            uri: "hotwire://fragment/web",
             pull_to_refresh_enabled: false
           }
         }
