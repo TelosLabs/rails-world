@@ -28,7 +28,7 @@ module Authentication
 
     unless user_signed_in?
       flash[:notice] = I18n.t("authentication.unauthenticated")
-      redirect_to Rails.application.routes.url_helpers.new_user_session_path, data: {turbo_action: "replace"}
+      redirect_to Rails.application.routes.url_helpers.new_user_session_path
     end
   end
 

@@ -12,7 +12,7 @@ class RegistrationsController < ApplicationController
 
     if @user.save
       login @user
-      redirect_to edit_profile_path(@user.profile.uuid, onboarding: true), data: {turbo_action: "replace"}
+      redirect_to edit_profile_path(@user.profile.uuid, onboarding: true)
     else
       render :new, status: :unprocessable_entity
     end
@@ -25,6 +25,6 @@ class RegistrationsController < ApplicationController
   end
 
   def redirect_if_signed_in
-    redirect_to root_path, data: {turbo_action: "replace"} if user_signed_in?
+    redirect_to root_path if user_signed_in?
   end
 end

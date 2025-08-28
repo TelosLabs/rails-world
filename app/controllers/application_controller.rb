@@ -21,6 +21,6 @@ class ApplicationController < ActionController::Base
   def after_invalid_authenticity_token
     path_to_redirect = request.referer
     path_to_redirect ||= user_signed_in? ? sessions_path : new_user_session_path
-    redirect_to path_to_redirect, alert: t("authorization.invalid_auth_token"), data: {turbo_action: "replace"}
+    redirect_to path_to_redirect, alert: t("authorization.invalid_auth_token")
   end
 end
