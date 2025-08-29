@@ -1,8 +1,8 @@
 require "rails_helper"
 
 RSpec.describe "Schedule", type: :system do
-  let!(:user) { create(:user) }
-  let!(:profile) { user.profile }
+  let(:user) { create(:user) }
+  let(:profile) { user.profile }
 
   context "when user is logged in" do
     before do
@@ -12,9 +12,9 @@ RSpec.describe "Schedule", type: :system do
     it "allows user to update their profile" do
       visit profile_path(profile.uuid)
 
-      expect(find_dti("github_link")[:class]).to include("cursor-not-allowed")
-      expect(find_dti("twitter_link")[:class]).to include("cursor-not-allowed")
-      expect(find_dti("linkedin_link")[:class]).to include("cursor-not-allowed")
+      expect(page).to have_no_css(dti("github_link"))
+      expect(page).to have_no_css(dti("twitter_link"))
+      expect(page).to have_no_css(dti("linkedin_link"))
 
       visit edit_profile_path(profile.uuid)
 
@@ -29,9 +29,9 @@ RSpec.describe "Schedule", type: :system do
 
       expect(page).to have_content("John Doe")
       expect(page).to have_content("Description about John Doe")
-      expect(find_dti("github_link")[:class]).not_to include("cursor-not-allowed")
-      expect(find_dti("twitter_link")[:class]).not_to include("cursor-not-allowed")
-      expect(find_dti("linkedin_link")[:class]).not_to include("cursor-not-allowed")
+      expect(page).to have_css(dti("github_link"))
+      expect(page).to have_css(dti("twitter_link"))
+      expect(page).to have_css(dti("linkedin_link"))
       expect(find_dti("qr_code")).to be_present
     end
   end
