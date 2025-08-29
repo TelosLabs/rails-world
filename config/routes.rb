@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get "/privacy_policy", to: "static_pages#privacy_policy"
   get "/account_deletion", to: "static_pages#account_deletion"
   get "/about", to: "static_pages#about"
+  get "/profile", to: "profiles#show", as: :profile_root
 
   mount MissionControl::Jobs::Engine, at: "/jobs"
   mount Avo::Engine, at: Avo.configuration.root_path

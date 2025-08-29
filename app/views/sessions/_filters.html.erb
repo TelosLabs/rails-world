@@ -1,15 +1,15 @@
 <%# locals: (resource:) %>
 
 <div class="flex justify-between w-full mb-4" data-controller="preserve-scroll">
-  <div id="<%= resource %>_filters" class="flex items-center gap-2 overflow-x-scroll no-scrollbar" data-preserve-scroll>
+  <div id="<%= resource %>_filters" class="flex items-center overflow-x-scroll gap-2 no-scrollbar" data-preserve-scroll>
     <% Current.conference&.dates&.each do |session_date| %>
       <%= link_to(
         session_date.strftime("%a, %d"),
         url_for([resource, session_filter_params.to_h.merge(starts_at: session_date)]) + current_day_anchor(session_date),
         class: [
           "flex min-w-fit items-center justify-center px-4 py-2 font-medium rounded-full",
-          "bg-red text-white": params[:starts_at] == session_date.to_s,
-          "bg-white text-red hover:bg-[#FAE7E8] focus:bg-[#FAE7E8]": params[:starts_at] != session_date.to_s
+          "bg-red dark:bg-off-red text-white": params[:starts_at] == session_date.to_s,
+          "bg-white text-red hover:bg-[#FAE7E8] focus:bg-[#FAE7E8] dark:bg-[#182027] dark:text-lightcolor dark:hover:bg-gray-800 transition-all": params[:starts_at] != session_date.to_s
         ],
         data: { test_id: "date_filter_#{session_date.strftime('%a_%d')}" }
       ) %>
@@ -19,8 +19,8 @@
       url_for([resource, session_filter_params.to_h]),
       class: [
         "flex min-w-fit items-center justify-center px-4 py-2 rounded-full font-medium",
-        "bg-red text-white": params[:starts_at].blank?,
-        "bg-white text-red hover:bg-[#FAE7E8] focus:bg-[#FAE7E8]": params[:starts_at].present?
+        "bg-red text-white dark:bg-off-red": params[:starts_at].blank?,
+        "bg-white text-red hover:bg-[#FAE7E8] focus:bg-[#FAE7E8] dark:bg-[#182027] dark:text-lightcolor dark:hover:bg-gray-800 transition-all": params[:starts_at].present?
       ],
       data: { test_id: "date_filter_all" }
     ) %>
@@ -30,8 +30,8 @@
     :div,
     class: [
       "flex items-center justify-center ml-3 rounded-full min-w-[42px] min-h-[42px]",
-      "bg-red fill-white": session_filter_params.present?,
-      "bg-white fill-red hover:bg-[#FAE7E8] focus:bg-[#FAE7E8]": session_filter_params.blank?
+      "bg-red dark:bg-off-red fill-white": session_filter_params.present?,
+      "bg-white fill-red hover:bg-[#FAE7E8] focus:bg-[#FAE7E8] dark:bg-[#182027] dark:hover:bg-gray-800 dark:fill-off-red transition-all": session_filter_params.blank?
     ]
   ) do %>
     <div class="relative" data-controller="dropdown">
@@ -46,30 +46,30 @@
         data-transition-enter-to="opacity-100 scale-100"
         data-transition-leave-from="opacity-100 scale-100"
         data-transition-leave-to="opacity-0 scale-95">
-        <div class="pt-2 pb-2 bg-white rounded-lg shadow-[0_10px_50px_0_rgba(0,0,0,0.40)] flex-col inline-flex absolute top-4 right-[-8px] right-0 w-40 max-w-40">
+        <div class="pt-2 pb-2 bg-white dark:bg-[#131b21] rounded-lg shadow-[0_10px_50px_0_rgba(0,0,0,0.40)] flex-col inline-flex absolute top-4 right-[-8px] right-0 w-40 max-w-40">
           <%= form_with url: resource, class: "grid", method: :get do |form| %>
             <%= form.hidden_field :starts_at, value: params[:starts_at] %>
 
             <% SessionQuery::STATUS_SCOPES.each do |name| %>
-              <div class="inline-flex items-center self-stretch gap-2 px-4 py-2">
+              <div class="inline-flex items-center self-stretch px-4 py-2 gap-2">
                 <%= form.check_box(
                   name, checked: params[name] == "1",
-                  class: "w-4 h-4 rounded text-red",
+                  class: "w-4 h-4 rounded text-red dark:text-off-red",
                   skip_base_styling: true, include_hidden: false
                 ) %>
                 <div class="text-gray-800">
-                  <%= form.label name, class: "text-base font-medium" do %>
+                  <%= form.label name, class: "text-base font-medium dark:text-lightcolor" do %>
                     <%= t("views.status_filters.#{name}") %>
                   <% end %>
                 </div>
               </div>
             <% end %>
             <div class="h-6 px-2.5 py-4 rounded justify-center items-center gap-2.5 inline-flex">
-              <div class="text-lg italic font-black underline text-red">
+              <div class="text-lg italic font-black underline text-red dark:text-off-red">
                 <%= form.submit(
                   t("views.status_filters.submit"),
                   name: "",
-                  class: "text-lg text-red italic underline font-black hover:cursor-pointer",
+                  class: "text-lg text-red dark:text-off-red italic underline font-black hover:cursor-pointer",
                   data: { test_id: "session_status_filters_submit" }
                 ) %>
               </div>
@@ -84,23 +84,22 @@
 <% if session_filter_params.present? %>
   <div class="flex w-full gap-2">
     <div class="flex flex-wrap">
-      <div class="flex items-center h-8 py-1 text-base font-bold leading-tight">Active filters:</div>
+      <div class="flex items-center h-8 py-1 text-base font-bold leading-tight dark:text-lightcolor">Active filters:</div>
     </div>
     <div class="flex flex-wrap gap-2">
       <% SessionQuery::STATUS_SCOPES.each do |name| %>
         <% next unless params[name] == "1" %>
-        <% bg_color = session_filter_color(name) %>
-        <div class="h-8 px-4 py-2 <%= bg_color %> bg-opacity-[.08] rounded-lg gap-2 inline-flex">
+        <div class="h-8 px-4 py-2 <%= session_filter_color(name) %> bg-opacity-[.08] rounded-lg gap-2 inline-flex">
           <div class="flex gap-2">
-            <div class="w-4 h-4 <%= bg_color %> rounded-full"></div>
-            <div class="text-xs font-medium"><%= t("views.status_filters.#{name}") %></div>
+            <div class="w-4 h-4 <%= session_filter_icon_color(name) %> rounded-full"></div>
+            <div class="text-xs font-medium dark:text-lightcolor"><%= t("views.status_filters.#{name}") %></div>
           </div>
           <div class="w-4 h-4">
             <% modified_params = request.query_parameters.deep_dup %>
             <% modified_params.delete(name) %>
 
             <%= link_to(
-              inline_svg_tag("icons/close.svg"),
+              inline_svg_tag("icons/close.svg", class: "fill-black dark:fill-white"),
               url_for([resource, modified_params])
             ) %>
           </div>
