@@ -1,34 +1,68 @@
-/* global localStorage */
 import { Controller } from '@hotwired/stimulus'
+import { getCookie, setCookie } from 'utils/cookies'
 
 export default class extends Controller {
   static targets = ['select']
 
   connect () {
-    this.mediaQueryList = window.matchMedia('(prefers-color-scheme: dark)')
-
-    this.mediaQueryList.addEventListener('change', this.onSystemChange.bind(this))
-    this.applyTheme(localStorage.getItem('theme') ?? 'system')
+    this.initializeTheme()
+    this.setupSystemThemeListener()
   }
 
   disconnect () {
-    this.mediaQueryList?.removeEventListener('change', this.onSystemChange.bind(this))
+    window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', this.onSystemChange.bind(this))
+  }
+
+  initializeTheme () {
+    const currentTheme = this.getCurrentTheme()
+    if (this.hasSelectTarget) {
+      this.selectTarget.value = currentTheme
+    }
+
+    if (currentTheme !== 'system') {
+      this.applyTheme(currentTheme)
+    }
+  }
+
+  getCurrentTheme () {
+    const savedTheme = getCookie('theme')
+
+    if (savedTheme) {
+      return savedTheme
+    }
+
+    return 'system'
+  }
+
+  setupSystemThemeListener () {
+    if (!window.matchMedia) return
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', this.onSystemChange.bind(this))
   }
 
   onSystemChange () {
-    this.currentMode === 'system' && this.applyTheme('system')
+    if (this.getCurrentTheme() === 'system') {
+      this.applyTheme('system')
+    }
   }
 
   change () {
-    this.applyTheme(this.selectTarget.value)
+    const theme = this.selectTarget.value
+
+    this.applyTheme(theme)
+    setCookie('theme', theme)
   }
 
   applyTheme (mode) {
-    this.currentMode = mode
-    const isDark = mode === 'dark' || (mode === 'system' && this.mediaQueryList.matches)
+    let isDark = false
+
+    if (mode === 'dark') {
+      isDark = true
+    } else if (mode === 'light') {
+      isDark = false
+    } else if (mode === 'system') {
+      isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+    }
 
     document.documentElement.classList.toggle('dark', isDark)
-    mode === 'system' ? localStorage.removeItem('theme') : localStorage.setItem('theme', mode)
-    if (this.hasSelectTarget) this.selectTarget.value = this.currentMode
   }
 }
