@@ -31,17 +31,18 @@
     <% end %>
 
     <%= link_to(
-      user_signed_in? ? profile_path(current_profile&.uuid) : profile_root_path,
+      profiles_path,
       class: [
         nav_text_class_for(["/profiles"]),
         "flex flex-col items-center justify-center"
-      ]
+      ],
+      data: { test_id: "attendees_nav" }
     ) do %>
       <%= inline_svg_tag(
         "icons/avatar_no_fill.svg",
         class: nav_icon_class_for(["/profiles"])
         ) %>
-      Profile
+      Attendees
     <% end %>
 
     <%= link_to(

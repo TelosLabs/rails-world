@@ -1,0 +1,37 @@
+<div class="mb-4">
+  <div class="flex items-center p-4 bg-gradient-to-r from-red/5 to-red/10 border border-red/20 rounded-lg shadow-sm" data-test-id="my-profile-card">
+    <% if user_signed_in? %>
+      <% if current_profile.image.attached? %>
+        <div class="w-20 h-20 mr-4 bg-cover bg-center rounded-full shrink-0 ring-2 ring-red/20" style="background-image: url(<%= url_for(current_profile.image) %>)"></div>
+      <% else %>
+        <div class="w-20 h-20 mr-4 rounded-full bg-slate-300 p-2 flex items-center justify-center shrink-0 ring-2 ring-red/20">
+          <%= image_tag url_for("icons/user_avatar.svg"), class: "w-full h-full" %>
+        </div>
+      <% end %>
+
+      <div class="flex flex-col flex-1 min-w-0">
+        <div class="text-xs font-semibold text-red/70 uppercase tracking-wider mb-1">Your Profile</div>
+        <%= link_to profile_path(current_profile.uuid), class: "text-xl font-bold text-red italic truncate underline hover:text-red/80", data: { turbo_frame: "_top" } do %>
+          <%= current_profile.name.presence || "Set up your profile" %>
+        <% end %>
+
+        <% if current_profile.job_title.present? %>
+          <div class="text-sm text-gray-600 truncate">
+            <%= current_profile.job_title %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="w-20 h-20 mr-4 rounded-full bg-slate-300 p-2 flex items-center justify-center shrink-0 ring-2 ring-red/20">
+        <%= image_tag url_for("icons/user_avatar.svg"), class: "w-full h-full" %>
+      </div>
+
+      <div class="flex flex-col flex-1 min-w-0">
+        <div class="text-xs font-semibold text-red/70 uppercase tracking-wider mb-1">Your Profile</div>
+        <%= link_to new_user_session_path, class: "text-xl font-bold text-red italic truncate underline hover:text-red/80", data: { turbo_frame: "_top" } do %>
+          Set up your profile
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
