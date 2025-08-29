@@ -29,3 +29,11 @@
 .native-mt-0 {
   margin-top: 0 !important;
 }
+
+.native-mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.native-bg-purple {
+  background-color: #432463 !important;
+}
