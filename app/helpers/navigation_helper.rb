@@ -9,7 +9,7 @@ module NavigationHelper
 
   def nav_text_class_for(paths)
     if paths.any? { |p| active_path?(p) }
-      "text-red dark:text-white"
+      "text-red dark:text-lightcolor"
     else
       "text-grey-400"
     end
