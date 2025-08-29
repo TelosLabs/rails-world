@@ -19,7 +19,7 @@ gem "tailwindcss-rails", "~> 2.6"
 
 # Hotwire
 gem "stimulus-rails"
-gem "turbo-rails"
+gem "turbo-rails", github: "rosa/turbo-rails", branch: "offline-cache"
 
 # Deployment
 gem "kamal", require: false
