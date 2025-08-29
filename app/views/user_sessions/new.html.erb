@@ -46,7 +46,7 @@
     <div class="flex flex-col">
       <%= form.button(
         "Log in",
-        data: { test_id: "sign_in_button" },
+        data: { test_id: "sign_in_button", turbo_action: "replace" },
         class: [
           "w-full bg-red py-4 text-white font-black italic rounded-[10px] uppercase",
           "disabled:bg-gray-400 disabled:cursor-not-allowed"

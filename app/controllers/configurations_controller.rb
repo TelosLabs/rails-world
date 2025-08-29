@@ -31,7 +31,9 @@ class ConfigurationsController < ApplicationController
           ],
           properties: {
             context: "default",
-            pull_to_refresh_enabled: false
+            pull_to_refresh_enabled: false,
+            presentation: "replace_root",
+            action: "replace"
           }
         },
         {
@@ -81,7 +83,9 @@ class ConfigurationsController < ApplicationController
           ],
           properties: {
             uri: "hotwire://fragment/web",
-            pull_to_refresh_enabled: false
+            pull_to_refresh_enabled: false,
+            presentation: "replace_root",
+            action: "replace"
           }
         }
       ]
