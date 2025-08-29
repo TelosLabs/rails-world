@@ -8,21 +8,21 @@
   model: current_user.profile,
   url: notification_settings_path,
   method: :put,
-  class: "flex flex-col items-center h-full w-full px-5 pt-safe-area-back-button pb-safe-area-bottom-navbar",
+  class: "flex flex-col items-center h-full w-full px-5 pt-safe-area-back-button pb-safe-area-bottom-navbar dark:bg-[#0f171b]",
   data: {controller: 'form', form_target: 'form'}
 ) do |form| %>
-  <div class="flex flex-col w-full max-w-screen-sm pt-4">
-    <p class="mb-2 italic font-bold text-black">Notifications Settings</p>
+  <div class="flex flex-col w-full pt-4 max-w-screen-sm">
+    <p class="mb-2 italic font-bold text-black dark:text-lightcolor">Notifications Settings</p>
     <div class="w-full mb-4 overflow-hidden rounded-md">
-      <div class="flex flex-row items-center justify-between w-full p-4 bg-white border-b border-grey-300">
-        <%= form.label :mail_notifications, "Mail notifications", class: "grow font-medium text-slate-900 text-base cursor-pointer mr-2" %>
+      <div class="flex flex-row items-center justify-between w-full p-4 bg-white dark:bg-[#182027] border-b border-grey-300">
+        <%= form.label :mail_notifications, "Mail notifications", class: "grow font-medium text-slate-900 dark:text-lightcolor text-base cursor-pointer mr-2" %>
         <label class="inline-flex items-center cursor-pointer">
           <%= form.check_box :mail_notifications, class: "sr-only peer", data: {action: 'change->form#submit'} %>
           <div class="relative w-11 h-6 bg-grey-300 rounded-full peer dark:bg-grey-300 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red"></div>
         </label>
       </div>
-      <div class="flex flex-row items-center justify-between w-full p-4 bg-white d-hotwire-native-none">
-        <%= form.label :web_push_notifications, "Web-push notifications", class: "grow font-medium text-slate-900 text-base cursor-pointer mr-2" %>
+      <div class="flex flex-row items-center justify-between w-full p-4 bg-white dark:bg-[#182027] d-hotwire-native-none">
+        <%= form.label :web_push_notifications, "Web-push notifications", class: "grow font-medium text-slate-900 dark:text-lightcolor text-base cursor-pointer mr-2" %>
         <label class="inline-flex items-center cursor-pointer">
           <%= form.check_box :web_push_notifications, class: "sr-only peer",
             data: {web_push_notifications_target: "enableNotifications", action: 'change->form#submit' } %>

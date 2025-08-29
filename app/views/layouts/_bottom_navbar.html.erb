@@ -1,4 +1,4 @@
-<div class="fixed bottom-0 z-40 flex flex-row items-center justify-center w-full pt-2 bg-white border-t border-b pb-safe-area-1 border-grey-200">
+<div class="fixed bottom-0 z-40 flex flex-row items-center justify-center w-full pt-2 bg-white border-t border-b dark:bg-[#182027] pb-safe-area-1 border-grey-200 dark:border-0">
   <div class="flex flex-row items-center justify-around w-full max-w-screen-sm text-[11px]">
     <%= link_to(
       sessions_path(
@@ -31,12 +31,12 @@
     <% end %>
 
     <%= link_to(
-      user_signed_in? ? profile_path(current_profile&.uuid) : new_user_session_path,
+      user_signed_in? ? profile_path(current_profile&.uuid) : profile_root_path,
       class: [
         nav_text_class_for(["/profiles"]),
         "flex flex-col items-center justify-center"
       ]
-        ) do %>
+    ) do %>
       <%= inline_svg_tag(
         "icons/avatar_no_fill.svg",
         class: nav_icon_class_for(["/profiles"])
@@ -53,7 +53,7 @@
     ) do %>
       <%= inline_svg_tag "icons/bell.svg", class: nav_icon_class_for([notifications_path, notification_settings_path]) %>
       <% if unread_notifications.present? %>
-        <div class="absolute -top-0.5 right-0 w-[18px] h-[18px] rounded-full bg-red flex justify-center items-center">
+        <div class="absolute -top-0.5 right-0 w-[18px] h-[18px] rounded-full bg-red dark:bg-off-red flex justify-center items-center">
           <span class="text-[11px] text-white font-bold px-1">
             <%= unread_notifications.length < 10 ? unread_notifications.length : "+9" %>
           </span>

@@ -1,8 +1,8 @@
-<div class="flex justify-center w-full px-4 pb-2 bg-white pt-safe-area-2">
+<div class="flex justify-center w-full px-4 pb-2 bg-white dark:bg-[#182027] dark:text-[#798691] pt-safe-area-2">
   <div class="relative flex items-center justify-center w-full max-w-screen-sm d-hotwire-native-none">
     <%= link_to "javascript:history.back()", class: "absolute left-0 flex items-center py-2", data: { test_id: "back_btn" } do %>
-      <%= inline_svg_tag("icons/chevron_left.svg", size: "24", class: "fill-red") %>
-      <span class="ml-1 text-lg italic font-black text-red">Back</span>
+      <%= inline_svg_tag("icons/chevron_left.svg", size: "24", class: "fill-red dark:fill-[#798691]") %>
+      <span class="ml-1 text-lg italic font-black text-red dark:text-[#798691]">Back</span>
     <% end %>
     <p class="text-lg font-medium"><%= back_title %></p>
   </div>

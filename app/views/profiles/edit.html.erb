@@ -10,15 +10,15 @@
   <meta name="turbo-refresh-scroll" content="reset">
 <% end %>
 
-<div class="flex flex-col items-center justify-center w-full bg-purple-dark pt-safe-area-header pb-safe-area-bottom-navbar">
-  <div class="flex flex-col w-full max-w-screen-sm p-4">
-    <h1 class="w-full mb-6 text-3xl font-black text-white">Set up your account</h1>
+<div class="flex flex-col items-center justify-center w-full bg-purple-dark dark:bg-[#0f171b] pt-safe-area-header pb-safe-area-bottom-navbar">
+  <div class="flex flex-col w-full p-4 max-w-screen-sm">
+    <h1 class="w-full mb-6 text-3xl font-black text-white dark:text-lightcolor">Set up your account</h1>
 
     <%= form_with model: @profile, url: profile_path(@profile.uuid), class: "flex flex-col items-center" do |form| %>
       <div class="relative" data-controller="image-previewer">
         <%= form.label(
           :image,
-          class: "overflow-hidden relative font-bold text-white text-base w-32 h-32 bg-white
+          class: "overflow-hidden relative font-bold text-white text-base w-32 h-32 bg-white dark:bg-[#182027] dark:text-lightcolor
             cursor-pointer rounded-full flex flex-col items-center justify-center"
         ) do %>
           <%= form.file_field(
@@ -52,47 +52,47 @@
       <div class="flex flex-col items-start w-full">
         <%= render partial: "shared/form_errors", locals: { errors: form.object.errors.full_messages } %>
 
-        <%= form.label :name, class: "font-bold text-white text-base mb-2" %>
+        <%= form.label :name, class: "font-bold text-white text-base mb-2 dark:text-lightcolor" %>
         <%= form.text_field :name, class: "w-full mb-6", placeholder: "John P. Doe" %>
 
-        <%= form.label :bio, class: "font-bold text-white text-base mb-2" %>
+        <%= form.label :bio, class: "font-bold text-white text-base mb-2 dark:text-lightcolor" %>
         <%= form.text_area :bio, class: "w-full mb-6", placeholder: "I'm a Ruby on Rails developer with six years of experience. Outside of work, I enjoy hiking and using dating apps.", rows: 3 %>
 
-        <%= form.label :job_title, class: "font-bold text-white  text-base mb-2" %>
+        <%= form.label :job_title, class: "font-bold text-white  text-base mb-2 dark:text-lightcolor" %>
         <%= form.text_field :job_title, class: "w-full mb-6", placeholder: "Senior Developer at Telos Labs" %>
 
-        <%= form.label :github_url, "GitHub", class: "font-bold text-white text-base mb-2" %>
+        <%= form.label :github_url, "GitHub", class: "font-bold text-white text-base mb-2 dark:text-lightcolor" %>
         <%= form.text_field :github_url, class: "w-full mb-6", placeholder: "https://github.com/johnp" %>
 
-        <%= form.label :linkedin_url, "LinkedIn", class: "font-bold text-white text-base mb-2" %>
+        <%= form.label :linkedin_url, "LinkedIn", class: "font-bold text-white text-base mb-2 dark:text-lightcolor" %>
         <%= form.text_field :linkedin_url, class: "w-full mb-6", placeholder: "https://www.linkedin.com/in/johnp" %>
 
-        <%= form.label :twitter_url, "X (formerly Twitter)", class: "font-bold text-white text-base mb-2" %>
+        <%= form.label :twitter_url, "X (formerly Twitter)", class: "font-bold text-white text-base mb-2 dark:text-lightcolor" %>
         <%= form.text_field :twitter_url, class: "w-full mb-6", placeholder: "https://x.com/johnp" %>
 
-        <p class="mb-2 font-bold text-white">Discoverability</p>
-        <div class="flex flex-row items-center justify-between w-full p-4 bg-white rounded-md">
-          <%= form.label :is_public, "Public profile", class: "grow font-medium text-slate-900 text-base cursor-pointer mr-2" %>
+        <p class="mb-2 font-bold text-white dark:text-lightcolor">Discoverability</p>
+        <div class="flex flex-row items-center justify-between w-full p-4 bg-white dark:bg-[#182027] rounded-md">
+          <%= form.label :is_public, "Public profile", class: "grow font-medium text-slate-900 dark:text-lightcolor text-base cursor-pointer mr-2" %>
           <%= form.toggle_field :is_public %>
         </div>
         <p class="mt-1 mb-6 text-xs text-white">Allow other persons to view your profile through a QR code.</p>
 
-        <p class="mb-2 font-bold text-white">Notifications</p>
+        <p class="mb-2 font-bold text-white dark:text-lightcolor">Notifications</p>
         <div class="w-full mb-10">
           <div class="w-full overflow-hidden rounded-md">
-            <div class="flex flex-row items-center justify-between w-full p-4 bg-white border-b border-grey-300">
-              <%= form.label :mail_notifications, "Mail notifications", class: "grow font-medium text-slate-900 text-base cursor-pointer mr-2" %>
+            <div class="flex flex-row items-center justify-between w-full p-4 bg-white dark:bg-[#182027] border-b border-grey-300">
+              <%= form.label :mail_notifications, "Mail notifications", class: "grow font-medium text-slate-900 dark:text-lightcolor text-base cursor-pointer mr-2" %>
               <%= form.toggle_field :mail_notifications %>
             </div>
-            <div class="flex flex-row items-center justify-between w-full p-4 bg-white d-hotwire-native-none">
-              <%= form.label :web_push_notifications, "Web-push notifications", class: "grow font-medium text-slate-900 text-base cursor-pointer mr-2" %>
+            <div class="flex flex-row items-center justify-between w-full p-4 bg-white dark:bg-[#182027] d-hotwire-native-none">
+              <%= form.label :web_push_notifications, "Web-push notifications", class: "grow font-medium text-slate-900 dark:text-lightcolor text-base cursor-pointer mr-2" %>
               <label>
                 <%= form.toggle_field :web_push_notifications, class: "sr-only peer",
                   data: {web_push_notifications_target: "enableNotifications"} %>
               </label>
             </div>
           </div>
-          <p class="hidden p-2 mt-6 text-sm font-medium bg-white rounded-md notification-blocking-message">
+          <p class="hidden p-2 mt-6 text-sm font-medium bg-white dark:bg-[#182027] dark:text-lightcolor rounded-md notification-blocking-message">
             It looks like you've blocked notifications. To stay updated,
             please enable notifications in your browser settings.
           </p>
@@ -102,7 +102,7 @@
       <%= form.submit(
         "SAVE PROFILE",
         class: [
-          "w-full bg-red rounded-[10px] p-4 text-lg font-black text-white cursor-pointer",
+          "w-full bg-red dark:bg-off-red rounded-[10px] p-4 text-lg font-black text-white cursor-pointer",
           "disabled:bg-grey-400 disabled:cursor-not-allowed"
         ],
         data: { test_id: "save_profile_button" }
@@ -111,12 +111,12 @@
       <% if params[:onboarding].present? %>
         <%= link_to(
           "Skip for now", root_path,
-          class: "text-lg underline font-black italic text-white mt-10"
+          class: "text-lg underline font-black italic text-white dark:text-lightcolor mt-10"
         ) %>
       <% else %>
         <%= link_to(
           "Edit your email and password", edit_user_path,
-          class: "text-lg underline font-black italic text-white mt-10"
+          class: "text-lg underline font-black italic text-white dark:text-lightcolor mt-10"
         ) %>
       <% end %>
     <% end %>

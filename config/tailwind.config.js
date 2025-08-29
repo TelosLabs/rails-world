@@ -1,5 +1,6 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 module.exports = {
+  darkMode: 'class',
   content: [
     './public/*.html',
     './app/helpers/**/*.rb',
@@ -40,9 +41,11 @@ module.exports = {
         'purple-dark': '#432463',
         'purple-light': '#4E2A73',
         red: '#CB0C1C',
+        'off-red': '#a46369',
         'blue-marine': '#003A5D',
         'blue-teal': '#00AFAA',
-        yellow: '#F4BF4F'
+        yellow: '#F4BF4F',
+        lightcolor: '#b8c0c7'
       },
       animation: {
         'slow-ping': 'ping 4s cubic-bezier(0, 0, 0.2, 1) infinite'

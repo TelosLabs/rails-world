@@ -4,9 +4,9 @@
   <%= render partial: "layouts/primary_top_nav" %>
 <% end %>
 
-<div class="flex relative flex-col flex-1 justify-between items-center h-full bg-grey-50 pt-safe-area-header pb-safe-area-bottom-navbar">
-  <div class="flex flex-col items-center w-full h-full bg-bottom bg-no-repeat bg-cover" style="background-image: url(<%= asset_path 'background_design.svg' %>)">
-    <div class="flex z-10 flex-col items-start px-5 pt-6 pb-12 w-full max-w-screen-sm">
+<div class="relative flex flex-col items-center justify-between flex-1 h-full bg-grey-50 dark:bg-[#0f171b] pt-safe-area-header pb-safe-area-bottom-navbar">
+  <div class="flex flex-col items-center w-full h-full bg-bottom bg-no-repeat bg-cover">
+    <div class="z-10 flex flex-col items-start w-full px-5 pt-6 pb-12 max-w-screen-sm">
       <div class="flex flex-row items-center">
         <% if @profile.image.attached? %>
           <div class="flex flex-col items-center justify-center shrink-0 relative w-[120px] bg-cover bg-no-repeat bg-center h-[120px] rounded-full" style="background-image: url(<%= url_for(@profile.image) %>)">
@@ -17,23 +17,23 @@
           </div>
         <% end %>
         <div class="flex flex-col items-start ml-5">
-          <div class="text-xl italic font-black text-red"> <%= @profile.name.presence || "Anonymous" %> </div>
+          <div class="text-xl italic font-medium text-red dark:text-off-red"> <%= @profile.name.presence || "Anonymous" %> </div>
           <% if @profile.job_title.present? %>
-            <div class="text-lg text-gray-400"><%= @profile.job_title %></div>
+            <div class="text-lg font-light text-gray-400 dark:text-[#798691]"><%= @profile.job_title %></div>
           <% end %>
         </div>
       </div>
       <% if @profile.bio.present? %>
-        <p class="mt-6 w-full text-base break-words"><%= @profile.bio %></p>
+        <p class="w-full mt-6 text-base break-words dark:text-[#798691]"><%= @profile.bio %></p>
       <% end %>
-      <div class="flex flex-row gap-4 justify-between items-center w-full">
+      <div class="flex flex-row items-center justify-between w-full gap-4">
         <%= link_to(
           @profile.github_url,
           target: "_blank",
           class: [
             "flex flex-row grow items-center justify-center max-w-28 w-full h-14 rounded-lg mt-6",
-            "bg-red": @profile.github_url.present?,
-            "bg-grey-300 cursor-not-allowed": @profile.github_url.blank?
+            "bg-red dark:bg-[#182027]": @profile.github_url.present?,
+            "bg-grey-300 cursor-not-allowed dark:bg-[#131b21]": @profile.github_url.blank?
           ],
           data: { test_id: "github_link" }
         ) do %>
@@ -44,8 +44,8 @@
           target: "_blank",
           class: [
             "flex flex-row grow items-center justify-center max-w-28 w-full h-14 rounded-lg mt-6",
-            "bg-red": @profile.twitter_url.present?,
-            "bg-grey-300 cursor-not-allowed": @profile.twitter_url.blank?
+            "bg-red dark:bg-[#182027]": @profile.twitter_url.present?,
+            "bg-grey-300 cursor-not-allowed dark:bg-[#131b21]": @profile.twitter_url.blank?
           ],
           data: { test_id: "twitter_link" }
         ) do %>
@@ -56,8 +56,8 @@
           target: "_blank",
           class: [
             "flex flex-row grow items-center justify-center max-w-28 w-full h-14 rounded-lg mt-6",
-            "bg-red": @profile.linkedin_url.present?,
-            "bg-grey-300 cursor-not-allowed": @profile.linkedin_url.blank?
+            "bg-red dark:bg-[#182027s]": @profile.linkedin_url.present?,
+            "bg-grey-300 cursor-not-allowed dark:bg-[#131b21]": @profile.linkedin_url.blank?
           ],
           data: { test_id: "linkedin_link" }
         ) do %>
@@ -68,7 +68,7 @@
   </div>
 
   <% if allowed_to?(:edit?, @profile, with: ProfilePolicy) %>
-    <div class="flex flex-col gap-6 items-center p-4 w-full">
+    <div class="flex flex-col items-center w-full p-4 gap-6">
       <% if @profile.is_public? %>
         <div class="p-6 bg-white rounded-2xl">
           <%= render inline: @profile.svg_qr_code(module_size: 4, svg_attributes: { "data-test-id": "qr_code" }) %>
@@ -77,17 +77,29 @@
 
       <%= link_to(
         'Edit Profile', edit_profile_path(@profile.uuid),
-        class: "text-red font-bold rounded-sm underline italic text-lg"
+        class: "text-red dark:text-off-red font-bold rounded-sm underline italic text-lg"
       ) %>
+
+      <div data-controller="dark-mode" class="w-full px-4 pb-8 max-w-screen-sm">
+        <label for="theme-select" class="block mb-2 font-black italic uppercase text-red dark:text-[#798691]">
+          Theme
+        </label>
+        <select id="theme-select" data-dark-mode-target="select" data-action="dark-mode#change" class="w-full bg-white dark:bg-[#182027] py-2 px-3 rounded-[10px] font-black italic uppercase text-red dark:text-[#798691]">
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+          <option value="system">System</option>
+        </select>
+      </div>
+
       <%= button_to(
         "Log out", user_session_path, method: :delete,
         form_class: "w-full max-w-screen-sm px-4",
-        class: "w-full bg-white py-4 text-red font-black italic rounded-[10px] uppercase",
+        class: "w-full bg-white dark:bg-[#182027] py-4 text-red dark:text-[#798691] font-black italic rounded-[10px] uppercase",
         data: { turbo_action: "clear_all" }
       ) %>
       <%= button_to(
         "Delete Account", profile_path(@profile.uuid), method: :delete,
-        class: "text-red font-bold rounded-sm underline italic text-lg",
+        class: "text-red dark:text-off-red font-bold rounded-sm underline italic text-lg",
         data: {
           turbo_action: "clear_all",
           turbo_confirm: "Are you sure you want to delete your account? This action cannot be undone."
@@ -98,7 +110,7 @@
     <div class="">
       <%= button_to "Report Abuse", abuse_reports_path(uuid: @profile.uuid),
           method: :post,
-          class: "text-red rounded-sm underline italic text-sm bg-transparent border-none cursor-pointer p-0",
+          class: "text-red dark:text-[#798691] rounded-sm underline italic text-sm bg-transparent border-none cursor-pointer p-0",
           data: {
             turbo_confirm: "Are you sure you want to report this profile for abuse? This action will notify administrators.",
             turbo_method: "post"

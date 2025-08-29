@@ -1,7 +1,7 @@
 module NavigationHelper
   def nav_icon_class_for(paths)
     if paths.any? { |p| active_path?(p) }
-      "fill-red w-6 h-6"
+      "fill-red w-6 h-6 dark:fill-white"
     else
       "fill-grey-400 w-6 h-6"
     end
@@ -9,7 +9,7 @@ module NavigationHelper
 
   def nav_text_class_for(paths)
     if paths.any? { |p| active_path?(p) }
-      "text-red"
+      "text-red dark:text-lightcolor"
     else
       "text-grey-400"
     end

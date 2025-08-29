@@ -4,29 +4,29 @@
   <%= render partial: "layouts/primary_top_nav" %>
 <% end %>
 
-<div class="flex flex-col items-center h-full bg-grey-50 pt-safe-area-header">
-  <div class="flex flex-col items-center w-full h-full max-w-screen-md px-5">
-    <div class="sticky z-30 flex flex-col items-center w-full pt-6 top-safe-area-header bg-grey-50">
+<div class="flex flex-col items-center h-full bg-grey-50 dark:bg-[#0f171b] pt-safe-area-header">
+  <div class="flex flex-col items-center w-full h-full px-5 max-w-screen-md">
+    <div class="sticky z-30 flex flex-col items-center w-full pt-6 top-safe-area-header bg-grey-50 dark:bg-[#0f171b]">
       <div class="flex w-full mb-4">
-        <h1 class="text-3xl italic font-black text-gray-800 d-hotwire-native-none">My Schedule</h1>
+        <h1 class="text-3xl italic font-black text-gray-800 d-hotwire-native-none dark:text-lightcolor">My Schedule</h1>
       </div>
 
       <%= render partial: 'sessions/filters', locals: { resource: :schedule } %>
     </div>
 
-    <div class="flex flex-col w-full h-full mb-[12rem]">
+    <div class="flex flex-col w-full h-full mb-[12rem] dark:text-lightcolor">
       <% if @sessions.present? %>
         <% previous_date = nil %>
         <% @sessions.group_by(&:starts_at).each do |starts_at, sessions| %>
           <%= content_tag(
                 :div,
                 class: [
-                  "sticky z-20 flex items-center mb-5 bg-grey-50",
+                  "sticky z-20 flex items-center mb-5 bg-grey-50 dark:bg-[#0f171b]",
                   "top-safe-area-with-filters": session_filter_params.present?,
                   "top-safe-area-no-filters": session_filter_params.blank?
                 ]
               ) do %>
-            <div class="pt-2 pb-4 text-2xl font-bold text-grey-800 text-nowrap">
+            <div class="pt-2 pb-4 text-2xl font-bold text-grey-800 dark:text-lightcolor text-nowrap">
               <a id="<%= session_anchor(sessions.first) %>" class="scroll-mt-[240px]">
                 <% if starts_at.to_date != previous_date && params[:starts_at].blank? %>
                   <%= starts_at.strftime("%A, %d - %H:%M") %>
@@ -52,16 +52,16 @@
         <% end %>
       <% elsif params[:starts_at].present? || session_filter_params.present? %>
         <div class="flex flex-col items-center justify-center w-full h-full">
-          <p class="max-w-xs mb-4 font-bold text-center">No sessions match your current filters</p>
-          <%= link_to 'Clear filters', schedule_path, class: "text-red underline font-bold italic text-lg" %>
+          <p class="max-w-xs mb-4 font-bold text-center dark:text-lightcolor">No sessions match your current filters</p>
+          <%= link_to 'Clear filters', schedule_path, class: "text-red dark:text-off-red underline font-bold italic text-lg" %>
         </div>
       <% else %>
         <div class="flex flex-col items-center justify-center w-full h-full">
-          <div class="p-8 mb-6 bg-white rounded-full w-fit h-fit">
+          <div class="p-8 mb-6 bg-white dark:bg-[#182027] rounded-full w-fit h-fit">
             <%= inline_svg_tag("icons/clock.svg", size: "56", class: "fill-gray-400") %>
           </div>
           <p class="mb-4 font-bold text-center max-w-52">You don't have any sessions in your schedule yet</p>
-          <%= link_to 'Explore the Agenda', sessions_path, class: "text-red underline font-bold italic text-lg" %>
+          <%= link_to 'Explore the Agenda', sessions_path, class: "text-red dark:text-off-red underline font-bold italic text-lg" %>
         </div>
       <% end %>
     </div>
