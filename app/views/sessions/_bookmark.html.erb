@@ -7,7 +7,7 @@
       data: { test_id: dom_id(session, "bookmark") }
     ) do %>
       <div class="p-2">
-        <%= inline_svg_tag("icons/bookmark-full.svg") %>
+        <%= inline_svg_tag("icons/bookmark-full.svg", class: "fill-red dark:fill-dark-theme-red") %>
       </div>
     <% end %>
   <% else %>
@@ -17,7 +17,7 @@
       data: { test_id: dom_id(session, "bookmark") }
     ) do %>
       <div class="p-2">
-        <%= inline_svg_tag("icons/bookmark-outline.svg", class: "") %>
+        <%= inline_svg_tag("icons/bookmark-outline.svg", class: "fill-red dark:fill-dark-theme-red") %>
       </div>
     <% end %>
   <% end %>
