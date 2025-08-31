@@ -23,11 +23,11 @@
 }
 
 .pt-safe-area-back-button {
-  padding-top: calc(env(safe-area-inset-top)) !important;
+  padding-top: env(safe-area-inset-top) !important;
 }
 
 .native-safe-area {
-  padding-top: calc(env(safe-area-inset-top)) !important;
+  padding-top: env(safe-area-inset-top) !important;
 }
 
 .native-mt-0 {
@@ -48,4 +48,8 @@
 
 .native-bg-purple {
   background-color: #432463;
+}
+
+.native-safe-area-login {
+  padding-top: max(calc(env(safe-area-inset-top - 40px)), 60px) !important;
 }
