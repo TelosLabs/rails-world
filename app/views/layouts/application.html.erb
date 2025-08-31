@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="h-screen">
   <head>
-    <title><%= content_for(:title).presence || "#{Current.conference&.name}" %></title>
+    <title><%= content_for(:title).presence || turbo_native_app? ? "" : "#{Current.conference&.name}" %></title>
 
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover">
     <meta name="turbo-refresh-scroll" content="preserve">
