@@ -1,12 +1,16 @@
 <%= title "Agenda" %>
 
 <% content_for :top_nav do %>
-  <%= render partial: "layouts/primary_top_nav" %>
+  <% if turbo_native_app? %>
+    <header class="w-full mx-auto border-b native-safe-area border-b-white bg-purple-dark dark:bg-[#182027] dark:border-[#182027]"></header>
+  <% else %>
+    <%= render partial: "layouts/primary_top_nav" %>
+  <% end %>
 <% end %>
 
-<%= turbo_frame_tag "sessions_content", class: "flex flex-col items-center h-full bg-grey-50 pt-safe-area-header dark:bg-[#0f171b]" do %>
+<%= turbo_frame_tag "sessions_content", class: "flex flex-col items-center h-full bg-grey-50 pt-safe-area-header dark:bg-[#0f171b] native-safe-area" do %>
   <div class="flex flex-col items-center w-full h-full px-5 max-w-screen-md">
-    <div class="sticky z-30 flex flex-col items-center w-full pt-6 top-safe-area-header bg-grey-50 dark:bg-[#0f171b]">
+    <div class="sticky z-30 flex flex-col items-center w-full pt-6 top-safe-area-header bg-grey-50 dark:bg-[#0f171b] native-top-safe-area-header">
       <div class="flex w-full mb-4">
         <h1 class="text-3xl italic font-black text-gray-800 d-hotwire-native-none dark:text-lightcolor">Agenda</h1>
       </div>
