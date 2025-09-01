@@ -7,19 +7,19 @@ const { registerRoute, setCatchHandler } = workbox.routing
 const { StaleWhileRevalidate, CacheFirst } = workbox.strategies
 const { ExpirationPlugin } = workbox.expiration
 
-const META_CACHE   = 'meta-v1'
-const PAGES_CACHE  = 'pages-v1'
+const META_CACHE = 'meta-v1'
+const PAGES_CACHE = 'pages-v1'
 const ASSETS_CACHE = 'assets-v1'
-const IMG_CACHE    = 'img-v1'
+const IMG_CACHE = 'img-v1'
 
-const WARM_MARK      = '/__warm__/pages-v1'
-const PRECACHE_PATH  = '/service-worker/precache.json'
-const OFFLINE_PATH   = '/offline.html'
+const WARM_MARK = '/__warm__/pages-v1'
+const PRECACHE_PATH = '/service-worker/precache.json'
+const OFFLINE_PATH = '/offline.html'
 
 const ONE_WEEK_S = 7 * 24 * 60 * 60
 const IMG_MAX_ENTRIES = 300
 const PAGE_WARM_BATCH = 40
-const IMG_WARM_BATCH  = 50
+const IMG_WARM_BATCH = 50
 
 workbox.core.clientsClaim()
 workbox.core.skipWaiting()
@@ -77,13 +77,13 @@ const matchPageFromCache = async (pagesCache, req) => {
 
 const hasAnyPagesCached = async () => {
   const cache = await caches.open(PAGES_CACHE)
-  const keys  = await cache.keys()
+  const keys = await cache.keys()
   return keys.length > 0
 }
 
 const alreadyWarmed = async () => {
   const cache = await caches.open(META_CACHE)
-  const mark  = await cache.match(WARM_MARK)
+  const mark = await cache.match(WARM_MARK)
   if (!mark) return false
   return hasAnyPagesCached()
 }
@@ -137,8 +137,8 @@ const post = async (payload) => {
 }
 
 const isNavigate = ({ request }) => request.mode === 'navigate'
-const isAsset    = ({ request }) => request.destination === 'style' || request.destination === 'script'
-const isImage    = ({ request }) => request.destination === 'image'
+const isAsset = ({ request }) => request.destination === 'style' || request.destination === 'script'
+const isImage = ({ request }) => request.destination === 'image'
 
 registerRoute(
   isNavigate,
@@ -179,14 +179,14 @@ async function warmAllPagesAndAPIs () {
 
   warming = (async () => {
     const precache = await fetchJSON(PRECACHE_PATH)
-    const pages  = precache?.pages  ?? []
+    const pages = precache?.pages  ?? []
     const images = precache?.images ?? []
 
     console.log('[SW] precache pages:', pages)
     console.log('[SW] precache images:', images)
 
     const pagesCache = await caches.open(PAGES_CACHE)
-    const imgCache   = await caches.open(IMG_CACHE)
+    const imgCache = await caches.open(IMG_CACHE)
 
     await cacheOfflinePage(pagesCache)
 
