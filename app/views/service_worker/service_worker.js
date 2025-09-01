@@ -16,16 +16,6 @@ const IMG_CACHE    = 'img-v1'
 workbox.core.clientsClaim()
 workbox.core.skipWaiting()
 
-self.addEventListener('install', (event) => {
-  event.waitUntil((async () => {
-    try {
-      await warmAllPagesAndAPIs()
-    } catch (e) {
-      console.error('[SW] install warm error', e)
-    }
-  })())
-})
-
 const isHTML = (req) => {
   const accept = req.headers.get('Accept') || ''
   return accept.includes('text/html') || accept.includes('vnd.turbo-stream.html')
@@ -33,9 +23,7 @@ const isHTML = (req) => {
 
 registerRoute(
   ({ request }) =>
-    request.mode === 'navigate' ||
-    request.destination === 'document' ||
-    (request.destination === '' && isHTML(request)),
+    request.mode === 'navigate',
     new StaleWhileRevalidate({ cacheName: PAGES_CACHE })
 )
 
@@ -58,17 +46,17 @@ setCatchHandler(async ({ event }) => {
   const pagesCache = await caches.open(PAGES_CACHE)
 
   try {
-    const u = new URL(event.request.url)
-    u.hash = ''
-    let res = await pagesCache.match(u.toString())
+    const url = new URL(event.request.url)
+    url.hash = ''
+    let res = await pagesCache.match(url.toString())
     if (res) return res
 
-    u.search = ''
-    res = await pagesCache.match(u.toString())
+    url.search = ''
+    res = await pagesCache.match(url.toString())
     if (res) return res
   } catch (_) {}
 
-  return caches.match('/offline.html')
+  return pagesCache.match('/offline.html')
 })
 
 
@@ -81,8 +69,8 @@ self.addEventListener('activate', (event) => {
   })())
 })
 
-self.addEventListener('message', (e) => {
-  if (e.data?.type === 'warm-all') {
+self.addEventListener('message', (event) => {
+  if (event.data?.type === 'warm-all') {
     warmAllPagesAndAPIs()
       .then(() => post({ type: 'warm-complete' }))
       .catch(() => post({ type: 'warm-failed' }))
@@ -90,22 +78,22 @@ self.addEventListener('message', (e) => {
 })
 
 async function hasAnyPagesCached () {
-  const c = await caches.open(PAGES_CACHE)
-  const keys = await c.keys()
+  const cache = await caches.open(PAGES_CACHE)
+  const keys = await cache.keys()
   return keys.length > 0
 }
 
 async function alreadyWarmed () {
-  const c = await caches.open(META_CACHE)
-  const mark = await c.match(WARM_MARK)
+  const cache = await caches.open(META_CACHE)
+  const mark = await cache.match(WARM_MARK)
   if (!mark) return false
 
   return await hasAnyPagesCached()
 }
 
 async function markWarmed () {
-  const c = await caches.open(META_CACHE)
-  await c.put(WARM_MARK, new Response('ok'))
+  const cache = await caches.open(META_CACHE)
+  await cache.put(WARM_MARK, new Response('ok'))
 }
 
 let warming = null
@@ -120,17 +108,17 @@ async function warmAllPagesAndAPIs () {
   warming = (async () => {
     let pages = [], images = []
     try {
-      const r = await fetch('/service-worker/precache.json', {
+      const res = await fetch('/service-worker/precache.json', {
         credentials: 'same-origin',
         headers: { Accept: 'application/json' }
       })
-      if (!r.ok) {
-        console.error('[SW] precache.json failed', r.status)
+      if (!res.ok) {
+        console.error('[SW] precache.json failed', res.status)
       } else {
-        ({ pages = [], images = [] } = await r.json())
+        ({ pages = [], images = [] } = await res.json())
       }
-    } catch (e) {
-      console.error('[SW] precache.json fetch error', e)
+    } catch (error) {
+      console.error('[SW] precache.json fetch error', error)
     }
 
     console.log('[SW] precache pages:', pages)
@@ -146,7 +134,7 @@ async function warmAllPagesAndAPIs () {
       } else {
         console.warn('[SW] offline.html not cached', offRes.status)
       }
-    } catch (e) { console.error('[SW] offline.html fetch error', e) }
+    } catch (error) { console.error('[SW] offline.html fetch error', error) }
 
     for (const batch of chunk(pages, 40)) {
       await Promise.all(batch.map(async (url) => {
@@ -163,10 +151,10 @@ async function warmAllPagesAndAPIs () {
             u.hash = ''
             finalURL = u.toString()
           } catch (_) { finalURL = url }
-          await pagesCache.put(new Request(finalURL, { credentials: 'same-origin' }), res.clone())
+          await pagesCache.put(finalURL, res.clone())
           if (finalURL !== url) console.log('[SW] Redirected', { from: url, to: finalURL })
-        } catch (e) {
-          console.error('[SW] Page fetch error', url, e)
+        } catch (error) {
+          console.error('[SW] Page fetch error', url, error)
         }
       }))
     }
@@ -178,14 +166,14 @@ async function warmAllPagesAndAPIs () {
           const sameOrigin = new URL(u, self.location.origin).origin === self.location.origin
           const req = sameOrigin ? new Request(u, { credentials: 'same-origin' }) : new Request(u, { mode: 'no-cors' })
           const res = await fetch(req)
-          await imgCache.put(req, res.clone())
-        } catch (e) {
-          console.error('[SW] Image fetch error', u, e)
+          if (res.ok || res.type === 'opaque') await imgCache.put(u, res.clone())
+        } catch (error) {
+          console.error('[SW] Image fetch error', u, error)
         }
       }))
     }
 
-    const keys = (await pagesCache.keys()).map(k => k.url)
+    const keys = (await pagesCache.keys()).map(key => key.url)
     console.log('[SW] Cached page keys:', keys)
 
     if (await hasAnyPagesCached()) {
