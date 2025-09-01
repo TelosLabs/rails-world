@@ -40,24 +40,21 @@ const normalizeURL = (urlStr, { dropSearch = false } = {}) => {
 
 const isSameOrigin = (u) => new URL(u, self.location.origin).origin === self.location.origin
 
-const buildRequest = (u) =>
-  isSameOrigin(u)
-    ? new Request(u, { credentials: 'same-origin' })
-    : new Request(u, { mode: 'no-cors' })
+const buildRequest = (u) => isSameOrigin(u) ? new Request(u, { credentials: 'same-origin' }) : new Request(u, { mode: 'no-cors' })
 
 const fetchJSON = async (path) => {
   try {
     const res = await fetch(path, { credentials: 'same-origin', headers: { Accept: 'application/json' } })
     if (!res.ok) throw new Error(`HTTP ${res.status}`)
     return await res.json()
-  } catch (err) {
-    console.error('[SW] JSON fetch error', path, err)
+  } catch (error) {
+    console.error('[SW] JSON fetch error', path, error)
     return null
   }
 }
 
 const putInCache = async (cache, req, res) => {
-  try { await cache.put(req, res.clone()) } catch (err) { console.error('[SW] cache.put error', req, err) }
+  try { await cache.put(req, res.clone()) } catch (error) { console.error('[SW] cache.put error', req, error) }
 }
 
 const matchPageFromCache = async (pagesCache, req) => {
@@ -98,7 +95,7 @@ const cacheOfflinePage = async (pagesCache) => {
     const res = await fetch(req)
     if (res.ok) await putInCache(pagesCache, req, res)
     else console.warn('[SW] offline.html not cached', res.status)
-  } catch (err) { console.error('[SW] offline.html fetch error', err) }
+  } catch (error) { console.error('[SW] offline.html fetch error', error) }
 }
 
 const warmPagesBatch = async (pages, pagesCache) => {
