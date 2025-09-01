@@ -48,13 +48,12 @@ const fetchJSON = async (path) => {
     if (!res.ok) throw new Error(`HTTP ${res.status}`)
     return await res.json()
   } catch (error) {
-    console.error('[SW] JSON fetch error', path, error)
     return null
   }
 }
 
 const putInCache = async (cache, req, res) => {
-  try { await cache.put(req, res.clone()) } catch (error) { console.error('[SW] cache.put error', req, error) }
+  try { await cache.put(req, res.clone()) } catch (error) { }
 }
 
 const matchPageFromCache = async (pagesCache, req) => {
@@ -94,8 +93,7 @@ const cacheOfflinePage = async (pagesCache) => {
     const req = new Request(OFFLINE_PATH, { credentials: 'same-origin' })
     const res = await fetch(req)
     if (res.ok) await putInCache(pagesCache, req, res)
-    else console.warn('[SW] offline.html not cached', res.status)
-  } catch (error) { console.error('[SW] offline.html fetch error', error) }
+  } catch (error) { }
 }
 
 const warmPagesBatch = async (pages, pagesCache) => {
@@ -104,15 +102,11 @@ const warmPagesBatch = async (pages, pagesCache) => {
       const req = new Request(url, { credentials: 'same-origin' })
       const res = await fetch(req)
       if (!res.ok) {
-        console.warn('[SW] Page NOT cached (status)', { url, status: res.status })
         return
       }
       const finalURL = normalizeURL(res.url)
       await pagesCache.put(finalURL, res.clone())
-      if (finalURL !== url) console.log('[SW] Redirected', { from: url, to: finalURL })
-    } catch (error) {
-      console.error('[SW] Page fetch error', url, error)
-    }
+    } catch (error) { }
   }))
 }
 
@@ -122,9 +116,7 @@ const warmImagesBatch = async (images, imgCache) => {
       const req = buildRequest(u)
       const res = await fetch(req)
       if (res.ok || res.type === 'opaque') await imgCache.put(u, res.clone())
-    } catch (error) {
-      console.error('[SW] Image fetch error', u, error)
-    }
+    } catch (error) { }
   }))
 }
 
@@ -168,19 +160,13 @@ setCatchHandler(async ({ event }) => {
 let warming = null
 
 async function warmAllPagesAndAPIs () {
-  if (await alreadyWarmed()) {
-    console.log('[SW] Skipping warmup: already warmed and pages present.')
-    return
-  }
+  if (await alreadyWarmed()) return
   if (warming) return warming
 
   warming = (async () => {
     const precache = await fetchJSON(PRECACHE_PATH)
     const pages = precache?.pages ?? []
     const images = precache?.images ?? []
-
-    console.log('[SW] precache pages:', pages)
-    console.log('[SW] precache images:', images)
 
     const pagesCache = await caches.open(PAGES_CACHE)
     const imgCache = await caches.open(IMG_CACHE)
@@ -196,14 +182,8 @@ async function warmAllPagesAndAPIs () {
     }
 
     const keys = (await pagesCache.keys()).map(key => key.url)
-    console.log('[SW] Cached page keys:', keys)
 
-    if (await hasAnyPagesCached()) {
-      await markWarmed()
-      console.log('[SW] Warmup complete.')
-    } else {
-      console.warn('[SW] Warmup finished but no pages were cached.')
-    }
+    if (await hasAnyPagesCached()) await markWarmed()
   })()
 
   return warming
