@@ -34,12 +34,12 @@
   margin-top: 0 !important;
 }
 
-.native-mt-6 {
-  margin-top: 24px !important;
-}
-
 .native-mb-0 {
   margin-bottom: 0 !important;
+}
+
+.native-pb-0 {
+  padding-bottom: 0 !important;
 }
 
 .native-mb-4 {
