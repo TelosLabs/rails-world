@@ -179,7 +179,7 @@ async function warmAllPagesAndAPIs () {
 
   warming = (async () => {
     const precache = await fetchJSON(PRECACHE_PATH)
-    const pages = precache?.pages  ?? []
+    const pages = precache?.pages ?? []
     const images = precache?.images ?? []
 
     console.log('[SW] precache pages:', pages)
