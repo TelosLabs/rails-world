@@ -28,9 +28,9 @@ class ServiceWorkerController < ApplicationController
     end
 
     date_pages =
-    Array(Current.conference&.dates).map do |date|
-      sessions_path(starts_at: date)
-    end
+      Array(Current.conference&.dates).map do |date|
+        sessions_path(starts_at: date)
+      end
 
     pages = [
       root_path,
@@ -57,11 +57,9 @@ class ServiceWorkerController < ApplicationController
       end.uniq
     end
 
-
     Rails.logger.info "[SW precache] Dates: #{Current.conference&.dates.inspect}"
     Rails.logger.info "[SW precache] Pages count=#{pages.size}"
     pages.each { |p| Rails.logger.info "[SW precache] #{p}" }
-
 
     render json: {pages: pages.uniq, images: avatars}
   end

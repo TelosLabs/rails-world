@@ -31,11 +31,11 @@ class SessionsController < ApplicationController
   def filter_params
     raw = params.permit(:starts_at, :live, :past, :starting_soon).to_h
 
-    if raw['starts_at'].present?
+    if raw["starts_at"].present?
       begin
-        raw['starts_at'] = Date.parse(raw['starts_at']).to_s
+        raw["starts_at"] = Date.parse(raw["starts_at"]).to_s
       rescue ArgumentError
-        raw.delete('starts_at')
+        raw.delete("starts_at")
       end
     end
 
