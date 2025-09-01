@@ -181,8 +181,6 @@ async function warmAllPagesAndAPIs () {
       await warmImagesBatch(batch, imgCache)
     }
 
-    const keys = (await pagesCache.keys()).map(key => key.url)
-
     if (await hasAnyPagesCached()) await markWarmed()
   })()
 
