@@ -29,7 +29,7 @@ registerRoute(
 
 registerRoute(
   ({ request }) => request.destination === 'style' || request.destination === 'script',
-  new StaleWhileRevalidate({ cacheName: ASSETS_CACHE })
+    new StaleWhileRevalidate({ cacheName: ASSETS_CACHE })
 )
 
 registerRoute(
@@ -106,7 +106,8 @@ async function warmAllPagesAndAPIs () {
   if (warming) return warming
 
   warming = (async () => {
-    let pages = [], images = []
+    let pages = []
+    let images = []
     try {
       const res = await fetch('/service-worker/precache.json', {
         credentials: 'same-origin',
