@@ -1,7 +1,28 @@
 class ProfilesController < ApplicationController
-  allow_unauthenticated_access only: :show
+  allow_unauthenticated_access only: [:index, :show]
 
-  before_action :set_profile, except: :show
+  before_action :set_profile, except: [:index, :show]
+
+  def index
+    profiles_scope = Profile.includes(:profileable)
+      .where(is_public: true)
+
+    profiles_scope = profiles_scope.where.not(id: current_profile.id) if user_signed_in?
+
+    @profiles = profiles_scope
+      .order(created_at: :desc)
+      .page(params[:page])
+      .per(10)
+
+    # The lazy_loading turbo frame defaults to HTML format, but we need turbo_stream
+    # format to handle pagination requests
+    request.format = :turbo_stream if turbo_frame_request? && params[:page].present?
+
+    respond_to do |format|
+      format.html
+      format.turbo_stream
+    end
+  end
 
   def show
     if user_signed_in?

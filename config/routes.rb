@@ -34,7 +34,7 @@ Rails.application.routes.draw do
     resource :attendee, only: [:create, :destroy]
   end
   resources :speakers, only: [:show]
-  resources :profiles, only: [:show, :edit, :update, :destroy], param: :uuid
+  resources :profiles, except: [:new, :create], param: :uuid
   resources :abuse_reports, only: [:create], param: :uuid
   resources :notifications, only: [:index]
   resources :web_push_subscriptions, only: [:create]

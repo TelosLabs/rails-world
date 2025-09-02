@@ -71,6 +71,7 @@ namespace :db do
       profile.github_url = "https://github.com/tenderlove"
       profile.linkedin_url = "https://www.linkedin.com/in/tenderlove/"
       profile.twitter_url = "https://twitter.com/tenderlove"
+      profile.is_public = true
       profile.image = Rails.root.join("#{image_path}/RW-Aaron_Patterson.jpg").open
       Speaker.find_or_create_by!(profile: profile)
     end.profileable
@@ -81,6 +82,7 @@ namespace :db do
       profile.github_url = "https://github.com/adrianna-chang-shopify"
       profile.linkedin_url = "https://ca.linkedin.com/in/adrianna-chang-42464796"
       profile.twitter_url = "https://twitter.com/adriannakchang"
+      profile.is_public = true
       profile.image = Rails.root.join("#{image_path}/RW-Adrianna_Chang.jpg").open
       Speaker.find_or_create_by!(profile: profile)
     end.profileable
@@ -91,6 +93,7 @@ namespace :db do
       profile.github_url = "https://www.github.com/austio"
       profile.linkedin_url = "https://www.linkedin.com/in/rubyprogramming/"
       profile.twitter_url = "https://twitter.com/austio36"
+      profile.is_public = true
       profile.image = Rails.root.join("#{image_path}/RW-Austin_Story.jpg").open
       Speaker.find_or_create_by!(profile: profile)
     end.profileable
@@ -101,6 +104,7 @@ namespace :db do
       profile.github_url = "https://www.github.com/excid3"
       profile.linkedin_url = "https://linkedin.com/in/excid3"
       profile.twitter_url = "https://twitter.com/excid3"
+      profile.is_public = true
       profile.image = Rails.root.join("#{image_path}/RW-Chris_Oliver.jpg").open
       Speaker.find_or_create_by!(profile: profile)
     end.profileable
@@ -111,6 +115,7 @@ namespace :db do
       profile.github_url = "https://github.com/dhh"
       profile.linkedin_url = "https://www.linkedin.com/in/david-heinemeier-hansson-374b18221/"
       profile.twitter_url = "https://twitter.com/dhh"
+      profile.is_public = true
       profile.image = Rails.root.join("#{image_path}/RW-David.jpeg").open
       Speaker.find_or_create_by!(profile: profile)
     end.profileable
@@ -121,6 +126,7 @@ namespace :db do
       profile.github_url = "https://github.com/djmb"
       profile.linkedin_url = "https://www.linkedin.com/in/donal-mcbreen-a8227a52/"
       profile.twitter_url = ""
+      profile.is_public = true
       profile.image = Rails.root.join("#{image_path}/RW-Donal_McBreen.jpg").open
       Speaker.find_or_create_by!(profile: profile)
     end.profileable
@@ -131,6 +137,7 @@ namespace :db do
       profile.github_url = ""
       profile.linkedin_url = ""
       profile.twitter_url = ""
+      profile.is_public = true
       profile.image = Rails.root.join("#{image_path}/RW-Hartley_McGuire.jpg").open
       Speaker.find_or_create_by!(profile: profile)
     end.profileable
@@ -141,6 +148,7 @@ namespace :db do
       profile.github_url = "https://github.com/sharkey11"
       profile.linkedin_url = "https://www.linkedin.com/in/sharkeyjack/"
       profile.twitter_url = "http://x.com/jacksharkey11"
+      profile.is_public = true
       profile.image = Rails.root.join("#{image_path}/RW-Jack_Sharkey.png").open
       Speaker.find_or_create_by!(profile: profile)
     end.profileable
@@ -151,6 +159,7 @@ namespace :db do
       profile.github_url = ""
       profile.linkedin_url = "https://www.linkedin.com/in/jason-meller-04498230/"
       profile.twitter_url = "https://twitter.com/jmeller"
+      profile.is_public = true
       profile.image = Rails.root.join("#{image_path}/RW-Jason_Meller.jpg").open
       Speaker.find_or_create_by!(profile: profile)
     end.profileable
@@ -161,6 +170,7 @@ namespace :db do
       profile.github_url = "https://www.github.com/joemasilotti"
       profile.linkedin_url = "https://www.linkedin.com/in/joemasilotti/"
       profile.twitter_url = "https://x.com/joemasilotti"
+      profile.is_public = true
       profile.image = Rails.root.join("#{image_path}/RW-Joe_Masilotti.jpg").open
       Speaker.find_or_create_by!(profile: profile)
     end.profileable
@@ -171,6 +181,7 @@ namespace :db do
       profile.github_url = "https://github.com/dischorde"
       profile.linkedin_url = "https://www.linkedin.com/in/katarinarossi/"
       profile.twitter_url = ""
+      profile.is_public = true
       profile.image = Rails.root.join("#{image_path}/RW-Katarina_Rossi.png").open
       Speaker.find_or_create_by!(profile: profile)
     end.profileable
@@ -181,6 +192,7 @@ namespace :db do
       profile.github_url = ""
       profile.linkedin_url = ""
       profile.twitter_url = ""
+      profile.is_public = true
       profile.image = Rails.root.join("#{image_path}/RW-Kevin_McConnell.jpg").open
       Speaker.find_or_create_by!(profile: profile)
     end.profileable
@@ -191,6 +203,7 @@ namespace :db do
       profile.github_url = "https://www.github.com/kinseydurhamgrace"
       profile.linkedin_url = "https://www.linkedin.com/in/kinseyanndurham/"
       profile.twitter_url = "https://twitter.com/KinseyAnnDurham"
+      profile.is_public = true
       profile.image = Rails.root.join("#{image_path}/RW-Kinsey_Durham_Grace.jpg").open
       Speaker.find_or_create_by!(profile: profile)
     end.profileable
@@ -201,6 +214,7 @@ namespace :db do
       profile.github_url = "https://github.com/okuramasafumi"
       profile.linkedin_url = "https://www.linkedin.com/in/masafumi-okura-82651128/"
       profile.twitter_url = "https://twitter.com/okuramasafumi"
+      profile.is_public = true
       profile.image = Rails.root.join("#{image_path}/RW-Masafumi_Okura.jpg").open
       Speaker.find_or_create_by!(profile: profile)
     end.profileable
@@ -211,6 +225,7 @@ namespace :db do
       profile.github_url = "https://github.com/minuteman3/"
       profile.linkedin_url = "https://www.linkedin.com/in/milesmcguire"
       profile.twitter_url = ""
+      profile.is_public = true
       profile.image = Rails.root.join("#{image_path}/RW-Mike_Dalessio.jpg").open
       Speaker.find_or_create_by!(profile: profile)
     end.profileable
@@ -221,6 +236,7 @@ namespace :db do
       profile.github_url = "https://github.com/minuteman3"
       profile.linkedin_url = "https://www.linkedin.com/in/milesmcguire/"
       profile.twitter_url = ""
+      profile.is_public = true
       profile.image = Rails.root.join("#{image_path}/RW-Miles_McGuire.jpg").open
       Speaker.find_or_create_by!(profile: profile)
     end.profileable
@@ -231,6 +247,7 @@ namespace :db do
       profile.github_url = "https://github.com/pstrzalk"
       profile.linkedin_url = "https://www.linkedin.com/in/pawel-strzalkowski/"
       profile.twitter_url = "https://x.com/realPawelS"
+      profile.is_public = true
       profile.image = Rails.root.join("#{image_path}/RW-Pawel_Strzalkowski.jpg").open
       Speaker.find_or_create_by!(profile: profile)
     end.profileable
@@ -241,6 +258,7 @@ namespace :db do
       profile.github_url = "https://github.com/peterzhu2118"
       profile.linkedin_url = "https://linkedin.com/in/peterzhu2118"
       profile.twitter_url = "https://twitter.com/peterzhu2118"
+      profile.is_public = true
       profile.image = Rails.root.join("#{image_path}/RW-Peter-Zhu.png").open
       Speaker.find_or_create_by!(profile: profile)
     end.profileable
@@ -251,6 +269,7 @@ namespace :db do
       profile.github_url = "https://github.com/radanskoric/"
       profile.linkedin_url = "https://www.linkedin.com/in/radanskoric/"
       profile.twitter_url = "https://x.com/RadanSkoric"
+      profile.is_public = true
       profile.image = Rails.root.join("#{image_path}/RW-Radan_Skoric.jpg").open
       Speaker.find_or_create_by!(profile: profile)
     end.profileable
@@ -261,6 +280,7 @@ namespace :db do
       profile.github_url = "https://github.com/rosa"
       profile.linkedin_url = "https://www.linkedin.com/in/rosagutierrezescudero/"
       profile.twitter_url = "https://twitter.com/rosapolis"
+      profile.is_public = true
       profile.image = Rails.root.join("#{image_path}/RW-Rosa_Gutierrez.jpg").open
       Speaker.find_or_create_by!(profile: profile)
     end.profileable
@@ -271,6 +291,7 @@ namespace :db do
       profile.github_url = "http://github.com/snehalahire"
       profile.linkedin_url = "https://www.linkedin.com/in/snehal-ahire27/"
       profile.twitter_url = ""
+      profile.is_public = true
       profile.image = Rails.root.join("#{image_path}/RW-Snehal_Ahire.jpg").open
       Speaker.find_or_create_by!(profile: profile)
     end.profileable
@@ -281,6 +302,7 @@ namespace :db do
       profile.github_url = ""
       profile.linkedin_url = ""
       profile.twitter_url = ""
+      profile.is_public = true
       profile.image = Rails.root.join("#{image_path}/RW-A_Mcnamara.jpg").open
       Speaker.find_or_create_by!(profile: profile)
     end.profileable
@@ -291,6 +313,7 @@ namespace :db do
       profile.github_url = "https://github.com/hsbt"
       profile.linkedin_url = "https://www.linkedin.com/in/hiroshi-shibata-04264122/"
       profile.twitter_url = ""
+      profile.is_public = true
       profile.image = Rails.root.join("#{image_path}/RW-Hiroshi_Shibata.jpeg").open
       Speaker.find_or_create_by!(profile: profile)
     end.profileable
