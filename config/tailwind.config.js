@@ -41,7 +41,7 @@ module.exports = {
         'purple-dark': '#432463',
         'purple-light': '#4E2A73',
         red: '#CB0C1C',
-        'off-red': '#a46369',
+        'dark-theme-red': '#D53D49',
         'blue-marine': '#003A5D',
         'blue-teal': '#00AFAA',
         yellow: '#F4BF4F',
