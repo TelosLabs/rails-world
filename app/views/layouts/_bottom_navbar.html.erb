@@ -55,7 +55,7 @@
     ) do %>
       <%= inline_svg_tag "icons/bell.svg", class: nav_icon_class_for([notifications_path, notification_settings_path]) %>
       <% if unread_notifications.present? %>
-        <div class="absolute -top-0.5 right-0 w-[18px] h-[18px] rounded-full bg-red dark:bg-off-red flex justify-center items-center">
+        <div class="absolute -top-0.5 right-0 w-[18px] h-[18px] rounded-full bg-red dark:bg-dark-theme-red flex justify-center items-center">
           <span class="text-[11px] text-white font-bold px-1">
             <%= unread_notifications.length < 10 ? unread_notifications.length : "+9" %>
           </span>

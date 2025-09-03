@@ -57,7 +57,7 @@
       <% elsif params[:starts_at].present? || session_filter_params.present? %>
         <div class="flex flex-col items-center justify-center w-full h-full">
           <p class="max-w-xs mb-4 font-bold text-center dark:text-lightcolor">No sessions match your current filters</p>
-          <%= link_to 'Clear filters', schedule_path, class: "text-red dark:text-off-red underline font-bold italic text-lg", data: { turbo_frame: "sessions_content", turbo_action: "advance" } %>
+          <%= link_to 'Clear filters', schedule_path, class: "text-red dark:text-dark-theme-red underline font-bold italic text-lg", data: { turbo_frame: "sessions_content", turbo_action: "advance" } %>
         </div>
       <% else %>
         <div class="flex flex-col items-center justify-center w-full h-full">
@@ -65,7 +65,7 @@
             <%= inline_svg_tag("icons/clock.svg", size: "56", class: "fill-gray-400") %>
           </div>
           <p class="mb-4 font-bold text-center max-w-52">You don't have any sessions in your schedule yet</p>
-          <%= link_to 'Explore the Agenda', sessions_path, class: "text-red dark:text-off-red underline font-bold italic text-lg", data: { turbo_frame: "_top", turbo_action: "replace" } %>
+          <%= link_to 'Explore the Agenda', sessions_path, class: "text-red dark:text-dark-theme-red underline font-bold italic text-lg", data: { turbo_frame: "_top", turbo_action: "replace" } %>
         </div>
       <% end %>
     </div>
