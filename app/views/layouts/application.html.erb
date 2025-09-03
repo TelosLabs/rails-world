@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html class="h-screen">
-  <head>
-    <title><%= content_for(:title).presence || "#{Current.conference&.name}" %></title>
+<html class="h-screen <%= resolved_theme_class %>">
+    <head>
+      <title><%= page_title %></title>
 
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover">
     <meta name="turbo-refresh-scroll" content="preserve">
@@ -27,6 +27,19 @@
 
     <%= javascript_importmap_tags %>
     <%= favicon_link_tag asset_path('icons/favicon.svg') %>
+
+    <% if current_theme == "system" %>
+      <script>
+        // Apply system theme immediately to prevent flash
+        (function() {
+          if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        })();
+      </script>
+    <% end %>
 
     <%= yield :head %>
   </head>

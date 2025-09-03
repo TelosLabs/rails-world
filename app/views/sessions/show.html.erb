@@ -8,9 +8,9 @@
   <div class="w-full px-5 pt-3 pb-4 bg-bottom bg-no-repeat bg-cover">
     <div class="flex flex-col rounded-lg max-w-screen-sm mx-auto bg-white dark:bg-[#131b21]">
       <%= render partial: "sessions/status", locals: { session: @session } %>
-      <div class="px-4">
+      <div class="p-5">
         <div class="flex flex-row justify-between w-full mb-2 grow">
-          <h1 class="text-2xl italic font-bold text-red dark:text-white"><%= @session.title %></h1>
+          <h1 class="text-2xl italic font-bold text-red dark:text-dark-theme-red"><%= @session.title %></h1>
           <%= render partial: "bookmark", locals: { session: @session, user_is_an_attendee: @user_session_ids.include?(@session.id)} %>
         </div>
 
@@ -21,7 +21,7 @@
                 speaker_path(speaker),
                 class: [
                   "inline-flex items-center py-2 px-4 rounded-lg min-w-fit",
-                  "group hover:bg-[#FAE7E8]/[0.5] focus:bg-[#FAE7E8]/[0.5] dark:hover:bg-[#182027] dark:focus:bg-[#182027]/[0.5]"
+                  "group hover:bg-[#FAE7E8]/[0.5] focus:bg-[#FAE7E8]/[0.5] dark:hover:bg-[#182027] dark:focus:bg-[#182027]/[0.5] transition-all"
                 ],
                 data: { test_id: "speaker_#{speaker.id}" }
               ) do %>
@@ -38,8 +38,8 @@
                     "flex flex-col ml-2",
                     "max-w-[200px]": @session.speakers.length > 1
                 ] ) do %>
-                  <h2 class="text-sm italic font-black group-hover:text-red group-focus:text-red dark:text-[#798691] dark:group-hover:text-white dark:group-focus:text-white"><%= speaker.name %></h2>
-                  <p class="text-sm font-normal text-gray-400 dark:text-[#798691]"><%= speaker.job_title %></p>
+                  <h2 class="text-sm font-medium group-hover:text-red group-focus:text-red dark:text-[#798691] dark:group-hover:text-white dark:group-focus:text-white transition-all"><%= speaker.name %></h2>
+                  <p class="text-sm font-light text-gray-400 dark:text-[#798691]"><%= speaker.job_title %></p>
                 <% end %>
               <% end %>
               <div class="my-3 border-l last:hidden"></div>
@@ -50,7 +50,7 @@
         <% if @session.tags.present? %>
           <div class="flex flex-row flex-wrap items-center mb-4 gap-4">
             <% @session.tags.each do |tag| %>
-              <div class="px-2 py-1 text-sm font-medium bg-white border rounded-lg border-bluegray-600 text-bluegray-600 dark:bg-[#1b2733] dark:text-[#5891c7] dark:border-0">
+              <div class="px-2 py-1 text-xs bg-white border rounded-lg border-bluegray-600 text-bluegray-600 dark:bg-[#1b2733] dark:text-[#5891c7] dark:border-0">
                 <%= tag.name %>
               </div>
             <% end %>
@@ -71,7 +71,7 @@
           </p>
         </div>
 
-        <div class="flex flex-row items-center mb-3">
+        <div class="flex flex-row items-center">
           <%= inline_svg_tag("icons/location.svg", class: "w-[16px] h-[16px] mr-1 fill-grey-600 dark:fill-[#798691]") %>
           <p class="text-sm text-grey-600 dark:text-[#798691]"><%= @session.location.name %></p>
         </div>
@@ -87,12 +87,12 @@
         </p>
         <div class="flex flex-col w-full gap-4">
           <% @session.speakers.each do |speaker| %>
-            <div class="w-full px-5 pt-2 pb-5 bg-white dark:bg-[#131b21] rounded-lg">
+            <div class="w-full p-5 bg-white dark:bg-[#131b21] rounded-lg">
               <%= link_to(
                 speaker_path(speaker),
                 class: [
                   "flex items-center p-3 rounded-lg",
-                  "hover:bg-[#FAE7E8]/[0.5] focus:bg-[#FAE7E8]/[0.5] dark:hover:bg-[#182027] dark:focus:bg-[#182027]/[0.5]"
+                  "group hover:bg-[#FAE7E8]/[0.5] focus:bg-[#FAE7E8]/[0.5] dark:hover:bg-[#182027] dark:focus:bg-[#182027]/[0.5] transition-all"
                 ]
               ) do %>
                 <% if speaker.image&.attached? %>
@@ -104,7 +104,7 @@
                   </div>
                 <% end %>
                 <div class="flex flex-col ml-5">
-                  <p class="text-base italic font-black text-red dark:text-[#798691]"><%= speaker.name %></p>
+                  <p class="text-base italic font-black text-red group-focus:text-red dark:text-[#798691] dark:group-hover:text-white dark:group-focus:text-white transition-all"><%= speaker.name %></p>
                   <p class="text-sm font-normal text-gray-400 dark:text-[#798691]"><%= speaker.job_title %></p>
                 </div>
               <% end %>
