@@ -11,7 +11,11 @@
           "bg-red dark:bg-dark-theme-red text-white": params[:starts_at] == session_date.to_s,
           "bg-white text-red hover:bg-[#FAE7E8] focus:bg-[#FAE7E8] dark:bg-[#182027] dark:text-lightcolor dark:hover:bg-gray-800 transition-all": params[:starts_at] != session_date.to_s
         ],
-        data: { test_id: "date_filter_#{session_date.strftime('%a_%d')}" }
+        data: {
+          test_id: "date_filter_#{session_date.strftime('%a_%d')}",
+          turbo_frame: "sessions_content",
+          turbo_action: "advance"
+        }
       ) %>
     <% end %>
     <%= link_to(
@@ -22,7 +26,11 @@
         "bg-red text-white dark:bg-dark-theme-red": params[:starts_at].blank?,
         "bg-white text-red hover:bg-[#FAE7E8] focus:bg-[#FAE7E8] dark:bg-[#182027] dark:text-lightcolor dark:hover:bg-gray-800 transition-all": params[:starts_at].present?
       ],
-      data: { test_id: "date_filter_all" }
+             data: {
+         test_id: "date_filter_all",
+         turbo_frame: "sessions_content",
+         turbo_action: "advance"
+       }
     ) %>
   </div>
 
@@ -47,7 +55,7 @@
         data-transition-leave-from="opacity-100 scale-100"
         data-transition-leave-to="opacity-0 scale-95">
         <div class="pt-2 pb-2 bg-white dark:bg-[#131b21] rounded-lg shadow-[0_10px_50px_0_rgba(0,0,0,0.40)] flex-col inline-flex absolute top-4 right-[-8px] right-0 w-40 max-w-40">
-          <%= form_with url: resource, class: "grid", method: :get do |form| %>
+                     <%= form_with url: resource, class: "grid", method: :get, data: { turbo_frame: "sessions_content", turbo_action: "advance" } do |form| %>
             <%= form.hidden_field :starts_at, value: params[:starts_at] %>
 
             <% SessionQuery::STATUS_SCOPES.each do |name| %>
@@ -82,7 +90,7 @@
 </div>
 
 <% if session_filter_params.present? %>
-  <div class="flex w-full gap-2">
+  <div class="flex w-full gap-2 native-mb-4">
     <div class="flex flex-wrap">
       <div class="flex items-center h-8 py-1 text-base font-bold leading-tight dark:text-lightcolor">Active filters:</div>
     </div>
@@ -100,7 +108,8 @@
 
             <%= link_to(
               inline_svg_tag("icons/close.svg", class: "fill-black dark:fill-white"),
-              url_for([resource, modified_params])
+              url_for([resource, modified_params]),
+              data: { turbo_frame: "sessions_content", turbo_action: "advance" }
             ) %>
           </div>
         </div>

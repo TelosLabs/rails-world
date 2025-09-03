@@ -8,6 +8,15 @@ export default class extends Controller {
 
     window.addEventListener('turbo:before-render', this.preserveScroll)
     window.addEventListener('turbo:render', this.restoreScroll)
+    window.addEventListener('turbo:before-fetch-request', this.preserveScroll)
+    window.addEventListener('turbo:frame-render', this.restoreScroll)
+  }
+
+  disconnect () {
+    window.removeEventListener('turbo:before-render', this.preserveScroll)
+    window.removeEventListener('turbo:render', this.restoreScroll)
+    window.removeEventListener('turbo:before-fetch-request', this.preserveScroll)
+    window.removeEventListener('turbo:frame-render', this.restoreScroll)
   }
 
   preserveScroll () {
