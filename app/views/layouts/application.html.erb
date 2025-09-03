@@ -49,6 +49,8 @@
     data-web-push-notifications-vapid-key-value=#{vapid_public_key}
     data-web-push-notifications-notifications-enabled-value=#{current_profile.web_push_notifications}" : '' %>>
 
+    <%= render 'layouts/offline_banner' %>
+
     <div class="fixed top-0 z-40 w-full">
       <%= yield :top_nav %>
     </div>
