@@ -96,7 +96,7 @@
                 ]
               ) do %>
                 <% if speaker.image&.attached? %>
-                  <div class="relative flex flex-col items-center justify-center w-12 h-12 bg-center bg-no-repeat bg-cover rounded-full min-w-12 min-h-12 " style="background-image: url('<%= url_for(speaker.image) %>')">
+                  <div class="relative flex flex-col items-center justify-center w-12 h-12 bg-center bg-no-repeat bg-cover rounded-full min-w-12 min-h-12 " style="background-image: url(<%= url_for(speaker.image) %>)">
                   </div>
                 <% else %>
                   <a class="flex flex-row items-center justify-center w-12 h-12 p-3 rounded-full bg-slate-300">
