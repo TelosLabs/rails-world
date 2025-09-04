@@ -3,7 +3,6 @@ class PasswordResetsController < ApplicationController
   rate_limit to: 3, 
     within: 1.minute, with: -> { 
       flash.now[:alert] = "Please try again later."
-      @user = User.new
       render :new, status: :too_many_requests
     }, 
     only: [:create],  by: -> { request.remote_ip }
