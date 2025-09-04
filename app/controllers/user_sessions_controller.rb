@@ -1,8 +1,12 @@
 class UserSessionsController < ApplicationController
   allow_unauthenticated_access only: [:new, :create]
   rate_limit to: 3, 
-    within: 1.minute, with: -> { redirect_to new_user_session_path, alert: "Please try again later.", status: :too_many_requests }, 
-    only: :create,  by: -> { request.remote_ip }
+    within: 1.minute, with: -> { 
+      flash.now[:alert] = "Please try again later."
+      @user = User.new
+      render :new, status: :too_many_requests
+    }, 
+    only: [:create],  by: -> { request.remote_ip }
 
   before_action :redirect_if_signed_in, only: [:new, :create]
 
