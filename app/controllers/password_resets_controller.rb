@@ -1,5 +1,8 @@
 class PasswordResetsController < ApplicationController
   allow_unauthenticated_access
+  rate_limit to: 3, 
+    within: 1.minute, with: -> { redirect_to new_password_reset_path, alert: "Please try again later.", status: :too_many_requests }, 
+    only: :create,  by: -> { request.remote_ip }
 
   before_action :set_user_by_token, only: [:edit, :update]
 
