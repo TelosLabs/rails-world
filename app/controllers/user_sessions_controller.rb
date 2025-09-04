@@ -2,7 +2,7 @@ class UserSessionsController < ApplicationController
   allow_unauthenticated_access only: [:new, :create]
   rate_limit to: 3, 
     within: 1.minute, with: -> { 
-      flash.now[:alert] = "Please try again later."
+      flash.now[:alert] = t("controllers.user_sessions.create.rate_limit")
       @user = User.new
       render :new, status: :too_many_requests
     }, 
