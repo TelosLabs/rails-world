@@ -32,6 +32,7 @@ RSpec.describe PasswordResetsController, type: :controller do
     context "with rate limit" do
       before do
         Rails.application.config.action_controller.perform_caching = true
+        Rails.cache.clear
       end
 
       after do
