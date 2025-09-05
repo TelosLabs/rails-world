@@ -1,5 +1,9 @@
 <%= title "#{@session.title}" %>
 
+<% content_for :head do %>
+  <meta name="turbo-visit-control" content="reload">
+<% end %>
+
 <% content_for :top_nav do %>
   <%= render partial: "layouts/secondary_top_nav" %>
 <% end %>
