@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="h-screen <%= resolved_theme_class %>">
-    <head>
-      <title><%= page_title %></title>
+  <head>
+    <title><%= page_title %></title>
 
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,viewport-fit=cover">
     <meta name="turbo-refresh-scroll" content="preserve">
@@ -9,6 +9,7 @@
     <meta name="view-transition" content="same-origin">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="turbo-prefetch" content="false">
 
     <link rel="apple-touch-icon" href="<%= image_path "homescreen_icon.png" %>">
     <link rel="manifest" crossorigin="use-credentials" href="/manifest.json">
@@ -47,6 +48,8 @@
     <%= user_signed_in? ? "data-controller=web-push-notifications
     data-web-push-notifications-vapid-key-value=#{vapid_public_key}
     data-web-push-notifications-notifications-enabled-value=#{current_profile.web_push_notifications}" : '' %>>
+
+    <%= render 'layouts/offline_banner' %>
 
     <div class="fixed top-0 z-40 w-full">
       <%= yield :top_nav %>
