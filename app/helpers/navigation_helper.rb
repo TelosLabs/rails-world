@@ -36,4 +36,12 @@ module NavigationHelper
   def show_bookmark_button?(session)
     controller_name == "schedules" || !session.past?
   end
+
+  def page_title
+    if turbo_native_app?
+      content_for(:title).presence
+    else
+      content_for(:title).presence || Current.conference&.name
+    end
+  end
 end

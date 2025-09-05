@@ -9,7 +9,7 @@
         nav_text_class_for([sessions_path, root_path, "/speakers"]),
         "flex flex-col items-center justify-center"
       ],
-      data: { test_id: "sessions_nav" }
+      data: { test_id: "sessions_nav", turbo_action: "replace" }
     ) do %>
       <%= inline_svg_tag "icons/calendar.svg", class: nav_icon_class_for([sessions_path, root_path, "/speakers"]) %>
       Agenda
@@ -24,7 +24,7 @@
         nav_text_class_for([schedule_path]),
         "flex flex-col items-center justify-center"
       ],
-      data: { test_id: "schedule_nav" }
+      data: { test_id: "schedule_nav", turbo_action: "replace" }
     ) do %>
       <%= inline_svg_tag "icons/clock.svg", class: nav_icon_class_for([schedule_path]) %>
       My Schedule
@@ -35,7 +35,8 @@
       class: [
         nav_text_class_for(["/profiles"]),
         "flex flex-col items-center justify-center"
-      ]
+      ],
+      data: { turbo_action: "replace" }
     ) do %>
       <%= inline_svg_tag(
         "icons/avatar_no_fill.svg",
@@ -49,11 +50,12 @@
       class: [
         nav_text_class_for([notifications_path, notification_settings_path]),
         "relative flex flex-col items-center justify-center"
-      ]
+      ],
+      data: { turbo_action: "replace" }
     ) do %>
       <%= inline_svg_tag "icons/bell.svg", class: nav_icon_class_for([notifications_path, notification_settings_path]) %>
       <% if unread_notifications.present? %>
-        <div class="absolute -top-0.5 right-0 w-[18px] h-[18px] rounded-full bg-red dark:bg-off-red flex justify-center items-center">
+        <div class="absolute -top-0.5 right-0 w-[18px] h-[18px] rounded-full bg-red dark:bg-dark-theme-red flex justify-center items-center">
           <span class="text-[11px] text-white font-bold px-1">
             <%= unread_notifications.length < 10 ? unread_notifications.length : "+9" %>
           </span>
@@ -67,7 +69,8 @@
       class: [
         nav_text_class_for([about_path]),
         "flex flex-col items-center justify-center"
-      ]
+      ],
+      data: { turbo_action: "replace" }
     ) do %>
       <%= inline_svg_tag "icons/info_circle.svg", class: nav_icon_class_for([about_path]) %>
       About
