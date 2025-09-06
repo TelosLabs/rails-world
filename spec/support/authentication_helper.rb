@@ -1,6 +1,8 @@
 module AuthenticationHelper
   def sign_in(user, password = "password2024")
     if respond_to?(:visit) # System specs
+      Rails.cache.clear if Rails.cache.respond_to?(:clear)
+
       visit new_user_session_path
       find_dti("email_field").set(user.email)
       find_dti("password_field").set(password)
