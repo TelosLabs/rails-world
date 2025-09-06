@@ -7,6 +7,7 @@ en:
         notice: "Check your email to reset your password."
       update:
         notice: "Your password has been reset successfully. Please login."
+        rate_limit: "Please try again later."
       errors:
         invalid_token: "Invalid token, please try again."
     passwords:
@@ -28,6 +29,7 @@ en:
       create:
         notice: "Signed in successfully."
         alert: "Invalid email or password."
+        rate_limit: "Please try again later."
       destroy:
         notice: "You have been logged out."
     users:

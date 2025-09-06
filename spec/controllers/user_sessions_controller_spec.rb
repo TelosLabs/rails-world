@@ -46,5 +46,35 @@ RSpec.describe UserSessionsController, type: :controller do
         expect(response).to redirect_to(new_user_session_path)
       end
     end
+
+    context "with rate limit" do
+      before do
+        Rails.application.config.action_controller.perform_caching = true
+        Rails.cache.clear
+      end
+
+      after do
+        Rails.cache.clear
+      end
+
+      let(:params) do
+        {
+          user: {
+            email: user.email,
+            password: "invalid_password"
+          }
+        }
+      end
+
+      it "rate limits a request after 3 attempts under a minute" do
+        3.times do
+          expect { post :create, params: params }.not_to change(User, :count)
+          expect(response).to have_http_status(:redirect)
+        end
+
+        post :create, params: params
+        expect(response).to have_http_status(:too_many_requests)
+      end
+    end
   end
 end
