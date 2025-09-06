@@ -47,7 +47,7 @@ RSpec.describe PasswordResetsController, type: :controller do
 
       it "allows up to 3 requests within 1 minute" do
         3.times do |i|
-          @request.env["REMOTE_ADDR"] = "192.168.1.100"
+          request.env["REMOTE_ADDR"] = "192.168.1.100"
           post :create, params: params
           expect(response).to redirect_to(post_submit_password_reset_path)
         end
@@ -55,14 +55,14 @@ RSpec.describe PasswordResetsController, type: :controller do
 
       it "blocks the 4th request" do
         3.times do
-          @request.env["REMOTE_ADDR"] = "192.168.1.100"
+          request.env["REMOTE_ADDR"] = "192.168.1.100"
           post :create, params: params
           expect(response).to redirect_to(post_submit_password_reset_path)
         end
 
-        @request.env["REMOTE_ADDR"] = "192.168.1.100"
+        request.env["REMOTE_ADDR"] = "192.168.1.100"
         post :create, params: params
-        
+
         expect(flash[:alert]).to eq("Please try again later.")
         expect(response).to have_http_status(:too_many_requests)
       end
