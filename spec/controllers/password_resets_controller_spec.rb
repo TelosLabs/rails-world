@@ -28,6 +28,45 @@ RSpec.describe PasswordResetsController, type: :controller do
         expect(response).to redirect_to(post_submit_password_reset_path)
       end
     end
+
+    context "with rate limit" do
+      before do
+        Rails.application.config.action_controller.perform_caching = true
+        Rails.cache.clear
+      end
+
+      after do
+        Rails.cache.clear
+      end
+
+      let(:params) do
+        {
+          email: user.email
+        }
+      end
+
+      it "allows up to 3 requests within 1 minute" do
+        3.times do |i|
+          request.env["REMOTE_ADDR"] = "192.168.1.100"
+          post :create, params: params
+          expect(response).to redirect_to(post_submit_password_reset_path)
+        end
+      end
+
+      it "blocks the 4th request" do
+        3.times do
+          request.env["REMOTE_ADDR"] = "192.168.1.100"
+          post :create, params: params
+          expect(response).to redirect_to(post_submit_password_reset_path)
+        end
+
+        request.env["REMOTE_ADDR"] = "192.168.1.100"
+        post :create, params: params
+
+        expect(flash[:alert]).to eq("Please try again later.")
+        expect(response).to have_http_status(:too_many_requests)
+      end
+    end
   end
 
   describe "GET #edit" do

@@ -1,5 +1,11 @@
 class PasswordResetsController < ApplicationController
   allow_unauthenticated_access
+  rate_limit to: 3,
+    within: 1.minute, with: -> {
+      flash.now[:alert] = t("controllers.password_resets.update.rate_limit")
+      render :new, status: :too_many_requests
+    },
+    only: [:create], by: -> { request.remote_ip }
 
   before_action :set_user_by_token, only: [:edit, :update]
 
