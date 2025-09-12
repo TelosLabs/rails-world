@@ -32,6 +32,7 @@ class Profile < ApplicationRecord
   validates :github_url, url: {allow_blank: true, schemes: ["https"]}
   validates :linkedin_url, url: {allow_blank: true, schemes: ["https"]}
   validates :twitter_url, url: {allow_blank: true, schemes: ["https"]}
+  validates :bluesky_url, url: {allow_blank: true, schemes: ["https"]}
 
   before_validation :set_uuid
   before_validation :set_url_scheme
@@ -47,7 +48,7 @@ class Profile < ApplicationRecord
   end
 
   def set_url_scheme
-    %i[github_url linkedin_url twitter_url].each do |url|
+    %i[github_url linkedin_url twitter_url bluesky_url].each do |url|
       next if send(url).blank?
 
       uri_parse = URI.parse(send(url))

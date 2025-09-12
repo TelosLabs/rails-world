@@ -1,19 +1,15 @@
 <%= title "Edit profile" %>
-
 <% content_for :top_nav do %>
   <%= render partial: "layouts/primary_top_nav" %>
 <% end %>
-
 <%= content_for(:head) do %>
   <%# Disabling morphing so that when an error occurs, the user is "redirected" to the top of the page %>
   <meta name="turbo-refresh-method" content="replace">
   <meta name="turbo-refresh-scroll" content="reset">
 <% end %>
-
 <div class="flex flex-col items-center justify-center w-full bg-purple-dark dark:bg-[#0f171b] pt-safe-area-header pb-safe-area-bottom-navbar">
   <div class="flex flex-col w-full p-4 max-w-screen-sm">
     <h1 class="w-full mb-6 text-3xl font-black text-white dark:text-lightcolor">Set up your account</h1>
-
     <%= form_with model: @profile, url: profile_path(@profile.uuid), class: "flex flex-col items-center" do |form| %>
       <div class="relative" data-controller="image-previewer">
         <%= form.label(
@@ -51,32 +47,26 @@
       </div>
       <div class="flex flex-col items-start w-full">
         <%= render partial: "shared/form_errors", locals: { errors: form.object.errors.full_messages } %>
-
         <%= form.label :name, class: "font-bold text-white text-base mb-2 dark:text-lightcolor" %>
         <%= form.text_field :name, class: "w-full mb-6", placeholder: "John P. Doe" %>
-
         <%= form.label :bio, class: "font-bold text-white text-base mb-2 dark:text-lightcolor" %>
         <%= form.text_area :bio, class: "w-full mb-6", placeholder: "I'm a Ruby on Rails developer with six years of experience. Outside of work, I enjoy hiking and using dating apps.", rows: 3 %>
-
         <%= form.label :job_title, class: "font-bold text-white  text-base mb-2 dark:text-lightcolor" %>
         <%= form.text_field :job_title, class: "w-full mb-6", placeholder: "Senior Developer at Telos Labs" %>
-
         <%= form.label :github_url, "GitHub", class: "font-bold text-white text-base mb-2 dark:text-lightcolor" %>
         <%= form.text_field :github_url, class: "w-full mb-6", placeholder: "https://github.com/johnp" %>
-
         <%= form.label :linkedin_url, "LinkedIn", class: "font-bold text-white text-base mb-2 dark:text-lightcolor" %>
         <%= form.text_field :linkedin_url, class: "w-full mb-6", placeholder: "https://www.linkedin.com/in/johnp" %>
-
         <%= form.label :twitter_url, "X (formerly Twitter)", class: "font-bold text-white text-base mb-2 dark:text-lightcolor" %>
         <%= form.text_field :twitter_url, class: "w-full mb-6", placeholder: "https://x.com/johnp" %>
-
+        <%= form.label :bluesky_url, "Bluesky", class: "font-bold text-white text-base mb-2 dark:text-lightcolor" %>
+        <%= form.text_field :bluesky_url, class: "w-full mb-6", placeholder: "https://bsky.app/profile/johnp.bsky.social" %>
         <p class="mb-2 font-bold text-white dark:text-lightcolor">Discoverability</p>
         <div class="flex flex-row items-center justify-between w-full p-4 bg-white dark:bg-[#182027] rounded-md">
           <%= form.label :is_public, "Public profile", class: "grow font-medium text-slate-900 dark:text-lightcolor text-base cursor-pointer mr-2" %>
           <%= form.toggle_field :is_public %>
         </div>
         <p class="mt-1 mb-6 text-xs text-white">Allow other persons to view your profile through a QR code.</p>
-
         <p class="mb-2 font-bold text-white dark:text-lightcolor">Notifications</p>
         <div class="w-full mb-10">
           <div class="w-full overflow-hidden rounded-md">
@@ -98,7 +88,6 @@
           </p>
         </div>
       </div>
-
       <%= form.submit(
         "SAVE PROFILE",
         class: [
@@ -107,7 +96,6 @@
         ],
         data: { test_id: "save_profile_button" }
       ) %>
-
       <% if params[:onboarding].present? %>
         <%= link_to(
           "Skip for now", root_path,
@@ -122,7 +110,6 @@
     <% end %>
   </div>
 </div>
-
 <% content_for :bottom_nav do %>
   <%= render partial: "layouts/bottom_navbar", locals: { unread_notifications: current_user&.notifications&.unread } %>
 <% end %>
